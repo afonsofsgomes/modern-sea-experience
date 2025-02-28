@@ -1,5 +1,5 @@
 
 // This file re-exports the Button component from Button.tsx to solve casing issues
-import { Button, buttonVariants } from "./Button";
+import { Button, buttonVariants, ButtonProps } from "./Button";
 
-export { Button, buttonVariants };
+export { Button, buttonVariants, ButtonProps };
