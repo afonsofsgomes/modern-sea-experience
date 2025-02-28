@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Ship, User, Search } from "lucide-react";
 import { Button } from "./ui/Button";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,12 +32,12 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-2xl font-display font-medium tracking-tight hover:opacity-80 transition-opacity"
             >
               SeaYou
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -87,16 +88,20 @@ export const Navbar = () => {
             >
               <User className="h-5 w-5" />
             </button>
-            <Button variant="primary" size="sm">
-              Book Now
-            </Button>
+            <Link to="/booking">
+              <Button variant="primary" size="sm">
+                Book Now
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
-            <Button variant="primary" size="sm">
-              Book
-            </Button>
+            <Link to="/booking">
+              <Button variant="primary" size="sm">
+                Book
+              </Button>
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-full hover:bg-secondary transition-colors"
@@ -165,6 +170,13 @@ export const Navbar = () => {
                 <User className="h-5 w-5" />
               </button>
             </div>
+            <Link
+              to="/booking"
+              className="text-lg font-medium py-2 border-b border-gray-100"
+              onClick={() => setIsOpen(false)}
+            >
+              Book Now
+            </Link>
           </div>
         </div>
       )}

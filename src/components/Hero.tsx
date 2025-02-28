@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/Button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   const [loaded, setLoaded] = useState(false);
@@ -61,9 +62,11 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button size="lg" className="w-full sm:w-auto">
-              Book Now
-            </Button>
+            <Link to="/booking">
+              <Button size="lg" className="w-full sm:w-auto">
+                Book Now
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="lg"
