@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, ShoppingCart, User, Search } from "lucide-react";
+import { Menu, X, Ship, User, Search } from "lucide-react";
 import { Button } from "./ui/Button";
 
 export const Navbar = () => {
@@ -35,23 +35,29 @@ export const Navbar = () => {
               href="/"
               className="text-2xl font-display font-medium tracking-tight hover:opacity-80 transition-opacity"
             >
-              Sea You
+              SeaYou
             </a>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-10">
             <a
-              href="#collections"
+              href="#routes"
               className="text-sm font-medium hover-border-effect transition-colors"
             >
-              Collections
+              Routes
             </a>
             <a
-              href="#bestsellers"
+              href="#cruises"
               className="text-sm font-medium hover-border-effect transition-colors"
             >
-              Best Sellers
+              Private Cruises
+            </a>
+            <a
+              href="#tours"
+              className="text-sm font-medium hover-border-effect transition-colors"
+            >
+              Porto Santo Tours
             </a>
             <a
               href="#about"
@@ -81,28 +87,16 @@ export const Navbar = () => {
             >
               <User className="h-5 w-5" />
             </button>
-            <button
-              aria-label="Shopping cart"
-              className="p-2 rounded-full hover:bg-secondary transition-colors relative"
-            >
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                2
-              </span>
-            </button>
+            <Button variant="primary" size="sm">
+              Book Now
+            </Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
-            <button
-              aria-label="Shopping cart"
-              className="p-2 rounded-full hover:bg-secondary transition-colors relative"
-            >
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                2
-              </span>
-            </button>
+            <Button variant="primary" size="sm">
+              Book
+            </Button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-full hover:bg-secondary transition-colors"
@@ -123,18 +117,25 @@ export const Navbar = () => {
         <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in">
           <div className="flex flex-col space-y-6">
             <a
-              href="#collections"
+              href="#routes"
               className="text-lg font-medium py-2 border-b border-gray-100"
               onClick={() => setIsOpen(false)}
             >
-              Collections
+              Routes
             </a>
             <a
-              href="#bestsellers"
+              href="#cruises"
               className="text-lg font-medium py-2 border-b border-gray-100"
               onClick={() => setIsOpen(false)}
             >
-              Best Sellers
+              Private Cruises
+            </a>
+            <a
+              href="#tours"
+              className="text-lg font-medium py-2 border-b border-gray-100"
+              onClick={() => setIsOpen(false)}
+            >
+              Porto Santo Tours
             </a>
             <a
               href="#about"

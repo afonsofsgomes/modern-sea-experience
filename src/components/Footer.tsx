@@ -1,5 +1,5 @@
 
-import { Mail, Phone, Instagram, Facebook, Twitter } from "lucide-react";
+import { Mail, Phone, Instagram, Facebook, Twitter, Anchor, Ship, MapPin } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -11,11 +11,10 @@ export const Footer = () => {
               href="/"
               className="text-xl font-display font-medium tracking-tight inline-block mb-6"
             >
-              Sea You
+              SeaYou
             </a>
             <p className="text-muted-foreground mb-6 max-w-xs">
-              Premium swimwear designed for comfort and style. Made with
-              sustainable materials.
+              Maritime tourism services in Madeira. Seabus connections, private cruises, and tours to Porto Santo.
             </p>
             <div className="flex space-x-4">
               <a
@@ -43,14 +42,30 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-medium text-lg mb-4">Shop</h3>
+            <h3 className="font-medium text-lg mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="#routes"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Women
+                  Seabus Routes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#cruises"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Private Cruises
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#tours"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Porto Santo Tours
                 </a>
               </li>
               <li>
@@ -58,7 +73,7 @@ export const Footer = () => {
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Men
+                  Group Bookings
                 </a>
               </li>
               <li>
@@ -66,23 +81,7 @@ export const Footer = () => {
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Kids
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Accessories
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  New Arrivals
+                  Corporate Events
                 </a>
               </li>
             </ul>
@@ -93,7 +92,7 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="#about"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   About Us
@@ -104,7 +103,15 @@ export const Footer = () => {
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Sustainability
+                  Our Fleet
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Safety Measures
                 </a>
               </li>
               <li>
@@ -120,58 +127,26 @@ export const Footer = () => {
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Press
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Blog
+                  News
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-medium text-lg mb-4">Customer Service</h3>
+            <h3 className="font-medium text-lg mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
                 >
-                  Contact Us
+                  <MapPin className="h-4 w-4 mr-2" /> Funchal Marina, Madeira
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  FAQs
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Shipping & Returns
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Size Guide
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="mailto:info@seayou.pt"
                   className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
                 >
                   <Mail className="h-4 w-4 mr-2" /> info@seayou.pt
@@ -179,10 +154,26 @@ export const Footer = () => {
               </li>
               <li>
                 <a
+                  href="tel:+351291000000"
+                  className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
+                >
+                  <Phone className="h-4 w-4 mr-2" /> +351 291 000 000
+                </a>
+              </li>
+              <li>
+                <a
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
                 >
-                  <Phone className="h-4 w-4 mr-2" /> +351 123 456 789
+                  <Anchor className="h-4 w-4 mr-2" /> Funchal Port Terminal
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
+                >
+                  <Ship className="h-4 w-4 mr-2" /> Schedule Information
                 </a>
               </li>
             </ul>
@@ -191,7 +182,7 @@ export const Footer = () => {
 
         <div className="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Sea You. All rights reserved.
+            © {new Date().getFullYear()} SeaYou. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a
