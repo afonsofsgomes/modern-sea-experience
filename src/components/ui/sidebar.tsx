@@ -1,57 +1,62 @@
+import * as React from "react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, ChevronsUpDown, Plus, X } from "lucide-react";
 
-import * as React from "react"
-import { cva } from "class-variance-authority"
-import { format } from "date-fns"
-import {
-  CalendarIcon,
-  Check,
-  ChevronsUpDown,
-  Circle,
-  Plus,
-  X,
-} from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { 
-  Button 
-} from "@/components/ui/Button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useMobile } from "@/hooks/use-mobile"
+} from "@/components/ui/select";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useIsMobile } from "@/hooks/use-mobile";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface SidebarProps {
-  defaultLayout?: number[] | undefined
-  defaultCollapsed?: boolean
-  navCollapsedSize?: number
-  children: React.ReactNode
-  breakpoints?: Record<string, boolean>
-  onLayoutChange?(sizes: number[]): void
+  defaultLayout?: number[] | undefined;
+  defaultCollapsed?: boolean;
+  navCollapsedSize?: number;
+  children: React.ReactNode;
+  breakpoints?: Record<string, boolean>;
+  onLayoutChange?(sizes: number[]): void;
 }
 
 export function Sidebar({
@@ -62,28 +67,28 @@ export function Sidebar({
   children,
   breakpoints,
 }: SidebarProps) {
-  const isTablet = breakpoints?.md ?? false
-  const isMobile = breakpoints?.sm ?? false
+  const isTablet = breakpoints?.md ?? false;
+  const isMobile = breakpoints?.sm ?? false;
 
-  const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
-  const [showSidebar, setShowSidebar] = React.useState(false)
+  const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
+  const [showSidebar, setShowSidebar] = React.useState(false);
   const closeSidebar = () => {
-    setShowSidebar(false)
-  }
+    setShowSidebar(false);
+  };
 
-  const [startDate, setStartDate] = React.useState<Date>()
-  const [endDate, setEndDate] = React.useState<Date>()
+  const [startDate, setStartDate] = React.useState<Date>();
+  const [endDate, setEndDate] = React.useState<Date>();
 
   function formatTimeRange(date: Date, position: "start" | "end"): string {
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-    const formattedHours = hours < 10 ? `0${hours}` : hours
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    return `${formattedHours}:${formattedMinutes}`
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${formattedHours}:${formattedMinutes}`;
   }
 
   function formatDateRange(date: Date): string {
-    return format(date, "LLL dd")
+    return format(date, "LLL dd");
   }
 
   return (
@@ -163,13 +168,13 @@ export function Sidebar({
         </>
       )}
     </>
-  )
+  );
 }
 
 export function SidebarFilters() {
-  const [startDate, setStartDate] = React.useState<Date>()
-  const [endDate, setEndDate] = React.useState<Date>()
-  
+  const [startDate, setStartDate] = React.useState<Date>();
+  const [endDate, setEndDate] = React.useState<Date>();
+
   return (
     <>
       <div className="mb-8">
@@ -454,7 +459,7 @@ export function SidebarFilters() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export function SidebarHeaderMobile() {
@@ -464,5 +469,5 @@ export function SidebarHeaderMobile() {
         <div className="text-lg font-medium">Filters</div>
       </div>
     </div>
-  )
+  );
 }
