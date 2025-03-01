@@ -1,62 +1,34 @@
+
 import * as React from "react"
+import { cva } from "class-variance-authority"
+import { format } from "date-fns"
 import {
-  AlignJustify,
-  ArrowLeft,
-  ChevronDown,
-  ChevronRight,
-  Copy,
-  Github,
-  HelpCircle,
-  Laptop,
-  Moon,
-  Palette,
+  CalendarIcon,
+  Check,
+  ChevronsUpDown,
+  Circle,
   Plus,
-  Settings,
-  Sun,
-  User,
   X,
 } from "lucide-react"
-import { useTheme } from "next-themes"
 
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { 
+  Button 
+} from "@/components/ui/Button"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -71,754 +43,426 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
+import { useMobile } from "@/hooks/use-mobile"
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface SidebarProps {
+  defaultLayout?: number[] | undefined
+  defaultCollapsed?: boolean
+  navCollapsedSize?: number
+  children: React.ReactNode
+  breakpoints?: Record<string, boolean>
+  onLayoutChange?(sizes: number[]): void
+}
 
-export function Sidebar({ className, ...props }: SidebarProps) {
-  const [open, setOpen] = React.useState(false)
+export function Sidebar({
+  defaultLayout = [265, 440, 655],
+  defaultCollapsed = false,
+  navCollapsedSize = 4,
+  onLayoutChange,
+  children,
+  breakpoints,
+}: SidebarProps) {
+  const isTablet = breakpoints?.md ?? false
+  const isMobile = breakpoints?.sm ?? false
+
+  const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
+  const [showSidebar, setShowSidebar] = React.useState(false)
+  const closeSidebar = () => {
+    setShowSidebar(false)
+  }
+
+  const [startDate, setStartDate] = React.useState<Date>()
+  const [endDate, setEndDate] = React.useState<Date>()
+
+  function formatTimeRange(date: Date, position: "start" | "end"): string {
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const formattedHours = hours < 10 ? `0${hours}` : hours
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes
+    return `${formattedHours}:${formattedMinutes}`
+  }
+
+  function formatDateRange(date: Date): string {
+    return format(date, "LLL dd")
+  }
+
   return (
-    <div className={cn("hidden border-r bg-background md:block", className)} {...props}>
-      <div className="space-y-4 py-4">
-        <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Dashboard
-          </h2>
-          <div className="space-y-1">
-            <Button variant="ghost" className="justify-start w-full">
-              <AlignJustify className="mr-2 h-4 w-4" />
-              <span>Overview</span>
-            </Button>
-            <Button variant="ghost" className="justify-start w-full">
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-            </Button>
-            <Button variant="ghost" className="justify-start w-full">
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-            </Button>
+    <>
+      {isMobile ? (
+        <>
+          <button
+            onClick={() => setShowSidebar(true)}
+            className="fixed bottom-4 right-4 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-md"
+          >
+            <Plus />
+          </button>
+          <Dialog open={showSidebar} onOpenChange={setShowSidebar}>
+            <DialogContent
+              onEscapeKeyDown={closeSidebar}
+              onPointerDownOutside={closeSidebar}
+              className="h-full max-w-[90vw] border-none p-0 shadow-none transition-transform sm:max-w-[90vw]"
+            >
+              <div className="container flex size-full flex-col py-3">
+                <div className="mb-4 flex items-center justify-between border-b pb-3">
+                  <DialogTitle className="text-muted-foreground">
+                    Filters
+                  </DialogTitle>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={closeSidebar}
+                    className="mr-2"
+                  >
+                    <X />
+                  </Button>
+                </div>
+                <div className="flex-1 overflow-y-auto no-scrollbar">
+                  {children}
+                </div>
+                <DialogFooter className="gap-3 border-t pt-3">
+                  <Button variant="secondary" size="sm" className="w-full">
+                    Reset
+                  </Button>
+                  <Button size="sm" className="w-full">
+                    Apply
+                  </Button>
+                </DialogFooter>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </>
+      ) : (
+        <>
+          <div
+            data-state={isCollapsed ? "collapsed" : "expanded"}
+            className="relative hidden border-r bg-background transition-all duration-300 ease-in-out data-[state=collapsed]:w-4 sm:block dark:bg-slate-950"
+            style={{
+              width: isCollapsed ? navCollapsedSize : defaultLayout[0],
+            }}
+          >
+            <div className="flex size-full flex-col py-6 pl-6 pr-4">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="text-xl font-medium">Filters</div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                  className="mr-2"
+                >
+                  {isCollapsed ? <Plus /> : <X />}
+                </Button>
+              </div>
+              <div
+                data-state={isCollapsed ? "collapsed" : "expanded"}
+                className="flex-1 overflow-y-auto data-[state=collapsed]:invisible"
+              >
+                {children}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Components
-          </h2>
-          <div className="space-y-1">
-            <AccordionDemo />
-            <AlertDialogDemo />
-            <AspectRatioDemo />
-            <AvatarDemo />
-            <BadgeDemo />
-            <ButtonDemo />
-            <CalendarDemo />
-            <CardDemo />
-            <CheckboxDemo />
-            <ComboboxDemo />
-            <CommandDemo />
-            <ContextMenuDemo />
-            <DialogDemo />
-            <DropdownMenuDemo />
-            <FormDemo />
-            <InputDemo />
-            <LabelDemo />
-            <PopoverDemo />
-            <RadioGroupDemo />
-            <ScrollAreaDemo />
-            <SelectDemo />
-            <SeparatorDemo />
-            <SheetDemo />
-            <SkeletonDemo />
-            <SliderDemo />
-            <SwitchDemo />
-            <TableDemo />
-            <TabsDemo />
-            <TextareaDemo />
-            <ToastDemo />
-            <TooltipDemo />
+        </>
+      )}
+    </>
+  )
+}
+
+export function SidebarFilters() {
+  const [startDate, setStartDate] = React.useState<Date>()
+  const [endDate, setEndDate] = React.useState<Date>()
+  
+  return (
+    <>
+      <div className="mb-8">
+        <h3 className="font-medium">Date range</h3>
+        <div className="mt-3 grid gap-3">
+          <div className="grid gap-1.5">
+            <Label htmlFor="from" className="text-xs text-muted-foreground">
+              From
+            </Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  id="from"
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "w-full justify-start border bg-transparent text-left font-normal hover:bg-transparent hover:text-foreground",
+                    !startDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {startDate ? (
+                    format(startDate, "PPP")
+                  ) : (
+                    <span>Pick a date</span>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={startDate}
+                  onSelect={setStartDate}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div className="grid gap-1.5">
+            <Label htmlFor="to" className="text-xs text-muted-foreground">
+              To
+            </Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  id="to"
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "w-full justify-start border bg-transparent text-left font-normal hover:bg-transparent hover:text-foreground",
+                    !endDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={endDate}
+                  onSelect={setEndDate}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
-      <MobileSidebar />
-    </div>
-  )
-}
-
-function MobileSidebar() {
-  return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="md:hidden"
-        >
-          <AlignJustify className="h-4 w-4" />
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="sm:w-64">
-        <div className="space-y-4 py-4">
-          <div className="px-3 py-2">
-            <SheetHeader>
-              <SheetTitle className="text-lg font-semibold tracking-tight">
-                Dashboard
-              </SheetTitle>
-            </SheetHeader>
-            <div className="space-y-1">
-              <Button variant="ghost" className="justify-start w-full">
-                <AlignJustify className="mr-2 h-4 w-4" />
-                <span>Overview</span>
-              </Button>
-              <Button variant="ghost" className="justify-start w-full">
-                <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </Button>
-              <Button variant="ghost" className="justify-start w-full">
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </Button>
-            </div>
-          </div>
-          <div className="px-3 py-2">
-            <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-              Components
-            </h2>
-            <div className="space-y-1">
-              <AccordionDemo />
-              <AlertDialogDemo />
-              <AspectRatioDemo />
-              <AvatarDemo />
-              <BadgeDemo />
-              <ButtonDemo />
-              <CalendarDemo />
-              <CardDemo />
-              <CheckboxDemo />
-              <ComboboxDemo />
-              <CommandDemo />
-              <ContextMenuDemo />
-              <DialogDemo />
-              <DropdownMenuDemo />
-              <FormDemo />
-              <InputDemo />
-              <LabelDemo />
-              <PopoverDemo />
-              <RadioGroupDemo />
-              <ScrollAreaDemo />
-              <SelectDemo />
-              <SeparatorDemo />
-              <SheetDemo />
-              <SkeletonDemo />
-              <SliderDemo />
-              <SwitchDemo />
-              <TableDemo />
-              <TabsDemo />
-              <TextareaDemo />
-              <ToastDemo />
-              <TooltipDemo />
-            </div>
-          </div>
-          <SheetFooter>
-            <SheetClose asChild>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="h-9 w-9 p-0"
+      <div className="mb-8">
+        <h3 className="font-medium">Time range</h3>
+        <div className="mt-3 grid gap-3">
+          <div className="grid gap-1.5">
+            <Label htmlFor="time-from" className="text-xs text-muted-foreground">
+              From
+            </Label>
+            <Select>
+              <SelectTrigger
+                id="time-from"
+                className="border bg-transparent"
               >
-                <X className="h-4 w-4" />
-                <span className="sr-only">Close</span>
-              </Button>
-            </SheetClose>
-          </SheetFooter>
-        </div>
-      </SheetContent>
-    </Sheet>
-  )
-}
-
-function TooltipDemo() {
-  return (
-    <TooltipProvider>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="ghost" className="justify-start w-full">
-            Tooltip
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-72">
-          <div className="grid gap-4">
-            <div className="space-y-2">
-              <h4 className="font-medium leading-none">Tooltip</h4>
-              <p className="text-sm text-muted-foreground">
-                This is a tooltip.
-              </p>
-            </div>
+                <SelectValue placeholder="Select a time" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="09:00">09:00</SelectItem>
+                <SelectItem value="09:30">09:30</SelectItem>
+                <SelectItem value="10:00">10:00</SelectItem>
+                <SelectItem value="10:30">10:30</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-        </PopoverContent>
-      </Popover>
-    </TooltipProvider>
-  )
-}
-
-function ToastDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Toast
-    </Button>
-  )
-}
-
-function TextareaDemo() {
-  return (
-    <div className="grid gap-2">
-      <Button variant="ghost" className="justify-start w-full">
-        Textarea
-      </Button>
-    </div>
-  )
-}
-
-function TabsDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Tabs
-    </Button>
-  )
-}
-
-function TableDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Table
-    </Button>
-  )
-}
-
-function SwitchDemo() {
-  return (
-    <div className="flex items-center space-x-2">
-      <Button variant="ghost" className="justify-start w-full">
-        Switch
-      </Button>
-    </div>
-  )
-}
-
-function SliderDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Slider
-    </Button>
-  )
-}
-
-function SkeletonDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Skeleton
-    </Button>
-  )
-}
-
-function SheetDemo() {
-  return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Sheet
-        </Button>
-      </SheetTrigger>
-      <SheetContent className="sm:max-w-sm">
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
+          <div className="grid gap-1.5">
+            <Label htmlFor="time-to" className="text-xs text-muted-foreground">
+              To
             </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Select>
+              <SelectTrigger
+                id="time-to"
+                className="border bg-transparent"
+              >
+                <SelectValue placeholder="Select a time" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="11:00">11:00</SelectItem>
+                <SelectItem value="11:30">11:30</SelectItem>
+                <SelectItem value="12:00">12:00</SelectItem>
+                <SelectItem value="12:30">12:30</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
-        <SheetFooter>
-          <Button type="submit">Save changes</Button>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
-  )
-}
-
-function SeparatorDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Separator
-    </Button>
-  )
-}
-
-function SelectDemo() {
-  return (
-    <Select>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="apple">Apple</SelectItem>
-        <SelectItem value="banana">Banana</SelectItem>
-        <SelectItem value="blueberry">Blueberry</SelectItem>
-        <SelectItem value="grapes">Grapes</SelectItem>
-        <SelectItem value="pineapple">Pineapple</SelectItem>
-      </SelectContent>
-    </Select>
-  )
-}
-
-function ScrollAreaDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      ScrollArea
-    </Button>
-  )
-}
-
-function RadioGroupDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      RadioGroup
-    </Button>
-  )
-}
-
-function PopoverDemo() {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Popover
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-72">
-        <div className="grid gap-4">
-          <div className="space-y-2">
-            <h4 className="font-medium leading-none">Popover</h4>
-            <p className="text-sm text-muted-foreground">
-              This is a popover.
-            </p>
+      </div>
+      <div className="mb-8">
+        <h3 className="font-medium">Duration</h3>
+        <div className="mt-3 grid gap-3">
+          <div className="grid grid-cols-2 gap-3">
+            <Label
+              className="flex h-10 cursor-pointer items-center justify-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+              htmlFor="1h-or-less"
+            >
+              <input
+                type="checkbox"
+                id="1h-or-less"
+                className="peer sr-only"
+              />
+              <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+              <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+              <span>1h or less</span>
+            </Label>
+            <Label
+              className="flex h-10 cursor-pointer items-center justify-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+              htmlFor="1-to-4-hours"
+            >
+              <input
+                type="checkbox"
+                id="1-to-4-hours"
+                className="peer sr-only"
+              />
+              <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+              <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+              <span>1 to 4 hours</span>
+            </Label>
+            <Label
+              className="flex h-10 cursor-pointer items-center justify-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+              htmlFor="4-to-8-hours"
+            >
+              <input
+                type="checkbox"
+                id="4-to-8-hours"
+                className="peer sr-only"
+              />
+              <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+              <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+              <span>4 to 8 hours</span>
+            </Label>
+            <Label
+              className="flex h-10 cursor-pointer items-center justify-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+              htmlFor="8h-or-more"
+            >
+              <input
+                type="checkbox"
+                id="8h-or-more"
+                className="peer sr-only"
+              />
+              <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+              <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+              <span>8h or more</span>
+            </Label>
           </div>
         </div>
-      </PopoverContent>
-    </Popover>
-  )
-}
-
-function LabelDemo() {
-  return (
-    <div className="flex flex-col space-y-1.5">
-      <Button variant="ghost" className="justify-start w-full">
-        Label
-      </Button>
-    </div>
-  )
-}
-
-function InputDemo() {
-  return (
-    <div className="grid gap-2">
-      <Button variant="ghost" className="justify-start w-full">
-        Input
-      </Button>
-    </div>
-  )
-}
-
-function FormDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Form
-    </Button>
-  )
-}
-
-function DropdownMenuDemo() {
-  const { setTheme } = useTheme()
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Dropdown Menu
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
-          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-          <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <HelpCircle className="mr-2 h-4 w-4" />
-          <span>Support</span>
-          <DropdownMenuShortcut>⌘?</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <Palette className="mr-2 h-4 w-4" />
-            <span>Theme</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup onValueChange={setTheme} defaultValue="system">
-              <DropdownMenuRadioItem value="light">
-                <Sun className="mr-2 h-4 w-4" />
-                <span>Light</span>
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="dark">
-                <Moon className="mr-2 h-4 w-4" />
-                <span>Dark</span>
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="system">
-                <Laptop className="mr-2 h-4 w-4" />
-                <span>System</span>
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-}
-
-function DialogDemo() {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Dialog
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  )
-}
-
-function ContextMenuDemo() {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Context Menu
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuItem>
-          Copy
-          <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          Paste
-          <DropdownMenuShortcut>⌘V</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Undo
-          <DropdownMenuShortcut>⌘Z</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          Redo
-          <DropdownMenuShortcut>⇧⌘Z</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-}
-
-function CommandDemo() {
-  const [open, setOpen] = React.useState(false)
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Command
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-0">
-        <Command>
-          <CommandInput placeholder="Type a command or search..." />
-          <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup heading="Suggestions">
-              <CommandItem>
-                <Plus className="mr-2 h-4 w-4" />
-                Create
-              </CommandItem>
-              <CommandItem>
-                <Copy className="mr-2 h-4 w-4" />
-                Duplicate
-              </CommandItem>
-              <CommandItem>
-                <Github className="mr-2 h-4 w-4" />
-                Clone
-              </CommandItem>
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
-}
-
-function ComboboxDemo() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
-
-  const frameworks = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ]
-
-  return (
-    <Command>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="ghost"
-            role="combobox"
-            aria-expanded={open}
-            className="w-full justify-between"
+      </div>
+      <div className="mb-8">
+        <h3 className="font-medium">Experience type</h3>
+        <div className="mt-3 space-y-2">
+          <Label
+            className="flex cursor-pointer items-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+            htmlFor="walking-tour"
           >
-            {value
-              ? frameworks.find((framework) => framework.value === value)?.label
-              : "Select framework..."}
-            <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
-          <CommandInput placeholder="Search framework..." />
-          <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
-            <CommandGroup heading="Frameworks">
-              {frameworks.map((framework) => (
-                <CommandItem
-                  key={framework.value}
-                  onSelect={() => {
-                    setValue(framework.value)
-                    setOpen(false)
-                  }}
+            <input
+              type="checkbox"
+              id="walking-tour"
+              className="peer sr-only"
+            />
+            <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+            <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+            <span>Walking tour</span>
+          </Label>
+          <Label
+            className="flex cursor-pointer items-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+            htmlFor="sightseeing"
+          >
+            <input
+              type="checkbox"
+              id="sightseeing"
+              className="peer sr-only"
+            />
+            <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+            <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+            <span>Sightseeing</span>
+          </Label>
+          <Label
+            className="flex cursor-pointer items-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+            htmlFor="activites"
+          >
+            <input
+              type="checkbox"
+              id="activites"
+              className="peer sr-only"
+            />
+            <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+            <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+            <span>Activities</span>
+          </Label>
+          <Label
+            className="flex cursor-pointer items-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+            htmlFor="food-and-drink"
+          >
+            <input
+              type="checkbox"
+              id="food-and-drink"
+              className="peer sr-only"
+            />
+            <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+            <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+            <span>Food & drink</span>
+          </Label>
+          <Label
+            className="flex cursor-pointer items-center rounded-md border bg-muted/50 px-4 py-2 text-sm"
+            htmlFor="entertainment"
+          >
+            <input
+              type="checkbox"
+              id="entertainment"
+              className="peer sr-only"
+            />
+            <Circle className="mr-1 size-4 transition-all peer-checked:hidden" />
+            <Check className="mr-1 hidden size-4 transition-all peer-checked:block" />
+            <span>Entertainment</span>
+          </Label>
+        </div>
+      </div>
+      <div className="mb-4">
+        <h3 className="font-medium">Location</h3>
+        <div className="mt-3">
+          <div className="flex items-center space-x-2">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-between border bg-transparent hover:bg-transparent hover:text-foreground"
                 >
-                  {framework.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </PopoverContent>
-      </Popover>
-    </Command>
+                  <span>Select a location</span>
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                align="end"
+                className="min-w-[200px] p-0"
+              >
+                <Command>
+                  <CommandList>
+                    <CommandGroup>
+                      <CommandItem onSelect={(currentValue) => console.log(currentValue)}>
+                        London
+                      </CommandItem>
+                      <CommandItem onSelect={(currentValue) => console.log(currentValue)}>
+                        Paris
+                      </CommandItem>
+                      <CommandItem onSelect={(currentValue) => console.log(currentValue)}>
+                        New York
+                      </CommandItem>
+                      <CommandItem onSelect={(currentValue) => console.log(currentValue)}>
+                        Rome
+                      </CommandItem>
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
-function CheckboxDemo() {
+export function SidebarHeaderMobile() {
   return (
-    <div className="flex items-center space-x-2">
-      <Button variant="ghost" className="justify-start w-full">
-        Checkbox
-      </Button>
+    <div className="mb-6 px-6 md:hidden">
+      <div className="flex items-center justify-between border-b pb-2">
+        <div className="text-lg font-medium">Filters</div>
+      </div>
     </div>
   )
 }
-
-function CardDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Card
-    </Button>
-  )
-}
-
-function CalendarDemo() {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="ghost"
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            !value && "text-muted-foreground"
-          )}
-        >
-          <Calendar className="mr-2 h-4 w-4" />
-          {value ? format(value, "PPP") : <span>Pick a date</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={value}
-          onSelect={setValue}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
-  )
-}
-
-function ButtonDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Button
-    </Button>
-  )
-}
-
-function BadgeDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Badge
-    </Button>
-  )
-}
-
-function AvatarDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Avatar
-    </Button>
-  )
-}
-
-function AspectRatioDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Aspect Ratio
-    </Button>
-  )
-}
-
-function AlertDialogDemo() {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" className="justify-start w-full">
-          Alert Dialog
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  )
-}
-
-function AccordionDemo() {
-  return (
-    <Button variant="ghost" className="justify-start w-full">
-      Accordion
-    </Button>
-  )
-}
-
-import * as React from "react"
-import { format } from "date-fns"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { TooltipProvider } from "@/components/ui/tooltip"

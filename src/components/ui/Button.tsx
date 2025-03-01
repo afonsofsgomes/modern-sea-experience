@@ -17,7 +17,19 @@ const buttonSizes = {
   lg: "text-base px-5 py-3 rounded-md",
 };
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// Function version of buttonVariants for compatibility with shadcn components
+const buttonVariantsFn = (options?: { variant?: "primary" | "secondary" | "ghost" | "link", size?: "sm" | "md" | "lg", className?: string }) => {
+  const { variant = "primary", size = "md", className = "" } = options || {};
+  
+  return cn(
+    "relative inline-flex items-center justify-center rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 btn-shine",
+    buttonVariants[variant],
+    buttonSizes[size],
+    className
+  );
+};
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "link";
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
@@ -74,5 +86,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+export { Button, buttonVariants, buttonVariantsFn };
 export type { ButtonProps };

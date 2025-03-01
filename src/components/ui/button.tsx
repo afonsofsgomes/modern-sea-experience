@@ -1,4 +1,5 @@
 
-import { Button, buttonVariants } from "./Button";
+import { Button, buttonVariantsFn as buttonVariants, ButtonProps } from "./Button";
+
 export { Button, buttonVariants };
-export type { ButtonProps } from "./Button";
+export type { ButtonProps };
