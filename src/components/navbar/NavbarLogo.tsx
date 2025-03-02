@@ -7,9 +7,13 @@ export const NavbarLogo: React.FC = () => {
     <div className="flex items-center">
       <Link
         to="/"
-        className="text-2xl font-display font-medium tracking-tight hover:opacity-80 transition-opacity"
+        className="hover:opacity-80 transition-opacity"
       >
-        SeaYou
+        <img 
+          src="https://extranet.seayou.pt/logos/logowhite.png" 
+          alt="SeaYou Logo" 
+          className="h-10 w-auto"
+        />
       </Link>
     </div>
   );
