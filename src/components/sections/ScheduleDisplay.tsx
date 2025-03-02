@@ -1,5 +1,7 @@
-
-import { motion } from "framer-motion";
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/Button';
 
 // Animation variants
 const containerVariants = {
