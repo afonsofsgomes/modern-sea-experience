@@ -19,7 +19,7 @@ export const NavbarLink: React.FC<NavbarLinkProps> = ({
       onClick={() => onClick(sectionId)}
       className={isMobile 
         ? "text-lg font-medium py-2 border-b border-gray-100" 
-        : "text-sm font-medium hover-border-effect transition-colors"
+        : "text-sm font-medium hover-border-effect transition-colors text-white"
       }
     >
       {label}

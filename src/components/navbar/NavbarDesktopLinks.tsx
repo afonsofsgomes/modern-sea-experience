@@ -4,9 +4,10 @@ import { NavbarLink } from "./NavbarLink";
 
 interface NavbarDesktopLinksProps {
   onScrollToSection: (sectionId: string) => void;
+  scrolled?: boolean;
 }
 
-export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScrollToSection }) => {
+export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScrollToSection, scrolled = false }) => {
   const navLinks = [
     { label: "Routes", sectionId: "routes" },
     { label: "Private Cruises", sectionId: "cruises" },

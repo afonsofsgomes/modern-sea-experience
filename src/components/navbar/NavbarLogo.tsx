@@ -14,7 +14,7 @@ export const NavbarLogo: React.FC<NavbarLogoProps> = ({ scrolled = false }) => {
         className="hover:opacity-80 transition-opacity"
       >
         <img 
-          src={scrolled ? "https://extranet.seayou.pt/logos/logocolor.png" : "https://extranet.seayou.pt/logos/logowhite.png"} 
+          src={scrolled ? "https://extranet.seayou.pt/logos/logoblack.png" : "https://extranet.seayou.pt/logos/logowhite.png"} 
           alt="SeaYou Logo" 
           className={`w-auto transition-all duration-300 ${scrolled ? "h-14" : "h-10"}`}
         />
