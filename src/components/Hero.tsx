@@ -75,9 +75,16 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-4"
         >
-          <Link to="/booking">
-            <Button size="lg">Book Your Trip</Button>
+          <Link to="/seabus">
+            <Button size="lg" className="min-w-32">SeaBus</Button>
+          </Link>
+          <Link to="/porto-santo">
+            <Button size="lg" className="min-w-32">Porto Santo</Button>
+          </Link>
+          <Link to="/private-cruise">
+            <Button size="lg" className="min-w-32">Private Cruises</Button>
           </Link>
         </motion.div>
       </div>
