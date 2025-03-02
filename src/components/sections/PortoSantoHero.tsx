@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Clock, Users, Wifi, Calendar } from "lucide-react";
 
 export const PortoSantoHero = () => {

@@ -1,8 +1,9 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BokunWidget } from "@/components/BokunWidget";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Users, Clock, Compass, Wifi, Calendar } from "lucide-react";
 
 const PrivateCruise = () => {

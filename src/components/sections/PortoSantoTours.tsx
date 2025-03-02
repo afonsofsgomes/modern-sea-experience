@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export const PortoSantoTours = () => {

@@ -1,6 +1,5 @@
-
 import { useEffect, useRef } from "react";
-import { Button } from "./ui/Button";
+import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 
