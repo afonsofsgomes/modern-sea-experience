@@ -1,8 +1,14 @@
+
 import * as React from "react"
 import { cva } from "class-variance-authority"
 import { Circle, Check, Command, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/Button"
+
+// Define interface for SidebarNavBadge with variant property
+interface SidebarNavBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: "default" | "success" | "warning" | "danger";
+}
 
 const Sidebar = React.forwardRef<
   HTMLDivElement,
@@ -76,8 +82,8 @@ SidebarNavSubmenu.displayName = "SidebarNavSubmenu"
 
 const SidebarNavBadge = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, variant, ...props }, ref) => {
+  SidebarNavBadgeProps
+>(({ className, variant = "default", ...props }, ref) => {
   const badgeVariants = cva(
     "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
     {
@@ -215,31 +221,23 @@ const SidebarSettings = React.forwardRef<
         <h4 className="mb-2 font-semibold">
           Language
         </h4>
-        {/* @ts-expect-error */}
-        <Command>
-          {/* @ts-expect-error */}
-          <CommandList>
-            {/* @ts-expect-error */}
-            <CommandGroup heading="Suggestions">
-              {/* @ts-expect-error */}
-              <CommandItem>
-                English
-              </CommandItem>
-              {/* @ts-expect-error */}
-              <CommandItem>
-                German
-              </CommandItem>
-              {/* @ts-expect-error */}
-              <CommandItem>
-                French
-              </CommandItem>
-              {/* @ts-expect-error */}
-              <CommandItem>
-                Spanish
-              </CommandItem>
-            </CommandGroup>
-          </CommandList>
-        </Command>
+        {/* Commented out command component as it's not available */}
+        {/* Replace this section with a simple select if needed */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between rounded-md border p-4">
+            <p className="text-sm font-medium">English</p>
+            <Check className="h-4 w-4 text-green-500" />
+          </div>
+          <div className="flex items-center justify-between rounded-md border p-4">
+            <p className="text-sm font-medium">German</p>
+          </div>
+          <div className="flex items-center justify-between rounded-md border p-4">
+            <p className="text-sm font-medium">French</p>
+          </div>
+          <div className="flex items-center justify-between rounded-md border p-4">
+            <p className="text-sm font-medium">Spanish</p>
+          </div>
+        </div>
       </div>
     </div>
   )
