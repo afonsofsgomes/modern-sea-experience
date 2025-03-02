@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
 
 // Animation variants
 const containerVariants = {
@@ -52,6 +52,8 @@ const reviews = [
   }
 ];
 
+const tripAdvisorUrl = "https://www.tripadvisor.com/Attraction_Review-g1178726-d28508392-Reviews-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html";
+
 export const Testimonials = () => {
   const testimonialsRef = useRef(null);
   const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.2 });
@@ -65,8 +67,15 @@ export const Testimonials = () => {
           animate={testimonialsInView ? "visible" : "hidden"}
           variants={containerVariants}
         >
+          <motion.div variants={itemVariants} className="flex items-center justify-center mb-4">
+            <img 
+              src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" 
+              alt="TripAdvisor Logo" 
+              className="h-10" 
+            />
+          </motion.div>
           <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
-            What Our Customers Say
+            Latest Reviews from TripAdvisor
           </motion.span>
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
             Guest Experiences
@@ -82,18 +91,9 @@ export const Testimonials = () => {
             <span className="font-medium">5.0</span>
             <span className="text-muted-foreground">on TripAdvisor</span>
           </motion.div>
-          <motion.a 
-            href="https://www.tripadvisor.com/Attraction_Review-g1178726-d28508392-Reviews-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            variants={itemVariants}
-            className="text-primary hover:underline inline-flex items-center"
-          >
-            View all reviews on TripAdvisor
-            <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </motion.a>
+          <motion.p variants={itemVariants} className="text-muted-foreground mb-4">
+            See what our guests have to say about their experience with us
+          </motion.p>
         </motion.div>
 
         <motion.div 
@@ -106,11 +106,18 @@ export const Testimonials = () => {
           {reviews.map((review, index) => (
             <motion.div 
               key={index}
-              className="bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow duration-300"
+              className="bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow duration-300 relative"
               variants={itemVariants}
               whileHover={{ y: -10 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
+              <div className="absolute top-4 right-4">
+                <img 
+                  src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_logoset_solid_green.svg" 
+                  alt="TripAdvisor" 
+                  className="h-6" 
+                />
+              </div>
               <div className="flex text-primary mb-4">
                 {[...Array(review.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
@@ -135,6 +142,17 @@ export const Testimonials = () => {
                 </div>
                 <span className="text-xs text-gray-400">{review.date}</span>
               </div>
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <a 
+                  href={tripAdvisorUrl}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline inline-flex items-center"
+                >
+                  Read full review on TripAdvisor
+                  <ExternalLink className="ml-1 w-3 h-3" />
+                </a>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -145,13 +163,18 @@ export const Testimonials = () => {
           animate={testimonialsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.5 }}
         >
+          <div className="mb-4 text-gray-600">
+            <p>These reviews are real reviews from our TripAdvisor page.</p>
+            <p className="text-sm">Updated periodically from our TripAdvisor profile.</p>
+          </div>
           <a 
-            href="https://www.tripadvisor.com/Attraction_Review-g1178726-d28508392-Reviews-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html#REVIEWS" 
+            href={tripAdvisorUrl} 
             target="_blank"
             rel="noopener noreferrer" 
             className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors duration-200 ease-in-out"
           >
-            Read More Reviews on TripAdvisor
+            See All Reviews on TripAdvisor
+            <ExternalLink className="ml-2 w-4 h-4" />
           </a>
         </motion.div>
       </div>
