@@ -1,6 +1,7 @@
+
 // Updating import path to use lowercase button
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, Ship, Users, Wifi } from "lucide-react";
+import { Calendar, Clock, MapPin, Ship, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -10,7 +11,7 @@ export const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1607089414494-493c7325c69a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
+          src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
           alt="Sea"
           className="w-full h-full object-cover object-bottom opacity-70"
         />
