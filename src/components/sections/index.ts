@@ -1,3 +1,4 @@
+
 export * from './Routes';
 export * from './Destinations';
 export * from './QuickBooking';
@@ -12,3 +13,9 @@ export * from './SeaBusHero';
 export * from './SeaBusRoutes';
 export * from './SeaBusFeatures';
 export * from './SeaBusBooking';
+
+// Add Porto Santo section components exports
+export * from './PortoSantoHero';
+export * from './PortoSantoAbout';
+export * from './PortoSantoHighlights';
+export * from './PortoSantoBooking';
