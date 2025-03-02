@@ -8,6 +8,7 @@ const buttonVariants = {
   secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
   ghost: "hover:bg-accent/10 hover:text-accent-foreground",
   link: "text-primary underline-offset-4 hover:underline hover-border-effect p-0 h-auto",
+  outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
 };
 
 // Define button sizes
@@ -18,7 +19,7 @@ const buttonSizes = {
 };
 
 // Function version of buttonVariants for compatibility with shadcn components
-const buttonVariantsFn = (options?: { variant?: "primary" | "secondary" | "ghost" | "link", size?: "sm" | "md" | "lg", className?: string }) => {
+const buttonVariantsFn = (options?: { variant?: "primary" | "secondary" | "ghost" | "link" | "outline", size?: "sm" | "md" | "lg", className?: string }) => {
   const { variant = "primary", size = "md", className = "" } = options || {};
   
   return cn(
@@ -30,7 +31,7 @@ const buttonVariantsFn = (options?: { variant?: "primary" | "secondary" | "ghost
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost" | "link";
+  variant?: "primary" | "secondary" | "ghost" | "link" | "outline";
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
 }
@@ -41,15 +42,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         className={cn(
           "relative inline-flex items-center justify-center rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 btn-shine",
-          {
-            [buttonVariants.primary]: variant === "primary",
-            [buttonVariants.secondary]: variant === "secondary",
-            [buttonVariants.ghost]: variant === "ghost",
-            [buttonVariants.link]: variant === "link",
-            [buttonSizes.sm]: size === "sm",
-            [buttonSizes.md]: size === "md",
-            [buttonSizes.lg]: size === "lg",
-          },
+          buttonVariants[variant],
+          buttonSizes[size],
           className
         )}
         ref={ref}

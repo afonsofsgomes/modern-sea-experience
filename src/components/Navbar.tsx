@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, Ship, User, Search } from "lucide-react";
+import { Menu, X, Ship, User, Search, Calendar, Anchor, MapPin, Mail } from "lucide-react";
 import { Button } from "./ui/Button";
 import { Link } from "react-router-dom";
 

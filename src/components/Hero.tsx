@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/Button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Ship, Anchor, MapPin } from "lucide-react";
 
 export const Hero = () => {
   const [loaded, setLoaded] = useState(false);
@@ -16,8 +17,8 @@ export const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/20 z-10" />
         <img
-          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80"
-          alt="Ocean view from Madeira"
+          src="https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          alt="Boat sailing along Madeira's coastline"
           className={`object-cover w-full h-full transition-opacity duration-1000 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
@@ -33,7 +34,7 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className="inline-block py-1 px-3 text-xs font-medium bg-white/20 backdrop-blur-sm rounded-full mb-4">
-              Maritime Tourism in Madeira
+              Premium Maritime Services in Madeira
             </span>
           </motion.div>
 
@@ -43,7 +44,7 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight"
           >
-            Explore Madeira's coastline with SeaYou
+            Discover Madeira's Beauty from the Sea
           </motion.h1>
 
           <motion.p
@@ -52,8 +53,7 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="text-base md:text-lg text-white/90 mb-8 max-w-lg"
           >
-            Experience comfortable seabus connections between Funchal, Calheta, and Caniçal, 
-            or enjoy private cruises and tours to Porto Santo island.
+            Experience our comfortable SeaBus connections, private yacht charters, and unforgettable Porto Santo tours with expert local guides.
           </motion.p>
 
           <motion.div
@@ -64,16 +64,41 @@ export const Hero = () => {
           >
             <Link to="/booking">
               <Button size="lg" className="w-full sm:w-auto">
-                Book Now
+                Book Your Journey
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              size="lg"
-              className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
-            >
-              Explore Services
-            </Button>
+            <div className="flex gap-2">
+              <Link to="/seabus">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
+                >
+                  <Anchor className="h-5 w-5 mr-2" />
+                  SeaBus
+                </Button>
+              </Link>
+              <Link to="/private-cruise">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
+                >
+                  <Ship className="h-5 w-5 mr-2" />
+                  Cruises
+                </Button>
+              </Link>
+              <Link to="/porto-santo">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
+                >
+                  <MapPin className="h-5 w-5 mr-2" />
+                  Porto Santo
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>
