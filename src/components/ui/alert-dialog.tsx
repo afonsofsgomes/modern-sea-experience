@@ -3,8 +3,8 @@ import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "@/lib/utils"
-// Update the import to use the consistent casing
-import { buttonVariants } from "@/components/ui/Button"
+// Update the import to use the correct export name
+import { buttonVariantsFn as buttonVariants } from "@/components/ui/Button"
 
 const AlertDialog = AlertDialogPrimitive.Root
 

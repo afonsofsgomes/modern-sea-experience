@@ -1,7 +1,8 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X, Ship, User, Search, Calendar, Anchor, MapPin, Mail } from "lucide-react";
-import { Button } from "./ui/Button";
+// Use consistent import path with other files
+import { Button } from "@/components/ui/Button";
 import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
