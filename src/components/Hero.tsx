@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Button } from "./ui/Button";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Ship, Anchor, MapPin } from "lucide-react";
