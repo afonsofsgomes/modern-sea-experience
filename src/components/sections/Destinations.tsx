@@ -1,8 +1,7 @@
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 // Animation variants

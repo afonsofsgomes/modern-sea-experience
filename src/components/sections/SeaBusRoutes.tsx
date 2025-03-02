@@ -1,3 +1,5 @@
+
+// Updating import path to use lowercase button
 import { Button } from "@/components/ui/button";
 
 export const SeaBusRoutes = () => {

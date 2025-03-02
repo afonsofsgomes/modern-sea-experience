@@ -1,149 +1,85 @@
-
-import { useEffect, useState } from "react";
+// Updating import path to use lowercase button
 import { Button } from "@/components/ui/button";
+import { Calendar, Clock, MapPin, Ship, Users, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Ship, Anchor, MapPin } from "lucide-react";
 
 export const Hero = () => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
   return (
-    <section className="relative min-h-screen overflow-hidden pt-20">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/20 z-10" />
+    <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-blue-900">
+      {/* Background Image */}
+      <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-          alt="Boat sailing along Madeira's coastline"
-          className={`object-cover w-full h-full transition-opacity duration-1000 ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
-          loading="eager"
+          src="https://images.unsplash.com/photo-1607089414494-493c7325c69a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
+          alt="Sea"
+          className="w-full h-full object-cover object-bottom opacity-70"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-[calc(100vh-80px)] flex items-center">
-        <motion.div 
-          className="max-w-2xl"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
+      {/* Hero Content */}
+      <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white z-10">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-4 whitespace-nowrap"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="overflow-hidden"
-          >
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-white/20 backdrop-blur-sm rounded-full mb-4 animate-slide-in">
-              Premium Maritime Services in Madeira
-            </span>
-          </motion.div>
+          YOUR NEXT ADVENTURE
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-xl max-w-3xl mb-8"
+        >
+          Discover breathtaking sea routes and unforgettable experiences with
+          SeaYou.
+        </motion.p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight"
-          >
-            Discover Madeira's Beauty from the Sea
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-base md:text-lg text-white/90 mb-8 max-w-lg"
-          >
-            Experience our comfortable SeaBus connections, private yacht charters, and unforgettable Porto Santo tours with expert local guides.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4"
-          >
-            <Link to="/booking">
-              <div className="relative inline-block">
-                <Button size="lg" className="w-full sm:w-auto relative z-10 bg-primary hover:bg-primary/90 transition-colors duration-300">
-                  Book Your Journey
-                </Button>
-                <div className="absolute -inset-0.5 bg-primary/50 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-soft-pulse"></div>
-              </div>
-            </Link>
-            <div className="flex gap-2">
-              <Link to="/seabus">
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-full sm:w-auto transition-all duration-300"
-                >
-                  <Anchor className="h-5 w-5 mr-2 animate-wave" />
-                  SeaBus
-                </Button>
-              </Link>
-              <Link to="/private-cruise">
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-full sm:w-auto transition-all duration-300"
-                >
-                  <Ship className="h-5 w-5 mr-2 animate-float" />
-                  Cruises
-                </Button>
-              </Link>
-              <Link to="/porto-santo">
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-full sm:w-auto transition-all duration-300"
-                >
-                  <MapPin className="h-5 w-5 mr-2" />
-                  Porto Santo
-                </Button>
-              </Link>
+        {/* Icon Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-8 mb-8"
+        >
+          <div className="flex flex-col items-center">
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <Ship className="h-6 w-6" />
             </div>
-          </motion.div>
+            <span className="text-sm">Daily Routes</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <Clock className="h-6 w-6" />
+            </div>
+            <span className="text-sm">9:00 - 18:00</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <MapPin className="h-6 w-6" />
+            </div>
+            <span className="text-sm">Funchal</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <Wifi className="h-6 w-6" />
+            </div>
+            <span className="text-sm">Free WiFi</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <Link to="/booking">
+            <Button size="lg">Book Your Trip</Button>
+          </Link>
         </motion.div>
       </div>
-
-      <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="animate-bounce"
-        >
-          <path d="M12 5v14M5 12l7 7 7-7" />
-        </svg>
-      </motion.div>
     </section>
   );
 };

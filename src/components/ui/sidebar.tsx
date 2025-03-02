@@ -1,9 +1,8 @@
-
 import * as React from "react"
 import { cva } from "class-variance-authority"
 import { Circle, Check, Command, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 
 // Define interface for SidebarNavBadge with variant property
 interface SidebarNavBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
