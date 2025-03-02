@@ -12,6 +12,17 @@ export const Hero = () => {
     setLoaded(true);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
   return (
     <section className="relative min-h-screen overflow-hidden pt-20">
       <div className="absolute inset-0 z-0">
@@ -27,13 +38,19 @@ export const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-[calc(100vh-80px)] flex items-center">
-        <div className="max-w-2xl">
+        <motion.div 
+          className="max-w-2xl"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="overflow-hidden"
           >
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-white/20 backdrop-blur-sm rounded-full mb-4">
+            <span className="inline-block py-1 px-3 text-xs font-medium bg-white/20 backdrop-blur-sm rounded-full mb-4 animate-slide-in">
               Premium Maritime Services in Madeira
             </span>
           </motion.div>
@@ -41,7 +58,7 @@ export const Hero = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight"
           >
             Discover Madeira's Beauty from the Sea
@@ -63,18 +80,21 @@ export const Hero = () => {
             className="flex flex-col sm:flex-row gap-4"
           >
             <Link to="/booking">
-              <Button size="lg" className="w-full sm:w-auto">
-                Book Your Journey
-              </Button>
+              <div className="relative inline-block">
+                <Button size="lg" className="w-full sm:w-auto relative z-10 bg-primary hover:bg-primary/90 transition-colors duration-300">
+                  Book Your Journey
+                </Button>
+                <div className="absolute -inset-0.5 bg-primary/50 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-soft-pulse"></div>
+              </div>
             </Link>
             <div className="flex gap-2">
               <Link to="/seabus">
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
+                  className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-full sm:w-auto transition-all duration-300"
                 >
-                  <Anchor className="h-5 w-5 mr-2" />
+                  <Anchor className="h-5 w-5 mr-2 animate-wave" />
                   SeaBus
                 </Button>
               </Link>
@@ -82,9 +102,9 @@ export const Hero = () => {
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
+                  className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-full sm:w-auto transition-all duration-300"
                 >
-                  <Ship className="h-5 w-5 mr-2" />
+                  <Ship className="h-5 w-5 mr-2 animate-float" />
                   Cruises
                 </Button>
               </Link>
@@ -92,7 +112,7 @@ export const Hero = () => {
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="bg-white/10 text-white hover:bg-white/20 w-full sm:w-auto"
+                  className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-full sm:w-auto transition-all duration-300"
                 >
                   <MapPin className="h-5 w-5 mr-2" />
                   Porto Santo
@@ -100,10 +120,15 @@ export const Hero = () => {
               </Link>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+      <motion.div 
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -114,10 +139,11 @@ export const Hero = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="animate-bounce"
         >
           <path d="M12 5v14M5 12l7 7 7-7" />
         </svg>
-      </div>
+      </motion.div>
     </section>
   );
 };

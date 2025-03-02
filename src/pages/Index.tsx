@@ -3,11 +3,42 @@ import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { Ship, Anchor, MapPin, Calendar, Clock, Users, Star, Compass, Sun, Coffee, Utensils, Camera, Mountain, Fish, Wine, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Link } from "react-router-dom";
 import { BokunWidget } from "@/components/BokunWidget";
+import { useRef } from "react";
+
+// Animation variants for staggered children
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5 }
+  }
+};
+
+const fadeInUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+  }
+};
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -16,6 +47,20 @@ const Index = () => {
     damping: 30,
     restDelta: 0.001
   });
+
+  // Refs for sections to animate on scroll
+  const routesRef = useRef(null);
+  const destinationsRef = useRef(null);
+  const cruisesRef = useRef(null);
+  const toursRef = useRef(null);
+  const testimonialsRef = useRef(null);
+
+  // Check if sections are in view
+  const routesInView = useInView(routesRef, { once: true, amount: 0.2 });
+  const destinationsInView = useInView(destinationsRef, { once: true, amount: 0.2 });
+  const cruisesInView = useInView(cruisesRef, { once: true, amount: 0.2 });
+  const toursInView = useInView(toursRef, { once: true, amount: 0.2 });
+  const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,29 +76,41 @@ const Index = () => {
       <Hero />
       
       {/* Destinations/Routes Section */}
-      <section id="routes" className="py-20">
+      <section id="routes" className="py-20" ref={routesRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center mb-16"
+            initial="hidden"
+            animate={routesInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
+            <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
               Our SeaBus Routes
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
+            </motion.span>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
               Fast & Comfortable Sea Connections
-            </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-base text-muted-foreground max-w-2xl mx-auto">
               Enjoy our reliable maritime transportation between Madeira's key destinations, 
               combining speed and comfort with breathtaking coastal views.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden group">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial="hidden"
+            animate={routesInView ? "visible" : "hidden"}
+            variants={containerVariants}
+            transition={{ staggerChildren: 0.2, delayChildren: 0.5 }}
+          >
+            <motion.div variants={itemVariants} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
               <div className="relative h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1675359220430-299ed4566518?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Funchal Harbor" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
@@ -66,15 +123,16 @@ const Index = () => {
                   <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" /> Wed, Thu, Fri</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-white rounded-lg shadow-md overflow-hidden group">
+            <motion.div variants={itemVariants} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
               <div className="relative h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1602776253430-8eccdc064c33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
                   alt="Caniçal View" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
@@ -87,15 +145,16 @@ const Index = () => {
                   <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" /> Tue, Sat, Sun</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-white rounded-lg shadow-md overflow-hidden group">
+            <motion.div variants={itemVariants} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
               <div className="relative h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Coastal Connection" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
@@ -108,40 +167,55 @@ const Index = () => {
                   <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" /> All week</span>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="mt-12 text-center">
+          <motion.div 
+            className="mt-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={routesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
             <Link to="/seabus" className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-md hover:bg-primary/20 transition-colors">
               <Ship className="w-4 h-4 mr-2" /> View SeaBus Schedule & Book Now
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Destinations Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" ref={destinationsRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center mb-16"
+            initial="hidden"
+            animate={destinationsInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
+            <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
               Explore Our Destinations
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
+            </motion.span>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
               What to Experience at Each Stop
-            </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-base text-muted-foreground max-w-2xl mx-auto">
               Make the most of your SeaBus journey by exploring these amazing destinations along Madeira's beautiful coastline.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+            initial="hidden"
+            animate={destinationsInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
             {/* Funchal */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <motion.div variants={itemVariants} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1593465678160-f99a8371fcf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Funchal" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
               <div className="p-6">
@@ -165,15 +239,15 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
             
             {/* Caniçal */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <motion.div variants={itemVariants} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1596627116790-af6f46ddddcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Caniçal" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
               <div className="p-6">
@@ -197,15 +271,15 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
             
             {/* Calheta */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <motion.div variants={itemVariants} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1596804796855-9f5c0e2bed93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Calheta" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
               <div className="p-6">
@@ -229,66 +303,102 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
           
-          <div className="text-center">
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
             <Link to="/seabus">
-              <Button>Plan Your SeaBus Journey Now</Button>
+              <Button className="relative group">
+                <span className="relative z-10">Plan Your SeaBus Journey Now</span>
+                <div className="absolute -inset-0.5 bg-primary rounded-md opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
+              </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Quick Booking Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-10">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
               Quick Booking
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
+            </motion.span>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
               Book Your Maritime Experience
-            </h2>
-            <p className="text-muted-foreground">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-muted-foreground">
               Browse our available services and secure your spot instantly
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <motion.div 
+            className="bg-white rounded-lg shadow-lg p-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
             <BokunWidget 
               productListId="83066"
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
               className="min-h-[500px]" 
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Schedule Display */}
       <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-white/20 rounded-full mb-4">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+          >
+            <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-white/20 rounded-full mb-4">
               Our SeaBus Schedule
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
+            </motion.span>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
               DEPARTURES
-            </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-white/80 max-w-2xl mx-auto">
               Plan your journey with our convenient schedule. All times shown are local.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Tuesday, Saturday, Sunday Schedule */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+            <motion.div 
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <h3 className="text-xl font-medium mb-6 text-center py-3 bg-[#284083] rounded-md">
                 Tuesday, Saturday, Sunday
               </h3>
               
               <div className="space-y-4">
-                <div className="bg-white/5 p-4 rounded-md">
+                <motion.div 
+                  className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span className="bg-blue-800 text-white text-sm py-1 px-2 rounded mr-2">09:00</span>
@@ -302,9 +412,13 @@ const Index = () => {
                     <p>From: <strong>Calheta</strong> To: <strong>Funchal</strong></p>
                     <span className="ml-2 text-xs text-white/60">(1h 15m)</span>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="bg-white/5 p-4 rounded-md">
+                <motion.div 
+                  className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span className="bg-blue-800 text-white text-sm py-1 px-2 rounded mr-2">09:00</span>
@@ -318,9 +432,13 @@ const Index = () => {
                     <p>From: <strong>Calheta</strong> To: <strong>Caniçal</strong></p>
                     <span className="ml-2 text-xs text-white/60">(2h 30m)</span>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="bg-white/5 p-4 rounded-md">
+                <motion.div 
+                  className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span className="bg-blue-800 text-white text-sm py-1 px-2 rounded mr-2">10:30</span>
@@ -334,18 +452,28 @@ const Index = () => {
                     <p>From: <strong>Funchal</strong> To: <strong>Caniçal</strong></p>
                     <span className="ml-2 text-xs text-white/60">(1h)</span>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
             
             {/* Wednesday, Thursday, Friday Schedule */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+            <motion.div 
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <h3 className="text-xl font-medium mb-6 text-center py-3 bg-[#284083] rounded-md">
                 Wednesday, Thursday, Friday
               </h3>
               
               <div className="space-y-4">
-                <div className="bg-white/5 p-4 rounded-md">
+                <motion.div 
+                  className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span className="bg-blue-800 text-white text-sm py-1 px-2 rounded mr-2">09:00</span>
@@ -359,9 +487,13 @@ const Index = () => {
                     <p>From: <strong>Caniçal</strong> To: <strong>Funchal</strong></p>
                     <span className="ml-2 text-xs text-white/60">(1h)</span>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="bg-white/5 p-4 rounded-md">
+                <motion.div 
+                  className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span className="bg-blue-800 text-white text-sm py-1 px-2 rounded mr-2">09:00</span>
@@ -375,9 +507,13 @@ const Index = () => {
                     <p>From: <strong>Caniçal</strong> To: <strong>Calheta</strong></p>
                     <span className="ml-2 text-xs text-white/60">(2h 30m)</span>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="bg-white/5 p-4 rounded-md">
+                <motion.div 
+                  className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span className="bg-blue-800 text-white text-sm py-1 px-2 rounded mr-2">10:15</span>
@@ -391,75 +527,101 @@ const Index = () => {
                     <p>From: <strong>Funchal</strong> To: <strong>Calheta</strong></p>
                     <span className="ml-2 text-xs text-white/60">(1h 15m)</span>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
           
-          <div className="text-center mt-10">
+          <motion.div 
+            className="text-center mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <Link to="/seabus">
-              <Button className="bg-white text-blue-900 hover:bg-white/90">
-                Book Your SeaBus Ticket
+              <Button className="bg-white text-blue-900 hover:bg-white/90 transition-all duration-300 group">
+                <span className="relative z-10">Book Your SeaBus Ticket</span>
+                <div className="absolute -inset-0.5 bg-white/50 rounded-md blur opacity-0 group-hover:opacity-30 transition duration-300"></div>
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Private Cruises Section */}
-      <section id="cruises" className="py-20 bg-white">
+      <section id="cruises" className="py-20 bg-white" ref={cruisesRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center mb-16"
+            initial="hidden"
+            animate={cruisesInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
+            <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
               Private Experiences
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
+            </motion.span>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
               Luxury Private Cruises
-            </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-base text-muted-foreground max-w-2xl mx-auto">
               Charter your own private vessel for celebrations, marine life watching, or to discover Madeira's hidden coastal gems with your own itinerary.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="group relative rounded-lg overflow-hidden h-[500px]">
+            <motion.div 
+              className="group relative rounded-lg overflow-hidden h-[500px]"
+              initial={{ opacity: 0, x: -50 }}
+              animate={cruisesInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
+            >
               <img 
                 src="https://images.unsplash.com/photo-1599232144917-85754060bf02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" 
                 alt="Sunset Cruise" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
-                <h3 className="text-white text-2xl font-display mb-2">Sunset & Celebration Cruises</h3>
-                <p className="text-white/80 mb-4">Perfect for anniversaries, birthdays, or romantic evenings with gourmet catering options</p>
-                <Link to="/private-cruise" className="inline-block bg-white text-foreground font-medium py-2 px-4 rounded-md hover:bg-white/90 transition-colors max-w-max">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-8 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-white text-2xl font-display mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">Sunset & Celebration Cruises</h3>
+                <p className="text-white/80 mb-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">Perfect for anniversaries, birthdays, or romantic evenings with gourmet catering options</p>
+                <Link to="/private-cruise" className="inline-block bg-white text-foreground font-medium py-2 px-4 rounded-md hover:bg-white/90 transition-colors max-w-max transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-100">
                   Learn More
                 </Link>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="group relative rounded-lg overflow-hidden h-[500px]">
+            <motion.div 
+              className="group relative rounded-lg overflow-hidden h-[500px]"
+              initial={{ opacity: 0, x: 50 }}
+              animate={cruisesInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
+            >
               <img 
                 src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                 alt="Whale Watching" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
-                <h3 className="text-white text-2xl font-display mb-2">Marine Life Expeditions</h3>
-                <p className="text-white/80 mb-4">Private tours with marine biologists to observe dolphins, whales, and sea turtles in their natural habitat</p>
-                <Link to="/private-cruise" className="inline-block bg-white text-foreground font-medium py-2 px-4 rounded-md hover:bg-white/90 transition-colors max-w-max">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-8 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-white text-2xl font-display mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">Marine Life Expeditions</h3>
+                <p className="text-white/80 mb-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">Private tours with marine biologists to observe dolphins, whales, and sea turtles in their natural habitat</p>
+                <Link to="/private-cruise" className="inline-block bg-white text-foreground font-medium py-2 px-4 rounded-md hover:bg-white/90 transition-colors max-w-max transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-100">
                   Learn More
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Porto Santo Tours */}
-      <section id="tours" className="py-24 bg-gray-50">
+      <section id="tours" className="py-24 bg-gray-50" ref={toursRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={toursInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.7 }}
+            >
               <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
                 Island Hopping
               </span>
@@ -473,58 +635,104 @@ const Index = () => {
                 Choose from day trips with guided tours or transport-only options for those who prefer to explore independently. Special packages available for overnight stays.
               </p>
               <div className="flex flex-wrap gap-4">
-                <div className="bg-white rounded-md p-6 flex-1 min-w-[160px]">
+                <motion.div 
+                  className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
                   <h3 className="text-3xl font-medium mb-2">9km</h3>
                   <p className="text-muted-foreground">Golden Beach</p>
-                </div>
-                <div className="bg-white rounded-md p-6 flex-1 min-w-[160px]">
+                </motion.div>
+                <motion.div 
+                  className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
                   <h3 className="text-3xl font-medium mb-2">2.5h</h3>
                   <p className="text-muted-foreground">Journey Time</p>
-                </div>
-                <div className="bg-white rounded-md p-6 flex-1 min-w-[160px]">
+                </motion.div>
+                <motion.div 
+                  className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
                   <h3 className="text-3xl font-medium mb-2">Daily</h3>
                   <p className="text-muted-foreground">Departures</p>
-                </div>
+                </motion.div>
               </div>
               <div className="mt-8">
                 <Link to="/porto-santo">
-                  <Button>Explore Porto Santo Options</Button>
+                  <Button 
+                    className="relative overflow-hidden group"
+                    whileHover={{ scale: 1.03 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <span className="relative z-10">Explore Porto Santo Options</span>
+                    <div className="absolute -inset-0.5 bg-primary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-soft-pulse"></div>
+                  </Button>
                 </Link>
               </div>
-            </div>
-            <div className="relative">
+            </motion.div>
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: 30 }}
+              animate={toursInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.7 }}
+            >
               <div className="aspect-square rounded-md overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Porto Santo Golden Beach" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                 />
               </div>
-              <div className="absolute -bottom-8 -left-8 w-2/3 aspect-video glass-card p-6 rounded-md">
+              <motion.div 
+                className="absolute -bottom-8 -left-8 w-2/3 aspect-video glass-card p-6 rounded-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={toursInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                whileHover={{ y: -5 }}
+              >
                 <h3 className="font-display text-lg mb-2">Health & Wellness</h3>
                 <p className="text-sm text-muted-foreground">
                   Porto Santo's sands are known for their therapeutic properties, perfect for natural spa treatments.
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" ref={testimonialsRef}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center mb-16"
+            initial="hidden"
+            animate={testimonialsInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
+            <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
               What Our Customers Say
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
+            </motion.span>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
               Guest Experiences
-            </h2>
-          </div>
+            </motion.h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-8 rounded-lg">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={testimonialsInView ? "visible" : "hidden"}
+            transition={{ staggerChildren: 0.15, delayChildren: 0.3 }}
+          >
+            <motion.div 
+              className="bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow duration-300"
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <div className="flex text-primary mb-4">
                 <Star className="w-5 h-5 fill-current" />
                 <Star className="w-5 h-5 fill-current" />
@@ -548,9 +756,14 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground">United Kingdom</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-gray-50 p-8 rounded-lg">
+            <motion.div 
+              className="bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow duration-300"
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <div className="flex text-primary mb-4">
                 <Star className="w-5 h-5 fill-current" />
                 <Star className="w-5 h-5 fill-current" />
@@ -574,9 +787,14 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground">Germany</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-gray-50 p-8 rounded-lg">
+            <motion.div 
+              className="bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow duration-300"
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <div className="flex text-primary mb-4">
                 <Star className="w-5 h-5 fill-current" />
                 <Star className="w-5 h-5 fill-current" />
@@ -600,39 +818,55 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground">Spain</p>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Newsletter Section */}
       <section id="contact" className="py-20 bg-primary text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+          >
             <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
               Stay updated with SeaYou Madeira
             </h2>
             <p className="text-white/80 mb-8 max-w-xl mx-auto">
               Subscribe to our newsletter for special offers, new routes announcements, and seasonal promotions.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+            <motion.form 
+              className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="flex-1 px-4 py-3 rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="flex-1 px-4 py-3 rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300"
                 required
               />
-              <button 
+              <motion.button 
                 type="submit" 
-                className="bg-white text-primary font-medium px-6 py-3 rounded-md hover:bg-white/90 transition-colors"
+                className="bg-white text-primary font-medium px-6 py-3 rounded-md hover:bg-white/90 transition-colors relative overflow-hidden group"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                Subscribe
-              </button>
-            </form>
+                <span className="relative z-10">Subscribe</span>
+                <span className="absolute inset-0 h-full w-10 bg-white/20 skew-x-[20deg] transform -translate-x-32 group-hover:translate-x-40 transition-transform duration-700"></span>
+              </motion.button>
+            </motion.form>
             <p className="text-white/60 text-sm mt-4">
               By subscribing, you agree to receive marketing communications from SeaYou Madeira.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
