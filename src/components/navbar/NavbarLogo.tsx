@@ -2,7 +2,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const NavbarLogo: React.FC = () => {
+interface NavbarLogoProps {
+  scrolled?: boolean;
+}
+
+export const NavbarLogo: React.FC<NavbarLogoProps> = ({ scrolled = false }) => {
   return (
     <div className="flex items-center">
       <Link
@@ -10,9 +14,9 @@ export const NavbarLogo: React.FC = () => {
         className="hover:opacity-80 transition-opacity"
       >
         <img 
-          src="https://extranet.seayou.pt/logos/logowhite.png" 
+          src={scrolled ? "https://extranet.seayou.pt/logos/logocolor.png" : "https://extranet.seayou.pt/logos/logowhite.png"} 
           alt="SeaYou Logo" 
-          className="h-10 w-auto"
+          className={`w-auto transition-all duration-300 ${scrolled ? "h-14" : "h-10"}`}
         />
       </Link>
     </div>

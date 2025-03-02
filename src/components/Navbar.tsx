@@ -56,7 +56,7 @@ export const Navbar = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <NavbarLogo />
+          <NavbarLogo scrolled={scrolled} />
           <NavbarDesktopLinks onScrollToSection={scrollToSection} />
           <NavbarDesktopActions />
           <NavbarMobileActions isOpen={isOpen} toggleMenu={toggleMenu} />
