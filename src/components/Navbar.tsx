@@ -2,11 +2,17 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Ship, User, Search, Calendar, Anchor, MapPin, Mail } from "lucide-react";
 import { Button } from "./ui/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +26,21 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    setIsOpen(false);
+    
+    // Check if we're on the home page
+    if (location.pathname === "/") {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Navigate to home page with hash
+      window.location.href = `/#${sectionId}`;
+    }
+  };
 
   return (
     <header
@@ -42,36 +63,36 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-10">
-            <a
-              href="#routes"
+            <button
+              onClick={() => scrollToSection("routes")}
               className="text-sm font-medium hover-border-effect transition-colors"
             >
               Routes
-            </a>
-            <a
-              href="#cruises"
+            </button>
+            <button
+              onClick={() => scrollToSection("cruises")}
               className="text-sm font-medium hover-border-effect transition-colors"
             >
               Private Cruises
-            </a>
-            <a
-              href="#tours"
+            </button>
+            <button
+              onClick={() => scrollToSection("tours")}
               className="text-sm font-medium hover-border-effect transition-colors"
             >
               Porto Santo Tours
-            </a>
-            <a
-              href="#about"
+            </button>
+            <button
+              onClick={() => scrollToSection("about")}
               className="text-sm font-medium hover-border-effect transition-colors"
             >
               About
-            </a>
-            <a
-              href="#contact"
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
               className="text-sm font-medium hover-border-effect transition-colors"
             >
               Contact
-            </a>
+            </button>
           </nav>
 
           {/* Desktop icons */}
@@ -121,41 +142,36 @@ export const Navbar = () => {
       {isOpen && (
         <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in">
           <div className="flex flex-col space-y-6">
-            <a
-              href="#routes"
+            <button
+              onClick={() => scrollToSection("routes")}
               className="text-lg font-medium py-2 border-b border-gray-100"
-              onClick={() => setIsOpen(false)}
             >
               Routes
-            </a>
-            <a
-              href="#cruises"
+            </button>
+            <button
+              onClick={() => scrollToSection("cruises")}
               className="text-lg font-medium py-2 border-b border-gray-100"
-              onClick={() => setIsOpen(false)}
             >
               Private Cruises
-            </a>
-            <a
-              href="#tours"
+            </button>
+            <button
+              onClick={() => scrollToSection("tours")}
               className="text-lg font-medium py-2 border-b border-gray-100"
-              onClick={() => setIsOpen(false)}
             >
               Porto Santo Tours
-            </a>
-            <a
-              href="#about"
+            </button>
+            <button
+              onClick={() => scrollToSection("about")}
               className="text-lg font-medium py-2 border-b border-gray-100"
-              onClick={() => setIsOpen(false)}
             >
               About
-            </a>
-            <a
-              href="#contact"
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
               className="text-lg font-medium py-2 border-b border-gray-100"
-              onClick={() => setIsOpen(false)}
             >
               Contact
-            </a>
+            </button>
             <div className="flex items-center space-x-4 py-4">
               <button
                 aria-label="Search"
