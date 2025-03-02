@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -136,7 +135,7 @@ const Index = () => {
           
           <div className="bg-white rounded-lg shadow-lg p-6">
             <BokunWidget 
-              productListId="81631"
+              productListId="83066"
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
               className="min-h-[500px]" 
             />

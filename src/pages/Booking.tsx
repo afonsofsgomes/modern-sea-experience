@@ -30,7 +30,11 @@ const Booking = () => {
             </motion.div>
 
             <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-              <BokunWidget className="min-h-[600px]" />
+              <BokunWidget 
+                productListId="83066"
+                bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
+                className="min-h-[600px]" 
+              />
             </div>
           </div>
         </section>
