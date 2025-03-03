@@ -18,7 +18,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5 }} 
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight pt-16 sm:pt-0"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight pt-16 sm:pt-0 whitespace-normal sm:whitespace-nowrap"
         >
           Exclusive Sea Tours in Madeira
         </motion.h1>
@@ -41,27 +41,27 @@ export const Hero = () => {
         >
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Ship className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Ship className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">Secure<br />Bookings</span>
+            <span className="text-xs sm:text-sm">Secure Bookings</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Clock className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">24/7<br />Support</span>
+            <span className="text-xs sm:text-sm">24/7 Support</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <MapPin className="h-5 w-5 sm:h-6 sm:w-6" />
+              <MapPin className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">Trusted by<br />TripAdvisor</span>
+            <span className="text-xs sm:text-sm">Trusted by TripAdvisor</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Wifi className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Wifi className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">Flexible<br />Cancellations</span>
+            <span className="text-xs sm:text-sm">Flexible Cancellations</span>
           </div>
         </motion.div>
 
@@ -70,17 +70,17 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.3 }} 
-          className="flex flex-wrap justify-center gap-3 w-full"
+          className="flex flex-wrap justify-center gap-3 w-full max-w-lg"
         >
           <div className="flex flex-row justify-center gap-3 w-full">
-            <Link to="/seabus" className="flex-1 max-w-[120px] sm:max-w-[130px]">
-              <Button size="lg" variant="primary" className="w-full text-sm md:text-base">SeaBus</Button>
+            <Link to="/seabus" className="flex-1">
+              <Button size="lg" variant="primary" className="w-full text-sm h-12 whitespace-nowrap">SeaBus</Button>
             </Link>
-            <Link to="/porto-santo" className="flex-1 max-w-[120px] sm:max-w-[130px]">
-              <Button size="lg" variant="primary" className="w-full text-sm md:text-base">Porto Santo</Button>
+            <Link to="/porto-santo" className="flex-1">
+              <Button size="lg" variant="primary" className="w-full text-sm h-12 whitespace-nowrap">Porto Santo</Button>
             </Link>
-            <Link to="/private-cruise" className="flex-1 max-w-[120px] sm:max-w-[130px]">
-              <Button size="lg" variant="primary" className="w-full text-sm md:text-base">Private Cruises</Button>
+            <Link to="/private-cruise" className="flex-1">
+              <Button size="lg" variant="primary" className="w-full text-sm h-12 whitespace-nowrap">Private Cruises</Button>
             </Link>
           </div>
         </motion.div>
