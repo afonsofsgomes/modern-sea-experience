@@ -18,7 +18,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5 }} 
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight pt-16 sm:pt-0"
         >
           Exclusive Sea Tours in Madeira
         </motion.h1>
@@ -37,31 +37,31 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.2 }} 
-          className="flex flex-wrap justify-center gap-6 md:gap-8 mb-8"
+          className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8"
         >
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Ship className="h-6 w-6" />
+              <Ship className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <span className="text-sm">Secure<br />Bookings</span>
+            <span className="text-xs sm:text-sm">Secure<br />Bookings</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Clock className="h-6 w-6" />
+              <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <span className="text-sm">24/7<br />Support</span>
+            <span className="text-xs sm:text-sm">24/7<br />Support</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <MapPin className="h-6 w-6" />
+              <MapPin className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <span className="text-sm">Trusted by<br />TripAdvisor</span>
+            <span className="text-xs sm:text-sm">Trusted by<br />TripAdvisor</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Wifi className="h-6 w-6" />
+              <Wifi className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <span className="text-sm">Flexible<br />Cancellations</span>
+            <span className="text-xs sm:text-sm">Flexible<br />Cancellations</span>
           </div>
         </motion.div>
 
@@ -70,17 +70,19 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.3 }} 
-          className="flex flex-wrap justify-center gap-3"
+          className="flex flex-wrap justify-center gap-3 w-full"
         >
-          <Link to="/seabus">
-            <Button size="lg" className="w-28 md:w-32 text-sm md:text-base bg-secondary hover:bg-secondary/90 text-white">SeaBus</Button>
-          </Link>
-          <Link to="/porto-santo">
-            <Button size="lg" className="w-28 md:w-32 text-sm md:text-base bg-secondary hover:bg-secondary/90 text-white">Porto Santo</Button>
-          </Link>
-          <Link to="/private-cruise">
-            <Button size="lg" className="w-28 md:w-32 text-sm md:text-base bg-secondary hover:bg-secondary/90 text-white">Private Cruises</Button>
-          </Link>
+          <div className="flex flex-row justify-center gap-3 w-full">
+            <Link to="/seabus" className="flex-1 max-w-[120px] sm:max-w-[130px]">
+              <Button size="lg" variant="primary" className="w-full text-sm md:text-base">SeaBus</Button>
+            </Link>
+            <Link to="/porto-santo" className="flex-1 max-w-[120px] sm:max-w-[130px]">
+              <Button size="lg" variant="primary" className="w-full text-sm md:text-base">Porto Santo</Button>
+            </Link>
+            <Link to="/private-cruise" className="flex-1 max-w-[120px] sm:max-w-[130px]">
+              <Button size="lg" variant="primary" className="w-full text-sm md:text-base">Private Cruises</Button>
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>;

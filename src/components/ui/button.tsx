@@ -1,11 +1,10 @@
-
 // This is a re-export file to solve casing issues
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
 // Define button variants
 const buttonVariants = {
-  primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+  primary: "bg-[#4A6FA5] text-white hover:bg-[#3A5A8A] shadow-sm transition-colors duration-300",
   secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
   ghost: "hover:bg-accent/10 hover:text-accent-foreground",
   link: "text-primary underline-offset-4 hover:underline hover-border-effect p-0 h-auto",
@@ -16,7 +15,7 @@ const buttonVariants = {
 const buttonSizes = {
   sm: "text-xs px-2.5 py-1.5 rounded-md",
   md: "text-sm px-4 py-2 rounded-md",
-  lg: "text-base px-5 py-3 rounded-md",
+  lg: "text-base px-5 py-2.5 rounded-md",
 };
 
 // Function version of buttonVariants for compatibility with shadcn components
