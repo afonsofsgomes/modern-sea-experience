@@ -89,7 +89,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
             initial={{ opacity: 0, x: reversed ? -30 : 30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: reversed ? -30 : 30 }}
             transition={{ duration: 0.7 }}
-            className={reversed ? 'lg:col-start-1' : ''}
+            className={`relative ${reversed ? 'lg:col-start-1' : ''}`}
           >
             <div className="aspect-square rounded-md overflow-hidden">
               <img 
