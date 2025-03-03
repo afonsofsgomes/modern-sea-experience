@@ -23,8 +23,8 @@ export const Hero = () => {
         y: 0
       }} transition={{
         duration: 0.5
-      }} className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-4 whitespace-nowrap">
-          YOUR NEXT ADVENTURE
+      }} className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-4 whitespace-normal max-w-4xl">
+          Exclusive Sea Tours & Experiences in Madeira
         </motion.h1>
         <motion.p initial={{
         opacity: 0,
@@ -36,8 +36,7 @@ export const Hero = () => {
         duration: 0.5,
         delay: 0.1
       }} className="text-xl max-w-3xl mb-8">
-          Discover breathtaking sea routes and unforgettable experiences with
-          SeaYou.
+          Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo. Book securely with 24/7 support.
         </motion.p>
 
         {/* Icon Row */}
@@ -88,13 +87,13 @@ export const Hero = () => {
         delay: 0.3
       }} className="flex flex-wrap justify-center gap-4">
           <Link to="/seabus">
-            <Button size="lg" className="min-w-32">SeaBus</Button>
+            <Button size="lg" className="min-w-32 bg-secondary hover:bg-secondary/90 text-white">SeaBus</Button>
           </Link>
           <Link to="/porto-santo">
-            <Button size="lg" className="min-w-32">Porto Santo</Button>
+            <Button size="lg" className="min-w-32 bg-secondary hover:bg-secondary/90 text-white">Porto Santo</Button>
           </Link>
           <Link to="/private-cruise">
-            <Button size="lg" className="min-w-32">Private Cruises</Button>
+            <Button size="lg" className="min-w-32 bg-secondary hover:bg-secondary/90 text-white">Private Cruises</Button>
           </Link>
         </motion.div>
       </div>

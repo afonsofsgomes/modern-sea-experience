@@ -61,7 +61,7 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
           to={link.path}
           className={`text-sm font-medium hover-border-effect transition-colors ${
             location.pathname === link.path 
-              ? 'text-primary font-semibold' 
+              ? 'text-secondary font-semibold' 
               : scrolled ? 'text-foreground' : 'text-white'
           }`}
         >
