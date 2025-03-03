@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -6,9 +5,7 @@ import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
 import { 
   Routes, 
-  Destinations, 
-  PrivateCruises, 
-  PortoSantoTours, 
+  Destinations,
   Testimonials, 
   Newsletter 
 } from "@/components/sections";
@@ -121,12 +118,6 @@ const Index = () => {
         />
       ))}
       
-      <div id="cruises">
-        <PrivateCruises />
-      </div>
-      <div id="tours">
-        <PortoSantoTours />
-      </div>
       <div id="about">
         <Testimonials />
       </div>
