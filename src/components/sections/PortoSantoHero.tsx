@@ -5,7 +5,7 @@ import { Clock, Users, Wifi, Calendar } from "lucide-react";
 
 export const PortoSantoHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900">
+    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-24">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 

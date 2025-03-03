@@ -4,7 +4,11 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-export const NavbarDesktopActions: React.FC = () => {
+interface NavbarDesktopActionsProps {
+  scrolled?: boolean;
+}
+
+export const NavbarDesktopActions: React.FC<NavbarDesktopActionsProps> = ({ scrolled = false }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -28,7 +32,7 @@ export const NavbarDesktopActions: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search..."
-            className="bg-transparent border-b border-white text-white placeholder-white/70 pr-8 pl-2 py-1 focus:outline-none"
+            className={`bg-transparent border-b ${scrolled ? 'border-foreground text-foreground placeholder-foreground/70' : 'border-white text-white placeholder-white/70'} pr-8 pl-2 py-1 focus:outline-none`}
             autoFocus
           />
           <button 
@@ -37,16 +41,16 @@ export const NavbarDesktopActions: React.FC = () => {
             className="absolute right-0 p-1" 
             aria-label="Close search"
           >
-            <X className="h-4 w-4 text-white" />
+            <X className={`h-4 w-4 ${scrolled ? 'text-foreground' : 'text-white'}`} />
           </button>
         </form>
       ) : (
         <button
           aria-label="Search"
           onClick={() => setIsSearchOpen(true)}
-          className="p-2 rounded-full hover:bg-white/10 transition-colors"
+          className={`p-2 rounded-full ${scrolled ? 'hover:bg-gray-100' : 'hover:bg-white/10'} transition-colors`}
         >
-          <Search className="h-5 w-5 text-white" />
+          <Search className={`h-5 w-5 ${scrolled ? 'text-foreground' : 'text-white'}`} />
         </button>
       )}
       <Link to="/booking">

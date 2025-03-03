@@ -50,7 +50,7 @@ export const Navbar = () => {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-sm py-3"
+          ? "bg-white backdrop-blur-md shadow-sm py-3"
           : "bg-transparent py-5"
       }`}
     >
@@ -58,7 +58,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-between">
           <NavbarLogo scrolled={scrolled} />
           <NavbarDesktopLinks onScrollToSection={scrollToSection} scrolled={scrolled} />
-          <NavbarDesktopActions />
+          <NavbarDesktopActions scrolled={scrolled} />
           <NavbarMobileActions isOpen={isOpen} toggleMenu={toggleMenu} />
         </div>
       </div>

@@ -29,7 +29,7 @@ const Booking = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <section className="py-20 pt-32">
+        <section className="py-20 pt-36">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial="hidden"
