@@ -1,9 +1,6 @@
-
 import { motion } from "framer-motion";
-
 export const PortoSantoAbout = () => {
-  return (
-    <section className="py-20 bg-white">
+  return <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -36,11 +33,7 @@ export const PortoSantoAbout = () => {
           </div>
           <div className="relative">
             <div className="aspect-square rounded-md overflow-hidden shadow-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1586500036065-8395181e4e64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-                alt="Porto Santo Island" 
-                className="w-full h-full object-cover"
-              />
+              <img alt="Porto Santo Island" className="w-full h-full object-cover" src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" />
             </div>
             <div className="absolute -bottom-8 -left-8 w-2/3 aspect-video bg-white/80 backdrop-blur-sm p-6 rounded-md shadow-lg">
               <h3 className="font-display text-lg mb-2 text-blue-900">Porto Santo Experience</h3>
@@ -51,6 +44,5 @@ export const PortoSantoAbout = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
