@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
 interface NavbarDesktopLinksProps {
@@ -8,18 +9,25 @@ interface NavbarDesktopLinksProps {
 }
 
 export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScrollToSection, scrolled = false }) => {
-  const navLinks = [
+  // Section links within the home page
+  const sectionLinks = [
     { label: "Home", sectionId: "home" },
     { label: "Routes", sectionId: "routes" },
-    { label: "Private Cruises", sectionId: "cruises" },
-    { label: "Porto Santo", sectionId: "tours" },
     { label: "About", sectionId: "about" },
     { label: "Contact", sectionId: "contact" }
   ];
+  
+  // Page links to separate pages
+  const pageLinks = [
+    { label: "SeaBus", path: "/seabus" },
+    { label: "Private Cruises", path: "/private-cruise" },
+    { label: "Porto Santo", path: "/porto-santo" }
+  ];
 
   return (
-    <nav className="hidden md:flex items-center space-x-10">
-      {navLinks.map((link) => (
+    <nav className="hidden md:flex items-center space-x-8">
+      {/* Section links that scroll within home page */}
+      {sectionLinks.map((link) => (
         <NavbarLink
           key={link.sectionId}
           label={link.label}
@@ -27,6 +35,20 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
           onClick={onScrollToSection}
           scrolled={scrolled}
         />
+      ))}
+      
+      {/* Divider */}
+      <div className={`h-5 w-px ${scrolled ? 'bg-gray-300' : 'bg-white/30'}`}></div>
+      
+      {/* Page links that navigate to different pages */}
+      {pageLinks.map((link) => (
+        <Link
+          key={link.path}
+          to={link.path}
+          className={`text-sm font-medium hover-border-effect transition-colors ${scrolled ? 'text-foreground' : 'text-white'}`}
+        >
+          {link.label}
+        </Link>
       ))}
     </nav>
   );

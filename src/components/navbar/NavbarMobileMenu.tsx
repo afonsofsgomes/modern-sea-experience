@@ -15,13 +15,19 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   onScrollToSection,
   onClose
 }) => {
-  const navLinks = [
+  // Section links within the home page
+  const sectionLinks = [
     { label: "Home", sectionId: "home" },
     { label: "Routes", sectionId: "routes" },
-    { label: "Private Cruises", sectionId: "cruises" },
-    { label: "Porto Santo", sectionId: "tours" },
     { label: "About", sectionId: "about" },
     { label: "Contact", sectionId: "contact" }
+  ];
+  
+  // Page links to separate pages
+  const pageLinks = [
+    { label: "SeaBus", path: "/seabus" },
+    { label: "Private Cruises", path: "/private-cruise" },
+    { label: "Porto Santo", path: "/porto-santo" }
   ];
 
   if (!isOpen) return null;
@@ -34,7 +40,11 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in">
       <div className="flex flex-col space-y-6">
-        {navLinks.map((link) => (
+        {/* Section heading */}
+        <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>
+        
+        {/* Section links that scroll within home page */}
+        {sectionLinks.map((link) => (
           <NavbarLink
             key={link.sectionId}
             label={link.label}
@@ -43,6 +53,22 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
             isMobile={true}
           />
         ))}
+        
+        {/* Section heading for pages */}
+        <h3 className="text-sm font-medium text-gray-500 uppercase pt-4 mb-2">Our Services</h3>
+        
+        {/* Page links that navigate to different pages */}
+        {pageLinks.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            className="text-lg font-medium py-2 border-b border-gray-100"
+            onClick={onClose}
+          >
+            {link.label}
+          </Link>
+        ))}
+        
         <div className="flex items-center space-x-4 py-4">
           <button
             aria-label="Search"
