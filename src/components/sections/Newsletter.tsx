@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 export const Newsletter = () => {
   return (
-    <section id="contact" className="py-20 bg-primary text-white">
+    <section id="contact" className="py-20 bg-[#253D7F] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="max-w-4xl mx-auto"
@@ -116,7 +116,7 @@ export const Newsletter = () => {
                 
                 <motion.button 
                   type="submit" 
-                  className="w-full bg-white text-primary font-medium px-6 py-3 rounded-md hover:bg-white/90 transition-colors relative overflow-hidden group"
+                  className="w-full bg-[#E95543] text-white font-medium px-6 py-3 rounded-md hover:bg-[#E95543]/90 transition-colors relative overflow-hidden group"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}

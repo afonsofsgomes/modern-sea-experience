@@ -5,7 +5,7 @@ import { Users, Clock, Compass, Wifi, Calendar } from "lucide-react";
 
 export const PrivateCruiseHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-24">
+    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-[#253D7F] pt-24">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -13,7 +13,7 @@ export const PrivateCruiseHero = () => {
           alt="Private Cruise" 
           className="w-full h-full object-cover opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/30 to-[#253D7F]/80" />
       </div>
       
       {/* Hero Content */}
@@ -30,7 +30,7 @@ export const PrivateCruiseHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-red-500 text-white px-6 py-2 rounded-md mb-6"
+          className="bg-[#E95543] text-white px-6 py-2 rounded-md mb-6"
         >
           CRUISE - SPECIAL REQUEST
         </motion.div>
@@ -83,7 +83,7 @@ export const PrivateCruiseHero = () => {
         >
           <Button 
             size="lg" 
-            className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg"
+            className="bg-[#E95543] hover:bg-[#E95543]/90 text-white px-8 py-3 text-lg"
             onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
           >
             BOOK NOW

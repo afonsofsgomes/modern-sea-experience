@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Ship, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 export const Hero = () => {
-  return <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-blue-900">
+  return <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-[#253D7F]">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img src="https://images.unsplash.com/photo-1628413283166-a7666966d26b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sea" className="w-full h-full object-cover object-bottom opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/30 to-[#253D7F]/80" />
       </div>
 
       {/* Hero Content */}

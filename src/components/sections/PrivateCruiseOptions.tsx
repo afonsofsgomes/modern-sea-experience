@@ -5,7 +5,7 @@ export const PrivateCruiseOptions = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center text-blue-900">
+        <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center text-[#253D7F]">
           Private Cruise Options
         </h2>
         
@@ -22,7 +22,7 @@ export const PrivateCruiseOptions = () => {
               <p className="text-white/80 mb-4">Experience the magic of Madeira's sunset from the sea with champagne and canapés</p>
               <p className="text-white text-2xl font-bold mb-4">From 350€</p>
               <Button
-                className="bg-red-500 hover:bg-red-600 text-white max-w-max"
+                className="bg-[#E95543] hover:bg-[#E95543]/90 text-white max-w-max"
                 onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Book Now
@@ -42,7 +42,7 @@ export const PrivateCruiseOptions = () => {
               <p className="text-white/80 mb-4">Private tours to discover Madeira's diverse marine life with experienced guides</p>
               <p className="text-white text-2xl font-bold mb-4">From 450€</p>
               <Button
-                className="bg-red-500 hover:bg-red-600 text-white max-w-max"
+                className="bg-[#E95543] hover:bg-[#E95543]/90 text-white max-w-max"
                 onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Book Now
@@ -62,7 +62,7 @@ export const PrivateCruiseOptions = () => {
               <p className="text-white/80 mb-4">Discover hidden caves, majestic cliffs and pristine beaches along Madeira's coastline</p>
               <p className="text-white text-2xl font-bold mb-4">From 400€</p>
               <Button
-                className="bg-red-500 hover:bg-red-600 text-white max-w-max"
+                className="bg-[#E95543] hover:bg-[#E95543]/90 text-white max-w-max"
                 onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Book Now
@@ -82,7 +82,7 @@ export const PrivateCruiseOptions = () => {
               <p className="text-white/80 mb-4">Customize your own private cruise experience with our luxury vessel</p>
               <p className="text-white text-2xl font-bold mb-4">From 500€</p>
               <Button
-                className="bg-red-500 hover:bg-red-600 text-white max-w-max"
+                className="bg-[#E95543] hover:bg-[#E95543]/90 text-white max-w-max"
                 onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Book Now
