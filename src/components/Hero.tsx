@@ -86,13 +86,13 @@ export const Hero = () => {
         delay: 0.3
       }} className="flex flex-wrap justify-center gap-2 md:gap-4">
           <Link to="/seabus">
-            <Button size="default" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">SeaBus</Button>
+            <Button size="md" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">SeaBus</Button>
           </Link>
           <Link to="/porto-santo">
-            <Button size="default" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">Porto Santo</Button>
+            <Button size="md" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">Porto Santo</Button>
           </Link>
           <Link to="/private-cruise">
-            <Button size="default" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">Private Cruises</Button>
+            <Button size="md" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">Private Cruises</Button>
           </Link>
         </motion.div>
       </div>

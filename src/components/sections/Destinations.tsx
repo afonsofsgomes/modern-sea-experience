@@ -123,6 +123,12 @@ export const Destinations = () => {
                   src={destination.image} 
                   alt={destination.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  onError={(e) => {
+                    // Fallback to a placeholder image if the image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80';
+                    console.log(`Image failed to load: ${destination.image}, using fallback`);
+                  }}
                 />
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
                   <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">
