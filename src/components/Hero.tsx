@@ -1,9 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Ship, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
 export const Hero = () => {
   return <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-[#253D7F]">
       {/* Background Image */}
@@ -22,9 +20,7 @@ export const Hero = () => {
         y: 0
       }} transition={{
         duration: 0.5
-      }} className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4 max-w-4xl">
-          Exclusive Sea Tours & Experiences in Madeira
-        </motion.h1>
+      }} className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4 max-w-4xl">Exclusive Sea Tours in Madeira</motion.h1>
         <motion.p initial={{
         opacity: 0,
         y: 20
