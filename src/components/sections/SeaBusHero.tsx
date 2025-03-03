@@ -12,7 +12,7 @@ export const SeaBusHero = () => {
   };
 
   return (
-    <section className="relative h-[50vh] md:h-[75vh] overflow-hidden bg-blue-900 pt-24">
+    <section className="relative h-[60vh] md:h-[75vh] overflow-hidden bg-blue-900 pt-16 md:pt-24">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -30,7 +30,7 @@ export const SeaBusHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-4 whitespace-nowrap"
+          className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4"
         >
           SEA BUS
         </motion.h1>
@@ -38,7 +38,7 @@ export const SeaBusHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl max-w-3xl mb-8"
+          className="text-lg md:text-xl max-w-3xl mb-6 md:mb-8"
         >
           Your hop-on hop-off boat tour in Madeira Island
         </motion.p>
@@ -48,37 +48,37 @@ export const SeaBusHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-8 mb-8"
+          className="flex flex-wrap justify-center gap-4 md:gap-8 mb-6 md:mb-8"
         >
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Clock className="h-6 w-6" />
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
+              <Clock className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-sm">9:30 - 17:00</span>
+            <span className="text-xs md:text-sm">9:30 - 17:00</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Users className="h-6 w-6" />
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
+              <Users className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-sm">up to 22 PAX</span>
+            <span className="text-xs md:text-sm">up to 22 PAX</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
-              <MapPin className="h-6 w-6" />
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
+              <MapPin className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-sm">Funchal</span>
+            <span className="text-xs md:text-sm">Funchal</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Wifi className="h-6 w-6" />
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
+              <Wifi className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-sm">FREE WiFi</span>
+            <span className="text-xs md:text-sm">FREE WiFi</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
-              <Calendar className="h-6 w-6" />
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
+              <Calendar className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-sm">Everyday</span>
+            <span className="text-xs md:text-sm">Everyday</span>
           </div>
         </motion.div>
 
