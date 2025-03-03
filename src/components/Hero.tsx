@@ -1,3 +1,4 @@
+
 // Updating import path to use lowercase button
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Ship, Wifi } from "lucide-react";
@@ -53,29 +54,25 @@ export const Hero = () => {
             <div className="bg-white/20 p-3 rounded-full mb-2">
               <Ship className="h-6 w-6" />
             </div>
-            <span className="text-sm">Secure
-Bookings</span>
+            <span className="text-sm">Secure<br />Bookings</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
               <Clock className="h-6 w-6" />
             </div>
-            <span className="text-sm">24/7
-Support</span>
+            <span className="text-sm">24/7<br />Support</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
               <MapPin className="h-6 w-6" />
             </div>
-            <span className="text-sm">Trusted by
-TripAdvisor</span>
+            <span className="text-sm">Trusted by<br />TripAdvisor</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
               <Wifi className="h-6 w-6" />
             </div>
-            <span className="text-sm">Flexibe
-Cancellations</span>
+            <span className="text-sm">Flexible<br />Cancellations</span>
           </div>
         </motion.div>
 
