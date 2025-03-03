@@ -86,7 +86,6 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
             </Link>
           </motion.div>
           <motion.div 
-            className="relative"
             initial={{ opacity: 0, x: reversed ? -30 : 30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: reversed ? -30 : 30 }}
             transition={{ duration: 0.7 }}
