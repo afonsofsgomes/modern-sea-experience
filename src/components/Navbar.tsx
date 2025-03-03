@@ -31,6 +31,22 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle scroll to section after navigation to home page
+  useEffect(() => {
+    // Only run this effect if we're on the home page and there's a hash in the URL
+    if (location.pathname === "/" && location.hash) {
+      const sectionId = location.hash.replace('#', '');
+      const element = document.getElementById(sectionId);
+      
+      if (element) {
+        // Small delay to ensure the page is loaded before scrolling
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location.pathname, location.hash]);
+
   const scrollToSection = (sectionId: string) => {
     // Check if we're on the home page
     if (location.pathname === "/") {
