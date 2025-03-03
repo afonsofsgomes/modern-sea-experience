@@ -5,7 +5,7 @@ import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
 
 export const SeaBusHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[75vh] overflow-hidden bg-blue-900">
+    <section className="relative h-[50vh] md:h-[75vh] overflow-hidden bg-blue-900 pt-24">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img

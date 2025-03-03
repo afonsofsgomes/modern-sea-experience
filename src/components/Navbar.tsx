@@ -59,7 +59,7 @@ export const Navbar = () => {
           <NavbarLogo scrolled={scrolled} />
           <NavbarDesktopLinks onScrollToSection={scrollToSection} scrolled={scrolled} />
           <NavbarDesktopActions scrolled={scrolled} />
-          <NavbarMobileActions isOpen={isOpen} toggleMenu={toggleMenu} />
+          <NavbarMobileActions isOpen={isOpen} toggleMenu={toggleMenu} scrolled={scrolled} />
         </div>
       </div>
 

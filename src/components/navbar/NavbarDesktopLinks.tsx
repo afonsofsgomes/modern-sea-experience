@@ -24,6 +24,7 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
           label={link.label}
           sectionId={link.sectionId}
           onClick={onScrollToSection}
+          scrolled={scrolled}
         />
       ))}
     </nav>
