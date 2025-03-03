@@ -1,23 +1,26 @@
+
 import * as React from "react"
 import { CalendarIcon } from "lucide-react"
+import { DayPicker } from "react-day-picker"
+import { format } from "date-fns"
+import "react-day-picker/dist/style.css"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-
-import { DayPicker } from "react-day-picker"
-import "react-day-picker/dist/style.css"
-
 import { buttonVariantsFn } from "@/components/ui/button"
 
-export interface CalendarProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
 export function Calendar({
   className,
+  classNames,
+  showOutsideDays = true,
   ...props
 }: CalendarProps) {
   return (
     <DayPicker
+      showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
@@ -48,7 +51,7 @@ export function Calendar({
         day_range_middle:
           "aria-selected:bg-accent aria-selected:text-accent-foreground bg-muted hover:bg-muted hover:text-muted-foreground",
         day_hidden: "invisible",
-        ...props.classNames,
+        ...classNames,
       }}
       {...props}
     />
@@ -69,15 +72,15 @@ export const CalendarDemo = () => {
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? date?.toLocaleDateString() : <span>Pick a date</span>}
+          {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
-          className="rounded-md border"
+          onSelect={setDate as any}
+          initialFocus
         />
       </PopoverContent>
     </Popover>
