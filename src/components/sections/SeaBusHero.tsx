@@ -9,8 +9,8 @@ export const SeaBusHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1502005229762-cf1b998ff696?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
-          alt="Sea Bus"
+          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21"
+          alt="Ocean Wave"
           className="w-full h-full object-cover object-center opacity-70"
           loading="eager"
         />
