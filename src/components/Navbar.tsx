@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { NavbarLogo } from "./navbar/NavbarLogo";
 import { NavbarDesktopLinks } from "./navbar/NavbarDesktopLinks";
 import { NavbarDesktopActions } from "./navbar/NavbarDesktopActions";
@@ -11,6 +11,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -45,7 +46,7 @@ export const Navbar = () => {
       }
     } else {
       // Navigate to home page with hash
-      window.location.href = `/#${sectionId}`;
+      navigate(`/#${sectionId}`);
     }
   };
 

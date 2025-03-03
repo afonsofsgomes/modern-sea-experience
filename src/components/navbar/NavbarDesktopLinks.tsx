@@ -27,6 +27,16 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
     { label: "Porto Santo", path: "/porto-santo" }
   ];
 
+  // Check if current hash matches one of our section IDs
+  const currentHash = location.hash.replace('#', '');
+  const isActiveSectionLink = (sectionId: string) => {
+    if (isHomePage) {
+      if (sectionId === 'home' && !currentHash) return true;
+      return currentHash === sectionId;
+    }
+    return false;
+  };
+
   return (
     <nav className="hidden md:flex items-center space-x-8">
       {/* Section links that scroll within home page or redirect to home page with hash */}
@@ -37,7 +47,7 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
           sectionId={link.sectionId}
           onClick={onScrollToSection}
           scrolled={scrolled}
-          isActive={isHomePage && link.sectionId === "home" && !location.hash}
+          isActive={isActiveSectionLink(link.sectionId)}
         />
       ))}
       

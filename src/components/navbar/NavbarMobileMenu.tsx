@@ -35,6 +35,16 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
 
   if (!isOpen) return null;
 
+  // Check if current hash matches one of our section IDs
+  const currentHash = location.hash.replace('#', '');
+  const isActiveSectionLink = (sectionId: string) => {
+    if (isHomePage) {
+      if (sectionId === 'home' && !currentHash) return true;
+      return currentHash === sectionId;
+    }
+    return false;
+  };
+
   const handleLinkClick = (sectionId: string) => {
     onScrollToSection(sectionId);
     onClose();
@@ -54,7 +64,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
             sectionId={link.sectionId}
             onClick={handleLinkClick}
             isMobile={true}
-            isActive={isHomePage && link.sectionId === "home" && !location.hash}
+            isActive={isActiveSectionLink(link.sectionId)}
           />
         ))}
         
