@@ -30,9 +30,7 @@ export const Hero = () => {
       }} transition={{
         duration: 0.5,
         delay: 0.1
-      }} className="text-base sm:text-lg md:text-xl max-w-3xl mb-6 md:mb-8 px-2">
-          Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo. Book securely with 24/7 support.
-        </motion.p>
+      }} className="text-base sm:text-lg md:text-xl max-w-3xl mb-6 md:mb-8 px-2">Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo.</motion.p>
 
         {/* Icon Row */}
         <motion.div initial={{
