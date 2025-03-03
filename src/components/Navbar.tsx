@@ -33,6 +33,12 @@ export const Navbar = () => {
   const scrollToSection = (sectionId: string) => {
     // Check if we're on the home page
     if (location.pathname === "/") {
+      // Special case for home section - scroll to top
+      if (sectionId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });

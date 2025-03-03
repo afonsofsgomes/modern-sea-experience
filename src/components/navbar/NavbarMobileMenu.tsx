@@ -16,9 +16,10 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   onClose
 }) => {
   const navLinks = [
+    { label: "Home", sectionId: "home" },
     { label: "Routes", sectionId: "routes" },
     { label: "Private Cruises", sectionId: "cruises" },
-    { label: "Porto Santo Tours", sectionId: "tours" },
+    { label: "Porto Santo", sectionId: "tours" },
     { label: "About", sectionId: "about" },
     { label: "Contact", sectionId: "contact" }
   ];

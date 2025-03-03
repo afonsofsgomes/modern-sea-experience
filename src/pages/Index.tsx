@@ -34,16 +34,26 @@ const Index = () => {
         style={{ scaleX, transformOrigin: "0%" }}
       />
       <Navbar />
-      <Hero />
+      <div id="home">
+        <Hero />
+      </div>
       
       <Routes />
       <Destinations />
       <QuickBooking />
       <ScheduleDisplay />
-      <PrivateCruises />
-      <PortoSantoTours />
-      <Testimonials />
-      <Newsletter />
+      <div id="cruises">
+        <PrivateCruises />
+      </div>
+      <div id="tours">
+        <PortoSantoTours />
+      </div>
+      <div id="about">
+        <Testimonials />
+      </div>
+      <div id="contact">
+        <Newsletter />
+      </div>
 
       <Footer />
     </div>
