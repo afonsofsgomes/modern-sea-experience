@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Thermometer, MessageSquareHeart } from "lucide-react";
@@ -51,22 +52,31 @@ export const Routes = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <motion.div className="rounded-lg overflow-hidden" initial={{
-          opacity: 0,
-          x: -30
-        }} animate={routesInView ? {
-          opacity: 1,
-          x: 0
-        } : {
-          opacity: 0,
-          x: -30
-        }} transition={{
-          duration: 0.8
-        }}>
-            <img alt="SeaBus Catamaran" className="w-full h-auto object-cover rounded-lg shadow-lg" src="http://extranet.seayou.pt/photos/boat1.jpg" />
+          <motion.div 
+            className="rounded-lg overflow-hidden h-full flex items-center justify-center"
+            initial={{
+              opacity: 0,
+              x: -30
+            }} 
+            animate={routesInView ? {
+              opacity: 1,
+              x: 0
+            } : {
+              opacity: 0,
+              x: -30
+            }} 
+            transition={{
+              duration: 0.8
+            }}
+          >
+            <img 
+              alt="SeaBus Catamaran" 
+              className="w-auto h-full max-h-[600px] object-cover rounded-lg shadow-lg" 
+              src="http://extranet.seayou.pt/photos/boat1.jpg" 
+            />
           </motion.div>
 
-          <motion.div initial="hidden" animate={routesInView ? "visible" : "hidden"} variants={containerVariants} className="grid grid-cols-2 gap-4">
+          <motion.div initial="hidden" animate={routesInView ? "visible" : "hidden"} variants={containerVariants} className="grid grid-cols-2 gap-4 h-full">
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
               <GaugeCircle className="w-10 h-10 text-secondary mb-3" />
               <h3 className="font-medium mb-1">Twin 420 HP</h3>
