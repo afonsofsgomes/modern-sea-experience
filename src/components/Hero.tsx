@@ -70,17 +70,17 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.3 }} 
-          className="flex flex-wrap justify-center gap-3 w-full max-w-lg"
+          className="flex flex-wrap justify-center gap-3 w-full max-w-lg px-2"
         >
-          <div className="flex flex-row justify-center gap-3 w-full">
+          <div className="flex flex-row justify-center gap-2 w-full">
             <Link to="/seabus" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-sm h-12 whitespace-nowrap">SeaBus</Button>
+              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">SeaBus</Button>
             </Link>
             <Link to="/porto-santo" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-sm h-12 whitespace-nowrap">Porto Santo</Button>
+              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Porto Santo</Button>
             </Link>
             <Link to="/private-cruise" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-sm h-12 whitespace-nowrap">Private Cruises</Button>
+              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Private Cruises</Button>
             </Link>
           </div>
         </motion.div>
