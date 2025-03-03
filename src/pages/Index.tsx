@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -28,7 +29,7 @@ const Index = () => {
     {
       title: "SeaBus Connections",
       description: "Fast & comfortable sea transportation with panoramic views between key destinations in Madeira.",
-      image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
+      image: "https://extranet.seayou.pt/photos/Funchal.jpg",
       linkTo: "/seabus",
       stat1: { value: "1h", label: "Journey Time" },
       stat2: { value: "22", label: "Passengers" },
@@ -37,7 +38,7 @@ const Index = () => {
     {
       title: "Porto Santo Golden Island",
       description: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service.",
-      image: "https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      image: "https://extranet.seayou.pt/photos/pxo.jpg",
       linkTo: "/porto-santo",
       stat1: { value: "9km", label: "Golden Beach" },
       stat2: { value: "2.5h", label: "Journey Time" },
@@ -46,7 +47,7 @@ const Index = () => {
     {
       title: "Private South Coast Cruise",
       description: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences.",
-      image: "https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      image: "https://extranet.seayou.pt/photos/Calheta.jpg",
       linkTo: "/private-cruise",
       stat1: { value: "4h", label: "Duration" },
       stat2: { value: "12", label: "Max Guests" },
@@ -55,7 +56,7 @@ const Index = () => {
     {
       title: "Private North Coast Cruise",
       description: "Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline.",
-      image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      image: "https://extranet.seayou.pt/photos/Canical.jpg",
       linkTo: "/private-cruise",
       stat1: { value: "4h", label: "Duration" },
       stat2: { value: "12", label: "Max Guests" },
@@ -64,7 +65,7 @@ const Index = () => {
     {
       title: "Desertas Island Adventure",
       description: "Visit the uninhabited Desertas Islands to observe rare wildlife and pristine natural landscapes.",
-      image: "https://images.unsplash.com/photo-1622484211753-e69ce5d86f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      image: "https://extranet.seayou.pt/photos/desertas.jpg",
       linkTo: "/private-cruise",
       stat1: { value: "6h", label: "Duration" },
       stat2: { value: "12", label: "Max Guests" },
