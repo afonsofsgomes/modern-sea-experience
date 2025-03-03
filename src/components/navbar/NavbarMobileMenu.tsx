@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Search, User } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
 interface NavbarMobileMenuProps {
@@ -15,9 +15,6 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   onScrollToSection,
   onClose
 }) => {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-  
   // Section links within the home page
   const sectionLinks = [
     { label: "Home", sectionId: "home" },
@@ -43,34 +40,19 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in">
       <div className="flex flex-col space-y-6">
-        {/* Home link - always visible */}
-        {!isHome && (
-          <Link
-            to="/"
-            className="text-lg font-medium py-2 border-b border-gray-100 w-full text-left"
-            onClick={onClose}
-          >
-            Home
-          </Link>
-        )}
+        {/* Section heading */}
+        <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>
         
-        {/* Section heading - only on homepage */}
-        {isHome && (
-          <>
-            <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>
-            
-            {/* Section links that scroll within home page */}
-            {sectionLinks.map((link) => (
-              <NavbarLink
-                key={link.sectionId}
-                label={link.label}
-                sectionId={link.sectionId}
-                onClick={handleLinkClick}
-                isMobile={true}
-              />
-            ))}
-          </>
-        )}
+        {/* Section links that scroll within home page */}
+        {sectionLinks.map((link) => (
+          <NavbarLink
+            key={link.sectionId}
+            label={link.label}
+            sectionId={link.sectionId}
+            onClick={handleLinkClick}
+            isMobile={true}
+          />
+        ))}
         
         {/* Section heading for pages */}
         <h3 className="text-sm font-medium text-gray-500 uppercase pt-4 mb-2">Our Services</h3>
@@ -80,7 +62,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
           <Link
             key={link.path}
             to={link.path}
-            className={`text-lg font-medium py-2 border-b border-gray-100 ${location.pathname === link.path ? 'text-primary' : ''}`}
+            className="text-lg font-medium py-2 border-b border-gray-100"
             onClick={onClose}
           >
             {link.label}
