@@ -19,3 +19,9 @@ export * from './PortoSantoHero';
 export * from './PortoSantoAbout';
 export * from './PortoSantoHighlights';
 export * from './PortoSantoBooking';
+
+// Add Private Cruise section components exports
+export * from './PrivateCruiseHero';
+export * from './PrivateCruiseOptions';
+export * from './PrivateCruiseFeatures';
+export * from './PrivateCruiseBooking';
