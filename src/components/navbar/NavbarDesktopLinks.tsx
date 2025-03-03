@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
 interface NavbarDesktopLinksProps {
@@ -9,6 +9,9 @@ interface NavbarDesktopLinksProps {
 }
 
 export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScrollToSection, scrolled = false }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  
   // Section links within the home page
   const sectionLinks = [
     { label: "Home", sectionId: "home" },
@@ -26,7 +29,7 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
 
   return (
     <nav className="hidden md:flex items-center space-x-8">
-      {/* Section links that scroll within home page */}
+      {/* Section links that scroll within home page or redirect to home page with hash */}
       {sectionLinks.map((link) => (
         <NavbarLink
           key={link.sectionId}
@@ -34,6 +37,7 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
           sectionId={link.sectionId}
           onClick={onScrollToSection}
           scrolled={scrolled}
+          isActive={isHomePage && link.sectionId === "home" && !location.hash}
         />
       ))}
       
@@ -45,7 +49,11 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
         <Link
           key={link.path}
           to={link.path}
-          className={`text-sm font-medium hover-border-effect transition-colors ${scrolled ? 'text-foreground' : 'text-white'}`}
+          className={`text-sm font-medium hover-border-effect transition-colors ${
+            location.pathname === link.path 
+              ? 'text-primary font-semibold' 
+              : scrolled ? 'text-foreground' : 'text-white'
+          }`}
         >
           {link.label}
         </Link>

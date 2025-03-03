@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Search, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
 interface NavbarMobileMenuProps {
@@ -15,6 +15,9 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   onScrollToSection,
   onClose
 }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  
   // Section links within the home page
   const sectionLinks = [
     { label: "Home", sectionId: "home" },
@@ -51,6 +54,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
             sectionId={link.sectionId}
             onClick={handleLinkClick}
             isMobile={true}
+            isActive={isHomePage && link.sectionId === "home" && !location.hash}
           />
         ))}
         
@@ -62,7 +66,9 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
           <Link
             key={link.path}
             to={link.path}
-            className="text-lg font-medium py-2 border-b border-gray-100"
+            className={`text-lg font-medium py-2 border-b border-gray-100 ${
+              location.pathname === link.path ? 'text-primary font-semibold' : ''
+            }`}
             onClick={onClose}
           >
             {link.label}
