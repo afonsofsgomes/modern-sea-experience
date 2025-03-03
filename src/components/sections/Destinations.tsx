@@ -26,12 +26,70 @@ const itemVariants = {
   }
 };
 
+const destinationData = [
+  {
+    name: "Funchal",
+    image: "https://images.unsplash.com/photo-1593465678160-f99a8371fcf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    description: "Discover the vibrant capital of Madeira, with its historic old town, bustling markets, and delicious local cuisine. Enjoy a leisurely stroll along the promenade or take a cable car to Monte for panoramic views.",
+    features: [
+      { icon: <Coffee className="w-5 h-5 text-secondary" />, text: "Historic Old Town with cafés" },
+      { icon: <ShoppingBag className="w-5 h-5 text-secondary" />, text: "Vibrant Farmers' Market" }
+    ],
+    link: "/seabus",
+    buttonText: "Book SeaBus Journey"
+  },
+  {
+    name: "Caniçal",
+    image: "https://images.unsplash.com/photo-1596627116790-af6f46ddddcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    description: "Experience the beautiful fishing village of Caniçal, the gateway to the stunning Ponta de São Lourenço nature reserve. Enjoy fresh seafood in the local restaurants and hike along dramatic coastal trails.",
+    features: [
+      { icon: <MapPin className="w-5 h-5 text-secondary" />, text: "Ponta de São Lourenço trails" },
+      { icon: <Fish className="w-5 h-5 text-secondary" />, text: "Fresh seafood restaurants" }
+    ],
+    link: "/seabus",
+    buttonText: "Book SeaBus Journey"
+  },
+  {
+    name: "Calheta",
+    image: "https://images.unsplash.com/photo-1596804796855-9f5c0e2bed93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    description: "Relax on Calheta's golden sandy beaches, one of the few on Madeira Island. Visit the rum distillery, art center, or simply enjoy the sun and calm waters of this charming coastal town.",
+    features: [
+      { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Golden sand beaches" },
+      { icon: <Utensils className="w-5 h-5 text-secondary" />, text: "Rum distillery tastings" }
+    ],
+    link: "/seabus",
+    buttonText: "Book SeaBus Journey"
+  },
+  {
+    name: "Desertas",
+    image: "https://images.unsplash.com/photo-1622484211753-e69ce5d86f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    description: "Explore the uninhabited Desertas Islands, a nature reserve and sanctuary for rare species including the Mediterranean monk seal. These dramatic, rugged islands offer a glimpse of untouched natural beauty.",
+    features: [
+      { icon: <Bird className="w-5 h-5 text-secondary" />, text: "Rare seabirds and marine life" },
+      { icon: <Anchor className="w-5 h-5 text-secondary" />, text: "Pristine natural reserves" }
+    ],
+    link: "/private-cruise",
+    buttonText: "Book Private Cruise"
+  },
+  {
+    name: "Porto Santo",
+    image: "https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
+    features: [
+      { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
+      { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Calm, warm waters year-round" }
+    ],
+    link: "/porto-santo",
+    buttonText: "Book Porto Santo Trip"
+  }
+];
+
 export const Destinations = () => {
   const destinationsRef = useRef(null);
-  const destinationsInView = useInView(destinationsRef, { once: true, amount: 0.2 });
+  const destinationsInView = useInView(destinationsRef, { once: true, amount: 0.1 });
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white" ref={destinationsRef}>
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden" ref={destinationsRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-16"
@@ -50,206 +108,53 @@ export const Destinations = () => {
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-16">
-          {/* Funchal */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="group relative h-[400px] overflow-hidden rounded-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1593465678160-f99a8371fcf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-              alt="Funchal" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-6 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-              <div className="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/20 shadow-xl">
-                <h3 className="text-2xl font-display text-white mb-3">Funchal</h3>
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Coffee className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Historic Old Town with cafés</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <ShoppingBag className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Vibrant Farmers' Market</p>
-                  </div>
+        <div className="space-y-16">
+          {destinationData.map((destination, index) => (
+            <motion.div
+              key={destination.name}
+              initial={{ opacity: 0, y: 100 }}
+              animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+              transition={{ duration: 0.7, delay: index * 0.2 }}
+              className={`flex flex-col lg:flex-row ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''} rounded-2xl overflow-hidden shadow-xl bg-white`}
+            >
+              <div className="w-full lg:w-1/2 relative aspect-[16/9] lg:aspect-auto">
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10"></div>
+                <img 
+                  src={destination.image} 
+                  alt={destination.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute top-6 left-6 z-20">
+                  <span className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white font-medium shadow-lg border border-white/20">
+                    {destination.name}
+                  </span>
                 </div>
-                <Link to="/seabus" className="block">
-                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white relative overflow-hidden group">
-                    <span className="relative z-10">Book SeaBus Journey</span>
+              </div>
+              
+              <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+                <h3 className="text-2xl md:text-3xl font-display font-medium mb-4">{destination.name}</h3>
+                <p className="text-muted-foreground mb-6">{destination.description}</p>
+                
+                <div className="space-y-4 mb-8">
+                  {destination.features.map((feature, i) => (
+                    <div key={i} className="flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-4">
+                        {feature.icon}
+                      </div>
+                      <span>{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <Link to={destination.link} className="mt-auto">
+                  <Button className="w-full md:w-auto bg-secondary hover:bg-secondary/90 text-white relative overflow-hidden group">
+                    <span className="relative z-10">{destination.buttonText}</span>
                     <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
                   </Button>
                 </Link>
               </div>
-            </div>
-          </motion.div>
-          
-          {/* Caniçal */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="group relative h-[400px] overflow-hidden rounded-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1596627116790-af6f46ddddcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-              alt="Caniçal" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-6 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-              <div className="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/20 shadow-xl">
-                <h3 className="text-2xl font-display text-white mb-3">Caniçal</h3>
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <MapPin className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Ponta de São Lourenço trails</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Fish className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Fresh seafood restaurants</p>
-                  </div>
-                </div>
-                <Link to="/seabus" className="block">
-                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white relative overflow-hidden group">
-                    <span className="relative z-10">Book SeaBus Journey</span>
-                    <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Calheta */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="group relative h-[400px] overflow-hidden rounded-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1596804796855-9f5c0e2bed93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-              alt="Calheta" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-6 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-              <div className="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/20 shadow-xl">
-                <h3 className="text-2xl font-display text-white mb-3">Calheta</h3>
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Sun className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Golden sand beaches</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Utensils className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Rum distillery tastings</p>
-                  </div>
-                </div>
-                <Link to="/seabus" className="block">
-                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white relative overflow-hidden group">
-                    <span className="relative z-10">Book SeaBus Journey</span>
-                    <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Desertas */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="group relative h-[400px] overflow-hidden rounded-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1622484211753-e69ce5d86f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-              alt="Desertas Island" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-6 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-              <div className="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/20 shadow-xl">
-                <h3 className="text-2xl font-display text-white mb-3">Desertas</h3>
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Bird className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Rare seabirds and marine life</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Anchor className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Pristine natural reserves</p>
-                  </div>
-                </div>
-                <Link to="/private-cruise" className="block">
-                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white relative overflow-hidden group">
-                    <span className="relative z-10">Book Private Cruise</span>
-                    <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Porto Santo */}
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="group relative h-[400px] overflow-hidden rounded-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-              alt="Porto Santo" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-6 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-              <div className="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/20 shadow-xl">
-                <h3 className="text-2xl font-display text-white mb-3">Porto Santo</h3>
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Palmtree className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">9km of therapeutic golden beach</p>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                      <Sun className="w-4 h-4 text-secondary" />
-                    </div>
-                    <p className="text-sm text-white/90">Calm, warm waters year-round</p>
-                  </div>
-                </div>
-                <Link to="/porto-santo" className="block">
-                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white relative overflow-hidden group">
-                    <span className="relative z-10">Book Porto Santo Trip</span>
-                    <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
