@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star, ExternalLink } from "lucide-react";
+import { Star, ExternalLink, Anchor, Shield, Award } from "lucide-react";
 
 // Animation variants
 const containerVariants = {
@@ -54,6 +54,25 @@ const reviews = [
 
 const tripAdvisorUrl = "https://www.tripadvisor.com/Attraction_Review-g1178726-d28508392-Reviews-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html";
 
+// Company values
+const companyValues = [
+  {
+    icon: <Shield className="w-10 h-10 text-primary" />,
+    title: "Safety First",
+    description: "Your safety is our top priority. All our boats are equipped with modern safety equipment and our crew is trained in first aid and emergency procedures."
+  },
+  {
+    icon: <Anchor className="w-10 h-10 text-primary" />,
+    title: "Marine Conservation",
+    description: "We're committed to responsible wildlife viewing. Our tours maintain safe distances from marine life and our crew are trained in conservation practices."
+  },
+  {
+    icon: <Award className="w-10 h-10 text-primary" />,
+    title: "Local Expertise",
+    description: "Our team consists of local captains and marine biologists who have extensive knowledge of Madeira's waters and marine ecosystems."
+  }
+];
+
 export const Testimonials = () => {
   const testimonialsRef = useRef(null);
   const testimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.2 });
@@ -67,6 +86,32 @@ export const Testimonials = () => {
           animate={testimonialsInView ? "visible" : "hidden"}
           variants={containerVariants}
         >
+          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
+            About SeaYou Madeira
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-muted-foreground mb-10">
+            SeaYou Madeira is a premier maritime tour operator based in Calheta, Madeira Island. 
+            Founded with a passion for the ocean and marine life, we specialize in creating 
+            unforgettable sea experiences for visitors to our beautiful island.
+          </motion.p>
+          
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+            initial={{ opacity: 0 }}
+            animate={testimonialsInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            {companyValues.map((value, index) => (
+              <div key={index} className="bg-gray-50 p-6 rounded-lg">
+                <div className="flex justify-center mb-4">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-medium mb-2">{value.title}</h3>
+                <p className="text-muted-foreground">{value.description}</p>
+              </div>
+            ))}
+          </motion.div>
+          
           <motion.div variants={itemVariants} className="flex items-center justify-center mb-4">
             <img 
               src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" 
@@ -77,9 +122,6 @@ export const Testimonials = () => {
           <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
             Latest Reviews from TripAdvisor
           </motion.span>
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
-            Guest Experiences
-          </motion.h2>
           <motion.div variants={itemVariants} className="flex items-center justify-center space-x-2 mb-4">
             <div className="flex text-primary">
               <Star className="w-6 h-6 fill-current" />
@@ -91,9 +133,6 @@ export const Testimonials = () => {
             <span className="font-medium">5.0</span>
             <span className="text-muted-foreground">on TripAdvisor</span>
           </motion.div>
-          <motion.p variants={itemVariants} className="text-muted-foreground mb-4">
-            See what our guests have to say about their experience with us
-          </motion.p>
         </motion.div>
 
         <motion.div 
@@ -163,10 +202,6 @@ export const Testimonials = () => {
           animate={testimonialsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.5 }}
         >
-          <div className="mb-4 text-gray-600">
-            <p>These reviews are real reviews from our TripAdvisor page.</p>
-            <p className="text-sm">Updated periodically from our TripAdvisor profile.</p>
-          </div>
           <a 
             href={tripAdvisorUrl} 
             target="_blank"

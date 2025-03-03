@@ -38,7 +38,9 @@ const Index = () => {
         <Hero />
       </div>
       
-      <Routes />
+      <div id="routes">
+        <Routes />
+      </div>
       <Destinations />
       <QuickBooking />
       <ScheduleDisplay />
