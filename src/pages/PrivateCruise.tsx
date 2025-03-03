@@ -167,10 +167,10 @@ const PrivateCruise = () => {
                 </div>
               </div>
               
-              {/* Custom Charter */}
+              {/* Custom Charter - Replacing food image with yacht/boat image */}
               <div className="group relative rounded-lg overflow-hidden h-[500px] shadow-lg">
                 <img 
-                  src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" 
+                  src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" 
                   alt="Custom Charter" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
