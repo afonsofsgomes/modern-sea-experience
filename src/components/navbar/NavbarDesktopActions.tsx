@@ -54,7 +54,7 @@ export const NavbarDesktopActions: React.FC<NavbarDesktopActionsProps> = ({ scro
         </button>
       )}
       <Link to="/booking">
-        <Button variant="primary" size="sm">
+        <Button variant="secondary" size="sm">
           Book Now
         </Button>
       </Link>

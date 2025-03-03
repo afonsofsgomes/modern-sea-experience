@@ -59,7 +59,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
         </button>
       )}
       <Link to="/booking">
-        <Button variant="primary" size="sm" className="px-3 py-1 text-xs">
+        <Button variant="secondary" size="sm" className="px-3 py-1 text-xs">
           Book
         </Button>
       </Link>

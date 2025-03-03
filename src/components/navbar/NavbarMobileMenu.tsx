@@ -101,7 +101,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
         </div>
         <Link
           to="/booking"
-          className="text-lg font-medium py-2 border-b border-gray-100 block w-full text-center bg-primary text-white rounded-md mt-4 p-3"
+          className="text-lg font-medium py-2 border-b border-gray-100 block w-full text-center bg-secondary text-white rounded-md mt-4 p-3"
           onClick={onClose}
         >
           Book Now
