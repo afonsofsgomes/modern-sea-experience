@@ -68,7 +68,7 @@ Support</span>
               <MapPin className="h-6 w-6" />
             </div>
             <span className="text-sm">Trusted by
- TripAdvisor</span>
+TripAdvisor</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-3 rounded-full mb-2">
