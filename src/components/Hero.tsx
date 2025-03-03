@@ -1,7 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Ship, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 export const Hero = () => {
   return <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-[#253D7F]">
       {/* Background Image */}
@@ -12,81 +14,72 @@ export const Hero = () => {
 
       {/* Hero Content */}
       <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white z-10">
-        <motion.h1 initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5
-      }} className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4 max-w-4xl">Exclusive Sea Tours in Madeira</motion.h1>
-        <motion.p initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.1
-      }} className="text-base sm:text-lg md:text-xl max-w-3xl mb-6 md:mb-8 px-2">Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo.</motion.p>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.5 }} 
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight"
+        >
+          Exclusive Sea Tours in Madeira
+        </motion.h1>
+        
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.5, delay: 0.1 }} 
+          className="text-base sm:text-lg md:text-xl max-w-3xl mb-6 md:mb-8 px-2"
+        >
+          Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo.
+        </motion.p>
 
         {/* Icon Row */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.2
-      }} className="flex flex-wrap justify-center gap-4 md:gap-8 mb-6 md:mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.5, delay: 0.2 }} 
+          className="flex flex-wrap justify-center gap-6 md:gap-8 mb-8"
+        >
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-2">
-              <Ship className="h-4 w-4 md:h-6 md:w-6" />
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <Ship className="h-6 w-6" />
             </div>
-            <span className="text-xs md:text-sm">Secure<br />Bookings</span>
+            <span className="text-sm">Secure<br />Bookings</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-2">
-              <Clock className="h-4 w-4 md:h-6 md:w-6" />
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <Clock className="h-6 w-6" />
             </div>
-            <span className="text-xs md:text-sm">24/7<br />Support</span>
+            <span className="text-sm">24/7<br />Support</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-2">
-              <MapPin className="h-4 w-4 md:h-6 md:w-6" />
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <MapPin className="h-6 w-6" />
             </div>
-            <span className="text-xs md:text-sm">Trusted by<br />TripAdvisor</span>
+            <span className="text-sm">Trusted by<br />TripAdvisor</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-2">
-              <Wifi className="h-4 w-4 md:h-6 md:w-6" />
+            <div className="bg-white/20 p-3 rounded-full mb-2">
+              <Wifi className="h-6 w-6" />
             </div>
-            <span className="text-xs md:text-sm">Flexible<br />Cancellations</span>
+            <span className="text-sm">Flexible<br />Cancellations</span>
           </div>
         </motion.div>
 
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5,
-        delay: 0.3
-      }} className="flex flex-wrap justify-center gap-2 md:gap-4">
+        {/* Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.5, delay: 0.3 }} 
+          className="flex flex-wrap justify-center gap-3"
+        >
           <Link to="/seabus">
-            <Button size="md" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">SeaBus</Button>
+            <Button size="lg" className="w-28 md:w-32 text-sm md:text-base bg-secondary hover:bg-secondary/90 text-white">SeaBus</Button>
           </Link>
           <Link to="/porto-santo">
-            <Button size="md" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">Porto Santo</Button>
+            <Button size="lg" className="w-28 md:w-32 text-sm md:text-base bg-secondary hover:bg-secondary/90 text-white">Porto Santo</Button>
           </Link>
           <Link to="/private-cruise">
-            <Button size="md" className="min-w-24 md:min-w-32 text-xs md:text-sm bg-secondary hover:bg-secondary/90 text-white">Private Cruises</Button>
+            <Button size="lg" className="w-28 md:w-32 text-sm md:text-base bg-secondary hover:bg-secondary/90 text-white">Private Cruises</Button>
           </Link>
         </motion.div>
       </div>
