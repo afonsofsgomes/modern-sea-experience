@@ -51,7 +51,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in">
+    <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in overflow-y-auto">
       <div className="flex flex-col space-y-6">
         {/* Section heading */}
         <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>
@@ -76,7 +76,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
           <Link
             key={link.path}
             to={link.path}
-            className={`text-lg font-medium py-2 border-b border-gray-100 ${
+            className={`text-lg font-medium py-2 border-b border-gray-100 block ${
               location.pathname === link.path ? 'text-primary font-semibold' : ''
             }`}
             onClick={onClose}
@@ -101,7 +101,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
         </div>
         <Link
           to="/booking"
-          className="text-lg font-medium py-2 border-b border-gray-100"
+          className="text-lg font-medium py-2 border-b border-gray-100 block w-full text-center bg-primary text-white rounded-md mt-4 p-3"
           onClick={onClose}
         >
           Book Now

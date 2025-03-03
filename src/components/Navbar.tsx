@@ -42,12 +42,17 @@ export const Navbar = () => {
         // Small delay to ensure the page is loaded before scrolling
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        }, 300); // Increased delay for mobile devices
       }
     }
   }, [location.pathname, location.hash]);
 
   const scrollToSection = (sectionId: string) => {
+    // Prevent body scroll when mobile menu is open
+    if (isOpen) {
+      document.body.style.overflow = 'auto';
+    }
+    
     // Check if we're on the home page
     if (location.pathname === "/") {
       // Special case for home section - scroll to top
@@ -66,8 +71,18 @@ export const Navbar = () => {
     }
   };
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => {
+    const newIsOpen = !isOpen;
+    setIsOpen(newIsOpen);
+    
+    // Prevent body scroll when mobile menu is open
+    document.body.style.overflow = newIsOpen ? 'hidden' : 'auto';
+  };
+  
+  const closeMenu = () => {
+    setIsOpen(false);
+    document.body.style.overflow = 'auto';
+  };
 
   return (
     <header

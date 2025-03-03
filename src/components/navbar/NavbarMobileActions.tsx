@@ -29,7 +29,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
   };
 
   return (
-    <div className="md:hidden flex items-center space-x-4">
+    <div className="md:hidden flex items-center space-x-2">
       {isSearchOpen ? (
         <form onSubmit={handleSearch} className="relative flex items-center">
           <input
@@ -37,7 +37,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search..."
-            className={`bg-transparent border-b ${scrolled ? 'border-foreground text-foreground placeholder-foreground/70' : 'border-white text-white placeholder-white/70'} pr-8 pl-2 py-1 focus:outline-none`}
+            className={`bg-transparent border-b ${scrolled ? 'border-foreground text-foreground placeholder-foreground/70' : 'border-white text-white placeholder-white/70'} pr-8 pl-2 py-1 focus:outline-none w-full`}
             autoFocus
           />
           <button 
@@ -59,7 +59,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
         </button>
       )}
       <Link to="/booking">
-        <Button variant="primary" size="sm">
+        <Button variant="primary" size="sm" className="px-3 py-1 text-xs">
           Book
         </Button>
       </Link>
