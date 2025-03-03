@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
 
 export const SeaBusHero = () => {
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative h-[50vh] md:h-[75vh] overflow-hidden bg-blue-900 pt-24">
       {/* Background Image */}
@@ -80,7 +87,7 @@ export const SeaBusHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button size="lg">Book your Experience</Button>
+          <Button size="lg" onClick={scrollToBooking}>Book your SeaBus</Button>
         </motion.div>
       </div>
     </section>
