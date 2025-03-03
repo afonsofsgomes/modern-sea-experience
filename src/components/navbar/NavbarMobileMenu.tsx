@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Search, User } from "lucide-react";
+import { Search, User, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
@@ -30,7 +30,8 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   const pageLinks = [
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruises", path: "/private-cruise" },
-    { label: "Porto Santo", path: "/porto-santo" }
+    { label: "Porto Santo", path: "/porto-santo" },
+    { label: "Desertas Islands", path: "/desertas" }
   ];
 
   if (!isOpen) return null;
@@ -52,6 +53,14 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in overflow-y-auto">
+      <button 
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+        aria-label="Close menu"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      
       <div className="flex flex-col space-y-6">
         {/* Section heading */}
         <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>

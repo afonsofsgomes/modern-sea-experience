@@ -1,19 +1,19 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, Wifi, Calendar } from "lucide-react";
+import { Clock, Users, Wifi, Calendar, Binoculars } from "lucide-react";
 
-export const PortoSantoHero = () => {
+export const DesertasHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-16 md:pt-24">
+    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-green-900 pt-16 md:pt-24">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-          alt="Porto Santo" 
+          src="https://extranet.seayou.pt/photos/desertas.jpg" 
+          alt="Desertas Islands" 
           className="w-full h-full object-cover opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-green-900/30 to-green-900/80" />
       </div>
       
       {/* Hero Content */}
@@ -24,15 +24,15 @@ export const PortoSantoHero = () => {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4"
         >
-          PORTO SANTO
+          DESERTAS ISLANDS
         </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-red-500 text-white px-6 py-2 rounded-md mb-4 md:mb-6"
+          className="bg-green-600 text-white px-6 py-2 rounded-md mb-4 md:mb-6"
         >
-          1-DAY EXPERIENCE
+          WILDLIFE ADVENTURE
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ export const PortoSantoHero = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl max-w-3xl mb-6 md:mb-8"
         >
-          Discover the Golden Island
+          Explore the untouched nature and wildlife
         </motion.p>
         
         {/* Icon Row */}
@@ -54,7 +54,7 @@ export const PortoSantoHero = () => {
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
               <Clock className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">1h</span>
+            <span className="text-xs md:text-sm">6h</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
@@ -64,15 +64,15 @@ export const PortoSantoHero = () => {
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Calendar className="h-4 w-4 md:h-6 md:w-6" />
+              <Binoculars className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">9:30h</span>
+            <span className="text-xs md:text-sm">Wildlife</span>
           </div>
           <div className="flex flex-col items-center">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Wifi className="h-4 w-4 md:h-6 md:w-6" />
+              <Calendar className="h-4 w-4 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">FREE WiFi</span>
+            <span className="text-xs md:text-sm">Seasonal</span>
           </div>
         </motion.div>
         
@@ -83,9 +83,10 @@ export const PortoSantoHero = () => {
         >
           <Button 
             size="lg" 
-            className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg"
+            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg"
+            onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            COMING SOON
+            BOOK NOW
           </Button>
         </motion.div>
       </div>

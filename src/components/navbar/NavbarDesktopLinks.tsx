@@ -24,7 +24,8 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
   const pageLinks = [
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruises", path: "/private-cruise" },
-    { label: "Porto Santo", path: "/porto-santo" }
+    { label: "Porto Santo", path: "/porto-santo" },
+    { label: "Desertas Islands", path: "/desertas" }
   ];
 
   // Check if current hash matches one of our section IDs

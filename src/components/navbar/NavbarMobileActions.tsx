@@ -66,7 +66,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
       <button
         onClick={toggleMenu}
         className={`p-2 rounded-full ${scrolled ? 'hover:bg-gray-100' : 'hover:bg-white/10'} transition-colors`}
-        aria-label="Toggle menu"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
       >
         {isOpen ? (
           <X className={`h-6 w-6 ${scrolled ? 'text-foreground' : 'text-white'}`} />

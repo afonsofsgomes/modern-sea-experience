@@ -9,6 +9,7 @@ import Booking from "./pages/Booking";
 import SeaBus from "./pages/SeaBus";
 import PrivateCruise from "./pages/PrivateCruise";
 import PortoSanto from "./pages/PortoSanto";
+import Desertas from "./pages/Desertas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/seabus" element={<SeaBus />} />
           <Route path="/private-cruise" element={<PrivateCruise />} />
           <Route path="/porto-santo" element={<PortoSanto />} />
+          <Route path="/desertas" element={<Desertas />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
