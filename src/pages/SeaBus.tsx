@@ -5,7 +5,8 @@ import {
   SeaBusHero, 
   SeaBusRoutes, 
   SeaBusFeatures, 
-  SeaBusBooking 
+  SeaBusBooking,
+  ScheduleDisplay
 } from "@/components/sections";
 
 const SeaBus = () => {
@@ -15,6 +16,7 @@ const SeaBus = () => {
       <main className="flex-grow">
         <SeaBusHero />
         <SeaBusRoutes />
+        <ScheduleDisplay />
         <SeaBusFeatures />
         <SeaBusBooking />
       </main>
