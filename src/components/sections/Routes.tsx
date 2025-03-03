@@ -1,11 +1,12 @@
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Thermometer, MessageSquareHeart } from "lucide-react";
 
 // Animation variants for staggered children
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {
+    opacity: 0
+  },
   visible: {
     opacity: 1,
     transition: {
@@ -14,31 +15,30 @@ const containerVariants = {
     }
   }
 };
-
 const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: {
+    y: 20,
+    opacity: 0
+  },
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5 }
+    transition: {
+      duration: 0.5
+    }
   }
 };
-
 export const Routes = () => {
   // Refs for sections to animate on scroll
   const routesRef = useRef(null);
   // Check if sections are in view
-  const routesInView = useInView(routesRef, { once: true, amount: 0.2 });
-
-  return (
-    <section id="routes" className="py-20" ref={routesRef}>
+  const routesInView = useInView(routesRef, {
+    once: true,
+    amount: 0.2
+  });
+  return <section id="routes" className="py-20" ref={routesRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial="hidden"
-          animate={routesInView ? "visible" : "hidden"}
-          variants={containerVariants}
-        >
+        <motion.div className="max-w-3xl mx-auto text-center mb-16" initial="hidden" animate={routesInView ? "visible" : "hidden"} variants={containerVariants}>
           <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
             Our SeaBus Catamaran
           </motion.span>
@@ -51,25 +51,22 @@ export const Routes = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <motion.div 
-            className="rounded-lg overflow-hidden"
-            initial={{ opacity: 0, x: -30 }}
-            animate={routesInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.8 }}
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1571432695773-320b04e2920c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-              alt="SeaBus Catamaran" 
-              className="w-full h-auto object-cover rounded-lg shadow-lg"
-            />
+          <motion.div className="rounded-lg overflow-hidden" initial={{
+          opacity: 0,
+          x: -30
+        }} animate={routesInView ? {
+          opacity: 1,
+          x: 0
+        } : {
+          opacity: 0,
+          x: -30
+        }} transition={{
+          duration: 0.8
+        }}>
+            <img alt="SeaBus Catamaran" className="w-full h-auto object-cover rounded-lg shadow-lg" src="http://extranet.seayou.pt/photos/boat1.jpg" />
           </motion.div>
 
-          <motion.div 
-            initial="hidden"
-            animate={routesInView ? "visible" : "hidden"}
-            variants={containerVariants}
-            className="grid grid-cols-2 gap-4"
-          >
+          <motion.div initial="hidden" animate={routesInView ? "visible" : "hidden"} variants={containerVariants} className="grid grid-cols-2 gap-4">
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
               <GaugeCircle className="w-10 h-10 text-secondary mb-3" />
               <h3 className="font-medium mb-1">Twin 420 HP</h3>
@@ -120,6 +117,5 @@ export const Routes = () => {
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
