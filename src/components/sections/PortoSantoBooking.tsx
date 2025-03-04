@@ -17,9 +17,12 @@ export const PortoSantoBooking = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {/* Porto Santo Just Tour */}
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience</h3>
+            <p className="text-muted-foreground mb-4">Self-guided tour with ferry transportation to Porto Santo's golden beaches.</p>
+            <div className="bg-blue-50 text-blue-800 py-2 px-3 rounded text-sm font-medium mb-6">Just Tour</div>
             <BokunWidget 
               isProductPage={true}
               productId="982788"
@@ -28,11 +31,27 @@ export const PortoSantoBooking = () => {
             />
           </div>
           
+          {/* Porto Santo Full Day Guided Experience */}
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience + Half Day Tour</h3>
+            <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience</h3>
+            <p className="text-muted-foreground mb-4">Complete island tour with professional guide, lunch, and activities included.</p>
+            <div className="bg-red-50 text-red-800 py-2 px-3 rounded text-sm font-medium mb-6">Full Day Guided</div>
             <BokunWidget 
               isProductPage={true}
               productId="985324"
+              bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
+              className="min-h-[450px]" 
+            />
+          </div>
+          
+          {/* Porto Santo Half Day Guided Experience */}
+          <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
+            <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience</h3>
+            <p className="text-muted-foreground mb-4">Morning guided tour with free afternoon to explore beaches at your leisure.</p>
+            <div className="bg-green-50 text-green-800 py-2 px-3 rounded text-sm font-medium mb-6">Half Day Guided</div>
+            <BokunWidget 
+              isProductPage={true}
+              productId="985325"
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
               className="min-h-[450px]" 
             />
@@ -41,6 +60,9 @@ export const PortoSantoBooking = () => {
         
         <div className="text-center">
           <p className="text-gray-500 text-sm mt-4">
+            All tours include round-trip ferry transportation from Funchal to Porto Santo.
+          </p>
+          <p className="text-gray-500 text-sm mt-2">
             By booking, you agree to our terms and conditions.
           </p>
         </div>
