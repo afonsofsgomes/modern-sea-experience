@@ -30,6 +30,17 @@ body, html {
   animation: fade-in 0.2s ease-in-out;
 }
 
+/* Fix for mobile menu */
+.fixed.inset-0.z-50 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

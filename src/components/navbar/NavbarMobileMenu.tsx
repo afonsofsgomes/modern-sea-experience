@@ -52,8 +52,9 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden animate-fade-in overscroll-none">
-      <div className="absolute top-0 left-0 right-0 h-16 bg-white flex items-center justify-end px-4">
+    <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden animate-fade-in">
+      <div className="flex-none px-4 py-4 border-b border-gray-100 flex items-center justify-between">
+        <h3 className="text-sm font-medium text-gray-500 uppercase">Main Navigation</h3>
         <button 
           onClick={onClose}
           className="p-2 rounded-full hover:bg-gray-100"
@@ -63,66 +64,61 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
         </button>
       </div>
       
-      <div className="flex-1 overflow-y-auto px-6 pt-20 pb-6">
-        <div className="flex flex-col space-y-6">
-          {/* Section heading */}
-          <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>
-          
-          {/* Section links that scroll within home page */}
-          <div className="flex flex-col space-y-1">
-            {sectionLinks.map((link) => (
-              <NavbarLink
-                key={link.sectionId}
-                label={link.label}
-                sectionId={link.sectionId}
-                onClick={handleLinkClick}
-                isMobile={true}
-                isActive={isActiveSectionLink(link.sectionId)}
-              />
-            ))}
-          </div>
-          
-          {/* Section heading for pages */}
-          <h3 className="text-sm font-medium text-gray-500 uppercase pt-4 mb-2">Our Services</h3>
-          
-          {/* Page links that navigate to different pages */}
-          <div className="flex flex-col space-y-1">
-            {pageLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-lg font-medium py-3 border-b border-gray-100 block ${
-                  location.pathname === link.path ? 'text-primary font-semibold' : ''
-                }`}
-                onClick={onClose}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          
-          <div className="flex items-center space-x-4 py-4">
-            <button
-              aria-label="Search"
-              className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-            <button
-              aria-label="User account"
-              className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
-            >
-              <User className="h-5 w-5" />
-            </button>
-          </div>
-          <Link
-            to="/booking"
-            className="text-lg font-medium py-2 border-b border-gray-100 block w-full text-center bg-secondary text-white rounded-md mt-4 p-3"
-            onClick={onClose}
-          >
-            Book Now
-          </Link>
+      <div className="flex-1 overflow-y-auto px-6 py-4">
+        {/* Section links that scroll within home page */}
+        <div className="flex flex-col space-y-1 mb-6">
+          {sectionLinks.map((link) => (
+            <NavbarLink
+              key={link.sectionId}
+              label={link.label}
+              sectionId={link.sectionId}
+              onClick={handleLinkClick}
+              isMobile={true}
+              isActive={isActiveSectionLink(link.sectionId)}
+            />
+          ))}
         </div>
+        
+        {/* Section heading for pages */}
+        <h3 className="text-sm font-medium text-gray-500 uppercase mb-4">Our Services</h3>
+        
+        {/* Page links that navigate to different pages */}
+        <div className="flex flex-col space-y-1 mb-6">
+          {pageLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`text-lg font-medium py-3 border-b border-gray-100 block ${
+                location.pathname === link.path ? 'text-primary font-semibold' : ''
+              }`}
+              onClick={onClose}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        
+        <div className="flex items-center space-x-4 py-4">
+          <button
+            aria-label="Search"
+            className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
+          >
+            <Search className="h-5 w-5" />
+          </button>
+          <button
+            aria-label="User account"
+            className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
+          >
+            <User className="h-5 w-5" />
+          </button>
+        </div>
+        <Link
+          to="/booking"
+          className="text-lg font-medium py-2 border-b border-gray-100 block w-full text-center bg-secondary text-white rounded-md mt-4 p-3"
+          onClick={onClose}
+        >
+          Book Now
+        </Link>
       </div>
     </div>
   );
