@@ -39,6 +39,18 @@ body, html {
   left: 0;
   display: flex;
   flex-direction: column;
+  height: 100vh; /* Ensure full height */
+}
+
+/* Ensure the mobile menu content is scrollable */
+.fixed.inset-0.z-50 .flex-1 {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Prevent body scrolling when menu is open */
+body.menu-open {
+  overflow: hidden;
 }
 
 .logo {

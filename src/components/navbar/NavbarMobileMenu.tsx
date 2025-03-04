@@ -52,7 +52,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden animate-fade-in">
+    <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden">
       <div className="flex-none px-4 py-4 border-b border-gray-100 flex items-center justify-between">
         <h3 className="text-sm font-medium text-gray-500 uppercase">Main Navigation</h3>
         <button 
