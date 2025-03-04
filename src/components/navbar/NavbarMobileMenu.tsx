@@ -52,7 +52,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white overflow-y-auto max-h-screen pt-24 px-6 pb-6 md:hidden animate-fade-in max-w-full">
+    <div className="fixed inset-0 z-50 bg-white overflow-y-auto pt-20 px-6 pb-6 md:hidden animate-fade-in">
       <button 
         onClick={onClose}
         className="fixed top-4 right-4 p-2 rounded-full hover:bg-gray-100 z-10"
@@ -66,33 +66,37 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
         <h3 className="text-sm font-medium text-gray-500 uppercase mb-2">Main Navigation</h3>
         
         {/* Section links that scroll within home page */}
-        {sectionLinks.map((link) => (
-          <NavbarLink
-            key={link.sectionId}
-            label={link.label}
-            sectionId={link.sectionId}
-            onClick={handleLinkClick}
-            isMobile={true}
-            isActive={isActiveSectionLink(link.sectionId)}
-          />
-        ))}
+        <div className="flex flex-col space-y-1">
+          {sectionLinks.map((link) => (
+            <NavbarLink
+              key={link.sectionId}
+              label={link.label}
+              sectionId={link.sectionId}
+              onClick={handleLinkClick}
+              isMobile={true}
+              isActive={isActiveSectionLink(link.sectionId)}
+            />
+          ))}
+        </div>
         
         {/* Section heading for pages */}
         <h3 className="text-sm font-medium text-gray-500 uppercase pt-4 mb-2">Our Services</h3>
         
         {/* Page links that navigate to different pages */}
-        {pageLinks.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            className={`text-lg font-medium py-2 border-b border-gray-100 block ${
-              location.pathname === link.path ? 'text-primary font-semibold' : ''
-            }`}
-            onClick={onClose}
-          >
-            {link.label}
-          </Link>
-        ))}
+        <div className="flex flex-col space-y-1">
+          {pageLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`text-lg font-medium py-3 border-b border-gray-100 block ${
+                location.pathname === link.path ? 'text-primary font-semibold' : ''
+              }`}
+              onClick={onClose}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
         
         <div className="flex items-center space-x-4 py-4">
           <button
