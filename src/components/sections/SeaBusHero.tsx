@@ -12,7 +12,7 @@ export const SeaBusHero = () => {
   };
 
   return (
-    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-blue-900 pt-16 md:pt-24 pb-12">
+    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-blue-900 pt-20 md:pt-28 pb-12">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
