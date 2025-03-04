@@ -52,7 +52,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in overflow-y-auto max-w-full">
       <button 
         onClick={onClose}
         className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
@@ -97,13 +97,13 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
         <div className="flex items-center space-x-4 py-4">
           <button
             aria-label="Search"
-            className="p-2 rounded-full hover:bg-secondary transition-colors"
+            className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
           >
             <Search className="h-5 w-5" />
           </button>
           <button
             aria-label="User account"
-            className="p-2 rounded-full hover:bg-secondary transition-colors"
+            className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
           >
             <User className="h-5 w-5" />
           </button>

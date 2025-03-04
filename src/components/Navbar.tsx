@@ -92,7 +92,7 @@ export const Navbar = () => {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <div className="flex items-center justify-between">
           <NavbarLogo scrolled={scrolled} />
           <NavbarDesktopLinks onScrollToSection={scrollToSection} scrolled={scrolled} />

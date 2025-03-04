@@ -19,7 +19,7 @@ interface ScheduleCardProps {
 export const ScheduleCard = ({ title, departures, initialAnimation }: ScheduleCardProps) => {
   return (
     <motion.div 
-      className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
+      className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 overflow-hidden"
       initial={{ opacity: 0, x: initialAnimation?.x || 0 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}

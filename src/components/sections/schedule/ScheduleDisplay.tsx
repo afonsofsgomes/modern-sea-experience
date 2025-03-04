@@ -55,8 +55,8 @@ export const ScheduleDisplay = () => {
   ];
 
   return (
-    <section className="py-16 bg-blue-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-blue-900 text-white overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <ScheduleHeader />
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
