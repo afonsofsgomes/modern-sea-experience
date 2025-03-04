@@ -5,7 +5,7 @@ import { Clock, Users, Wifi, Calendar } from "lucide-react";
 
 export const PortoSantoHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-16 md:pt-24 w-full">
+    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-16 md:pt-24 pb-8 w-full">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -80,6 +80,7 @@ export const PortoSantoHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-4"
         >
           <Button 
             size="lg" 

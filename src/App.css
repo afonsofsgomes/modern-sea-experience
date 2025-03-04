@@ -16,6 +16,17 @@ body, html {
   padding: 0;
 }
 
+/* Add space between hero and content sections */
+section.relative[class*="h-["] {
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Ensure buttons are fully visible */
+section.relative[class*="h-["] .z-10 {
+  padding-bottom: 1.5rem;
+}
+
 /* Add animation for mobile menu */
 @keyframes fade-in {
   from {
