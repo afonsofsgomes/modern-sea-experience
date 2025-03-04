@@ -52,10 +52,10 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white pt-24 px-6 pb-6 md:hidden animate-fade-in overflow-y-auto max-w-full">
+    <div className="fixed inset-0 z-50 bg-white overflow-y-auto max-h-screen pt-24 px-6 pb-6 md:hidden animate-fade-in max-w-full">
       <button 
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+        className="fixed top-4 right-4 p-2 rounded-full hover:bg-gray-100 z-10"
         aria-label="Close menu"
       >
         <X className="h-6 w-6" />
