@@ -78,10 +78,7 @@ export const Navbar = () => {
     // Prevent body scroll when mobile menu is open
     document.body.style.overflow = newIsOpen ? 'hidden' : 'auto';
     
-    // If opening menu, scroll to top of mobile menu
-    if (newIsOpen) {
-      window.scrollTo(0, 0);
-    }
+    // Removed the code that scrolls to top when opening menu
   };
   
   const closeMenu = () => {
