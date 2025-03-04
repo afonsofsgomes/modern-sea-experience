@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
@@ -11,7 +12,7 @@ export const SeaBusHero = () => {
   };
 
   return (
-    <section className="relative h-[60vh] md:h-[75vh] overflow-hidden bg-blue-900 pt-16 md:pt-24">
+    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-blue-900 pt-16 md:pt-24 pb-12">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img

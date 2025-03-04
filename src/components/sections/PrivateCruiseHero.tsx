@@ -1,10 +1,11 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Users, Clock, Compass, Wifi, Calendar } from "lucide-react";
 
 export const PrivateCruiseHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-[#253D7F] pt-16 md:pt-24">
+    <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-[#253D7F] pt-16 md:pt-24 pb-12">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 

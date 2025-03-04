@@ -19,12 +19,12 @@ body, html {
 /* Add space between hero and content sections */
 section.relative[class*="h-["] {
   padding-bottom: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 /* Ensure buttons are fully visible */
 section.relative[class*="h-["] .z-10 {
-  padding-bottom: 1.5rem;
+  padding-bottom: 2.5rem;
 }
 
 /* Add animation for mobile menu */
