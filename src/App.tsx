@@ -11,6 +11,17 @@ import PrivateCruise from "./pages/PrivateCruise";
 import PortoSanto from "./pages/PortoSanto";
 import Desertas from "./pages/Desertas";
 import NotFound from "./pages/NotFound";
+import OurFleet from "./pages/OurFleet";
+import SafetyMeasures from "./pages/SafetyMeasures";
+import Careers from "./pages/Careers";
+import News from "./pages/News";
+import GroupBookings from "./pages/GroupBookings";
+import CorporateEvents from "./pages/CorporateEvents";
+import PortTerminal from "./pages/PortTerminal";
+import Schedule from "./pages/Schedule";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+import Cookies from "./pages/Cookies";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +39,17 @@ const App = () => (
             <Route path="/private-cruise" element={<PrivateCruise />} />
             <Route path="/porto-santo" element={<PortoSanto />} />
             <Route path="/desertas" element={<Desertas />} />
+            <Route path="/our-fleet" element={<OurFleet />} />
+            <Route path="/safety-measures" element={<SafetyMeasures />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/group-bookings" element={<GroupBookings />} />
+            <Route path="/corporate-events" element={<CorporateEvents />} />
+            <Route path="/port-terminal" element={<PortTerminal />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

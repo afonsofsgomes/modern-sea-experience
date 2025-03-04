@@ -1,5 +1,6 @@
 
 import { Mail, Phone, Instagram, Facebook, Twitter, Anchor, Ship, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -7,12 +8,12 @@ export const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="col-span-1 md:col-span-1">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-xl font-display font-medium tracking-tight inline-block mb-6"
             >
               SeaYou
-            </a>
+            </Link>
             <p className="text-muted-foreground mb-6 max-w-xs">
               Maritime tourism services in Madeira. Seabus connections, private cruises, and tours to Porto Santo.
             </p>
@@ -45,44 +46,44 @@ export const Footer = () => {
             <h3 className="font-medium text-lg mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#routes"
+                <Link
+                  to="/seabus#routes"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Seabus Routes
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#cruises"
+                <Link
+                  to="/private-cruise"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Private Cruises
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#tours"
+                <Link
+                  to="/porto-santo"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Porto Santo Tours
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/group-bookings"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Group Bookings
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/corporate-events"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Corporate Events
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -91,44 +92,44 @@ export const Footer = () => {
             <h3 className="font-medium text-lg mb-4">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#about"
+                <Link
+                  to="/#about"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/our-fleet"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Our Fleet
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/safety-measures"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Safety Measures
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/careers"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Careers
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/news"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   News
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -161,20 +162,20 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/port-terminal"
                   className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
                 >
                   <Anchor className="h-4 w-4 mr-2" /> Funchal Port Terminal
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/schedule"
                   className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
                 >
                   <Ship className="h-4 w-4 mr-2" /> Schedule Information
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -185,24 +186,24 @@ export const Footer = () => {
             © {new Date().getFullYear()} SeaYou. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a
-              href="#"
+            <Link
+              to="/privacy-policy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/terms"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms of Service
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/cookies"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Cookies
-            </a>
+            </Link>
           </div>
         </div>
       </div>
