@@ -1,10 +1,11 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Wifi, Calendar } from "lucide-react";
 
 export const PortoSantoHero = () => {
   return (
-    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-16 md:pt-24">
+    <section className="relative h-[50vh] md:h-[60vh] overflow-hidden bg-blue-900 pt-16 md:pt-24 w-full">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
