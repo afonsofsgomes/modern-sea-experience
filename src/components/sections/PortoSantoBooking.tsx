@@ -17,28 +17,15 @@ export const PortoSantoBooking = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Porto Santo Just Tour */}
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience</h3>
             <p className="text-muted-foreground mb-4">Self-guided tour with ferry transportation to Porto Santo's golden beaches.</p>
             <div className="bg-blue-50 text-blue-800 py-2 px-3 rounded text-sm font-medium mb-6">Just Tour</div>
             <BokunWidget 
-              isProductPage={true}
+              isCalendarWidget={true}
               productId="982788"
-              bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
-              className="min-h-[450px]" 
-            />
-          </div>
-          
-          {/* Porto Santo Full Day Guided Experience */}
-          <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience</h3>
-            <p className="text-muted-foreground mb-4">Complete island tour with professional guide, lunch, and activities included.</p>
-            <div className="bg-red-50 text-red-800 py-2 px-3 rounded text-sm font-medium mb-6">Full Day Guided</div>
-            <BokunWidget 
-              isProductPage={true}
-              productId="985324"
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
               className="min-h-[450px]" 
             />
@@ -50,12 +37,23 @@ export const PortoSantoBooking = () => {
             <p className="text-muted-foreground mb-4">Morning guided tour with free afternoon to explore beaches at your leisure.</p>
             <div className="bg-green-50 text-green-800 py-2 px-3 rounded text-sm font-medium mb-6">Half Day Guided</div>
             <BokunWidget 
-              isProductPage={true}
-              productId="985325"
+              isCalendarWidget={true}
+              productId="985324"
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
               className="min-h-[450px]" 
             />
           </div>
+        </div>
+        
+        <div className="bg-gray-50 rounded-lg p-8 mb-12">
+          <div className="text-center mb-6">
+            <h3 className="text-xl font-bold text-blue-900 mb-2">Full Day Guided Tour</h3>
+            <p className="text-muted-foreground">Complete island tour with professional guide and activities included.</p>
+            <div className="inline-block bg-red-50 text-red-800 py-2 px-3 rounded text-sm font-medium mt-4">Coming Soon</div>
+          </div>
+          <p className="text-center text-muted-foreground">
+            Our Full Day Guided Tour option will be available soon. Please check back later or contact us for more information.
+          </p>
         </div>
         
         <div className="text-center">
