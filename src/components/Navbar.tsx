@@ -16,6 +16,7 @@ export const Navbar = () => {
   // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
+    document.body.classList.remove('menu-open');
   }, [location.pathname]);
 
   useEffect(() => {
@@ -48,11 +49,6 @@ export const Navbar = () => {
   }, [location.pathname, location.hash]);
 
   const scrollToSection = (sectionId: string) => {
-    // Prevent body scroll when mobile menu is open
-    if (isOpen) {
-      document.body.style.overflow = 'auto';
-    }
-    
     // Check if we're on the home page
     if (location.pathname === "/") {
       // Special case for home section - scroll to top
@@ -75,15 +71,17 @@ export const Navbar = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
     
-    // Prevent body scroll when mobile menu is open
-    document.body.style.overflow = newIsOpen ? 'hidden' : 'auto';
-    
-    // Removed the code that scrolls to top when opening menu
+    // Toggle body class for preventing background scroll
+    if (newIsOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
   };
   
   const closeMenu = () => {
     setIsOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.classList.remove('menu-open');
   };
 
   return (
