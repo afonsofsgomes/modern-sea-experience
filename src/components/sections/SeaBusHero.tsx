@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
@@ -25,7 +24,7 @@ export const SeaBusHero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white z-10">
+      <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white z-10 max-w-full">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
