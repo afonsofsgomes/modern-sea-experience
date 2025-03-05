@@ -13,8 +13,11 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Close mobile menu when route changes
+  // Scroll to top when route changes
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    // Close mobile menu when route changes
     setIsOpen(false);
     document.body.classList.remove('menu-open');
   }, [location.pathname]);

@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Wifi, Calendar, Binoculars } from "lucide-react";
@@ -42,36 +43,36 @@ export const DesertasHero = () => {
           Explore the untouched nature and wildlife
         </motion.p>
         
-        {/* Icon Row */}
+        {/* Icon Row with consistent sizing and alignment */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-4 md:gap-8 mb-6 md:mb-8"
         >
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Clock className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Clock className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">6h</span>
+            <span className="text-xs md:text-sm text-center">6h</span>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Users className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Users className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">up to 12 PAX</span>
+            <span className="text-xs md:text-sm text-center">up to 12 PAX</span>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Binoculars className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Binoculars className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">Wildlife</span>
+            <span className="text-xs md:text-sm text-center">Wildlife</span>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Calendar className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Calendar className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">Seasonal</span>
+            <span className="text-xs md:text-sm text-center">Seasonal</span>
           </div>
         </motion.div>
         

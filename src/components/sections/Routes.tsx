@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Thermometer, MessageSquareHeart } from "lucide-react";
+import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Smartphone, MessageSquareHeart } from "lucide-react";
 
 // Animation variants for staggered children
 const containerVariants = {
@@ -91,7 +91,7 @@ export const Routes = () => {
 
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
               <Waves className="w-10 h-10 text-secondary mb-3" />
-              <h3 className="font-medium mb-1">5.8m Beam</h3>
+              <h3 className="font-medium mb-1">3.8m Beam</h3>
               <p className="text-sm text-muted-foreground">Stable platform</p>
             </motion.div>
             
@@ -114,9 +114,9 @@ export const Routes = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-              <Thermometer className="w-10 h-10 text-secondary mb-3" />
-              <h3 className="font-medium mb-1">AC System</h3>
-              <p className="text-sm text-muted-foreground">Climate control</p>
+              <Smartphone className="w-10 h-10 text-secondary mb-3" />
+              <h3 className="font-medium mb-1">Phone Charging</h3>
+              <p className="text-sm text-muted-foreground">Stay powered</p>
             </motion.div>
 
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">

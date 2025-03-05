@@ -1,17 +1,26 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface NavbarLogoProps {
   scrolled?: boolean;
 }
 
 export const NavbarLogo: React.FC<NavbarLogoProps> = ({ scrolled = false }) => {
+  const navigate = useNavigate();
+  
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("/");
+    window.scrollTo(0, 0);
+  };
+  
   return (
     <div className="flex items-center">
       <Link
         to="/"
         className="hover:opacity-80 transition-opacity"
+        onClick={handleLogoClick}
       >
         <img 
           src={scrolled ? "https://extranet.seayou.pt/logos/logoblack.png" : "https://extranet.seayou.pt/logos/logowhite.png"} 

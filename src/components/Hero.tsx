@@ -39,29 +39,29 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.2 }} 
           className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-8 mb-8 w-full max-w-lg mx-auto"
         >
-          <div className="flex flex-col items-center justify-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
+          <div className="flex flex-col items-center justify-center h-24">
+            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <Ship className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">Secure Bookings</span>
+            <span className="text-xs sm:text-sm text-center">Secure Bookings</span>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
+          <div className="flex flex-col items-center justify-center h-24">
+            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <Clock className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">24/7 Support</span>
+            <span className="text-xs sm:text-sm text-center">24/7 Support</span>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
+          <div className="flex flex-col items-center justify-center h-24">
+            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <MapPin className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">Trusted by TripAdvisor</span>
+            <span className="text-xs sm:text-sm text-center">Trusted by TripAdvisor</span>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="bg-white/20 p-3 rounded-full mb-2">
+          <div className="flex flex-col items-center justify-center h-24">
+            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <Wifi className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm">Flexible Cancellations</span>
+            <span className="text-xs sm:text-sm text-center">Flexible Cancellations</span>
           </div>
         </motion.div>
 
