@@ -14,7 +14,7 @@ import NotFound from "./pages/NotFound";
 import OurFleet from "./pages/OurFleet";
 import SafetyMeasures from "./pages/SafetyMeasures";
 import Careers from "./pages/Careers";
-import News from "./pages/News";
+import Blog from "./pages/Blog";
 import GroupBookings from "./pages/GroupBookings";
 import CorporateEvents from "./pages/CorporateEvents";
 import PortTerminal from "./pages/PortTerminal";
@@ -42,7 +42,7 @@ const App = () => (
             <Route path="/our-fleet" element={<OurFleet />} />
             <Route path="/safety-measures" element={<SafetyMeasures />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/news" element={<News />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/group-bookings" element={<GroupBookings />} />
             <Route path="/corporate-events" element={<CorporateEvents />} />
             <Route path="/port-terminal" element={<PortTerminal />} />

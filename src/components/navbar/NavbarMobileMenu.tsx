@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Search, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
@@ -31,7 +30,8 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruises", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
-    { label: "Desertas Islands", path: "/desertas" }
+    { label: "Desertas Islands", path: "/desertas" },
+    { label: "Blog", path: "/blog" }
   ];
 
   if (!isOpen) return null;

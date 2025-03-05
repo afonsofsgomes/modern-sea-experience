@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -9,7 +8,7 @@ import { motion } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Helmet } from "react-helmet";
 
-const News = () => {
+const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
@@ -560,4 +559,4 @@ const destinations = [
   }
 ];
 
-export default News;
+export default Blog;
