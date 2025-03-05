@@ -14,7 +14,7 @@ import NotFound from "./pages/NotFound";
 import OurFleet from "./pages/OurFleet";
 import SafetyMeasures from "./pages/SafetyMeasures";
 import Careers from "./pages/Careers";
-import Blog from "./pages/Blog";
+import Blog from "./pages/Blog/Blog";
 import GroupBookings from "./pages/GroupBookings";
 import CorporateEvents from "./pages/CorporateEvents";
 import PortTerminal from "./pages/PortTerminal";
