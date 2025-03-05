@@ -80,7 +80,7 @@ export const BlogPost = ({ post, featured = false, index = 0 }: BlogPostProps) =
             </div>
             <span className={`${featured ? "text-sm" : "text-xs"} text-gray-700`}>{post.author}</span>
           </div>
-          <Button variant={featured ? "link" : "ghost"} size={featured ? "default" : "sm"} className={`${featured ? "group flex items-center gap-1 p-0" : "group p-0 h-auto"}`}>
+          <Button variant={featured ? "link" : "ghost"} size={featured ? "md" : "sm"} className={`${featured ? "group flex items-center gap-1 p-0" : "group p-0 h-auto"}`}>
             {featured ? "Read Article" : "Read more"}
             <ArrowRight className={`${featured ? "ml-1 h-4 w-4" : "ml-1 h-4 w-4"} group-hover:translate-x-1 transition-transform`} />
           </Button>
