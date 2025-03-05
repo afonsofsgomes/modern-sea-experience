@@ -35,7 +35,7 @@ const Blog = () => {
       
       <Navbar />
       
-      {/* Hero Banner */}
+      {/* Hero Banner with dark overlay for text contrast */}
       <BlogHero searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
       {/* Main Content */}

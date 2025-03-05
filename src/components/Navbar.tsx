@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NavbarLogo } from "./navbar/NavbarLogo";
@@ -20,7 +19,6 @@ export const Navbar = () => {
       "/our-fleet", 
       "/safety-measures", 
       "/careers", 
-      "/news",
       "/port-terminal",
       "/schedule",
       "/privacy-policy",
@@ -52,26 +50,21 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle scroll to section after navigation to home page
   useEffect(() => {
-    // Only run this effect if we're on the home page and there's a hash in the URL
     if (location.pathname === "/" && location.hash) {
       const sectionId = location.hash.replace('#', '');
       const element = document.getElementById(sectionId);
       
       if (element) {
-        // Small delay to ensure the page is loaded before scrolling
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
-        }, 300); // Increased delay for mobile devices
+        }, 300);
       }
     }
   }, [location.pathname, location.hash]);
 
   const scrollToSection = (sectionId: string) => {
-    // Check if we're on the home page
     if (location.pathname === "/") {
-      // Special case for home section - scroll to top
       if (sectionId === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
@@ -82,7 +75,6 @@ export const Navbar = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Navigate to home page with hash
       navigate(`/#${sectionId}`);
     }
   };
@@ -91,14 +83,13 @@ export const Navbar = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
     
-    // Toggle body class for preventing background scroll
     if (newIsOpen) {
       document.body.classList.add('menu-open');
     } else {
       document.body.classList.remove('menu-open');
     }
   };
-  
+
   const closeMenu = () => {
     setIsOpen(false);
     document.body.classList.remove('menu-open');
