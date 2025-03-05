@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Search, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
@@ -22,6 +23,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
     { label: "Home", sectionId: "home" },
     { label: "Routes", sectionId: "routes" },
     { label: "About", sectionId: "about" },
+    { label: "Blog", path: "/blog" },  // Moved Blog here
     { label: "Contact", sectionId: "contact" }
   ];
   
@@ -30,8 +32,8 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruises", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
-    { label: "Desertas Islands", path: "/desertas" },
-    { label: "Blog", path: "/blog" }
+    { label: "Desertas Islands", path: "/desertas" }
+    // Removed Blog from here
   ];
 
   if (!isOpen) return null;
@@ -68,16 +70,34 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {/* Section links that scroll within home page */}
           <div className="flex flex-col space-y-1 mb-6">
-            {sectionLinks.map((link) => (
-              <NavbarLink
-                key={link.sectionId}
-                label={link.label}
-                sectionId={link.sectionId}
-                onClick={handleLinkClick}
-                isMobile={true}
-                isActive={isActiveSectionLink(link.sectionId)}
-              />
-            ))}
+            {sectionLinks.map((link) => {
+              // For regular section links
+              if (!link.path) {
+                return (
+                  <NavbarLink
+                    key={link.sectionId}
+                    label={link.label}
+                    sectionId={link.sectionId}
+                    onClick={handleLinkClick}
+                    isMobile={true}
+                    isActive={isActiveSectionLink(link.sectionId)}
+                  />
+                );
+              }
+              // For Blog link
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-lg font-medium py-3 border-b border-gray-100 block ${
+                    location.pathname === link.path ? 'text-primary font-semibold' : ''
+                  }`}
+                  onClick={onClose}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
           
           {/* Section heading for pages */}

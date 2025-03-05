@@ -125,10 +125,10 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/news"
+                  to="/blog"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  News
+                  Blog
                 </Link>
               </li>
             </ul>
