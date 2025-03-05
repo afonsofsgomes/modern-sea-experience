@@ -32,7 +32,7 @@ export const Hero = () => {
           Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo.
         </motion.p>
 
-        {/* Icon Row */}
+        {/* Icon Row - Fixed alignment issues */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
@@ -43,25 +43,25 @@ export const Hero = () => {
             <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <Ship className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm text-center">Secure Bookings</span>
+            <span className="text-xs sm:text-sm text-center">Secure<br />Bookings</span>
           </div>
           <div className="flex flex-col items-center justify-center h-24">
             <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <Clock className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm text-center">24/7 Support</span>
+            <span className="text-xs sm:text-sm text-center">24/7<br />Support</span>
           </div>
           <div className="flex flex-col items-center justify-center h-24">
             <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <MapPin className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm text-center">Trusted by TripAdvisor</span>
+            <span className="text-xs sm:text-sm text-center">Trusted by<br />TripAdvisor</span>
           </div>
           <div className="flex flex-col items-center justify-center h-24">
             <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
               <Wifi className="h-6 w-6" />
             </div>
-            <span className="text-xs sm:text-sm text-center">Flexible Cancellations</span>
+            <span className="text-xs sm:text-sm text-center">Flexible<br />Cancellations</span>
           </div>
         </motion.div>
 

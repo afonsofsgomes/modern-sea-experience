@@ -50,6 +50,7 @@ section.relative[class*="h-["] .z-10 {
   left: 0 !important;
   height: 100vh !important;
   max-height: 100vh !important;
+  overflow-y: auto !important;
 }
 
 /* Ensure the mobile menu content is scrollable */
@@ -62,12 +63,20 @@ section.relative[class*="h-["] .z-10 {
 /* Prevent body scrolling when menu is open */
 body.menu-open {
   overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 /* Make sure menu is fully visible */
 .fixed.inset-0.z-50 .flex-col {
   height: 100vh !important;
   display: flex !important;
+}
+
+/* Remove 100vh height restriction for content area */
+.fixed.inset-0.z-50 .flex-col .flex-1 {
+  min-height: calc(100vh - 60px) !important;
 }
 
 .logo {

@@ -12,9 +12,26 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [forceColored, setForceColored] = useState(false);
 
-  // Scroll to top when route changes
+  // Check if current page should have a colored navbar
   useEffect(() => {
+    const whiteBackgroundPages = [
+      "/our-fleet", 
+      "/safety-measures", 
+      "/careers", 
+      "/news",
+      "/port-terminal",
+      "/schedule",
+      "/privacy-policy",
+      "/terms",
+      "/cookies"
+    ];
+    
+    const shouldForceColor = whiteBackgroundPages.includes(location.pathname);
+    setForceColored(shouldForceColor);
+    
+    // Scroll to top when route changes
     window.scrollTo(0, 0);
     
     // Close mobile menu when route changes
@@ -90,17 +107,17 @@ export const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || forceColored
           ? "bg-white backdrop-blur-md shadow-sm py-3"
           : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <div className="flex items-center justify-between">
-          <NavbarLogo scrolled={scrolled} />
-          <NavbarDesktopLinks onScrollToSection={scrollToSection} scrolled={scrolled} />
-          <NavbarDesktopActions scrolled={scrolled} />
-          <NavbarMobileActions isOpen={isOpen} toggleMenu={toggleMenu} scrolled={scrolled} />
+          <NavbarLogo scrolled={scrolled || forceColored} />
+          <NavbarDesktopLinks onScrollToSection={scrollToSection} scrolled={scrolled || forceColored} />
+          <NavbarDesktopActions scrolled={scrolled || forceColored} />
+          <NavbarMobileActions isOpen={isOpen} toggleMenu={toggleMenu} scrolled={scrolled || forceColored} />
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Search, User, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
@@ -52,7 +52,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-white md:hidden" style={{ height: '100%', overflow: 'hidden' }}>
+    <div className="fixed inset-0 z-50 bg-white md:hidden" style={{ height: '100vh', overflow: 'auto', top: 0, position: 'fixed' }}>
       <div className="flex flex-col h-full">
         <div className="flex-none px-4 py-4 border-b border-gray-100 flex items-center justify-between">
           <h3 className="text-sm font-medium text-gray-500 uppercase">Main Navigation</h3>
@@ -105,12 +105,6 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
               className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
             >
               <Search className="h-5 w-5" />
-            </button>
-            <button
-              aria-label="User account"
-              className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
-            >
-              <User className="h-5 w-5" />
             </button>
           </div>
           <Link
