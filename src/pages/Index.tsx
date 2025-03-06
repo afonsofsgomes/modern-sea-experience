@@ -12,7 +12,8 @@ import {
   Newsletter 
 } from "@/components/sections";
 import { ProductShowcase } from "@/components/sections/ProductShowcase";
-import { MetaTags, LocalBusinessSchema } from "@/components/SEO";
+import { MetaTags, LocalBusinessSchema, WebPageSchema } from "@/components/SEO";
+import { ImagePreload } from "@/components/ImagePreload";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -25,6 +26,12 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Preload critical images
+  const criticalImages = [
+    "https://images.unsplash.com/photo-1628413283166-a7666966d26b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://extranet.seayou.pt/photos/boat1.jpg"
+  ];
 
   // Product showcase items data
   const showcaseItems = [
@@ -83,6 +90,15 @@ const Index = () => {
         keywords="Madeira sea transportation, maritime tourism Madeira, SeaBus Madeira, private cruises Madeira, Porto Santo ferry, boat tours Madeira"
       />
       <LocalBusinessSchema />
+      <WebPageSchema 
+        title="SeaYou Madeira - Maritime Tourism & Sea Transport Services"
+        description="Discover Madeira's coastline with SeaYou's premium maritime experiences. Fast SeaBus connections, private cruises, and Porto Santo tours."
+        image="https://extranet.seayou.pt/photos/boat1.jpg"
+        breadcrumbs={[
+          { name: "Home", url: "https://seayou.pt/" }
+        ]}
+      />
+      <ImagePreload images={criticalImages} highPriority={true} />
       
       <motion.div 
         className="fixed top-0 left-0 right-0 h-[3px] bg-primary z-[100]"

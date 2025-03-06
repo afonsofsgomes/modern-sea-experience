@@ -1,9 +1,9 @@
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 // Animation variants
 const containerVariants = {
@@ -119,16 +119,12 @@ export const Destinations = () => {
             >
               <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10"></div>
-                <img 
+                <OptimizedImage 
                   src={destination.image} 
                   alt={destination.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  onError={(e) => {
-                    // Fallback to a placeholder image if the image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80';
-                    console.log(`Image failed to load: ${destination.image}, using fallback`);
-                  }}
+                  width={800}
+                  height={500}
                 />
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
                   <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">

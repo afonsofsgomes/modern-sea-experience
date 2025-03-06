@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export const SeaBusHero = () => {
   const scrollToBooking = () => {
@@ -13,12 +14,15 @@ export const SeaBusHero = () => {
 
   return (
     <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-blue-900 pt-20 md:pt-28 pb-12">
-      {/* Background Image */}
+      {/* Background Image - Preloaded with priority */}
       <div className="absolute inset-0">
-        <img
+        <OptimizedImage
           src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21"
           alt="Ocean Wave"
-          className="w-full h-full object-cover object-center opacity-70"
+          className="w-full h-full"
+          width={1920}
+          height={1080}
+          priority={true}
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
