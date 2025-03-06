@@ -51,20 +51,30 @@ const BlogPost = () => {
           throw error;
         }
 
-        // Check if data.profiles is a valid object with the expected structure
-        if (data && typeof data.profiles === 'object' && data.profiles !== null &&
-            !('error' in data.profiles)) {
-          setPost(data as BlogPostType);
-        } else {
-          // Handle case where profiles data might be missing or malformed
-          const formattedPost = {
+        // Safely handle the profiles data, accounting for potential null or error cases
+        if (data) {
+          // Check if profiles data exists and is a valid object (not an error)
+          const profilesData = data.profiles;
+          const isValidProfilesObject = 
+            profilesData && 
+            typeof profilesData === 'object' && 
+            !('error' in profilesData);
+          
+          // Create formatted post with proper profiles data
+          const formattedPost: BlogPostType = {
             ...data,
-            profiles: {
-              first_name: "Unknown",
-              last_name: "Author",
-              avatar_url: null
-            }
-          } as BlogPostType;
+            profiles: isValidProfilesObject 
+              ? {
+                  first_name: profilesData?.first_name || "Unknown",
+                  last_name: profilesData?.last_name || "Author",
+                  avatar_url: profilesData?.avatar_url || null
+                }
+              : {
+                  first_name: "Unknown",
+                  last_name: "Author",
+                  avatar_url: null
+                }
+          };
           
           setPost(formattedPost);
         }
