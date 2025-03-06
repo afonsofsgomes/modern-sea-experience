@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export const PrivateCruiseOptions = () => {
   return (
@@ -12,10 +13,12 @@ export const PrivateCruiseOptions = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Sunset Cruise */}
           <div className="group relative rounded-lg overflow-hidden h-[500px] shadow-lg">
-            <img 
+            <OptimizedImage 
               src="https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
               alt="Sunset Cruise" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              width={1170}
+              height={800}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-display mb-2">Sunset Cruises</h3>
@@ -32,10 +35,12 @@ export const PrivateCruiseOptions = () => {
           
           {/* Whale Watching */}
           <div className="group relative rounded-lg overflow-hidden h-[500px] shadow-lg">
-            <img 
+            <OptimizedImage 
               src="https://images.unsplash.com/photo-1511161631409-96a2525fab62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" 
               alt="Whale Watching" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              width={1172}
+              height={800}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-display mb-2">Whale & Dolphin Watching</h3>
@@ -52,10 +57,12 @@ export const PrivateCruiseOptions = () => {
           
           {/* Coastal Tour */}
           <div className="group relative rounded-lg overflow-hidden h-[500px] shadow-lg">
-            <img 
+            <OptimizedImage 
               src="https://images.unsplash.com/photo-1518398046578-8cca57782e17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
               alt="Coastal Tour" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              width={1170}
+              height={800}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-display mb-2">Coastal Exploration</h3>
@@ -72,10 +79,12 @@ export const PrivateCruiseOptions = () => {
           
           {/* Custom Charter */}
           <div className="group relative rounded-lg overflow-hidden h-[500px] shadow-lg">
-            <img 
+            <OptimizedImage 
               src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" 
               alt="Custom Charter" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              width={1026}
+              height={800}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-display mb-2">Custom Charter</h3>

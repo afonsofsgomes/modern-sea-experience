@@ -1,6 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { getFallbackImage } from '@/lib/imageFallback';
+import { getResponsiveImageUrl, ensureHttps } from '@/lib/imageUtils';
+import { useImageError } from '@/context/ImageErrorContext';
 
 interface OptimizedImageProps {
   src: string;
@@ -24,30 +27,55 @@ export const OptimizedImage = ({
   priority = false,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const hasExtension = src.includes('.');
-  const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
+  const [imageSrc, setImageSrc] = useState<string>('');
+  const [usedFallback, setUsedFallback] = useState(false);
+  const { reportError } = useImageError();
+  
+  // Initialize with optimized URL
+  useEffect(() => {
+    // Ensure HTTPS and apply responsive sizing
+    const optimizedSrc = getResponsiveImageUrl(ensureHttps(src), width);
+    setImageSrc(optimizedSrc);
+    setUsedFallback(false);
+    setIsLoaded(false);
+  }, [src, width]);
+  
+  const hasExtension = imageSrc.includes('.');
+  const imageType = hasExtension ? imageSrc.split('.').pop()?.toLowerCase() : null;
   
   // Generate webp URL if the image is a JPEG or PNG
   const webpSrc = 
     hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') 
-      ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
+      ? imageSrc.substring(0, imageSrc.lastIndexOf('.')) + '.webp' 
       : null;
 
   useEffect(() => {
     if (priority) {
       const img = new Image();
-      img.src = src;
+      img.src = imageSrc;
     }
-  }, [priority, src]);
+  }, [priority, imageSrc]);
 
-  // Fallback logic for when original image fails to load
+  // Fallback logic for when image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.warn(`Failed to load image: ${src}`);
+    console.warn(`Failed to load image: ${imageSrc}`);
     const imgElement = e.currentTarget;
     
     // If this is the webp version that failed, switch to original
     if (imgElement.src.endsWith('.webp') && webpSrc) {
-      imgElement.src = src;
+      imgElement.src = imageSrc;
+      return;
+    }
+    
+    // If original source failed and we haven't used a fallback yet
+    if (!usedFallback) {
+      // Report the error
+      reportError(imageSrc, `OptimizedImage(${alt})`);
+      
+      const fallbackSrc = getFallbackImage(imageSrc);
+      console.log(`Using fallback image: ${fallbackSrc}`);
+      setImageSrc(fallbackSrc);
+      setUsedFallback(true);
     }
   };
 
@@ -56,7 +84,7 @@ export const OptimizedImage = ({
       {priority ? (
         // For priority images, don't use picture element to avoid delays
         <img
-          src={src}
+          src={imageSrc}
           alt={alt}
           width={width}
           height={height}
@@ -67,9 +95,9 @@ export const OptimizedImage = ({
         />
       ) : (
         <picture>
-          {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
+          {webpSrc && !usedFallback && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            src={src}
+            src={imageSrc}
             alt={alt}
             width={width}
             height={height}

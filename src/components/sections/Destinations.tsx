@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird } from "lucide-react";
@@ -29,7 +30,7 @@ const itemVariants = {
 const destinationData = [
   {
     name: "Funchal",
-    image: "https://extranet.seayou.pt/photos/Funchal.jpg",
+    image: "https://images.unsplash.com/photo-1592089042603-930e791a6d2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Discover the vibrant capital of Madeira, with its historic old town, bustling markets, and delicious local cuisine. Enjoy a leisurely stroll along the promenade or take a cable car to Monte for panoramic views.",
     features: [
       { icon: <Coffee className="w-5 h-5 text-secondary" />, text: "Historic Old Town with cafés" },
@@ -40,7 +41,7 @@ const destinationData = [
   },
   {
     name: "Caniçal",
-    image: "https://extranet.seayou.pt/photos/Canical.jpg",
+    image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Experience the beautiful fishing village of Caniçal, the gateway to the stunning Ponta de São Lourenço nature reserve. Enjoy fresh seafood in the local restaurants and hike along dramatic coastal trails.",
     features: [
       { icon: <MapPin className="w-5 h-5 text-secondary" />, text: "Ponta de São Lourenço trails" },
@@ -51,7 +52,7 @@ const destinationData = [
   },
   {
     name: "Calheta",
-    image: "https://extranet.seayou.pt/photos/Calheta.jpg",
+    image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Relax on Calheta's golden sandy beaches, one of the few on Madeira Island. Visit the rum distillery, art center, or simply enjoy the sun and calm waters of this charming coastal town.",
     features: [
       { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Golden sand beaches" },
@@ -62,7 +63,7 @@ const destinationData = [
   },
   {
     name: "Desertas",
-    image: "https://extranet.seayou.pt/photos/desertas.jpg",
+    image: "https://images.unsplash.com/photo-1518125853935-a7c1d54032a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Explore the uninhabited Desertas Islands, a nature reserve and sanctuary for rare species including the Mediterranean monk seal. These dramatic, rugged islands offer a glimpse of untouched natural beauty.",
     features: [
       { icon: <Bird className="w-5 h-5 text-secondary" />, text: "Rare seabirds and marine life" },
@@ -73,7 +74,7 @@ const destinationData = [
   },
   {
     name: "Porto Santo",
-    image: "https://extranet.seayou.pt/photos/pxo.jpg",
+    image: "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
     features: [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },

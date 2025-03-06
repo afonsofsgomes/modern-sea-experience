@@ -1,4 +1,6 @@
 
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 export const PortoSantoHighlights = () => {
   return (
     <section className="py-20 bg-gray-50">
@@ -19,10 +21,12 @@ export const PortoSantoHighlights = () => {
           {/* Highlight 1 */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-60 overflow-hidden">
-              <img 
+              <OptimizedImage 
                 src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80" 
                 alt="Golden Beach" 
-                className="w-full h-full object-cover"
+                className="w-full h-full"
+                width={1173}
+                height={700}
               />
             </div>
             <div className="p-6">
@@ -34,10 +38,12 @@ export const PortoSantoHighlights = () => {
           {/* Highlight 2 */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-60 overflow-hidden">
-              <img 
+              <OptimizedImage 
                 src="https://images.unsplash.com/photo-1552353617-f0bc93b0fddf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1228&q=80" 
                 alt="Water Sports" 
-                className="w-full h-full object-cover"
+                className="w-full h-full"
+                width={1228}
+                height={700}
               />
             </div>
             <div className="p-6">
@@ -49,10 +55,12 @@ export const PortoSantoHighlights = () => {
           {/* Highlight 3 */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-60 overflow-hidden">
-              <img 
+              <OptimizedImage 
                 src="https://images.unsplash.com/photo-1543836282-501d561b9ab7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                 alt="Golf Course" 
-                className="w-full h-full object-cover"
+                className="w-full h-full"
+                width={1170}
+                height={700}
               />
             </div>
             <div className="p-6">
