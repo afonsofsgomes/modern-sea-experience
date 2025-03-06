@@ -24,9 +24,9 @@ interface BlogPostType {
   slug: string;
   author_id: string;
   profiles: {
-    first_name: string;
-    last_name: string;
-    avatar_url: string;
+    first_name: string | null;
+    last_name: string | null;
+    avatar_url: string | null;
   };
 }
 
@@ -51,7 +51,22 @@ const BlogPost = () => {
           throw error;
         }
 
-        setPost(data as BlogPostType);
+        // Ensure profiles data structure is correct
+        if (data && typeof data.profiles === 'object' && data.profiles !== null) {
+          setPost(data as BlogPostType);
+        } else {
+          // Handle case where profiles data might be missing or malformed
+          const formattedPost = {
+            ...data,
+            profiles: {
+              first_name: "Unknown",
+              last_name: "Author",
+              avatar_url: null
+            }
+          } as BlogPostType;
+          
+          setPost(formattedPost);
+        }
       } catch (error: any) {
         console.error('Error fetching blog post:', error);
         toast({

@@ -274,9 +274,10 @@ const BlogDashboard = () => {
             <div className="flex items-center gap-3">
               {isEditing && (
                 <Button
-                  variant="destructive"
+                  variant="outline"
                   onClick={handleDelete}
                   disabled={isDeleting || isLoading}
+                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
                   {isDeleting ? 'Deleting...' : 'Delete'}
