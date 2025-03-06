@@ -1,70 +1,8 @@
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 export const Newsletter = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [phone, setPhone] = useState("");
-  const [subscribeNewsletter, setSubscribeNewsletter] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!name || !email || !message) {
-      toast({
-        title: "Missing information",
-        description: "Please fill in your name, email, and message.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    setIsSubmitting(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('contact-form', {
-        body: {
-          name,
-          email,
-          message,
-          phone,
-          subscribe_newsletter: subscribeNewsletter
-        }
-      });
-      
-      if (error) {
-        throw new Error(error.message);
-      }
-      
-      toast({
-        title: "Message sent!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
-      });
-      
-      // Reset form
-      setName("");
-      setEmail("");
-      setMessage("");
-      setPhone("");
-      setSubscribeNewsletter(false);
-    } catch (error: any) {
-      console.error("Error submitting contact form:", error);
-      toast({
-        title: "Submission failed",
-        description: error.message || "There was an error sending your message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <section id="contact" className="py-20 bg-[#253D7F] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,7 +71,6 @@ export const Newsletter = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              onSubmit={handleSubmit}
             >
               <h3 className="text-xl font-medium mb-6">Send us a Message</h3>
               
@@ -145,9 +82,6 @@ export const Newsletter = () => {
                     id="name"
                     placeholder="Enter your name" 
                     className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
                   />
                 </div>
                 
@@ -158,21 +92,6 @@ export const Newsletter = () => {
                     id="email"
                     placeholder="Enter your email" 
                     className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="phone" className="block mb-1 text-sm font-medium">Phone Number (Optional)</label>
-                  <input 
-                    type="tel" 
-                    id="phone"
-                    placeholder="Enter your phone number" 
-                    className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
                 
@@ -183,9 +102,6 @@ export const Newsletter = () => {
                     rows={4}
                     placeholder="Tell us about your inquiry" 
                     className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
                   ></textarea>
                 </div>
                 
@@ -194,23 +110,18 @@ export const Newsletter = () => {
                     type="checkbox" 
                     id="newsletter" 
                     className="mr-2 h-4 w-4 bg-white/5 border border-white/20 rounded"
-                    checked={subscribeNewsletter}
-                    onChange={(e) => setSubscribeNewsletter(e.target.checked)}
                   />
                   <label htmlFor="newsletter" className="text-sm">Subscribe to our newsletter for special offers</label>
                 </div>
                 
                 <motion.button 
                   type="submit" 
-                  className="w-full bg-[#E95543] text-white font-medium px-6 py-3 rounded-md hover:bg-[#E95543]/90 transition-colors relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full bg-[#E95543] text-white font-medium px-6 py-3 rounded-md hover:bg-[#E95543]/90 transition-colors relative overflow-hidden group"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  disabled={isSubmitting}
                 >
-                  <span className="relative z-10">
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </span>
+                  <span className="relative z-10">Send Message</span>
                   <span className="absolute inset-0 h-full w-10 bg-white/20 skew-x-[20deg] transform -translate-x-32 group-hover:translate-x-40 transition-transform duration-700"></span>
                 </motion.button>
               </div>

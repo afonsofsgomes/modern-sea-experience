@@ -1,95 +1,13 @@
 
-import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Users, CalendarDays, Clock, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MetaTags } from "@/components/SEO";
-
-// Define form schema with zod
-const formSchema = z.object({
-  fullName: z.string().min(2, { message: "Full name must be at least 2 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  groupSize: z.string().min(1, { message: "Please enter your group size" }),
-  preferredDate: z.string().min(1, { message: "Please select a preferred date" }),
-  experienceType: z.string().min(1, { message: "Please select an experience type" }),
-  additionalInfo: z.string().optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
 
 const GroupBookings = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  // Initialize react-hook-form
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      groupSize: "",
-      preferredDate: "",
-      experienceType: "",
-      additionalInfo: "",
-    },
-  });
-
-  const onSubmit = async (values: FormValues) => {
-    setIsSubmitting(true);
-    try {
-      // Submit to Supabase
-      const { error } = await supabase.from("group_booking_inquiries").insert({
-        contact_name: values.fullName,
-        email: values.email,
-        group_size: parseInt(values.groupSize),
-        event_date: values.preferredDate,
-        destination: values.experienceType,
-        requirements: values.additionalInfo,
-      });
-
-      if (error) throw error;
-
-      // Success notification
-      toast({
-        title: "Group Inquiry Submitted",
-        description: "Thank you! We'll contact you shortly about your group booking.",
-      });
-
-      // Reset form and show success state
-      form.reset();
-      setSubmitted(true);
-    } catch (error) {
-      console.error("Error submitting group inquiry:", error);
-      toast({
-        title: "Error",
-        description: "There was a problem submitting your inquiry. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
-      <MetaTags
-        title="Group Bookings | SeaYou Madeira"
-        description="Special rates and personalized service for groups of all sizes. Book your group maritime experience in Madeira."
-        keywords="group bookings, Madeira group tours, corporate events, school trips, family reunions, group discounts"
-      />
-      
       <Navbar />
       
       <section className="pt-32 pb-20 bg-blue-900 text-white">
@@ -146,9 +64,7 @@ const GroupBookings = () => {
                 ))}
               </div>
               
-              <Button size="lg" onClick={() => document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' })}>
-                Request Group Quote
-              </Button>
+              <Button size="lg">Request Group Quote</Button>
             </div>
             <div className="relative">
               <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
@@ -222,9 +138,7 @@ const GroupBookings = () => {
                       <span>{pkg.location}</span>
                     </div>
                   </div>
-                  <Button className="w-full" onClick={() => document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' })}>
-                    Inquire Now
-                  </Button>
+                  <Button className="w-full">Inquire Now</Button>
                 </div>
               </motion.div>
             ))}
@@ -232,7 +146,7 @@ const GroupBookings = () => {
         </div>
       </section>
       
-      <section id="inquiry-form" className="py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -281,150 +195,65 @@ const GroupBookings = () => {
               </div>
               
               <div className="bg-gray-50 p-6 rounded-lg">
-                {submitted ? (
-                  <div className="text-center py-10">
-                    <div className="bg-green-100 text-green-800 p-4 rounded-md mb-6">
-                      <h3 className="text-xl font-medium mb-2">Thank You!</h3>
-                      <p>Your group inquiry has been submitted successfully. One of our group coordinators will contact you shortly.</p>
+                <form className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                      <input 
+                        type="text" 
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                        placeholder="Your name"
+                      />
                     </div>
-                    <Button 
-                      onClick={() => setSubmitted(false)}
-                      variant="outline"
-                    >
-                      Submit Another Inquiry
-                    </Button>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                      <input 
+                        type="email" 
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                        placeholder="Your email"
+                      />
+                    </div>
                   </div>
-                ) : (
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="fullName"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Full Name</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  placeholder="Your name" 
-                                  {...field} 
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Email Address</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  type="email" 
-                                  placeholder="Your email" 
-                                  {...field} 
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="groupSize"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Group Size</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  type="number" 
-                                  placeholder="Number of people" 
-                                  {...field} 
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="preferredDate"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Preferred Date</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  type="date" 
-                                  {...field} 
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="experienceType"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Experience Type</FormLabel>
-                            <Select 
-                              onValueChange={field.onChange} 
-                              defaultValue={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select an experience" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="seabus">SeaBus Route</SelectItem>
-                                <SelectItem value="porto-santo">Porto Santo Trip</SelectItem>
-                                <SelectItem value="private-cruise">Private Cruise</SelectItem>
-                                <SelectItem value="custom">Custom Experience</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Group Size</label>
+                      <input 
+                        type="number" 
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                        placeholder="Number of people"
                       />
-                      
-                      <FormField
-                        control={form.control}
-                        name="additionalInfo"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Additional Information</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                placeholder="Tell us more about your group and any special requirements" 
-                                className="h-32" 
-                                {...field} 
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
+                      <input 
+                        type="date" 
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                       />
-                      
-                      <Button 
-                        type="submit" 
-                        size="lg" 
-                        className="w-full"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Submitting..." : "Submit Group Inquiry"}
-                      </Button>
-                    </form>
-                  </Form>
-                )}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Experience Type</label>
+                    <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                      <option value="">Select an experience</option>
+                      <option value="seabus">SeaBus Route</option>
+                      <option value="porto-santo">Porto Santo Trip</option>
+                      <option value="private-cruise">Private Cruise</option>
+                      <option value="custom">Custom Experience</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
+                    <textarea 
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary h-32"
+                      placeholder="Tell us more about your group and any special requirements"
+                    ></textarea>
+                  </div>
+                  
+                  <Button size="lg" className="w-full">Submit Group Inquiry</Button>
+                </form>
               </div>
             </div>
           </div>
