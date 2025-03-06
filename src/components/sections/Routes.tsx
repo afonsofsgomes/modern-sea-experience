@@ -72,7 +72,12 @@ export const Routes = () => {
             <img 
               alt="SeaBus Catamaran" 
               className="w-auto h-full max-h-[600px] object-cover rounded-lg shadow-lg" 
-              src="http://extranet.seayou.pt/photos/boat1.jpg" 
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80';
+                console.log('Catamaran image failed to load, using fallback');
+              }}
             />
           </motion.div>
 
