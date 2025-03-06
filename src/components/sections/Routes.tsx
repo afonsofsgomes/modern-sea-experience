@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Smartphone, MessageSquareHeart } from "lucide-react";
@@ -69,9 +70,16 @@ export const Routes = () => {
             }}
           >
             <img 
-              alt="SeaBus Catamaran" 
+              alt="SeaBus Catamaran - Modern maritime transportation vessel in Madeira" 
               className="w-auto h-full max-h-[600px] object-cover rounded-lg shadow-lg" 
-              src="https://extranet.seayou.pt/photos/boat1.jpg?quality=100&width=1200" 
+              src="https://extranet.seayou.pt/photos/boat1.jpg?quality=85&width=800" 
+              srcSet="https://extranet.seayou.pt/photos/boat1.jpg?quality=85&width=400 400w, 
+                      https://extranet.seayou.pt/photos/boat1.jpg?quality=85&width=800 800w, 
+                      https://extranet.seayou.pt/photos/boat1.jpg?quality=85&width=1200 1200w"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+              width="800"
+              height="600"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80';
