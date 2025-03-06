@@ -26,7 +26,7 @@ export const ImagePreload = ({ images, highPriority = false }: ImagePreloadProps
           rel="preload" 
           as="image" 
           href={imageSrc} 
-          fetchpriority={highPriority ? "high" : "auto"}
+          fetchPriority={highPriority ? "high" : "auto"}
         />
       ))}
     </Helmet>
