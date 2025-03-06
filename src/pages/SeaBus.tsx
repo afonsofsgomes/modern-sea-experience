@@ -8,17 +8,10 @@ import {
   SeaBusBooking,
   ScheduleDisplay
 } from "@/components/sections";
-import { MetaTags, TourSchema, FAQSchema, WebPageSchema } from "@/components/SEO";
+import { MetaTags, TourSchema, FAQSchema } from "@/components/SEO";
 import { Helmet } from "react-helmet";
-import { ImagePreload } from "@/components/ImagePreload";
 
 const SeaBus = () => {
-  // Critical images to preload
-  const criticalImages = [
-    "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
-    "https://extranet.seayou.pt/photos/boat1.jpg"
-  ];
-
   // FAQ data for structured data
   const faqQuestions = [
     {
@@ -69,17 +62,6 @@ const SeaBus = () => {
         availability="https://schema.org/InStock"
       />
       <FAQSchema questions={faqQuestions} />
-      <WebPageSchema 
-        title="SeaBus Madeira - Fast Marine Connections"
-        description="Experience fast and comfortable sea transportation around Madeira with SeaBus. Enjoy panoramic views and easy travel."
-        image="https://extranet.seayou.pt/photos/boat1.jpg"
-        type="ItemPage"
-        breadcrumbs={[
-          { name: "Home", url: "https://seayou.pt/" },
-          { name: "SeaBus", url: "https://seayou.pt/seabus" }
-        ]}
-      />
-      <ImagePreload images={criticalImages} highPriority={true} />
       
       <Navbar />
       <main className="flex-grow">

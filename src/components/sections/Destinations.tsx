@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { OptimizedImage } from "@/components/OptimizedImage";
 
 // Animation variants
 const containerVariants = {
@@ -30,7 +29,7 @@ const itemVariants = {
 const destinationData = [
   {
     name: "Funchal",
-    image: "https://images.unsplash.com/photo-1592089042603-930e791a6d2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://extranet.seayou.pt/photos/Funchal.jpg",
     description: "Discover the vibrant capital of Madeira, with its historic old town, bustling markets, and delicious local cuisine. Enjoy a leisurely stroll along the promenade or take a cable car to Monte for panoramic views.",
     features: [
       { icon: <Coffee className="w-5 h-5 text-secondary" />, text: "Historic Old Town with cafés" },
@@ -41,7 +40,7 @@ const destinationData = [
   },
   {
     name: "Caniçal",
-    image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://extranet.seayou.pt/photos/Canical.jpg",
     description: "Experience the beautiful fishing village of Caniçal, the gateway to the stunning Ponta de São Lourenço nature reserve. Enjoy fresh seafood in the local restaurants and hike along dramatic coastal trails.",
     features: [
       { icon: <MapPin className="w-5 h-5 text-secondary" />, text: "Ponta de São Lourenço trails" },
@@ -52,7 +51,7 @@ const destinationData = [
   },
   {
     name: "Calheta",
-    image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://extranet.seayou.pt/photos/Calheta.jpg",
     description: "Relax on Calheta's golden sandy beaches, one of the few on Madeira Island. Visit the rum distillery, art center, or simply enjoy the sun and calm waters of this charming coastal town.",
     features: [
       { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Golden sand beaches" },
@@ -63,7 +62,7 @@ const destinationData = [
   },
   {
     name: "Desertas",
-    image: "https://images.unsplash.com/photo-1518125853935-a7c1d54032a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://extranet.seayou.pt/photos/desertas.jpg",
     description: "Explore the uninhabited Desertas Islands, a nature reserve and sanctuary for rare species including the Mediterranean monk seal. These dramatic, rugged islands offer a glimpse of untouched natural beauty.",
     features: [
       { icon: <Bird className="w-5 h-5 text-secondary" />, text: "Rare seabirds and marine life" },
@@ -74,7 +73,7 @@ const destinationData = [
   },
   {
     name: "Porto Santo",
-    image: "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://extranet.seayou.pt/photos/pxo.jpg",
     description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
     features: [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
@@ -120,12 +119,16 @@ export const Destinations = () => {
             >
               <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10"></div>
-                <OptimizedImage 
+                <img 
                   src={destination.image} 
                   alt={destination.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  width={800}
-                  height={500}
+                  onError={(e) => {
+                    // Fallback to a placeholder image if the image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80';
+                    console.log(`Image failed to load: ${destination.image}, using fallback`);
+                  }}
                 />
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
                   <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">

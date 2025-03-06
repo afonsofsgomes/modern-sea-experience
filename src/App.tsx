@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,45 +22,41 @@ import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
-import { ImageErrorProvider } from './context/ImageErrorContext';
 
 const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <ImageErrorProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <div className="overflow-x-hidden w-full">
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/booking" element={<Booking />} />
-                <Route path="/seabus" element={<SeaBus />} />
-                <Route path="/private-cruise" element={<PrivateCruise />} />
-                <Route path="/porto-santo" element={<PortoSanto />} />
-                <Route path="/desertas" element={<Desertas />} />
-                <Route path="/our-fleet" element={<OurFleet />} />
-                <Route path="/safety-measures" element={<SafetyMeasures />} />
-                <Route path="/careers" element={<Careers />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/group-bookings" element={<GroupBookings />} />
-                <Route path="/corporate-events" element={<CorporateEvents />} />
-                <Route path="/port-terminal" element={<PortTerminal />} />
-                <Route path="/schedule" element={<Schedule />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/cookies" element={<Cookies />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </div>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ImageErrorProvider>
-  );
-}
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <div className="overflow-x-hidden w-full">
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/booking" element={<Booking />} />
+            <Route path="/seabus" element={<SeaBus />} />
+            <Route path="/private-cruise" element={<PrivateCruise />} />
+            <Route path="/porto-santo" element={<PortoSanto />} />
+            <Route path="/desertas" element={<Desertas />} />
+            <Route path="/our-fleet" element={<OurFleet />} />
+            <Route path="/safety-measures" element={<SafetyMeasures />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/group-bookings" element={<GroupBookings />} />
+            <Route path="/corporate-events" element={<CorporateEvents />} />
+            <Route path="/port-terminal" element={<PortTerminal />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;

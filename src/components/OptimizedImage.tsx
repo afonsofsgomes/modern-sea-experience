@@ -1,9 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { getFallbackImage } from '@/lib/imageFallback';
-import { getResponsiveImageUrl, ensureHttps, isImageValid } from '@/lib/imageUtils';
-import { useImageError } from '@/context/ImageErrorContext';
 
 interface OptimizedImageProps {
   src: string;
@@ -27,64 +24,30 @@ export const OptimizedImage = ({
   priority = false,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [imageSrc, setImageSrc] = useState<string>('');
-  const [usedFallback, setUsedFallback] = useState(false);
-  const { reportError } = useImageError();
-  
-  // Initialize with optimized URL
-  useEffect(() => {
-    // Check if src is empty or undefined
-    if (!src || src.trim() === '') {
-      console.warn('Empty image URL provided to OptimizedImage');
-      const fallbackSrc = getFallbackImage('empty');
-      setImageSrc(fallbackSrc);
-      setUsedFallback(true);
-      return;
-    }
-    
-    // Ensure HTTPS and apply responsive sizing
-    const optimizedSrc = getResponsiveImageUrl(ensureHttps(src), width);
-    setImageSrc(optimizedSrc);
-    setUsedFallback(false);
-    setIsLoaded(false);
-  }, [src, width]);
-  
-  const hasExtension = imageSrc.includes('.');
-  const imageType = hasExtension ? imageSrc.split('.').pop()?.toLowerCase() : null;
+  const hasExtension = src.includes('.');
+  const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
   
   // Generate webp URL if the image is a JPEG or PNG
   const webpSrc = 
     hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') 
-      ? imageSrc.substring(0, imageSrc.lastIndexOf('.')) + '.webp' 
+      ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
       : null;
 
   useEffect(() => {
     if (priority) {
       const img = new Image();
-      img.src = imageSrc;
+      img.src = src;
     }
-  }, [priority, imageSrc]);
+  }, [priority, src]);
 
-  // Fallback logic for when image fails to load
+  // Fallback logic for when original image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.warn(`Failed to load image: ${imageSrc}`);
+    console.warn(`Failed to load image: ${src}`);
     const imgElement = e.currentTarget;
     
     // If this is the webp version that failed, switch to original
     if (imgElement.src.endsWith('.webp') && webpSrc) {
-      imgElement.src = imageSrc;
-      return;
-    }
-    
-    // If original source failed and we haven't used a fallback yet
-    if (!usedFallback) {
-      // Report the error
-      reportError(imageSrc, `OptimizedImage(${alt})`);
-      
-      const fallbackSrc = getFallbackImage(imageSrc);
-      console.log(`Using fallback image: ${fallbackSrc}`);
-      setImageSrc(fallbackSrc);
-      setUsedFallback(true);
+      imgElement.src = src;
     }
   };
 
@@ -93,7 +56,7 @@ export const OptimizedImage = ({
       {priority ? (
         // For priority images, don't use picture element to avoid delays
         <img
-          src={imageSrc}
+          src={src}
           alt={alt}
           width={width}
           height={height}
@@ -104,9 +67,9 @@ export const OptimizedImage = ({
         />
       ) : (
         <picture>
-          {webpSrc && !usedFallback && <source srcSet={webpSrc} type="image/webp" />}
+          {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            src={imageSrc}
+            src={src}
             alt={alt}
             width={width}
             height={height}
