@@ -39,14 +39,6 @@ export const FooterCompany: React.FC = () => {
             Careers
           </Link>
         </li>
-        <li>
-          <Link
-            to="/blog"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Blog
-          </Link>
-        </li>
       </ul>
     </div>
   );

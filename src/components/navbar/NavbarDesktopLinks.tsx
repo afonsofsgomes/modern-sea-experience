@@ -17,7 +17,6 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
     { label: "Home", sectionId: "home" },
     { label: "Routes", sectionId: "routes" },
     { label: "About", sectionId: "about" },
-    { label: "Blog", path: "/blog" },  // Moved Blog here from pageLinks
     { label: "Contact", sectionId: "contact" }
   ];
   
@@ -27,7 +26,6 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
     { label: "Private Cruises", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
     { label: "Desertas Islands", path: "/desertas" }
-    // Removed Blog from here
   ];
 
   // Check if current hash matches one of our section IDs
@@ -44,32 +42,15 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
     <nav className="hidden md:flex items-center space-x-8">
       {/* Section links that scroll within home page or redirect to home page with hash */}
       {sectionLinks.map((link) => {
-        // For regular section links
-        if (!link.path) {
-          return (
-            <NavbarLink
-              key={link.sectionId}
-              label={link.label}
-              sectionId={link.sectionId}
-              onClick={onScrollToSection}
-              scrolled={scrolled}
-              isActive={isActiveSectionLink(link.sectionId)}
-            />
-          );
-        }
-        // For Blog link
         return (
-          <Link
-            key={link.path}
-            to={link.path}
-            className={`text-sm font-medium hover-border-effect transition-colors ${
-              location.pathname === link.path 
-                ? 'text-secondary font-semibold' 
-                : scrolled ? 'text-foreground' : 'text-white'
-            }`}
-          >
-            {link.label}
-          </Link>
+          <NavbarLink
+            key={link.sectionId}
+            label={link.label}
+            sectionId={link.sectionId}
+            onClick={onScrollToSection}
+            scrolled={scrolled}
+            isActive={isActiveSectionLink(link.sectionId)}
+          />
         );
       })}
       
