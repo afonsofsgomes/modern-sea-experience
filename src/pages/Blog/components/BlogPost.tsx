@@ -2,6 +2,7 @@
 import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export interface BlogPostProps {
   post: {
@@ -32,10 +33,15 @@ export const BlogPost = ({ post, featured = false, index = 0 }: BlogPostProps) =
       }`}
     >
       <div className={`${featured ? "aspect-video" : "aspect-video"} overflow-hidden`}>
-        <img 
+        <OptimizedImage 
           src={post.image} 
           alt={post.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          width={featured ? 800 : 400}
+          height={featured ? 450 : 225}
+          className="w-full h-full"
+          loading="lazy"
+          sizes={featured ? "(max-width: 768px) 100vw, 800px" : "(max-width: 768px) 100vw, 400px"}
+          priority={featured}
         />
       </div>
       <div className={`${featured ? "p-6" : "p-5"}`}>
@@ -72,10 +78,12 @@ export const BlogPost = ({ post, featured = false, index = 0 }: BlogPostProps) =
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <div className={`${featured ? "w-8 h-8" : "w-6 h-6"} rounded-full overflow-hidden mr-2`}>
-              <img 
+              <OptimizedImage 
                 src={post.authorImage} 
                 alt={post.author}
-                className="w-full h-full object-cover" 
+                width={featured ? 32 : 24}
+                height={featured ? 32 : 24}
+                className="w-full h-full"
               />
             </div>
             <span className={`${featured ? "text-sm" : "text-xs"} text-gray-700`}>{post.author}</span>
