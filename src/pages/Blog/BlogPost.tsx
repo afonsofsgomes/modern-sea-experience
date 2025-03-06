@@ -51,8 +51,9 @@ const BlogPost = () => {
           throw error;
         }
 
-        // Ensure profiles data structure is correct
-        if (data && typeof data.profiles === 'object' && data.profiles !== null) {
+        // Check if data.profiles is a valid object with the expected structure
+        if (data && typeof data.profiles === 'object' && data.profiles !== null &&
+            !('error' in data.profiles)) {
           setPost(data as BlogPostType);
         } else {
           // Handle case where profiles data might be missing or malformed
