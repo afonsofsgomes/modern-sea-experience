@@ -5,6 +5,10 @@
  * @returns Promise that resolves to a boolean indicating if the image is valid
  */
 export const isImageValid = (url: string): Promise<boolean> => {
+  if (!url || url.trim() === '') {
+    return Promise.resolve(false);
+  }
+  
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => resolve(true);
@@ -19,6 +23,10 @@ export const isImageValid = (url: string): Promise<boolean> => {
  * @returns The HTTPS URL
  */
 export const ensureHttps = (url: string): string => {
+  if (!url || url.trim() === '') {
+    return url;
+  }
+  
   if (url.startsWith('http://')) {
     return url.replace('http://', 'https://');
   }
@@ -32,6 +40,10 @@ export const ensureHttps = (url: string): string => {
  * @returns Modified URL with sizing parameters
  */
 export const getResponsiveImageUrl = (url: string, width = 800): string => {
+  if (!url || url.trim() === '') {
+    return url;
+  }
+  
   try {
     const urlObj = new URL(url);
     

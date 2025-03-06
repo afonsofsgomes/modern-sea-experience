@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { getFallbackImage } from '@/lib/imageFallback';
-import { getResponsiveImageUrl, ensureHttps } from '@/lib/imageUtils';
+import { getResponsiveImageUrl, ensureHttps, isImageValid } from '@/lib/imageUtils';
 import { useImageError } from '@/context/ImageErrorContext';
 
 interface OptimizedImageProps {
@@ -33,6 +33,15 @@ export const OptimizedImage = ({
   
   // Initialize with optimized URL
   useEffect(() => {
+    // Check if src is empty or undefined
+    if (!src || src.trim() === '') {
+      console.warn('Empty image URL provided to OptimizedImage');
+      const fallbackSrc = getFallbackImage('empty');
+      setImageSrc(fallbackSrc);
+      setUsedFallback(true);
+      return;
+    }
+    
     // Ensure HTTPS and apply responsive sizing
     const optimizedSrc = getResponsiveImageUrl(ensureHttps(src), width);
     setImageSrc(optimizedSrc);

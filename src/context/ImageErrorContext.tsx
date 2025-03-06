@@ -23,6 +23,12 @@ export const ImageErrorProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [hasShownToast, setHasShownToast] = useState(false);
 
   const reportError = (src: string, component: string) => {
+    // Prevent reporting errors for empty URLs (they're handled separately)
+    if (!src || src.trim() === '') {
+      console.warn('Empty URL reported as error, skipping');
+      return;
+    }
+    
     setErrors(prev => {
       const current = prev[src];
       return {

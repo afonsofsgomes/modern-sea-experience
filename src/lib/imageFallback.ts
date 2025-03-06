@@ -15,11 +15,17 @@ export const defaultFallbacks = {
   island: "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
   landscape: "https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
   boat1: "https://images.unsplash.com/photo-1532587311244-fa8c813675fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-  pxo: "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  pxo: "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  empty: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
 };
 
 // Function to get a fallback image URL based on the original image URL
 export const getFallbackImage = (originalUrl: string): string => {
+  // Handle empty URLs
+  if (!originalUrl || originalUrl.trim() === '') {
+    return defaultFallbacks.empty;
+  }
+  
   // Try to match destinations first
   for (const [destination, fallbackUrl] of Object.entries(destinationFallbacks)) {
     if (originalUrl.toLowerCase().includes(destination.toLowerCase())) {
