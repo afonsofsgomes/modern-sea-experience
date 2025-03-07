@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Umbrella } from "lucide-react";
@@ -83,7 +84,7 @@ const destinationData = [
     image: "https://extranet.seayou.pt/photos/pxo.jpg",
     description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
     features: [
-      { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
+      { icon: <Waves className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
       { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Calm, warm waters year-round" },
       { icon: <Flag className="w-5 h-5 text-secondary" />, text: "Championship golf course" },
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "European Maldives" }
