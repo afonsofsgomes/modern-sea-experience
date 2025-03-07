@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Umbrella } from "lucide-react";
@@ -87,7 +86,7 @@ const destinationData = [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
       { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Calm, warm waters year-round" },
       { icon: <Flag className="w-5 h-5 text-secondary" />, text: "Championship golf course" },
-      { icon: <Umbrella className="w-5 h-5 text-secondary" />, text: "European Maldives" }
+      { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "European Maldives" }
     ],
     link: "/porto-santo",
     buttonText: "Book Porto Santo Trip"
