@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Golf, Umbrella } from "lucide-react";
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Umbrella } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -86,7 +86,7 @@ const destinationData = [
     features: [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
       { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Calm, warm waters year-round" },
-      { icon: <Golf className="w-5 h-5 text-secondary" />, text: "Championship golf course" },
+      { icon: <Flag className="w-5 h-5 text-secondary" />, text: "Championship golf course" },
       { icon: <Umbrella className="w-5 h-5 text-secondary" />, text: "European Maldives" }
     ],
     link: "/porto-santo",
