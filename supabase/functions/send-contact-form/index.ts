@@ -1,5 +1,8 @@
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+import { Resend } from "npm:resend@2.0.0";
+
+const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -32,24 +35,66 @@ serve(async (req) => {
       );
     }
 
-    // Create email content
-    const emailBody = `
+    // Format email content with HTML
+    const htmlContent = `
+      <h2>New Contact Form Submission</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong> ${message}</p>
+      <p><strong>Subscribe to newsletter:</strong> ${newsletter ? 'Yes' : 'No'}</p>
+    `;
+
+    // Format email content as plain text
+    const textContent = `
+      New Contact Form Submission
+      
       Name: ${name}
       Email: ${email}
       Message: ${message}
       Subscribe to newsletter: ${newsletter ? 'Yes' : 'No'}
     `;
 
-    console.log('Contact form submission:', {
-      to: "support@seayou.pt",
-      from: "no-reply@seayou.pt",
-      subject: `Contact Form Submission from ${name}`,
-      text: emailBody,
-    });
+    console.log('Sending contact form submission to support@seayou.pt');
     
-    // In a production environment, we would connect to an email service
-    // For now we'll simulate a successful response
-    // TODO: Implement actual email sending functionality when email service is available
+    // Send email using Resend
+    const emailResponse = await resend.emails.send({
+      from: "SeaYou Contact Form <onboarding@resend.dev>",
+      to: "support@seayou.pt",
+      subject: `Contact Form Submission from ${name}`,
+      html: htmlContent,
+      text: textContent,
+      reply_to: email
+    });
+
+    console.log('Email response:', emailResponse);
+
+    // Also send confirmation email to the user
+    const confirmationResponse = await resend.emails.send({
+      from: "SeaYou <onboarding@resend.dev>",
+      to: email,
+      subject: "Thank you for contacting SeaYou Madeira",
+      html: `
+        <h2>Thank you for contacting us, ${name}!</h2>
+        <p>We have received your message and will get back to you as soon as possible.</p>
+        <p>If you have an urgent matter, please call us at +351 291 123 456.</p>
+        <p>
+          Best regards,<br>
+          The SeaYou Madeira Team
+        </p>
+      `,
+      text: `
+        Thank you for contacting us, ${name}!
+        
+        We have received your message and will get back to you as soon as possible.
+        
+        If you have an urgent matter, please call us at +351 291 123 456.
+        
+        Best regards,
+        The SeaYou Madeira Team
+      `
+    });
+
+    console.log('Confirmation email response:', confirmationResponse);
 
     return new Response(
       JSON.stringify({ 
