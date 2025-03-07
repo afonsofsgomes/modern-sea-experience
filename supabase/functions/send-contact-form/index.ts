@@ -40,21 +40,16 @@ serve(async (req) => {
       Subscribe to newsletter: ${newsletter ? 'Yes' : 'No'}
     `;
 
-    // Send email using Deno's built-in fetch for simplicity
-    // In a production environment, you might want to use a dedicated email service
-    const emailData = {
+    console.log('Contact form submission:', {
       to: "support@seayou.pt",
       from: "no-reply@seayou.pt",
       subject: `Contact Form Submission from ${name}`,
       text: emailBody,
-      html: emailBody.replace(/\n/g, '<br>'),
-    };
-
-    console.log('Contact form submission:', emailData);
+    });
     
-    // Here we would normally connect to an email service
-    // For now, we'll just log the data and return success
-    // In a real implementation, you would add the code to send the email here
+    // In a production environment, we would connect to an email service
+    // For now we'll simulate a successful response
+    // TODO: Implement actual email sending functionality when email service is available
 
     return new Response(
       JSON.stringify({ 

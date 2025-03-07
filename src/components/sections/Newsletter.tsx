@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 
 export const Newsletter = () => {
   const [name, setName] = useState("");
@@ -33,6 +34,7 @@ export const Newsletter = () => {
       });
 
       if (error) {
+        console.error("Error sending contact form:", error);
         throw new Error(error.message);
       }
 
@@ -174,17 +176,14 @@ export const Newsletter = () => {
                   <label htmlFor="newsletter" className="text-sm">Subscribe to our newsletter for special offers</label>
                 </div>
                 
-                <motion.button 
+                <Button 
                   type="submit" 
                   className="w-full bg-[#E95543] text-white font-medium px-6 py-3 rounded-md hover:bg-[#E95543]/90 transition-colors relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   disabled={isSubmitting}
+                  isLoading={isSubmitting}
                 >
-                  <span className="relative z-10">{isSubmitting ? "Sending..." : "Send Message"}</span>
-                  <span className="absolute inset-0 h-full w-10 bg-white/20 skew-x-[20deg] transform -translate-x-32 group-hover:translate-x-40 transition-transform duration-700"></span>
-                </motion.button>
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
               </div>
             </motion.form>
           </div>
