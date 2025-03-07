@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -8,6 +7,7 @@ import {
   SeaBusBooking,
   ScheduleDisplay
 } from "@/components/sections";
+import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
 import { MetaTags, TourSchema, FAQSchema } from "@/components/SEO";
 import { Helmet } from "react-helmet";
 
@@ -67,6 +67,7 @@ const SeaBus = () => {
       <main className="flex-grow">
         <SeaBusHero />
         <SeaBusRoutes />
+        <SeaBusDestinations />
         <ScheduleDisplay />
         <SeaBusFeatures />
         <SeaBusBooking />

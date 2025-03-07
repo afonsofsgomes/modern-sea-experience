@@ -1,4 +1,3 @@
-
 export * from './Routes';
 export * from './Destinations';
 export * from './QuickBooking';
@@ -25,3 +24,6 @@ export * from './PrivateCruiseHero';
 export * from './PrivateCruiseOptions';
 export * from './PrivateCruiseFeatures';
 export * from './PrivateCruiseBooking';
+
+// New export
+export { SeaBusDestinations } from "./SeaBusDestinations";
