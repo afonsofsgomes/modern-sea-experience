@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag } from "lucide-react";
@@ -84,8 +85,8 @@ const destinationData = [
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Volcanic Beaches" },
       { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Starting point to visit Desertas island" }
     ],
-    link: "/seabus",
-    buttonText: "Book SeaBus Journey",
+    link: "/private-cruise",
+    buttonText: "Book Private Cruise",
     stats: [
       { value: "4h", label: "Duration" },
       { value: "12", label: "Max Guests" },
@@ -104,8 +105,8 @@ const destinationData = [
       { icon: <Route className="w-5 h-5 text-secondary" />, text: "Levadas: Rabaçal, 25 Fontes" },
       { icon: <Sunset className="w-5 h-5 text-secondary" />, text: "Beautiful sunset point" }
     ],
-    link: "/seabus",
-    buttonText: "Book SeaBus Journey",
+    link: "/private-cruise",
+    buttonText: "Book Private Cruise",
     stats: [
       { value: "4h", label: "Duration" },
       { value: "12", label: "Max Guests" },
@@ -124,8 +125,8 @@ const destinationData = [
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Volcanic Beaches" },
       { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Natural Deep caves" }
     ],
-    link: "/private-cruise",
-    buttonText: "Book Private Cruise",
+    link: "/desertas",
+    buttonText: "Book Desertas Adventure",
     stats: [
       { value: "6h", label: "Duration" },
       { value: "12", label: "Max Guests" },
@@ -295,7 +296,7 @@ export const Destinations = () => {
                       </div>
                       
                       <Link to={destination.link} className="mt-auto">
-                        <Button className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white text-xs sm:text-sm relative overflow-hidden group">
+                        <Button size="lg" className="w-full sm:w-auto bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
                           <span className="relative z-10">{destination.buttonText}</span>
                           <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
                         </Button>
@@ -367,7 +368,7 @@ export const Destinations = () => {
                     </div>
                     
                     <Link to={destination.link} className="mt-auto">
-                      <Button className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white text-xs sm:text-sm relative overflow-hidden group">
+                      <Button size="lg" className="w-full sm:w-auto bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
                         <span className="relative z-10">{destination.buttonText}</span>
                         <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
                       </Button>
