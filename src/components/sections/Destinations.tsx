@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship } from "lucide-react";
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Golf, Umbrella } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -85,7 +85,9 @@ const destinationData = [
     description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
     features: [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
-      { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Calm, warm waters year-round" }
+      { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Calm, warm waters year-round" },
+      { icon: <Golf className="w-5 h-5 text-secondary" />, text: "Championship golf course" },
+      { icon: <Umbrella className="w-5 h-5 text-secondary" />, text: "European Maldives" }
     ],
     link: "/porto-santo",
     buttonText: "Book Porto Santo Trip"
