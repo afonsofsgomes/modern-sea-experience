@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Umbrella } from "lucide-react";
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -38,7 +38,14 @@ const destinationData = [
       { icon: <ShoppingBag className="w-5 h-5 text-secondary" />, text: "Shopping areas" }
     ],
     link: "/seabus",
-    buttonText: "Book SeaBus Journey"
+    buttonText: "Book SeaBus Journey",
+    stats: [
+      { value: "1h", label: "Journey Time" },
+      { value: "22", label: "Passengers" },
+      { value: "Daily", label: "Departures" }
+    ],
+    experience: "SeaBus Connections",
+    experienceDesc: "Fast & comfortable sea transportation with panoramic views between key destinations in Madeira."
   },
   {
     name: "Caniçal",
@@ -51,7 +58,14 @@ const destinationData = [
       { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Starting point to visit Desertas island" }
     ],
     link: "/seabus",
-    buttonText: "Book SeaBus Journey"
+    buttonText: "Book SeaBus Journey",
+    stats: [
+      { value: "4h", label: "Duration" },
+      { value: "12", label: "Max Guests" },
+      { value: "Unique", label: "Sights" }
+    ],
+    experience: "Private North Coast Cruise",
+    experienceDesc: "Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline."
   },
   {
     name: "Calheta",
@@ -64,7 +78,14 @@ const destinationData = [
       { icon: <Sunset className="w-5 h-5 text-secondary" />, text: "Beautiful sunset point" }
     ],
     link: "/seabus",
-    buttonText: "Book SeaBus Journey"
+    buttonText: "Book SeaBus Journey",
+    stats: [
+      { value: "4h", label: "Duration" },
+      { value: "12", label: "Max Guests" },
+      { value: "Luxury", label: "Experience" }
+    ],
+    experience: "Private South Coast Cruise",
+    experienceDesc: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences."
   },
   {
     name: "Desertas",
@@ -77,7 +98,14 @@ const destinationData = [
       { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Natural Deep caves" }
     ],
     link: "/private-cruise",
-    buttonText: "Book Private Cruise"
+    buttonText: "Book Private Cruise",
+    stats: [
+      { value: "6h", label: "Duration" },
+      { value: "12", label: "Max Guests" },
+      { value: "Wildlife", label: "Focus" }
+    ],
+    experience: "Desertas Island Adventure",
+    experienceDesc: "Visit the uninhabited Desertas Islands to observe rare wildlife and pristine natural landscapes."
   },
   {
     name: "Porto Santo",
@@ -90,7 +118,14 @@ const destinationData = [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "European Maldives" }
     ],
     link: "/porto-santo",
-    buttonText: "Book Porto Santo Trip"
+    buttonText: "Book Porto Santo Trip",
+    stats: [
+      { value: "9km", label: "Golden Beach" },
+      { value: "2.5h", label: "Journey Time" },
+      { value: "Daily", label: "Departures" }
+    ],
+    experience: "Porto Santo Golden Island",
+    experienceDesc: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service."
   }
 ];
 
@@ -99,7 +134,7 @@ export const Destinations = () => {
   const destinationsInView = useInView(destinationsRef, { once: true, amount: 0.1 });
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden" ref={destinationsRef}>
+    <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden" ref={destinationsRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-10 md:mb-16"
@@ -108,17 +143,17 @@ export const Destinations = () => {
           variants={containerVariants}
         >
           <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-3 md:mb-4">
-            Explore Our Destinations
+            Discover Madeira by Sea
           </motion.span>
           <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl font-display font-medium mb-4 md:mb-6">
-            What to Experience at Each Stop
+            Explore Our Destinations & Experiences
           </motion.h2>
           <motion.p variants={itemVariants} className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Discover amazing destinations around Madeira Island with our sea connections. Each location offers unique experiences and scenery.
+            Choose from our carefully crafted sea experiences to make your visit to Madeira unforgettable, each location offers unique experiences and scenery.
           </motion.p>
         </motion.div>
         
-        <div className="space-y-8 md:space-y-16">
+        <div className="space-y-12 md:space-y-24">
           {destinationData.map((destination, index) => (
             <motion.div
               key={destination.name}
@@ -141,23 +176,51 @@ export const Destinations = () => {
                   }}
                 />
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
+                  <span className="px-3 py-1 sm:px-4 sm:py-2 bg-secondary/80 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-medium shadow-lg">
+                    {destination.experience}
+                  </span>
+                </div>
+                <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 z-20">
                   <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">
                     {destination.name}
                   </span>
                 </div>
               </div>
               
-              <div className="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 xl:p-12 flex flex-col justify-center">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-medium mb-2 md:mb-4">{destination.name}</h3>
+              <div className="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 xl:p-10 flex flex-col justify-center">
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-medium">{destination.experience}</h3>
+                  <p className="text-sm text-muted-foreground">{destination.experienceDesc}</p>
+                </div>
+                
+                <div className="my-5">
+                  <div className="h-px w-full bg-gradient-to-r from-secondary/50 to-transparent"></div>
+                </div>
+                
+                <h4 className="text-lg font-medium mb-2">Highlights of {destination.name}</h4>
                 <p className="text-sm sm:text-base text-muted-foreground mb-4 md:mb-6">{destination.description}</p>
                 
-                <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                <div className="flex flex-wrap gap-4 mb-6">
+                  {destination.stats.map((stat, idx) => (
+                    <motion.div 
+                      key={idx}
+                      className="bg-gray-50 rounded-md p-4 flex-1 min-w-[100px] hover:shadow-md transition-shadow duration-300"
+                      whileHover={{ y: -5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <h3 className="text-2xl font-medium mb-1">{stat.value}</h3>
+                      <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                   {destination.features.map((feature, i) => (
                     <div key={i} className="flex items-center">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary/10 flex items-center justify-center mr-3 flex-shrink-0">
                         {feature.icon}
                       </div>
-                      <span className="text-sm sm:text-base">{feature.text}</span>
+                      <span className="text-sm">{feature.text}</span>
                     </div>
                   ))}
                 </div>

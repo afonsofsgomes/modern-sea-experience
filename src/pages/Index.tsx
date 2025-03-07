@@ -11,7 +11,6 @@ import {
   Testimonials, 
   Newsletter 
 } from "@/components/sections";
-import { ProductShowcase } from "@/components/sections/ProductShowcase";
 import { MetaTags, LocalBusinessSchema } from "@/components/SEO";
 
 const Index = () => {
@@ -25,55 +24,6 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Product showcase items data
-  const showcaseItems = [
-    {
-      title: "SeaBus Connections",
-      description: "Fast & comfortable sea transportation with panoramic views between key destinations in Madeira.",
-      image: "https://extranet.seayou.pt/photos/Funchal.jpg",
-      linkTo: "/seabus",
-      stat1: { value: "1h", label: "Journey Time" },
-      stat2: { value: "22", label: "Passengers" },
-      stat3: { value: "Daily", label: "Departures" }
-    },
-    {
-      title: "Porto Santo Golden Island",
-      description: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service.",
-      image: "https://extranet.seayou.pt/photos/pxo.jpg",
-      linkTo: "/porto-santo",
-      stat1: { value: "9km", label: "Golden Beach" },
-      stat2: { value: "2.5h", label: "Journey Time" },
-      stat3: { value: "Daily", label: "Departures" }
-    },
-    {
-      title: "Private South Coast Cruise",
-      description: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences.",
-      image: "https://extranet.seayou.pt/photos/Calheta.jpg",
-      linkTo: "/private-cruise",
-      stat1: { value: "4h", label: "Duration" },
-      stat2: { value: "12", label: "Max Guests" },
-      stat3: { value: "Luxury", label: "Experience" }
-    },
-    {
-      title: "Private North Coast Cruise",
-      description: "Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline.",
-      image: "https://extranet.seayou.pt/photos/Canical.jpg",
-      linkTo: "/private-cruise",
-      stat1: { value: "4h", label: "Duration" },
-      stat2: { value: "12", label: "Max Guests" },
-      stat3: { value: "Unique", label: "Sights" }
-    },
-    {
-      title: "Desertas Island Adventure",
-      description: "Visit the uninhabited Desertas Islands to observe rare wildlife and pristine natural landscapes.",
-      image: "https://extranet.seayou.pt/photos/desertas.jpg",
-      linkTo: "/private-cruise",
-      stat1: { value: "6h", label: "Duration" },
-      stat2: { value: "12", label: "Max Guests" },
-      stat3: { value: "Wildlife", label: "Focus" }
-    }
-  ];
 
   return (
     <div className="relative">
@@ -96,37 +46,9 @@ const Index = () => {
       <div id="routes">
         <Routes />
       </div>
-      <Destinations />
-      
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
-              Our Experiences
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
-              Discover Madeira by Sea
-            </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              Choose from our carefully crafted sea experiences to make your visit to Madeira unforgettable
-            </p>
-          </div>
-        </div>
+      <div id="destinations">
+        <Destinations />
       </div>
-      
-      {showcaseItems.map((item, index) => (
-        <ProductShowcase
-          key={index}
-          title={item.title}
-          description={item.description}
-          image={item.image}
-          linkTo={item.linkTo}
-          stat1={item.stat1}
-          stat2={item.stat2}
-          stat3={item.stat3}
-          reversed={index % 2 !== 0}
-        />
-      ))}
       
       <div id="about">
         <Testimonials />
