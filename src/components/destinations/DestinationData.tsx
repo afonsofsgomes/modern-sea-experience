@@ -94,12 +94,13 @@ export const destinationData: DestinationType[] = [
     link: "/private-cruise",
     buttonText: "Book Private Cruise",
     stats: [
-      { value: "4h", label: "Duration" },
-      { value: "12", label: "Max Guests" },
-      { value: "Unique", label: "Sights" }
+      { value: "2.5h", label: "Duration" },
+      { value: "18", label: "Max Guests" },
+      { value: "Tailor Made", label: "Experience" }
     ],
     experience: "Private North Coast Cruise",
-    experienceDesc: "Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline."
+    experienceDesc: "Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline.",
+    destinations: [] // Added empty destinations array to satisfy DestinationType
   },
   {
     name: "Calheta",
@@ -114,12 +115,13 @@ export const destinationData: DestinationType[] = [
     link: "/private-cruise",
     buttonText: "Book Private Cruise",
     stats: [
-      { value: "4h", label: "Duration" },
-      { value: "12", label: "Max Guests" },
-      { value: "Luxury", label: "Experience" }
+      { value: "2.5h", label: "Duration" },
+      { value: "18", label: "Max Guests" },
+      { value: "Tailor Made", label: "Experience" }
     ],
     experience: "Private South Coast Cruise",
-    experienceDesc: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences."
+    experienceDesc: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences.",
+    destinations: [] // Added empty destinations array to satisfy DestinationType
   },
   {
     name: "Desertas",
@@ -134,12 +136,13 @@ export const destinationData: DestinationType[] = [
     link: "/desertas",
     buttonText: "Book Desertas Adventure",
     stats: [
-      { value: "6h", label: "Duration" },
-      { value: "12", label: "Max Guests" },
+      { value: "3.5h", label: "Duration" },
+      { value: "18", label: "Max Guests" },
       { value: "Wildlife", label: "Focus" }
     ],
     experience: "Desertas Island Adventure",
-    experienceDesc: "Visit the uninhabited Desertas Islands to observe rare wildlife and pristine natural landscapes."
+    experienceDesc: "Visit the uninhabited Desertas Islands to observe rare wildlife and pristine natural landscapes.",
+    destinations: [] // Added empty destinations array to satisfy DestinationType
   },
   {
     name: "Porto Santo",
@@ -154,11 +157,12 @@ export const destinationData: DestinationType[] = [
     link: "/porto-santo",
     buttonText: "Book Porto Santo Trip",
     stats: [
+      { value: "2h", label: "Round-Sea Trip Time" },
       { value: "9km", label: "Golden Beach" },
-      { value: "2.5h", label: "Journey Time" },
-      { value: "Daily", label: "Departures" }
+      { value: "Wed-Fri", label: "Departures" }
     ],
     experience: "Porto Santo Golden Island",
-    experienceDesc: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service."
+    experienceDesc: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service.",
+    destinations: [] // Added empty destinations array to satisfy DestinationType
   }
 ];

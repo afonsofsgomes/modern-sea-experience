@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star, ExternalLink, Anchor, Shield, Award } from "lucide-react";
+import { Star, ExternalLink, Shield, Coffee, Award } from "lucide-react";
 
 // Animation variants
 const containerVariants = {
@@ -27,28 +27,28 @@ const itemVariants = {
 // TripAdvisor real reviews
 const reviews = [
   {
-    name: "Craig H",
-    country: "United Kingdom",
+    name: "Ana",
+    country: "Portugal",
     rating: 5,
-    text: "Great evening out whale watching, sunset tour. Antonio was brilliant, informative and very welcoming. Saw a pod of dolphins as well as being treated to a wonderful sunset. Great friendly service with cold beer, and a well managed boat. Highly recommended!",
+    text: "An excellent way to start the day and explore a bit of Madeira's stunning coastline. The staff is very friendly and welcoming, always making sure you have a great experience.",
     date: "September 2023",
-    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80"
+    link: "https://www.tripadvisor.com/ShowUserReviews-g1178726-d28508392-r992739462-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html"
   },
   {
-    name: "Lorraine P",
-    country: "United Kingdom",
+    name: "Anne T",
+    country: "UK",
     rating: 5,
-    text: "Amazing! We were in Calheta and wanted to see dolphins and whales. Antonio was so helpful when booking - he advised us when the best time would be. The trip was brilliant - we saw hundreds of dolphins and a mother whale with her baby. Antonio and his colleague Manuel were so enthusiastic about the sealife, Antonio gave a great commentary. The boat was really comfortable. Highly recommended!",
+    text: "A day to remember. We went from Canical to Calheta on the new Seabus. It was absolutely wonderful, we loved every minute.",
     date: "July 2023",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80"
+    link: "https://www.tripadvisor.com/ShowUserReviews-g1178726-d28508392-r992438674-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html"
   },
   {
-    name: "Martin H",
-    country: "United Kingdom",
+    name: "Lauren",
+    country: "UK",
     rating: 5,
-    text: "Antonio and his shipmate spotted pilot whales and dolphins on our sunset cruise. Antonio makes a really good host and guide for these trips, I'd recommend SeaYou. We saw the whales, plus two different types of dolphins (including with a calf). Best of all, they're quite conservation minded and keep a good distance from the mammals without chasing them - more ethical.",
+    text: "What an amazing experience! Highly recommended. We literally got the best of both worlds we had a super chilled glide out to enjoy the sunset and even stopped for a swim.",
     date: "August 2023",
-    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80"
+    link: "https://www.tripadvisor.com/ShowUserReviews-g1178726-d28508392-r977114675-SeaYou_Madeira-Calheta_Madeira_Madeira_Islands.html"
   }
 ];
 
@@ -59,17 +59,17 @@ const companyValues = [
   {
     icon: <Shield className="w-10 h-10 text-primary" />,
     title: "Safety First",
-    description: "Your safety is our top priority. All our boats are equipped with modern safety equipment and our crew is trained in first aid and emergency procedures."
+    description: "Our boat is equipped with modern safety equipment and our crew is trained in first aid and emergency procedures."
   },
   {
-    icon: <Anchor className="w-10 h-10 text-primary" />,
-    title: "Marine Conservation",
-    description: "We're committed to responsible wildlife viewing. Our tours maintain safe distances from marine life and our crew are trained in conservation practices."
+    icon: <Coffee className="w-10 h-10 text-primary" />,
+    title: "Hospitality",
+    description: "Your comfort is our priority. We go the extra mile to ensure you experience Madeira in the most enjoyable and comfortable way. Relax and explore with ease, knowing every detail is taken care of!"
   },
   {
     icon: <Award className="w-10 h-10 text-primary" />,
     title: "Local Expertise",
-    description: "Our team consists of local captains and marine biologists who have extensive knowledge of Madeira's waters and marine ecosystems."
+    description: "Our team consists of local captains and sailors who have extensive knowledge of Madeira's waters and places of interest on land. Just ask us."
   }
 ];
 
@@ -120,7 +120,7 @@ export const Testimonials = () => {
             />
           </motion.div>
           <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
-            Latest Reviews from TripAdvisor
+            Reviews from TripAdvisor
           </motion.span>
           <motion.div variants={itemVariants} className="flex items-center justify-center space-x-2 mb-4">
             <div className="flex text-primary">
@@ -167,13 +167,6 @@ export const Testimonials = () => {
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                    <img 
-                      src={review.image} 
-                      alt={review.name} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
                   <div>
                     <h4 className="font-medium">{review.name}</h4>
                     <p className="text-sm text-muted-foreground">{review.country}</p>
@@ -183,7 +176,7 @@ export const Testimonials = () => {
               </div>
               <div className="mt-4 pt-4 border-t border-gray-200">
                 <a 
-                  href={tripAdvisorUrl}
+                  href={review.link}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-primary hover:underline inline-flex items-center"

@@ -43,15 +43,15 @@ export const PortoSantoTours = () => {
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <h3 className="text-3xl font-medium mb-2">2.5h</h3>
-                <p className="text-muted-foreground">Journey Time</p>
+                <h3 className="text-3xl font-medium mb-2">2h</h3>
+                <p className="text-muted-foreground">Round-Sea Trip Time</p>
               </motion.div>
               <motion.div 
                 className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <h3 className="text-3xl font-medium mb-2">Daily</h3>
+                <h3 className="text-3xl font-medium mb-2">Wed-Fri</h3>
                 <p className="text-muted-foreground">Departures</p>
               </motion.div>
             </div>
