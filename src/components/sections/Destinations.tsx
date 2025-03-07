@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag } from "lucide-react";
@@ -192,7 +191,7 @@ export const Destinations = () => {
             >
               {destination.multipleDestinations ? (
                 <div className="flex flex-col">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+                  <div className="hidden md:grid md:grid-cols-3 gap-0">
                     {destination.destinations.map((dest, idx) => (
                       <div key={dest.name} className="relative aspect-video">
                         <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10"></div>
@@ -209,6 +208,45 @@ export const Destinations = () => {
                           <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">
                             {dest.name}
                           </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="md:hidden">
+                    {destination.destinations.map((dest, idx) => (
+                      <div key={dest.name} className="mb-6">
+                        <div className="relative aspect-video mb-4">
+                          <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10"></div>
+                          <img 
+                            src={dest.image} 
+                            alt={dest.name}
+                            className="absolute inset-0 w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80';
+                            }}
+                          />
+                          <div className="absolute bottom-4 left-4 z-20">
+                            <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white text-xs font-medium shadow-lg border border-white/20">
+                              {dest.name}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h4 className="text-lg font-medium mb-3">Highlights of {dest.name}</h4>
+                          <p className="text-sm text-muted-foreground mb-4">{dest.description}</p>
+                          <div className="grid grid-cols-2 gap-3">
+                            {dest.features.map((feature, i) => (
+                              <div key={i} className="flex items-center">
+                                <div className="w-7 h-7 rounded-full bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0">
+                                  {feature.icon}
+                                </div>
+                                <span className="text-xs">{feature.text}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -237,7 +275,7 @@ export const Destinations = () => {
                         ))}
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                      <div className="hidden md:grid md:grid-cols-3 gap-6 mb-8">
                         {destination.destinations.map((dest) => (
                           <div key={dest.name} className="bg-gray-50 p-4 rounded-lg">
                             <h4 className="text-lg font-medium mb-3">Highlights of {dest.name}</h4>
