@@ -65,7 +65,7 @@ export const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Buttons - Fixed overflowing issue on mobile */}
+        {/* Buttons - Improved contrast with shadow and stronger background colors */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
@@ -74,16 +74,16 @@ export const Hero = () => {
         >
           <div className="grid grid-cols-2 xs:grid-cols-4 gap-2 w-full">
             <Link to="/seabus" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">SeaBus</Button>
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">SeaBus</Button>
             </Link>
             <Link to="/porto-santo" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Porto Santo</Button>
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">Porto Santo</Button>
             </Link>
             <Link to="/private-cruise" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Private</Button>
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">Private</Button>
             </Link>
             <Link to="/desertas" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Desertas</Button>
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">Desertas</Button>
             </Link>
           </div>
         </motion.div>
