@@ -82,6 +82,9 @@ export const Hero = () => {
             <Link to="/private-cruise" className="flex-1">
               <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Private Cruises</Button>
             </Link>
+            <Link to="/desertas" className="flex-1">
+              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Desertas</Button>
+            </Link>
           </div>
         </motion.div>
       </div>

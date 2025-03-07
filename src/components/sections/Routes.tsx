@@ -91,7 +91,7 @@ export const Routes = () => {
           <motion.div initial="hidden" animate={routesInView ? "visible" : "hidden"} variants={containerVariants} className="grid grid-cols-2 gap-4 h-full">
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
               <GaugeCircle className="w-10 h-10 text-secondary mb-3" />
-              <h3 className="font-medium mb-1">Twin 420 HP</h3>
+              <h3 className="font-medium mb-1">Twin 400 HP</h3>
               <p className="text-sm text-muted-foreground">Powerful engines</p>
             </motion.div>
 
@@ -103,13 +103,13 @@ export const Routes = () => {
 
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
               <Waves className="w-10 h-10 text-secondary mb-3" />
-              <h3 className="font-medium mb-1">3.8m Beam</h3>
+              <h3 className="font-medium mb-1">4.3m Beam</h3>
               <p className="text-sm text-muted-foreground">Stable platform</p>
             </motion.div>
             
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
               <Shield className="w-10 h-10 text-secondary mb-3" />
-              <h3 className="font-medium mb-1">Category B</h3>
+              <h3 className="font-medium mb-1">Type 4 - MT</h3>
               <p className="text-sm text-muted-foreground">Safety certified</p>
             </motion.div>
 
