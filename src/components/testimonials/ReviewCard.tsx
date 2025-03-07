@@ -36,7 +36,6 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
             <p className="text-sm text-muted-foreground">{review.country}</p>
           </div>
         </div>
-        <span className="text-xs text-gray-400">{review.date}</span>
       </div>
       <div className="mt-4 pt-4 border-t border-gray-200">
         <a 
