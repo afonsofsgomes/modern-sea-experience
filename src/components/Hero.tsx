@@ -32,58 +32,58 @@ export const Hero = () => {
           Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo.
         </motion.p>
 
-        {/* Icon Row - Fixed alignment issues */}
+        {/* Icon Row - Fixed for mobile: tighter spacing and better alignment */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.2 }} 
-          className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-8 mb-8 w-full max-w-lg mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-8 w-full max-w-lg mx-auto px-2"
         >
-          <div className="flex flex-col items-center justify-center h-24">
-            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
-              <Ship className="h-6 w-6" />
+          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
+            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
+              <Ship className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <span className="text-xs sm:text-sm text-center">Secure<br />Bookings</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-24">
-            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
-              <Clock className="h-6 w-6" />
+          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
+            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
+              <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <span className="text-xs sm:text-sm text-center">24/7<br />Support</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-24">
-            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
-              <MapPin className="h-6 w-6" />
+          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
+            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
+              <MapPin className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <span className="text-xs sm:text-sm text-center">Trusted by<br />TripAdvisor</span>
           </div>
-          <div className="flex flex-col items-center justify-center h-24">
-            <div className="bg-white/20 p-3 rounded-full mb-2 flex items-center justify-center w-12 h-12">
-              <Wifi className="h-6 w-6" />
+          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
+            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
+              <Wifi className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <span className="text-xs sm:text-sm text-center">Flexible<br />Cancellations</span>
           </div>
         </motion.div>
 
-        {/* Buttons */}
+        {/* Buttons - Fixed overflowing issue on mobile */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.3 }} 
           className="flex flex-wrap justify-center gap-3 w-full max-w-lg px-2"
         >
-          <div className="flex flex-row justify-center gap-2 w-full">
-            <Link to="/seabus" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">SeaBus</Button>
+          <div className="grid grid-cols-2 xs:grid-cols-4 gap-2 w-full">
+            <Link to="/seabus" className="col-span-1">
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">SeaBus</Button>
             </Link>
-            <Link to="/porto-santo" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Porto Santo</Button>
+            <Link to="/porto-santo" className="col-span-1">
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Porto Santo</Button>
             </Link>
-            <Link to="/private-cruise" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Private Cruises</Button>
+            <Link to="/private-cruise" className="col-span-1">
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Private</Button>
             </Link>
-            <Link to="/desertas" className="flex-1">
-              <Button size="lg" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Desertas</Button>
+            <Link to="/desertas" className="col-span-1">
+              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap">Desertas</Button>
             </Link>
           </div>
         </motion.div>
