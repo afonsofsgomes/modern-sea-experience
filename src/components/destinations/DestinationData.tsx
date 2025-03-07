@@ -29,7 +29,7 @@ export type DestinationType = {
   experience: string;
   experienceDesc: string;
   multipleDestinations?: boolean;
-  destinations?: SubDestinationType[];
+  destinations: SubDestinationType[]; // Changed from optional to required to match MultiDestinationCardProps
 };
 
 export const destinationData: DestinationType[] = [
