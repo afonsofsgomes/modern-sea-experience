@@ -18,10 +18,11 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   
-  // Section links within the home page
+  // Section links within the home page - updated to match homepage sections
   const sectionLinks = [
     { label: "Home", sectionId: "home" },
     { label: "Routes", sectionId: "routes" },
+    { label: "Destinations", sectionId: "destinations" },
     { label: "About", sectionId: "about" },
     { label: "Contact", sectionId: "contact" }
   ];
