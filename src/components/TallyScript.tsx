@@ -56,7 +56,9 @@ export const TallyScript = () => {
     return () => {
       // We don't remove the script as it might be needed by other components
       // But we can remove our custom style
-      document.head.removeChild(styleTag);
+      if (document.head.contains(styleTag)) {
+        document.head.removeChild(styleTag);
+      }
     };
   }, []);
 
@@ -64,4 +66,3 @@ export const TallyScript = () => {
 };
 
 export default TallyScript;
-

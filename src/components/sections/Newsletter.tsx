@@ -2,15 +2,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 
 export const Newsletter = () => {
-  // Keep contact information side
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeHeight, setIframeHeight] = useState(276);
 
@@ -34,20 +27,6 @@ export const Newsletter = () => {
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success("Message sent successfully!");
-      setName("");
-      setEmail("");
-      setMessage("");
-      setIsSubmitting(false);
-    }, 1000);
-  };
   
   return (
     <section id="contact" className="py-20 bg-[#253D7F] text-white">
@@ -170,4 +149,3 @@ export const Newsletter = () => {
     </section>
   );
 };
-
