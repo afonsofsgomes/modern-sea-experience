@@ -1,5 +1,6 @@
 
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+// Import from a more recent version of Deno standard library
+import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
 import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const corsHeaders = {
