@@ -1,11 +1,13 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export const Newsletter = () => {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeHeight, setIframeHeight] = useState(276);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Function to handle iframe resize messages from Tally
   useEffect(() => {
@@ -16,6 +18,7 @@ export const Newsletter = () => {
       try {
         const data = JSON.parse(event.data);
         if (data.type === "tally-resize") {
+          console.log("Received tally-resize event with height:", data.height);
           setIframeHeight(data.height);
           setIframeLoaded(true);
         }
@@ -36,8 +39,27 @@ export const Newsletter = () => {
       });
     }, 1000);
     
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
+    // Force show form after a timeout (fallback if resize event never fires)
+    loadingTimerRef.current = setTimeout(() => {
+      if (!iframeLoaded) {
+        console.log("Forcing iframe to show after timeout");
+        setIframeLoaded(true);
+      }
+    }, 5000);
+    
+    return () => {
+      window.removeEventListener("message", handleMessage);
+      if (loadingTimerRef.current) {
+        clearTimeout(loadingTimerRef.current);
+      }
+    };
+  }, [iframeLoaded]);
+  
+  // Handle iframe load event
+  const handleIframeLoad = () => {
+    console.log("Iframe onload event fired");
+    setIframeLoaded(true);
+  };
   
   return (
     <section id="contact" className="py-20 bg-[#253D7F] text-white">
@@ -121,7 +143,8 @@ export const Newsletter = () => {
                 {/* Tally form iframe with improved visibility */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-md overflow-hidden">
                   <iframe 
-                    src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    ref={iframeRef}
+                    src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                     data-tally-src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                     loading="lazy" 
                     width="100%" 
@@ -135,6 +158,7 @@ export const Newsletter = () => {
                       opacity: iframeLoaded ? 1 : 0.6,
                       minHeight: "276px" 
                     }}
+                    onLoad={handleIframeLoad}
                   ></iframe>
                 </div>
               </div>
