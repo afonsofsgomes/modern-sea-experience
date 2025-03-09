@@ -144,6 +144,18 @@ export const Newsletter = () => {
           font-family: inherit;
           color-scheme: light;
         }
+        
+        /* Make iframe content background white for better readability */
+        iframe[src*="tally.so"] {
+          background-color: #FFFFFF !important;
+        }
+        
+        /* Target Tally form fields to ensure white background and readable text */
+        /* These will apply if the iframe content allows style inheritance */
+        :root {
+          --tally-form-background: #FFFFFF !important;
+          --tally-input-background: #FFFFFF !important;
+        }
       `}</style>
     </section>
   );
