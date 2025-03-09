@@ -33,7 +33,7 @@ serve(async (req) => {
       );
     }
 
-    // Create SMTP client with the correct class name
+    // Create SMTP client
     const client = new SmtpClient({
       connection: {
         hostname: Deno.env.get("SMTP_HOST") || "",
