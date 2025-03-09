@@ -36,7 +36,7 @@ serve(async (req) => {
 
     // Get environment variables for SMTP configuration
     const host = Deno.env.get("SMTP_HOST") || "";
-    const port = parseInt(Deno.env.get("SMTP_PORT") || "587"); // Try a standard port like 587 instead
+    const port = 465; // Force 465 for SSL as confirmed by user
     const username = Deno.env.get("SMTP_USERNAME") || "";
     const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
@@ -56,49 +56,21 @@ serve(async (req) => {
     if (!username || !password) {
       throw new Error("SMTP credentials are not configured");
     }
-
-    // Try to resolve the SMTP host to check if it's reachable
-    try {
-      console.log(`Attempting to resolve DNS for ${host}...`);
-      // This is a simple way to check if the host is resolvable
-      const testConn = await Deno.connect({ hostname: host, port: 80 });
-      testConn.close();
-      console.log(`Successfully resolved ${host}`);
-    } catch (dnsError) {
-      console.error(`DNS resolution error for ${host}:`, dnsError);
-      throw new Error(`Cannot resolve SMTP host: ${host}. Error: ${dnsError.message}`);
-    }
-
-    // Initialize SMTP client
+    
+    // Initialize SMTP client - using a different approach to connect
     const client = new SmtpClient();
     
-    // Connect to SMTP server with detailed error reporting
     try {
-      console.log(`Attempting to connect to SMTP server at ${host}:${port}`);
+      console.log(`Connecting to SMTP server at ${host}:${port} with SSL`);
       
-      if (port === 465) {
-        console.log("Using TLS with secure:true for port 465");
-        await client.connectTLS({
-          hostname: host,
-          port: port,
-          username: username,
-          password: password,
-          secure: true, // Implicit SSL for port 465
-        });
-      } else if (port === 587) {
-        console.log("Using StartTLS for port 587");
-        await client.connect({ hostname: host, port });
-        await client.startTLS({ hostname: host });
-        await client.authenticate({ username, password });
-      } else {
-        console.log(`Using standard TLS connection for port ${port}`);
-        await client.connectTLS({
-          hostname: host,
-          port: port,
-          username: username,
-          password: password,
-        });
-      }
+      // For SSL on port 465, just use the simple connect method
+      await client.connectTLS({
+        hostname: host,
+        port: port,
+        username: username,
+        password: password,
+        // No secure flag - avoiding the issue with Deno.writeAll
+      });
       
       console.log("SMTP connection established successfully");
     } catch (connError) {
