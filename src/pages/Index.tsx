@@ -12,6 +12,7 @@ import {
   Newsletter 
 } from "@/components/sections";
 import { MetaTags, LocalBusinessSchema } from "@/components/SEO";
+import TallyScript from "@/components/TallyScript";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -33,6 +34,7 @@ const Index = () => {
         keywords="Madeira sea transportation, maritime tourism Madeira, SeaBus Madeira, private cruises Madeira, Porto Santo ferry, boat tours Madeira"
       />
       <LocalBusinessSchema />
+      <TallyScript />
       
       <motion.div 
         className="fixed top-0 left-0 right-0 h-[3px] bg-primary z-[100]"

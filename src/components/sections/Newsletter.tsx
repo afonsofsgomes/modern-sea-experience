@@ -1,15 +1,38 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 export const Newsletter = () => {
+  // Keep contact information side
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeHeight, setIframeHeight] = useState(276);
+
+  // Function to handle iframe resize messages from Tally
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Only accept messages from Tally domain
+      if (event.origin !== "https://tally.so") return;
+      
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === "tally-resize") {
+          setIframeHeight(data.height);
+          setIframeLoaded(true);
+        }
+      } catch (e) {
+        // Silent fail if not a valid JSON message
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,53 +119,33 @@ export const Newsletter = () => {
             >
               <h3 className="text-xl font-medium mb-6">Send us a Message</h3>
               
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
-                  <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-white"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
+              <div className="tally-form-container relative">
+                {/* Loading overlay that disappears when the iframe loads */}
+                {!iframeLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/5 backdrop-blur-sm rounded-md z-10">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                  </div>
+                )}
                 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-white"
-                    placeholder="Your email"
-                    required
-                  />
+                {/* Tally form iframe with improved visibility */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-md overflow-hidden">
+                  <iframe 
+                    data-tally-src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+                    loading="lazy" 
+                    width="100%" 
+                    height={iframeHeight}
+                    frameBorder="0" 
+                    marginHeight={0} 
+                    marginWidth={0} 
+                    title="Contact form"
+                    className="transition-opacity duration-300"
+                    style={{ 
+                      opacity: iframeLoaded ? 1 : 0.6,
+                      minHeight: "276px" 
+                    }}
+                  ></iframe>
                 </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
-                  <textarea
-                    id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 text-white h-32"
-                    placeholder="How can we help you?"
-                    required
-                  ></textarea>
-                </div>
-                
-                <Button
-                  type="submit"
-                  className="w-full bg-white text-blue-800 hover:bg-white/90"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
+              </div>
               
               <p className="text-xs text-white/60 mt-4">
                 Your information will be processed according to our privacy policy.
@@ -151,6 +154,16 @@ export const Newsletter = () => {
           </div>
         </motion.div>
       </div>
+      
+      {/* Custom styles for the Tally form to ensure placeholder visibility */}
+      <style jsx>{`
+        /* These styles help improve the form elements inside the iframe */
+        :global(.tally-form-container) {
+          /* Override any conflicting styles */
+          font-family: inherit;
+          color-scheme: light;
+        }
+      `}</style>
     </section>
   );
 };
