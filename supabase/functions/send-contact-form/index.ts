@@ -1,8 +1,8 @@
 
-// Use a stable Deno standard library version that's known to work
+// Using a stable version of Deno's standard library
 import { serve } from "https://deno.land/std@0.167.0/http/server.ts";
-// Use the correct SMTP client package with a stable version
-import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
+// Using nodemailer instead of the problematic SMTP client
+import * as nodemailer from "https://deno.land/x/nodemailer@v0.8.2/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -35,34 +35,34 @@ serve(async (req) => {
       );
     }
 
-    // Get the from email from environment variable
+    // Get environment variables for SMTP configuration
+    const host = Deno.env.get("SMTP_HOST") || "";
+    const port = parseInt(Deno.env.get("SMTP_PORT") || "587");
+    const username = Deno.env.get("SMTP_USERNAME") || "";
+    const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
     
     console.log("SMTP Configuration:");
-    console.log(`Host: ${Deno.env.get("SMTP_HOST")}`);
-    console.log(`Port: ${Deno.env.get("SMTP_PORT")}`);
-    console.log(`Username: ${Deno.env.get("SMTP_USERNAME")}`);
+    console.log(`Host: ${host}`);
+    console.log(`Port: ${port}`);
+    console.log(`Username: ${username}`);
     console.log(`From Email: ${fromEmail}`);
 
-    // Create SMTP client with correct configuration
-    const client = new SmtpClient();
+    // Create nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: host,
+      port: port,
+      secure: port === 465, // true for 465, false for other ports
+      auth: {
+        user: username,
+        pass: password,
+      },
+    });
 
-    try {
-      await client.connectTLS({
-        hostname: Deno.env.get("SMTP_HOST") || "",
-        port: parseInt(Deno.env.get("SMTP_PORT") || "587"),
-        username: Deno.env.get("SMTP_USERNAME") || "",
-        password: Deno.env.get("SMTP_PASSWORD") || "",
-      });
-      
-      console.log("SMTP connection successful");
-    } catch (connError) {
-      console.error("SMTP connection error:", connError);
-      throw new Error(`Failed to connect to SMTP server: ${connError.message}`);
-    }
+    console.log("Transporter created successfully");
 
-    // Format email content with HTML
-    const htmlContent = `
+    // Format HTML content for support email
+    const supportHtmlContent = `
       <h2>New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
@@ -70,63 +70,52 @@ serve(async (req) => {
       <p><strong>Subscribe to newsletter:</strong> ${newsletter ? 'Yes' : 'No'}</p>
     `;
 
-    // Format email content as plain text
-    const textContent = `
-      New Contact Form Submission
-      
-      Name: ${name}
-      Email: ${email}
-      Message: ${message}
-      Subscribe to newsletter: ${newsletter ? 'Yes' : 'No'}
-    `;
-
-    console.log(`Sending contact form submission to support@seayou.pt from ${fromEmail}`);
-    
+    // Send email to support
     try {
-      // Send email to support
-      await client.send({
+      console.log(`Sending contact form submission to support@seayou.pt from ${fromEmail}`);
+      
+      const supportMailOptions = {
         from: fromEmail,
         to: "support@seayou.pt",
         subject: `Contact Form Submission from ${name}`,
-        content: "text/html",
-        html: htmlContent,
-      });
+        html: supportHtmlContent,
+      };
       
+      await transporter.sendMail(supportMailOptions);
       console.log("Support email sent successfully");
     } catch (sendError) {
       console.error("Error sending email to support:", sendError);
       throw new Error(`Failed to send email to support: ${sendError.message}`);
     }
 
-    console.log(`Sending confirmation email to user ${email} from ${fromEmail}`);
+    // Format HTML content for confirmation email
+    const confirmationHtmlContent = `
+      <h2>Thank you for contacting us, ${name}!</h2>
+      <p>We have received your message and will get back to you as soon as possible.</p>
+      <p>If you have an urgent matter, please call us at +351 291 123 456.</p>
+      <p>
+        Best regards,<br>
+        The SeaYou Madeira Team
+      </p>
+    `;
 
+    // Send confirmation email to user
     try {
-      // Send confirmation email to the user
-      await client.send({
+      console.log(`Sending confirmation email to user ${email} from ${fromEmail}`);
+      
+      const userMailOptions = {
         from: fromEmail,
         to: email,
         subject: "Thank you for contacting SeaYou Madeira",
-        content: "text/html",
-        html: `
-          <h2>Thank you for contacting us, ${name}!</h2>
-          <p>We have received your message and will get back to you as soon as possible.</p>
-          <p>If you have an urgent matter, please call us at +351 291 123 456.</p>
-          <p>
-            Best regards,<br>
-            The SeaYou Madeira Team
-          </p>
-        `,
-      });
+        html: confirmationHtmlContent,
+      };
       
+      await transporter.sendMail(userMailOptions);
       console.log("Confirmation email to user sent successfully");
     } catch (sendError) {
       console.error("Error sending confirmation email to user:", sendError);
       throw new Error(`Failed to send confirmation email: ${sendError.message}`);
     }
-
-    // Close the connection
-    await client.close();
-    console.log("SMTP connection closed");
 
     return new Response(
       JSON.stringify({ 
