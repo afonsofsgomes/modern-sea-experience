@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -156,14 +157,17 @@ export const Newsletter = () => {
       </div>
       
       {/* Custom styles for the Tally form to ensure placeholder visibility */}
-      <style jsx>{`
-        /* These styles help improve the form elements inside the iframe */
-        :global(.tally-form-container) {
-          /* Override any conflicting styles */
-          font-family: inherit;
-          color-scheme: light;
-        }
-      `}</style>
+      <style>
+        {`
+          /* These styles help improve the form elements inside the iframe */
+          .tally-form-container {
+            /* Override any conflicting styles */
+            font-family: inherit;
+            color-scheme: light;
+          }
+        `}
+      </style>
     </section>
   );
 };
+
