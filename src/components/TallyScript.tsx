@@ -10,12 +10,18 @@ export const TallyScript = () => {
       const v = function() {
         if (typeof (window as any).Tally !== 'undefined') {
           (window as any).Tally.loadEmbeds();
+          
+          // Add observer to hide Tally branding after the iframe loads
+          setTimeout(hideTallyBranding, 1000);
         } else {
           d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e: HTMLElement) {
             if (e instanceof HTMLIFrameElement && e.dataset.tallySrc) {
               e.src = e.dataset.tallySrc;
             }
           });
+          
+          // Add observer to hide Tally branding after the iframe loads
+          setTimeout(hideTallyBranding, 1000);
         }
       };
       
@@ -30,6 +36,34 @@ export const TallyScript = () => {
       }
     };
     
+    const hideTallyBranding = () => {
+      // Add CSS to hide Tally branding elements
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Hide Tally branding */
+        iframe[data-tally-src] + div[class*="Symbol"],
+        iframe[data-tally-src] + div,
+        .tally-symbol-button,
+        [class*="Symbol"],
+        [class*="tally"] [class*="Symbol"],
+        [class*="tally-"] {
+          display: none !important;
+          opacity: 0 !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Try to find and remove Tally branding elements
+      const tallyElements = document.querySelectorAll('[class*="Symbol"], [class*="tally-"], .tally-symbol-button');
+      tallyElements.forEach(el => {
+        if (el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
+      });
+    };
+    
     loadTally();
     
     // Add event listener for route changes to reload embeds when navigating
@@ -37,11 +71,15 @@ export const TallyScript = () => {
       if (typeof (window as any).Tally !== 'undefined') {
         setTimeout(() => {
           (window as any).Tally.loadEmbeds();
+          hideTallyBranding();
         }, 100);
       }
     };
     
     window.addEventListener('popstate', handleRouteChange);
+    
+    // Initial hide attempt
+    setTimeout(hideTallyBranding, 1000);
     
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
