@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
@@ -27,7 +28,7 @@ export const SeaBusHero = () => {
         y: 0
       }} transition={{
         duration: 0.5
-      }} className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4">
+      }} className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4 landscape:mt-12">
           SEA BUS
         </motion.h1>
         <motion.p initial={{
