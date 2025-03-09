@@ -46,12 +46,11 @@ serve(async (req) => {
     const client = new SmtpClient();
 
     try {
-      await client.connect({
+      await client.connectTLS({
         hostname: Deno.env.get("SMTP_HOST") || "",
         port: parseInt(Deno.env.get("SMTP_PORT") || "587"),
         username: Deno.env.get("SMTP_USERNAME") || "",
         password: Deno.env.get("SMTP_PASSWORD") || "",
-        tls: true,
       });
       
       console.log("SMTP connection successful");
