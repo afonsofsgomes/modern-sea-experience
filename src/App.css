@@ -82,11 +82,11 @@ body.menu-open {
 /* Fix landscape mode overlap between header and hero content */
 @media (orientation: landscape) and (max-height: 500px) {
   section.relative {
-    padding-top: 80px !important; /* Add more space at the top for the fixed header */
+    padding-top: 100px !important; /* Increased space at the top for the fixed header */
   }
   
   section.relative h1 {
-    margin-top: 20px; /* Additional margin for headings */
+    margin-top: 30px !important; /* Additional margin for headings */
   }
   
   /* Adjust hero heights in landscape mode */
@@ -97,15 +97,19 @@ body.menu-open {
   section.relative.h-\[85vh\],
   section.relative.h-\[90vh\] {
     height: auto !important;
-    min-height: 480px !important;
-    padding-bottom: 30px !important;
+    min-height: 520px !important; /* Increased height */
+    padding-bottom: 40px !important; /* More padding at bottom */
   }
 }
 
 /* Ensure hero sections have proper padding in landscape mode */
 @media (orientation: landscape) {
   .pt-16, .pt-20, .pt-24, .pt-28 {
-    padding-top: 6rem !important;
+    padding-top: 7rem !important; /* Increased top padding */
+  }
+  
+  .landscape\:mt-24 {
+    margin-top: 6rem !important; /* Ensure this is adequately applied */
   }
 }
 

@@ -18,7 +18,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5 }} 
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight pt-16 sm:pt-0 whitespace-normal sm:whitespace-nowrap landscape:mt-12"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight pt-16 sm:pt-0 whitespace-normal sm:whitespace-nowrap landscape:mt-24"
         >
           Exclusive Sea Tours in Madeira
         </motion.h1>
