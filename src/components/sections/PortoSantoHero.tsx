@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Wifi, Calendar } from "lucide-react";
@@ -21,7 +22,7 @@ export const PortoSantoHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4"
+          className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4 landscape:mt-12"
         >
           PORTO SANTO
         </motion.h1>
@@ -42,36 +43,36 @@ export const PortoSantoHero = () => {
           Discover the Golden Island
         </motion.p>
         
-        {/* Icon Row */}
+        {/* Icon Row with consistent sizing and alignment */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-4 md:gap-8 mb-6 md:mb-8"
         >
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Clock className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Clock className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">1h</span>
+            <span className="text-xs md:text-sm text-center">1h</span>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Users className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Users className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">up to 12 PAX</span>
+            <span className="text-xs md:text-sm text-center">up to 12 PAX</span>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Calendar className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Calendar className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">9:30h</span>
+            <span className="text-xs md:text-sm text-center">9:30h</span>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2">
-              <Wifi className="h-4 w-4 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+              <Wifi className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm">FREE WiFi</span>
+            <span className="text-xs md:text-sm text-center">FREE WiFi</span>
           </div>
         </motion.div>
         
