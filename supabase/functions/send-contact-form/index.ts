@@ -36,11 +36,23 @@ serve(async (req) => {
     }
 
     // Get environment variables for SMTP configuration
-    const host = Deno.env.get("SMTP_HOST") || "";
+    let host = Deno.env.get("SMTP_HOST") || "";
     const port = parseInt(Deno.env.get("SMTP_PORT") || "587");
     const username = Deno.env.get("SMTP_USERNAME") || "";
     const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
+    
+    // Remove http:// or https:// from host if present
+    if (host.startsWith("http://")) {
+      host = host.substring(7);
+    } else if (host.startsWith("https://")) {
+      host = host.substring(8);
+    }
+    
+    // Remove trailing slash if present
+    if (host.endsWith("/")) {
+      host = host.substring(0, host.length - 1);
+    }
     
     console.log("SMTP Configuration:");
     console.log(`Host: ${host}`);
