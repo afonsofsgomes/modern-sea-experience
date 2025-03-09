@@ -1,7 +1,7 @@
 
 // Using a stable version of Deno's standard library
 import { serve } from "https://deno.land/std@0.167.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@2.0.0";
+import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -34,20 +34,39 @@ serve(async (req) => {
       );
     }
 
-    // Get environment variable for Resend API key
-    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    // Get environment variables for SMTP configuration
+    const host = Deno.env.get("SMTP_HOST") || "";
+    const port = parseInt(Deno.env.get("SMTP_PORT") || "587");
+    const username = Deno.env.get("SMTP_USERNAME") || "";
+    const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
     
-    if (!resendApiKey) {
-      throw new Error("Resend API key is not configured");
-    }
-
-    console.log("Email Configuration:");
+    console.log("SMTP Configuration:");
+    console.log(`Host: ${host}`);
+    console.log(`Port: ${port}`);
+    console.log(`Username: ${username}`);
     console.log(`From Email: ${fromEmail}`);
 
-    // Initialize Resend client
-    const resend = new Resend(resendApiKey);
-    console.log("Resend client initialized successfully");
+    if (!host) {
+      throw new Error("SMTP host is not configured");
+    }
+
+    // Initialize SMTP client
+    const client = new SmtpClient();
+    
+    try {
+      await client.connectTLS({
+        hostname: host,
+        port: port,
+        username: username,
+        password: password,
+      });
+      
+      console.log("SMTP connection established successfully");
+    } catch (connError) {
+      console.error("Error connecting to SMTP server:", connError);
+      throw new Error(`Failed to connect to SMTP server: ${connError.message}`);
+    }
 
     // Format HTML content for support email
     const supportHtmlContent = `
@@ -62,14 +81,15 @@ serve(async (req) => {
     try {
       console.log(`Sending contact form submission to support@seayou.pt from ${fromEmail}`);
       
-      const supportEmailResponse = await resend.emails.send({
+      await client.send({
         from: fromEmail,
         to: "support@seayou.pt",
         subject: `Contact Form Submission from ${name}`,
+        content: supportHtmlContent,
         html: supportHtmlContent,
       });
       
-      console.log("Support email sent successfully:", supportEmailResponse);
+      console.log("Support email sent successfully");
     } catch (sendError) {
       console.error("Error sending email to support:", sendError);
       throw new Error(`Failed to send email to support: ${sendError.message}`);
@@ -90,18 +110,22 @@ serve(async (req) => {
     try {
       console.log(`Sending confirmation email to user ${email} from ${fromEmail}`);
       
-      const userEmailResponse = await resend.emails.send({
+      await client.send({
         from: fromEmail,
         to: email,
         subject: "Thank you for contacting SeaYou Madeira",
+        content: confirmationHtmlContent,
         html: confirmationHtmlContent,
       });
       
-      console.log("Confirmation email to user sent successfully:", userEmailResponse);
+      console.log("Confirmation email to user sent successfully");
     } catch (sendError) {
       console.error("Error sending confirmation email to user:", sendError);
       throw new Error(`Failed to send confirmation email: ${sendError.message}`);
     }
+
+    // Close the SMTP connection
+    await client.close();
 
     return new Response(
       JSON.stringify({ 
