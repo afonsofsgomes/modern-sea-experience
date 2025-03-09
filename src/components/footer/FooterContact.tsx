@@ -18,10 +18,10 @@ export const FooterContact: React.FC = () => {
         </li>
         <li>
           <a
-            href="mailto:info@seayou.pt"
+            href="mailto:support@seayou.pt"
             className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
           >
-            <Mail className="h-4 w-4 mr-2" /> info@seayou.pt
+            <Mail className="h-4 w-4 mr-2" /> support@seayou.pt
           </a>
         </li>
         <li>

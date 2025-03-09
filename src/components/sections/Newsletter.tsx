@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -87,7 +88,7 @@ export const Newsletter = () => {
                   <Mail className="w-5 h-5 mr-3 mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-medium">Email</p>
-                    <p className="text-white/80">info@seayoumadeira.com</p>
+                    <p className="text-white/80">support@seayou.pt</p>
                   </div>
                 </div>
                 
