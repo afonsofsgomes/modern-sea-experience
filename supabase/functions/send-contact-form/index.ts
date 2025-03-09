@@ -36,7 +36,7 @@ serve(async (req) => {
 
     // Get environment variables for SMTP configuration
     const host = Deno.env.get("SMTP_HOST") || "";
-    const port = parseInt(Deno.env.get("SMTP_PORT") || "465"); // Default to 465 for SSL
+    const port = parseInt(Deno.env.get("SMTP_PORT") || "587"); // Try a standard port like 587 instead
     const username = Deno.env.get("SMTP_USERNAME") || "";
     const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
@@ -44,30 +44,65 @@ serve(async (req) => {
     console.log("SMTP Configuration:");
     console.log(`Host: ${host}`);
     console.log(`Port: ${port}`);
-    console.log(`Username: ${username}`);
+    console.log(`Username: ${username ? "Provided" : "Missing"}`);
+    console.log(`Password: ${password ? "Provided" : "Missing"}`);
     console.log(`From Email: ${fromEmail}`);
 
+    // Check that required SMTP settings are provided
     if (!host) {
       throw new Error("SMTP host is not configured");
+    }
+    
+    if (!username || !password) {
+      throw new Error("SMTP credentials are not configured");
+    }
+
+    // Try to resolve the SMTP host to check if it's reachable
+    try {
+      console.log(`Attempting to resolve DNS for ${host}...`);
+      // This is a simple way to check if the host is resolvable
+      const testConn = await Deno.connect({ hostname: host, port: 80 });
+      testConn.close();
+      console.log(`Successfully resolved ${host}`);
+    } catch (dnsError) {
+      console.error(`DNS resolution error for ${host}:`, dnsError);
+      throw new Error(`Cannot resolve SMTP host: ${host}. Error: ${dnsError.message}`);
     }
 
     // Initialize SMTP client
     const client = new SmtpClient();
     
-    // Connect to SMTP server
+    // Connect to SMTP server with detailed error reporting
     try {
-      // For port 465, we use connectTLS with secure:true option
-      await client.connectTLS({
-        hostname: host,
-        port: port,
-        username: username,
-        password: password,
-        secure: port === 465, // Set secure:true for port 465 (implicit SSL)
-      });
+      console.log(`Attempting to connect to SMTP server at ${host}:${port}`);
+      
+      if (port === 465) {
+        console.log("Using TLS with secure:true for port 465");
+        await client.connectTLS({
+          hostname: host,
+          port: port,
+          username: username,
+          password: password,
+          secure: true, // Implicit SSL for port 465
+        });
+      } else if (port === 587) {
+        console.log("Using StartTLS for port 587");
+        await client.connect({ hostname: host, port });
+        await client.startTLS({ hostname: host });
+        await client.authenticate({ username, password });
+      } else {
+        console.log(`Using standard TLS connection for port ${port}`);
+        await client.connectTLS({
+          hostname: host,
+          port: port,
+          username: username,
+          password: password,
+        });
+      }
       
       console.log("SMTP connection established successfully");
     } catch (connError) {
-      console.error("Error connecting to SMTP server:", connError);
+      console.error(`Error connecting to SMTP server at ${host}:${port}:`, connError);
       throw new Error(`Failed to connect to SMTP server: ${connError.message}`);
     }
 
