@@ -100,6 +100,23 @@ export const Newsletter = () => {
                     visibility: hidden !important;
                     pointer-events: none !important;
                   }
+                  
+                  /* Make placeholders visible */
+                  iframe {
+                    color-scheme: light;
+                  }
+                  
+                  /* Target the iframe content to make placeholders visible */
+                  iframe::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: transparent;
+                    z-index: -1;
+                  }
                   `}
                 </style>
                 <iframe 
@@ -112,6 +129,10 @@ export const Newsletter = () => {
                   marginWidth={0} 
                   title="Contact Form"
                   className="text-white"
+                  style={{ 
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
+                    colorScheme: "light"
+                  }}
                 ></iframe>
               </div>
               
