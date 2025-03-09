@@ -1,8 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+import { SMTPClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -35,6 +33,19 @@ serve(async (req) => {
       );
     }
 
+    // Create SMTP client
+    const client = new SMTPClient({
+      connection: {
+        hostname: Deno.env.get("SMTP_HOST") || "",
+        port: parseInt(Deno.env.get("SMTP_PORT") || "587"),
+        tls: true,
+        auth: {
+          username: Deno.env.get("SMTP_USERNAME") || "",
+          password: Deno.env.get("SMTP_PASSWORD") || "",
+        },
+      }
+    });
+
     // Format email content with HTML
     const htmlContent = `
       <h2>New Contact Form Submission</h2>
@@ -56,23 +67,23 @@ serve(async (req) => {
 
     console.log('Sending contact form submission to support@seayou.pt');
     
-    // Send email using Resend
-    const emailResponse = await resend.emails.send({
-      from: "SeaYou Contact Form <onboarding@resend.dev>",
+    // Send email to support
+    await client.send({
+      from: Deno.env.get("SMTP_FROM") || "contact@seayoumadeira.com",
       to: "support@seayou.pt",
       subject: `Contact Form Submission from ${name}`,
+      content: "text/html",
       html: htmlContent,
-      text: textContent,
-      reply_to: email
     });
 
-    console.log('Email response:', emailResponse);
+    console.log('Sending confirmation email to user');
 
-    // Also send confirmation email to the user
-    const confirmationResponse = await resend.emails.send({
-      from: "SeaYou <onboarding@resend.dev>",
+    // Send confirmation email to the user
+    await client.send({
+      from: Deno.env.get("SMTP_FROM") || "contact@seayoumadeira.com",
       to: email,
       subject: "Thank you for contacting SeaYou Madeira",
+      content: "text/html",
       html: `
         <h2>Thank you for contacting us, ${name}!</h2>
         <p>We have received your message and will get back to you as soon as possible.</p>
@@ -82,19 +93,10 @@ serve(async (req) => {
           The SeaYou Madeira Team
         </p>
       `,
-      text: `
-        Thank you for contacting us, ${name}!
-        
-        We have received your message and will get back to you as soon as possible.
-        
-        If you have an urgent matter, please call us at +351 291 123 456.
-        
-        Best regards,
-        The SeaYou Madeira Team
-      `
     });
 
-    console.log('Confirmation email response:', confirmationResponse);
+    // Close the connection
+    await client.close();
 
     return new Response(
       JSON.stringify({ 
