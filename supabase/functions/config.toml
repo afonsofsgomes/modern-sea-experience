@@ -1,8 +1,5 @@
 
 project_id = "limxqghelamjpjihezvg"
 [global.env]
-SMTP_HOST = "env:SMTP_HOST"
-SMTP_PORT = "env:SMTP_PORT"
-SMTP_USERNAME = "env:SMTP_USERNAME"
-SMTP_PASSWORD = "env:SMTP_PASSWORD"
+RESEND_API_KEY = "env:RESEND_API_KEY"
 SMTP_FROM = "env:SMTP_FROM"

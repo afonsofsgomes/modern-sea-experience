@@ -1,8 +1,7 @@
 
 // Using a stable version of Deno's standard library
 import { serve } from "https://deno.land/std@0.167.0/http/server.ts";
-// Using nodemailer instead of the problematic SMTP client
-import * as nodemailer from "https://deno.land/x/nodemailer@v0.8.2/mod.ts";
+import { Resend } from "https://esm.sh/resend@2.0.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -35,39 +34,20 @@ serve(async (req) => {
       );
     }
 
-    // Get environment variables for SMTP configuration
-    const rawHost = Deno.env.get("SMTP_HOST") || "";
-    const port = parseInt(Deno.env.get("SMTP_PORT") || "587");
-    const username = Deno.env.get("SMTP_USERNAME") || "";
-    const password = Deno.env.get("SMTP_PASSWORD") || "";
+    // Get environment variable for Resend API key
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
     
-    // Clean the host value - remove protocol prefixes and trailing slashes
-    let host = rawHost.replace(/^https?:\/\//, '').replace(/\/$/, '');
-    
-    console.log("SMTP Configuration:");
-    console.log(`Raw Host: ${rawHost}`);
-    console.log(`Cleaned Host: ${host}`);
-    console.log(`Port: ${port}`);
-    console.log(`Username: ${username}`);
-    console.log(`From Email: ${fromEmail}`);
-
-    if (!host) {
-      throw new Error("SMTP host is not configured");
+    if (!resendApiKey) {
+      throw new Error("Resend API key is not configured");
     }
 
-    // Create nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      host: host,
-      port: port,
-      secure: port === 465, // true for 465, false for other ports
-      auth: {
-        user: username,
-        pass: password,
-      },
-    });
+    console.log("Email Configuration:");
+    console.log(`From Email: ${fromEmail}`);
 
-    console.log("Transporter created successfully");
+    // Initialize Resend client
+    const resend = new Resend(resendApiKey);
+    console.log("Resend client initialized successfully");
 
     // Format HTML content for support email
     const supportHtmlContent = `
@@ -82,15 +62,14 @@ serve(async (req) => {
     try {
       console.log(`Sending contact form submission to support@seayou.pt from ${fromEmail}`);
       
-      const supportMailOptions = {
+      const supportEmailResponse = await resend.emails.send({
         from: fromEmail,
         to: "support@seayou.pt",
         subject: `Contact Form Submission from ${name}`,
         html: supportHtmlContent,
-      };
+      });
       
-      await transporter.sendMail(supportMailOptions);
-      console.log("Support email sent successfully");
+      console.log("Support email sent successfully:", supportEmailResponse);
     } catch (sendError) {
       console.error("Error sending email to support:", sendError);
       throw new Error(`Failed to send email to support: ${sendError.message}`);
@@ -111,15 +90,14 @@ serve(async (req) => {
     try {
       console.log(`Sending confirmation email to user ${email} from ${fromEmail}`);
       
-      const userMailOptions = {
+      const userEmailResponse = await resend.emails.send({
         from: fromEmail,
         to: email,
         subject: "Thank you for contacting SeaYou Madeira",
         html: confirmationHtmlContent,
-      };
+      });
       
-      await transporter.sendMail(userMailOptions);
-      console.log("Confirmation email to user sent successfully");
+      console.log("Confirmation email to user sent successfully:", userEmailResponse);
     } catch (sendError) {
       console.error("Error sending confirmation email to user:", sendError);
       throw new Error(`Failed to send confirmation email: ${sendError.message}`);
