@@ -78,7 +78,8 @@ export const Newsletter = () => {
               <h3 className="text-xl font-medium mb-6">Send us a Message</h3>
               
               <div className="w-full h-[480px] overflow-hidden rounded-md relative">
-                <style jsx>{`
+                <style>
+                  {`
                   /* Hide Tally branding */
                   iframe[data-tally-src] + div[class*="Symbol"] {
                     display: none !important;
@@ -99,7 +100,8 @@ export const Newsletter = () => {
                     visibility: hidden !important;
                     pointer-events: none !important;
                   }
-                `}</style>
+                  `}
+                </style>
                 <iframe 
                   data-tally-src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                   loading="lazy" 
