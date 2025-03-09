@@ -25,6 +25,17 @@ export const Newsletter = () => {
     };
 
     window.addEventListener("message", handleMessage);
+    
+    // Manual trigger to set iframe src if not already set
+    setTimeout(() => {
+      document.querySelectorAll('iframe[data-tally-src]:not([src])').forEach((iframe: HTMLIFrameElement) => {
+        if (iframe.dataset.tallySrc) {
+          iframe.src = iframe.dataset.tallySrc;
+          console.log("Manual iframe src set:", iframe.dataset.tallySrc);
+        }
+      });
+    }, 1000);
+    
     return () => window.removeEventListener("message", handleMessage);
   }, []);
   
@@ -110,6 +121,7 @@ export const Newsletter = () => {
                 {/* Tally form iframe with improved visibility */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-md overflow-hidden">
                   <iframe 
+                    src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
                     data-tally-src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                     loading="lazy" 
                     width="100%" 
@@ -135,17 +147,14 @@ export const Newsletter = () => {
         </motion.div>
       </div>
       
-      {/* Custom styles for the Tally form to ensure placeholder visibility */}
-      <style>
-        {`
-          /* These styles help improve the form elements inside the iframe */
-          .tally-form-container {
-            /* Override any conflicting styles */
-            font-family: inherit;
-            color-scheme: light;
-          }
-        `}
-      </style>
+      <style>{`
+        /* These styles help improve the form elements inside the iframe */
+        .tally-form-container {
+          /* Override any conflicting styles */
+          font-family: inherit;
+          color-scheme: light;
+        }
+      `}</style>
     </section>
   );
 };

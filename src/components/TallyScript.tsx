@@ -18,7 +18,7 @@ export const TallyScript = () => {
       if (typeof (window as any).Tally !== 'undefined') {
         (window as any).Tally.loadEmbeds();
       } else {
-        // Fallback for when Tally object is not available
+        // If Tally object is not available, manually set src on iframes
         document.querySelectorAll('iframe[data-tally-src]:not([src])').forEach((iframe: HTMLIFrameElement) => {
           if (iframe.dataset.tallySrc) {
             iframe.src = iframe.dataset.tallySrc;
@@ -29,7 +29,10 @@ export const TallyScript = () => {
     
     // Set up callbacks
     script.onload = loadEmbeds;
-    script.onerror = loadEmbeds; // Still try to load iframes directly if script fails
+    script.onerror = () => {
+      console.error('Failed to load Tally script');
+      loadEmbeds(); // Still try to load iframes directly if script fails
+    };
     
     // Add the script to the document
     document.body.appendChild(script);
@@ -51,6 +54,9 @@ export const TallyScript = () => {
       }
     `;
     document.head.appendChild(styleTag);
+    
+    // Run loadEmbeds immediately in case the script is already loaded
+    setTimeout(loadEmbeds, 500);
     
     // Cleanup on component unmount
     return () => {
