@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Coffee, Wine, Mountain, Camera, Anchor, Route, Sun, Fish, Waves, Ship } from "lucide-react";
+import { Coffee, Wine, Mountain, Camera, Anchor, Route, Sun, Fish, Waves, Ship, Clock, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -37,8 +37,8 @@ const seabusDestinationsData = [
       { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Old Town Exploration" },
       { icon: <Camera className="w-5 h-5 text-secondary" />, text: "CR7 Museum" }
     ],
-    travelTime: "40 minutes",
-    departuresPerDay: "7"
+    travelTime: "1h - 1h 30m",
+    departuresPerDay: "Tue-Sun"
   },
   {
     name: "Caniçal",
@@ -50,8 +50,8 @@ const seabusDestinationsData = [
       { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Working Fishing Harbor" },
       { icon: <Fish className="w-5 h-5 text-secondary" />, text: "Fresh Seafood Restaurants" }
     ],
-    travelTime: "1 hour",
-    departuresPerDay: "5"
+    travelTime: "1h - 1h 15m",
+    departuresPerDay: "Tue-Sun"
   },
   {
     name: "Calheta",
@@ -63,8 +63,8 @@ const seabusDestinationsData = [
       { icon: <Wine className="w-5 h-5 text-secondary" />, text: "Sugar Cane Factory & Rum" },
       { icon: <Camera className="w-5 h-5 text-secondary" />, text: "Casa das Mudas Arts Center" }
     ],
-    travelTime: "1 hour 15 minutes",
-    departuresPerDay: "4"
+    travelTime: "1h 15m - 2h",
+    departuresPerDay: "Tue-Sun"
   }
 ];
 
@@ -121,11 +121,13 @@ export const SeaBusDestinations = () => {
               
               <div className="p-5">
                 <div className="flex justify-between items-center mb-4">
-                  <div className="bg-primary/10 rounded-lg px-3 py-1.5">
-                    <p className="text-xs font-medium">Travel time: <span className="text-primary">{destination.travelTime}</span></p>
+                  <div className="bg-primary/10 rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-primary" />
+                    <p className="text-xs font-medium">Travel: <span className="text-primary">{destination.travelTime}</span></p>
                   </div>
-                  <div className="bg-primary/10 rounded-lg px-3 py-1.5">
-                    <p className="text-xs font-medium">Daily departures: <span className="text-primary">{destination.departuresPerDay}</span></p>
+                  <div className="bg-primary/10 rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-primary" />
+                    <p className="text-xs font-medium">Days: <span className="text-primary">{destination.departuresPerDay}</span></p>
                   </div>
                 </div>
                 
@@ -141,6 +143,13 @@ export const SeaBusDestinations = () => {
                       <span className="text-xs">{feature.text}</span>
                     </div>
                   ))}
+                </div>
+                
+                <div className="flex justify-center mt-2 mb-4">
+                  <div className="flex items-center gap-2 bg-secondary/10 rounded-lg px-3 py-1.5">
+                    <Users className="w-4 h-4 text-secondary" />
+                    <span className="text-xs font-medium">Maximum 18 passengers</span>
+                  </div>
                 </div>
                 
                 <Link to="/schedule" className="mt-auto block">

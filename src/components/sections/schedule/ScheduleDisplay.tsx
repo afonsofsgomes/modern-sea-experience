@@ -73,6 +73,10 @@ export const ScheduleDisplay = () => {
           />
         </div>
         
+        <div className="text-center mt-6 text-white/80 text-sm">
+          <p>Please note: No SeaBus services operate on Mondays</p>
+        </div>
+        
         <BookingButton />
       </div>
     </section>

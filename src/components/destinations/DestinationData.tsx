@@ -1,5 +1,5 @@
 
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag } from "lucide-react";
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar } from "lucide-react";
 
 export type FeatureType = {
   icon: React.ReactNode;
@@ -74,9 +74,9 @@ export const destinationData: DestinationType[] = [
     link: "/seabus",
     buttonText: "Book SeaBus Journey",
     stats: [
-      { value: "1h", label: "Journey Time" },
-      { value: "22", label: "Passengers" },
-      { value: "Daily", label: "Departures" }
+      { value: "1-2h", label: "Journey Time" },
+      { value: "18", label: "Passengers" },
+      { value: "Tue-Sun", label: "Departures" }
     ],
     experience: "SeaBus Connections",
     experienceDesc: "Fast & comfortable sea transportation with panoramic views between key destinations in Madeira."
