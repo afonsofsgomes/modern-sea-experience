@@ -1,6 +1,7 @@
 
-// Import from a more recent version of Deno standard library
-import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
+// Import from a stable Deno standard library version
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+// Fix the SMTP client import to use the correct export name
 import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const corsHeaders = {
