@@ -69,7 +69,7 @@ serve(async (req) => {
     
     // Send email to support
     await client.send({
-      from: Deno.env.get("SMTP_FROM") || "contact@seayoumadeira.com",
+      from: "noreply@seayou.pt",
       to: "support@seayou.pt",
       subject: `Contact Form Submission from ${name}`,
       content: "text/html",
@@ -80,7 +80,7 @@ serve(async (req) => {
 
     // Send confirmation email to the user
     await client.send({
-      from: Deno.env.get("SMTP_FROM") || "contact@seayoumadeira.com",
+      from: "noreply@seayou.pt",
       to: email,
       subject: "Thank you for contacting SeaYou Madeira",
       content: "text/html",
