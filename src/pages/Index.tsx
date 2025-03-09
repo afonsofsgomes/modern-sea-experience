@@ -1,6 +1,5 @@
 
 import { useEffect } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
 import { Helmet } from "react-helmet";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -15,13 +14,6 @@ import { MetaTags, LocalBusinessSchema } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 
 const Index = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,10 +28,6 @@ const Index = () => {
       <LocalBusinessSchema />
       <TallyScript />
       
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-[3px] bg-primary z-[100]"
-        style={{ scaleX, transformOrigin: "0%" }}
-      />
       <Navbar />
       <div id="home">
         <Hero />
