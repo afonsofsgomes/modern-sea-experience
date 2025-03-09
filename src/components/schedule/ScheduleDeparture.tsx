@@ -1,7 +1,7 @@
 
 import { motion } from 'framer-motion';
 
-interface DepartureItemProps {
+interface ScheduleDepartureProps {
   departureTime: string;
   returnTime: string;
   origin: string;
@@ -9,13 +9,13 @@ interface DepartureItemProps {
   duration: string;
 }
 
-export const DepartureItem = ({ 
+export const ScheduleDeparture = ({ 
   departureTime, 
   returnTime, 
   origin, 
   destination, 
   duration 
-}: DepartureItemProps) => {
+}: ScheduleDepartureProps) => {
   return (
     <motion.div 
       className="bg-white/5 p-4 rounded-md hover:bg-white/10 transition-colors duration-300"

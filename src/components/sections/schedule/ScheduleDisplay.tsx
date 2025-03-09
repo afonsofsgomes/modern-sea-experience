@@ -1,6 +1,7 @@
 
 import { ScheduleHeader } from './ScheduleHeader';
-import { ScheduleCard } from './ScheduleCard';
+import { ScheduleDayCard } from '@/components/schedule/ScheduleDayCard';
+import { ScheduleNotice } from '@/components/schedule/ScheduleNotice';
 import { BookingButton } from './BookingButton';
 
 export const ScheduleDisplay = () => {
@@ -60,22 +61,20 @@ export const ScheduleDisplay = () => {
         <ScheduleHeader />
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <ScheduleCard 
+          <ScheduleDayCard 
             title="Tuesday, Saturday, Sunday"
             departures={weekendSchedule}
             initialAnimation={{ x: -30 }}
           />
           
-          <ScheduleCard 
+          <ScheduleDayCard 
             title="Wednesday, Thursday, Friday"
             departures={weekdaySchedule}
             initialAnimation={{ x: 30 }}
           />
         </div>
         
-        <div className="text-center mt-6 text-white/80 text-sm">
-          <p>Please note: No SeaBus services operate on Mondays</p>
-        </div>
+        <ScheduleNotice />
         
         <BookingButton />
       </div>

@@ -1,8 +1,8 @@
 
 import { motion } from 'framer-motion';
-import { DepartureItem } from './DepartureItem';
+import { ScheduleDeparture } from './ScheduleDeparture';
 
-interface ScheduleCardProps {
+interface ScheduleDayCardProps {
   title: string;
   departures: Array<{
     departureTime: string;
@@ -16,7 +16,7 @@ interface ScheduleCardProps {
   };
 }
 
-export const ScheduleCard = ({ title, departures, initialAnimation }: ScheduleCardProps) => {
+export const ScheduleDayCard = ({ title, departures, initialAnimation }: ScheduleDayCardProps) => {
   return (
     <motion.div 
       className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 overflow-hidden"
@@ -31,7 +31,7 @@ export const ScheduleCard = ({ title, departures, initialAnimation }: ScheduleCa
       
       <div className="space-y-4">
         {departures.map((departure, index) => (
-          <DepartureItem 
+          <ScheduleDeparture 
             key={`${departure.origin}-${departure.destination}-${index}`}
             departureTime={departure.departureTime}
             returnTime={departure.returnTime}
