@@ -3,56 +3,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export const Newsletter = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [subscribe, setSubscribe] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!name.trim() || !email.trim() || !message.trim()) {
-      toast.error("Please fill out all required fields");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const { data, error } = await supabase.functions.invoke("send-contact-form", {
-        body: {
-          name,
-          email,
-          message,
-          newsletter: subscribe
-        }
-      });
-
-      if (error) {
-        console.error("Error sending contact form:", error);
-        throw new Error(error.message);
-      }
-
-      toast.success("Message sent successfully. We'll contact you soon!");
-      
-      // Reset form
-      setName("");
-      setEmail("");
-      setMessage("");
-      setSubscribe(false);
-    } catch (error) {
-      console.error("Error sending contact form:", error);
-      toast.error("Failed to send message. Please try again later.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <section id="contact" className="py-20 bg-[#253D7F] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,8 +68,7 @@ export const Newsletter = () => {
               </div>
             </motion.div>
             
-            <motion.form 
-              onSubmit={handleSubmit}
+            <motion.div 
               className="bg-white/10 p-8 rounded-lg"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -125,67 +77,23 @@ export const Newsletter = () => {
             >
               <h3 className="text-xl font-medium mb-6">Send us a Message</h3>
               
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block mb-1 text-sm font-medium">Your Name</label>
-                  <input 
-                    type="text" 
-                    id="name"
-                    placeholder="Enter your name" 
-                    className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block mb-1 text-sm font-medium">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email"
-                    placeholder="Enter your email" 
-                    className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block mb-1 text-sm font-medium">Message</label>
-                  <textarea 
-                    id="message"
-                    rows={4}
-                    placeholder="Tell us about your inquiry" 
-                    className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                  ></textarea>
-                </div>
-                
-                <div className="flex items-center">
-                  <input 
-                    type="checkbox" 
-                    id="newsletter" 
-                    className="mr-2 h-4 w-4 bg-white/5 border border-white/20 rounded"
-                    checked={subscribe}
-                    onChange={(e) => setSubscribe(e.target.checked)}
-                  />
-                  <label htmlFor="newsletter" className="text-sm">Subscribe to our newsletter for special offers</label>
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full bg-[#E95543] text-white font-medium px-6 py-3 rounded-md hover:bg-[#E95543]/90 transition-colors relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
-                  disabled={isSubmitting}
-                  isLoading={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
+              <div className="w-full h-[480px] overflow-hidden rounded-md">
+                <iframe 
+                  src="https://tally.so/embed/mBxdRM?alignLeft=1&hideTitle=1&transparentBackground=1" 
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0" 
+                  marginHeight={0} 
+                  marginWidth={0} 
+                  title="Contact Form"
+                  className="text-white"
+                ></iframe>
               </div>
-            </motion.form>
+              
+              <p className="text-xs text-white/60 mt-4">
+                This contact form is powered by a third-party service. Your information will be processed according to our privacy policy.
+              </p>
+            </motion.div>
           </div>
         </motion.div>
       </div>
