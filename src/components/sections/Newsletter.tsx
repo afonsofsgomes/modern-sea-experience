@@ -4,10 +4,8 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export const Newsletter = () => {
-  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeHeight, setIframeHeight] = useState(276);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Function to handle iframe resize messages from Tally
   useEffect(() => {
@@ -20,7 +18,6 @@ export const Newsletter = () => {
         if (data.type === "tally-resize") {
           console.log("Received tally-resize event with height:", data.height);
           setIframeHeight(data.height);
-          setIframeLoaded(true);
         }
       } catch (e) {
         // Silent fail if not a valid JSON message
@@ -39,27 +36,10 @@ export const Newsletter = () => {
       });
     }, 1000);
     
-    // Force show form after a timeout (fallback if resize event never fires)
-    loadingTimerRef.current = setTimeout(() => {
-      if (!iframeLoaded) {
-        console.log("Forcing iframe to show after timeout");
-        setIframeLoaded(true);
-      }
-    }, 5000);
-    
     return () => {
       window.removeEventListener("message", handleMessage);
-      if (loadingTimerRef.current) {
-        clearTimeout(loadingTimerRef.current);
-      }
     };
-  }, [iframeLoaded]);
-  
-  // Handle iframe load event
-  const handleIframeLoad = () => {
-    console.log("Iframe onload event fired");
-    setIframeLoaded(true);
-  };
+  }, []);
   
   return (
     <section id="contact" className="py-20 bg-[#253D7F] text-white">
@@ -132,20 +112,11 @@ export const Newsletter = () => {
             >
               <h3 className="text-xl font-medium mb-6">Send us a Message</h3>
               
-              <div className="tally-form-container relative">
-                {/* Loading overlay that disappears when the iframe loads */}
-                {!iframeLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/5 backdrop-blur-sm rounded-md z-10">
-                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
-                  </div>
-                )}
-                
-                {/* Tally form iframe with improved visibility */}
+              <div className="tally-form-container">
                 <div className="bg-white/5 backdrop-blur-sm rounded-md overflow-hidden">
                   <iframe 
                     ref={iframeRef}
                     src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-                    data-tally-src="https://tally.so/embed/mDM1Vj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
                     loading="lazy" 
                     width="100%" 
                     height={iframeHeight}
@@ -153,12 +124,7 @@ export const Newsletter = () => {
                     marginHeight={0} 
                     marginWidth={0} 
                     title="Contact form"
-                    className="transition-opacity duration-300"
-                    style={{ 
-                      opacity: iframeLoaded ? 1 : 0.6,
-                      minHeight: "276px" 
-                    }}
-                    onLoad={handleIframeLoad}
+                    style={{ minHeight: "276px" }}
                   ></iframe>
                 </div>
               </div>
