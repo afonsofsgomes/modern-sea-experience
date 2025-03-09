@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
-import { TallyScript } from "@/components/TallyScript";
 import { 
   Routes, 
   Destinations,
@@ -34,7 +33,6 @@ const Index = () => {
         keywords="Madeira sea transportation, maritime tourism Madeira, SeaBus Madeira, private cruises Madeira, Porto Santo ferry, boat tours Madeira"
       />
       <LocalBusinessSchema />
-      <TallyScript />
       
       <motion.div 
         className="fixed top-0 left-0 right-0 h-[3px] bg-primary z-[100]"
