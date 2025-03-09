@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
-import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
+import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/smtp_client.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -33,17 +33,18 @@ serve(async (req) => {
       );
     }
 
-    // Create SMTP client
-    const client = new SmtpClient({
-      connection: {
-        hostname: Deno.env.get("SMTP_HOST") || "",
-        port: parseInt(Deno.env.get("SMTP_PORT") || "587"),
-        tls: true,
-        auth: {
-          username: Deno.env.get("SMTP_USERNAME") || "",
-          password: Deno.env.get("SMTP_PASSWORD") || "",
-        },
-      }
+    // Get the from email from environment variable
+    const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
+
+    // Create SMTP client with the correct import
+    const client = new SmtpClient();
+    
+    // Configure SMTP connection
+    await client.connectTLS({
+      hostname: Deno.env.get("SMTP_HOST") || "",
+      port: parseInt(Deno.env.get("SMTP_PORT") || "587"),
+      username: Deno.env.get("SMTP_USERNAME") || "",
+      password: Deno.env.get("SMTP_PASSWORD") || "",
     });
 
     // Format email content with HTML
@@ -65,22 +66,22 @@ serve(async (req) => {
       Subscribe to newsletter: ${newsletter ? 'Yes' : 'No'}
     `;
 
-    console.log('Sending contact form submission to support@seayou.pt');
+    console.log(`Sending contact form submission to support@seayou.pt from ${fromEmail}`);
     
     // Send email to support
     await client.send({
-      from: "noreply@seayou.pt",
+      from: fromEmail,
       to: "support@seayou.pt",
       subject: `Contact Form Submission from ${name}`,
       content: "text/html",
       html: htmlContent,
     });
 
-    console.log('Sending confirmation email to user');
+    console.log(`Sending confirmation email to user ${email} from ${fromEmail}`);
 
     // Send confirmation email to the user
     await client.send({
-      from: "noreply@seayou.pt",
+      from: fromEmail,
       to: email,
       subject: "Thank you for contacting SeaYou Madeira",
       content: "text/html",
@@ -114,7 +115,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: 'Internal server error'
+        error: error.message || 'Internal server error'
       }),
       { 
         status: 500, 
