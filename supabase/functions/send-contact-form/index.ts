@@ -36,7 +36,7 @@ serve(async (req) => {
 
     // Get environment variables for SMTP configuration
     const host = Deno.env.get("SMTP_HOST") || "";
-    const port = parseInt(Deno.env.get("SMTP_PORT") || "465"); // Use port 465 for SSL by default
+    const port = parseInt(Deno.env.get("SMTP_PORT") || "465"); // Default to 465 for SSL
     const username = Deno.env.get("SMTP_USERNAME") || "";
     const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
@@ -51,27 +51,19 @@ serve(async (req) => {
       throw new Error("SMTP host is not configured");
     }
 
-    // Initialize SMTP client and connect with SSL
+    // Initialize SMTP client
     const client = new SmtpClient();
     
+    // Connect to SMTP server
     try {
-      if (port === 465) {
-        console.log("Attempting SSL connection on port 465");
-        await client.connectSSL({
-          hostname: host,
-          port: port,
-          username: username,
-          password: password,
-        });
-      } else {
-        console.log(`Attempting TLS connection on port ${port}`);
-        await client.connectTLS({
-          hostname: host,
-          port: port,
-          username: username,
-          password: password,
-        });
-      }
+      // For port 465, we use connectTLS with secure:true option
+      await client.connectTLS({
+        hostname: host,
+        port: port,
+        username: username,
+        password: password,
+        secure: port === 465, // Set secure:true for port 465 (implicit SSL)
+      });
       
       console.log("SMTP connection established successfully");
     } catch (connError) {
