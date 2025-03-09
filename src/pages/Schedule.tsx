@@ -3,6 +3,9 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { Helmet } from "react-helmet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const Schedule = () => {
   return (
@@ -85,6 +88,14 @@ const Schedule = () => {
                       </div>
                     </div>
                   </div>
+                  
+                  <div className="mt-8 text-center">
+                    <Button asChild className="bg-blue-600 hover:bg-blue-700">
+                      <Link to="/seabus">
+                        View SeaBus Details <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
                 </TabsContent>
                 
                 <TabsContent value="porto-santo" className="bg-white rounded-lg shadow-md p-6">
@@ -139,6 +150,14 @@ const Schedule = () => {
                       </div>
                     </div>
                   </div>
+                  
+                  <div className="mt-8 text-center">
+                    <Button asChild className="bg-red-500 hover:bg-red-600">
+                      <Link to="/porto-santo">
+                        Explore Porto Santo <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
                 </TabsContent>
                 
                 <TabsContent value="desertas" className="bg-white rounded-lg shadow-md p-6">
@@ -179,6 +198,14 @@ const Schedule = () => {
                         Note: All tours depart from Funchal Marina. Please arrive 30 minutes before departure time.
                       </p>
                     </div>
+                  </div>
+                  
+                  <div className="mt-8 text-center">
+                    <Button asChild className="bg-green-600 hover:bg-green-700">
+                      <Link to="/desertas">
+                        Discover Desertas Islands <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
                   </div>
                 </TabsContent>
               </Tabs>
