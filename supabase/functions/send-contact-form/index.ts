@@ -36,29 +36,25 @@ serve(async (req) => {
     }
 
     // Get environment variables for SMTP configuration
-    let host = Deno.env.get("SMTP_HOST") || "";
+    const rawHost = Deno.env.get("SMTP_HOST") || "";
     const port = parseInt(Deno.env.get("SMTP_PORT") || "587");
     const username = Deno.env.get("SMTP_USERNAME") || "";
     const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
     
-    // Remove http:// or https:// from host if present
-    if (host.startsWith("http://")) {
-      host = host.substring(7);
-    } else if (host.startsWith("https://")) {
-      host = host.substring(8);
-    }
-    
-    // Remove trailing slash if present
-    if (host.endsWith("/")) {
-      host = host.substring(0, host.length - 1);
-    }
+    // Clean the host value - remove protocol prefixes and trailing slashes
+    let host = rawHost.replace(/^https?:\/\//, '').replace(/\/$/, '');
     
     console.log("SMTP Configuration:");
-    console.log(`Host: ${host}`);
+    console.log(`Raw Host: ${rawHost}`);
+    console.log(`Cleaned Host: ${host}`);
     console.log(`Port: ${port}`);
     console.log(`Username: ${username}`);
     console.log(`From Email: ${fromEmail}`);
+
+    if (!host) {
+      throw new Error("SMTP host is not configured");
+    }
 
     // Create nodemailer transporter
     const transporter = nodemailer.createTransport({
