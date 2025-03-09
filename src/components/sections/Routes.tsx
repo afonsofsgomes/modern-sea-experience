@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Smartphone, MessageSquareHeart } from "lucide-react";
+import { Shield, GaugeCircle, Ship, Waves, Wifi, Coffee, Smartphone, Sun } from "lucide-react";
 
 // Animation variants for staggered children
 const containerVariants = {
@@ -132,9 +132,9 @@ export const Routes = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} className="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-              <MessageSquareHeart className="w-10 h-10 text-secondary mb-3" />
-              <h3 className="font-medium mb-1">Tour Guide</h3>
-              <p className="text-sm text-muted-foreground">Informative trips</p>
+              <Sun className="w-10 h-10 text-secondary mb-3" />
+              <h3 className="font-medium mb-1">Solar Panels</h3>
+              <p className="text-sm text-muted-foreground">Eco-friendly power</p>
             </motion.div>
           </motion.div>
         </div>
