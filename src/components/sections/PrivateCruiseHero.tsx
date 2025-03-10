@@ -4,14 +4,24 @@ import { Button } from "@/components/ui/button";
 import { Users, Clock, Compass, Wifi, Calendar } from "lucide-react";
 
 export const PrivateCruiseHero = () => {
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
-    <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-[#253D7F] pt-20 md:pt-28 pb-12">
+    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-[#253D7F] pt-20 md:pt-28 pb-12">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+          src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" 
           alt="Private Cruise" 
-          className="w-full h-full object-cover opacity-70"
+          className="w-full h-full object-cover object-center opacity-70"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/30 to-[#253D7F]/80" />
       </div>
@@ -43,7 +53,7 @@ export const PrivateCruiseHero = () => {
           Your Private Cruise
         </motion.p>
         
-        {/* Icon Row with consistent sizing and alignment */}
+        {/* Icon Row with fixed sizes and better alignment */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,8 +93,8 @@ export const PrivateCruiseHero = () => {
         >
           <Button 
             size="lg" 
-            className="bg-[#E95543] hover:bg-[#E95543]/90 text-white px-8 py-3 text-lg"
-            onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-[#E95543] hover:bg-[#E95543]/90 text-white"
+            onClick={scrollToBooking}
           >
             BOOK NOW
           </Button>
