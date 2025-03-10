@@ -4,14 +4,24 @@ import { Button } from "@/components/ui/button";
 import { Clock, Users, Wifi, Calendar } from "lucide-react";
 
 export const PortoSantoHero = () => {
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
-    <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-blue-900 pt-20 md:pt-28 pb-12 w-full">
+    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-blue-900 pt-20 md:pt-28 pb-12">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-          alt="Porto Santo" 
-          className="w-full h-full object-cover opacity-70"
+          src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" 
+          alt="Porto Santo Golden Beach" 
+          className="w-full h-full object-cover object-center opacity-70"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
       </div>
@@ -26,14 +36,6 @@ export const PortoSantoHero = () => {
         >
           PORTO SANTO
         </motion.h1>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-red-500 text-white px-6 py-2 rounded-md mb-4 md:mb-6"
-        >
-          1-DAY EXPERIENCE
-        </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,7 +45,6 @@ export const PortoSantoHero = () => {
           Discover the Golden Island
         </motion.p>
         
-        {/* Icon Row with consistent sizing and alignment */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,11 +81,10 @@ export const PortoSantoHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-8"
         >
           <Button 
             size="lg" 
-            className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg"
+            className="bg-red-500 hover:bg-red-600 text-white"
           >
             COMING SOON
           </Button>
