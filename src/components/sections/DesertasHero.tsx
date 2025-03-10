@@ -18,7 +18,7 @@ export const DesertasHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" 
+          src="/lovable-uploads/fd11f644-1594-4d22-a02d-78fa2310f4e6.png" 
           alt="Desertas Islands" 
           className="w-full h-full object-cover object-center opacity-70"
           loading="eager"
