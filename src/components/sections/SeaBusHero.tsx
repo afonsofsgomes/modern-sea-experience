@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
@@ -14,7 +13,7 @@ export const SeaBusHero = () => {
   return <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-blue-900 pt-20 md:pt-28 pb-12">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21" alt="Ocean Wave" className="w-full h-full object-cover object-center opacity-70" loading="eager" />
+        <img alt="Ocean Wave" className="w-full h-full object-cover object-center opacity-70" loading="eager" src="/lovable-uploads/55bd04ea-d807-46c1-ba3e-b6e118ffc695.jpg" />
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
       </div>
 
