@@ -3,8 +3,10 @@ import { BokunWidget } from "@/components/BokunWidget";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { CalendarClock, Calendar, CalendarDays, Package, Gift, Star } from "lucide-react";
+import { CalendarClock, Calendar, CalendarDays, Package, Gift, Star, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Switch } from "@/components/ui/switch";
 
 export const SeaBusBooking = () => {
   return (
@@ -79,68 +81,85 @@ export const SeaBusBooking = () => {
             </div>
             
             <div className="bg-blue-50 rounded-lg p-6 max-w-3xl mx-auto mb-10">
-              <h3 className="text-lg font-semibold mb-4 text-blue-900">Pass Options</h3>
+              <h3 className="text-lg font-semibold mb-6 text-blue-900">Choose Your Pass Format</h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-white p-4 rounded-lg border border-blue-100 flex items-center">
-                  <div className="bg-blue-50 p-2 rounded-full mr-3">
-                    <Package className="h-5 w-5 text-blue-600" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {/* Virtual Pass Card */}
+                <div className="bg-white p-6 rounded-lg border border-blue-100 flex flex-col h-full">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-blue-50 p-3 rounded-full mr-3">
+                      <Smartphone className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-blue-900">Virtual Pass</h4>
                   </div>
-                  <div>
-                    <h4 className="font-medium text-blue-900">Physical Pass</h4>
-                    <p className="text-sm text-gray-600">Delivered to your door</p>
+                  
+                  <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700 mb-6 flex-grow">
+                    <li>Instant delivery to your email</li>
+                    <li>Easy access via your smartphone</li>
+                    <li>QR code for quick scanning</li>
+                    <li>Eco-friendly option</li>
+                    <li>Free cancelation within 24 hours</li>
+                  </ul>
+                  
+                  <div className="bg-blue-50 rounded-md p-3 text-center text-blue-800 font-medium">
+                    Standard Price
                   </div>
                 </div>
                 
-                <div className="bg-white p-4 rounded-lg border border-blue-100 flex items-center">
-                  <div className="bg-blue-50 p-2 rounded-full mr-3">
-                    <Gift className="h-5 w-5 text-blue-600" />
+                {/* Physical Pass Card */}
+                <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-lg border-2 border-blue-300 flex flex-col h-full shadow-md relative overflow-hidden">
+                  <div className="absolute -right-6 -top-6 w-24 h-24 bg-blue-600 rotate-45 z-0"></div>
+                  <Badge className="absolute right-3 top-3 bg-blue-600 z-10">PREMIUM</Badge>
+                  
+                  <div className="flex items-center mb-4 relative z-10">
+                    <div className="bg-blue-100 p-3 rounded-full mr-3">
+                      <Package className="h-6 w-6 text-blue-700" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-blue-900">Physical Pass</h4>
                   </div>
-                  <div>
-                    <h4 className="font-medium text-blue-900">Gift Option</h4>
-                    <p className="text-sm text-gray-600">Perfect for friends & family</p>
-                  </div>
-                </div>
-                
-                <div className="bg-white p-4 rounded-lg border border-blue-100 flex items-center">
-                  <div className="bg-blue-50 p-2 rounded-full mr-3">
-                    <Star className="h-5 w-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-blue-900">Premium Pass</h4>
-                    <p className="text-sm text-gray-600">VIP privileges included</p>
+                  
+                  <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700 mb-6 flex-grow relative z-10">
+                    <li>Premium plastic card with personalization</li>
+                    <li>Perfect as a gift (special gift packaging available)</li>
+                    <li>Delivery to your hotel/accommodation in Madeira</li>
+                    <li>Priority boarding on all routes</li>
+                    <li>Free cancelation and route changes</li>
+                    <li>Dedicated customer support</li>
+                    <li>Souvenir to take home</li>
+                  </ul>
+                  
+                  <div className="bg-blue-100 rounded-md p-3 text-center text-blue-800 font-medium relative z-10">
+                    +€5.00 (Delivery Fee)
                   </div>
                 </div>
               </div>
               
-              <div className="mb-6 bg-white p-4 rounded-lg border border-blue-100">
-                <h4 className="font-medium text-blue-900 mb-2">Physical Delivery</h4>
-                <p className="text-sm text-gray-600 mb-3">Have your pass delivered to your hotel or accommodation in Madeira for an additional fee of €5.00. Delivery is typically completed within 24 hours of purchase.</p>
-                <div className="flex items-center gap-2">
+              <div className="bg-white p-5 rounded-lg border border-blue-100 mb-6">
+                <div className="flex justify-between items-center mb-3">
+                  <div className="flex items-center">
+                    <Gift className="h-5 w-5 text-blue-600 mr-2" />
+                    <h4 className="font-medium text-blue-900">Gift Option</h4>
+                  </div>
+                  <Switch id="gift-option" />
+                </div>
+                <p className="text-sm text-gray-600 mb-3">
+                  Select this option to purchase a pass as a gift. For virtual passes, we'll provide a beautifully designed digital gift card. For physical passes, we'll include elegant gift packaging with your personal message.
+                </p>
+                <div className="bg-blue-50 p-3 rounded-md text-sm text-blue-700">
+                  <strong>Note:</strong> Gift options are only available for pre-paid passes and cannot be used with pay-as-you-go options.
+                </div>
+              </div>
+              
+              <div className="mb-6 bg-white p-5 rounded-lg border border-blue-100">
+                <h4 className="font-medium text-blue-900 mb-2">Physical Pass Delivery</h4>
+                <p className="text-sm text-gray-600 mb-3">Physical passes can be delivered to your hotel or accommodation in Madeira for an additional fee of €5.00. Delivery is typically completed within 24 hours of purchase.</p>
+                <div className="flex flex-wrap items-center gap-2 mb-3">
                   <span className="text-sm font-medium text-blue-900">Available delivery areas:</span>
                   <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Funchal</span>
                   <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Caniço</span>
                   <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Calheta</span>
                 </div>
-              </div>
-              
-              <div className="mb-6 bg-white p-4 rounded-lg border border-blue-100">
-                <h4 className="font-medium text-blue-900 mb-2">Gift a Pass</h4>
-                <p className="text-sm text-gray-600 mb-3">Purchase a pass as a gift for friends or family. We'll provide a beautifully designed digital gift card that you can send to the recipient, including a QR code for pass activation.</p>
-              </div>
-              
-              <div className="bg-white p-4 rounded-lg border border-blue-100">
-                <h4 className="font-medium text-blue-900 mb-2">Premium Pass Benefits</h4>
-                <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700 mb-3">
-                  <li>Priority boarding on all routes</li>
-                  <li>Access to exclusive premium lounge at Funchal terminal</li>
-                  <li>Complimentary refreshments on board</li>
-                  <li>Free cancelation and route changes</li>
-                  <li>Dedicated customer support line</li>
-                </ul>
-                <div className="text-sm text-gray-600">
-                  <span className="font-medium">Premium surcharge:</span> Additional €15.00 for 3-Day, €25.00 for Weekly, and €60.00 for Monthly passes
-                </div>
+                <p className="text-xs text-gray-500">For delivery to other areas of Madeira, additional fees may apply. Please contact customer service for details.</p>
               </div>
             </div>
             
