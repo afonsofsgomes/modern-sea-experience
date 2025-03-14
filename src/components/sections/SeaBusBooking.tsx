@@ -3,7 +3,8 @@ import { BokunWidget } from "@/components/BokunWidget";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { CalendarClock, Calendar, CalendarDays } from "lucide-react";
+import { CalendarClock, Calendar, CalendarDays, Package, Gift, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const SeaBusBooking = () => {
   return (
@@ -75,6 +76,72 @@ export const SeaBusBooking = () => {
                   </div>
                 </motion.div>
               ))}
+            </div>
+            
+            <div className="bg-blue-50 rounded-lg p-6 max-w-3xl mx-auto mb-10">
+              <h3 className="text-lg font-semibold mb-4 text-blue-900">Pass Options</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div className="bg-white p-4 rounded-lg border border-blue-100 flex items-center">
+                  <div className="bg-blue-50 p-2 rounded-full mr-3">
+                    <Package className="h-5 w-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-blue-900">Physical Pass</h4>
+                    <p className="text-sm text-gray-600">Delivered to your door</p>
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg border border-blue-100 flex items-center">
+                  <div className="bg-blue-50 p-2 rounded-full mr-3">
+                    <Gift className="h-5 w-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-blue-900">Gift Option</h4>
+                    <p className="text-sm text-gray-600">Perfect for friends & family</p>
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg border border-blue-100 flex items-center">
+                  <div className="bg-blue-50 p-2 rounded-full mr-3">
+                    <Star className="h-5 w-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-blue-900">Premium Pass</h4>
+                    <p className="text-sm text-gray-600">VIP privileges included</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mb-6 bg-white p-4 rounded-lg border border-blue-100">
+                <h4 className="font-medium text-blue-900 mb-2">Physical Delivery</h4>
+                <p className="text-sm text-gray-600 mb-3">Have your pass delivered to your hotel or accommodation in Madeira for an additional fee of €5.00. Delivery is typically completed within 24 hours of purchase.</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-blue-900">Available delivery areas:</span>
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Funchal</span>
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Caniço</span>
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Calheta</span>
+                </div>
+              </div>
+              
+              <div className="mb-6 bg-white p-4 rounded-lg border border-blue-100">
+                <h4 className="font-medium text-blue-900 mb-2">Gift a Pass</h4>
+                <p className="text-sm text-gray-600 mb-3">Purchase a pass as a gift for friends or family. We'll provide a beautifully designed digital gift card that you can send to the recipient, including a QR code for pass activation.</p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg border border-blue-100">
+                <h4 className="font-medium text-blue-900 mb-2">Premium Pass Benefits</h4>
+                <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700 mb-3">
+                  <li>Priority boarding on all routes</li>
+                  <li>Access to exclusive premium lounge at Funchal terminal</li>
+                  <li>Complimentary refreshments on board</li>
+                  <li>Free cancelation and route changes</li>
+                  <li>Dedicated customer support line</li>
+                </ul>
+                <div className="text-sm text-gray-600">
+                  <span className="font-medium">Premium surcharge:</span> Additional €15.00 for 3-Day, €25.00 for Weekly, and €60.00 for Monthly passes
+                </div>
+              </div>
             </div>
             
             <div className="bg-blue-50 rounded-lg p-6 max-w-3xl mx-auto">
