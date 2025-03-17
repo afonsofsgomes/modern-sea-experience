@@ -16,6 +16,18 @@ body, html {
   padding: 0;
 }
 
+/* Section scroll offset - this helps with section title visibility when scrolling */
+section[id] {
+  scroll-margin-top: 100px; /* Provides extra space for fixed navbar */
+}
+
+/* Section headings should have adequate top margin */
+section[id] h1,
+section[id] h2,
+section[id] h3 {
+  padding-top: 1rem;
+}
+
 /* Updated CTA button styles */
 .btn-cta {
   display: block !important;

@@ -56,7 +56,15 @@ export const Navbar = () => {
       
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+          // Get the navbar height to use as offset
+          const navbar = document.querySelector('header');
+          const navbarHeight = navbar ? navbar.offsetHeight : 80; // Default fallback height
+          
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementPosition - navbarHeight - 20, // Extra 20px buffer
+            behavior: "smooth"
+          });
         }, 300);
       }
     }
@@ -71,7 +79,15 @@ export const Navbar = () => {
       
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        // Get the navbar height to use as offset
+        const navbar = document.querySelector('header');
+        const navbarHeight = navbar ? navbar.offsetHeight : 80; // Default fallback height
+        
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - navbarHeight - 20, // Extra 20px buffer
+          behavior: "smooth"
+        });
       }
     } else {
       navigate(`/#${sectionId}`);
