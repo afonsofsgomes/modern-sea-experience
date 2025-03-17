@@ -24,7 +24,8 @@ export const Navbar = () => {
       "/schedule",
       "/privacy-policy",
       "/terms",
-      "/cookies"
+      "/cookies",
+      "/booking"  // Added booking page to the white background pages list
     ];
     
     const shouldForceColor = whiteBackgroundPages.includes(location.pathname);
