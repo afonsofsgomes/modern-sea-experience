@@ -69,11 +69,8 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ['Nexa', 'Inter', 'sans-serif'],
-				display: ['Nexa', 'Playfair Display', 'serif'],
-				nexa: ['Nexa', 'sans-serif'],
-				'nexa-light': ['Nexa', 'sans-serif'],
-				'nexa-bold': ['Nexa', 'sans-serif'],
+				sans: ['Inter', 'sans-serif'],
+				display: ['Playfair Display', 'serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
