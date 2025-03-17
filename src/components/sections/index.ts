@@ -25,6 +25,7 @@ export * from './PrivateCruiseHero';
 export * from './PrivateCruiseOptions';
 export * from './PrivateCruiseFeatures';
 export * from './PrivateCruiseBooking';
+export * from './PrivateCruiseInfo';
 
 // New export
 export { SeaBusDestinations } from "./SeaBusDestinations";
