@@ -1,4 +1,5 @@
-import { Check, Shield, Wind } from "lucide-react";
+
+import { Check, Shield, Wind, Clock } from "lucide-react";
 
 export const SeaBusFeatures = () => {
   return (
