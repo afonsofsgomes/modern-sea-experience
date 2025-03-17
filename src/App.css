@@ -16,6 +16,29 @@ body, html {
   padding: 0;
 }
 
+/* Updated CTA button styles */
+.btn-cta {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-width: 180px !important;
+  font-size: 1.1rem !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+/* Ensure action buttons are centered */
+.flex-action-btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Increase icon sizes */
+.feature-icon svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+
 /* Add space between hero and content sections */
 section.relative[class*="h-["] {
   padding-bottom: 2rem;
@@ -111,6 +134,16 @@ body.menu-open {
   .landscape\:mt-24 {
     margin-top: 6rem !important; /* Ensure this is adequately applied */
   }
+}
+
+/* Make destination text larger */
+.destination-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.destination-description {
+  font-size: 1.1rem !important;
 }
 
 .logo {

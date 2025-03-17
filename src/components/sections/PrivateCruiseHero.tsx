@@ -18,7 +18,7 @@ export const PrivateCruiseHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" 
+          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" 
           alt="Private Cruise" 
           className="w-full h-full object-cover object-center opacity-70"
           loading="eager"
@@ -32,7 +32,7 @@ export const PrivateCruiseHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4 landscape:mt-24"
+          className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-2 md:mb-4 landscape:mt-24"
         >
           PRIVATE
         </motion.h1>
@@ -40,7 +40,7 @@ export const PrivateCruiseHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-[#E95543] text-white px-6 py-2 rounded-md mb-4 md:mb-6"
+          className="bg-[#E95543] text-white px-8 py-3 rounded-md mb-6 md:mb-8 text-xl"
         >
           CRUISE - SPECIAL REQUEST
         </motion.div>
@@ -48,41 +48,41 @@ export const PrivateCruiseHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl max-w-3xl mb-6 md:mb-8"
+          className="text-xl md:text-2xl max-w-3xl mb-8 md:mb-10"
         >
           Your Private Cruise
         </motion.p>
         
-        {/* Icon Row with fixed sizes and better alignment */}
+        {/* Icon Row with larger sizes */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-4 md:gap-8 mb-6 md:mb-8"
+          className="flex flex-wrap justify-center gap-8 md:gap-12 mb-8 md:mb-10"
         >
-          <div className="flex flex-col items-center justify-center w-16 md:w-20">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
-              <Clock className="h-5 w-5 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Clock className="h-7 w-7 md:h-8 md:w-8" />
             </div>
-            <span className="text-xs md:text-sm text-center">2-4h</span>
+            <span className="text-sm md:text-base text-center font-medium">2.5h</span>
           </div>
-          <div className="flex flex-col items-center justify-center w-16 md:w-20">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
-              <Users className="h-5 w-5 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Users className="h-7 w-7 md:h-8 md:w-8" />
             </div>
-            <span className="text-xs md:text-sm text-center">up to 12 PAX</span>
+            <span className="text-sm md:text-base text-center font-medium">up to 12 PAX</span>
           </div>
-          <div className="flex flex-col items-center justify-center w-16 md:w-20">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
-              <Wifi className="h-5 w-5 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Wifi className="h-7 w-7 md:h-8 md:w-8" />
             </div>
-            <span className="text-xs md:text-sm text-center">FREE WiFi</span>
+            <span className="text-sm md:text-base text-center font-medium">FREE WiFi</span>
           </div>
-          <div className="flex flex-col items-center justify-center w-16 md:w-20">
-            <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
-              <Calendar className="h-5 w-5 md:h-6 md:w-6" />
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Calendar className="h-7 w-7 md:h-8 md:w-8" />
             </div>
-            <span className="text-xs md:text-sm text-center">REFRESHMENTS</span>
+            <span className="text-sm md:text-base text-center font-medium">REFRESHMENTS</span>
           </div>
         </motion.div>
         
@@ -90,10 +90,11 @@ export const PrivateCruiseHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex justify-center w-full"
         >
           <Button 
             size="lg" 
-            className="bg-[#E95543] hover:bg-[#E95543]/90 text-white"
+            className="bg-[#E95543] hover:bg-[#E95543]/90 text-white text-lg px-10 py-4"
             onClick={scrollToBooking}
           >
             BOOK NOW

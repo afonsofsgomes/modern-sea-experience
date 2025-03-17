@@ -8,12 +8,12 @@ export const FooterBranding: React.FC = () => {
     <div className="col-span-1 md:col-span-1">
       <Link
         to="/"
-        className="text-xl font-display font-medium tracking-tight inline-block mb-6"
+        className="text-2xl font-display font-medium tracking-tight inline-block mb-6"
       >
         SeaYou
       </Link>
-      <p className="text-muted-foreground mb-6 max-w-xs">
-        Maritime tourism services in Madeira. Seabus connections, private cruises, and tours to Porto Santo.
+      <p className="text-base text-muted-foreground mb-6 max-w-xs">
+        Maritime tourism services in Madeira. Catamaran connections, private cruises, and tours to Porto Santo.
       </p>
       <FooterSocialLinks />
     </div>

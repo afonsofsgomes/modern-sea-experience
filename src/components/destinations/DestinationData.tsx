@@ -1,5 +1,5 @@
 
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar } from "lucide-react";
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar } from "lucide-react";
 
 export type FeatureType = {
   icon: React.ReactNode;
@@ -45,7 +45,7 @@ export const destinationData: DestinationType[] = [
           { icon: <Coffee className="w-5 h-5 text-secondary" />, text: "Historic Old Town with cafés" },
           { icon: <ShoppingBag className="w-5 h-5 text-secondary" />, text: "Vibrant Farmers' Market" },
           { icon: <Trees className="w-5 h-5 text-secondary" />, text: "Tropical gardens and parks" },
-          { icon: <Camera className="w-5 h-5 text-secondary" />, text: "CR7 Museum & cable car" }
+          { icon: <CableCar className="w-5 h-5 text-secondary" />, text: "Monte Cable Car Experience" }
         ],
       },
       {
@@ -83,20 +83,20 @@ export const destinationData: DestinationType[] = [
   },
   {
     name: "Caniçal",
-    image: "https://extranet.seayou.pt/photos/Canical.jpg",
-    description: "Experience the beautiful fishing village of Caniçal, the gateway to the stunning Ponta de São Lourenço nature reserve. Enjoy fresh seafood in the local restaurants and hike along dramatic coastal trails.",
+    image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    description: "Discover the raw beauty of the North Coast from the comfort and privacy of our catamaran. Sail along dramatic volcanic cliffs, marvel at the iconic Ponta de São Lourenço Lighthouse, and dive into crystal-clear waters surrounded by breathtaking scenery. An unforgettable experience, where nature's greatness meets total relaxation.",
     features: [
-      { icon: <MapPin className="w-5 h-5 text-secondary" />, text: "Ponta de São Lourenço trails" },
-      { icon: <Fish className="w-5 h-5 text-secondary" />, text: "Fresh seafood restaurants" },
-      { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Volcanic Beaches" },
-      { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Starting point to visit Desertas island" }
+      { icon: <MapPin className="w-5 h-5 text-secondary" />, text: "Stunning Views" },
+      { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Crystal Waters" },
+      { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Caves" },
+      { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Comfort of Privacy" }
     ],
     link: "/private-cruise",
     buttonText: "Book Private Cruise",
     stats: [
       { value: "2.5h", label: "Duration" },
-      { value: "18", label: "Max Guests" },
-      { value: "Tailor Made", label: "Experience" }
+      { value: "12", label: "Max Guests" },
+      { value: "13:00", label: "Departure Time" }
     ],
     experience: "Private North Coast Cruise",
     experienceDesc: "Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline.",
@@ -104,20 +104,20 @@ export const destinationData: DestinationType[] = [
   },
   {
     name: "Calheta",
-    image: "https://extranet.seayou.pt/photos/Calheta.jpg",
-    description: "Relax on Calheta's golden sandy beach, one of the few on Madeira Island. Visit the rum distillery, art center, or simply enjoy the sun and calm waters of this charming coastal town.",
+    image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    description: "Sail to the sunniest part of Madeira and experience the island's southern charm. Glide past small waterfalls, famous banana plantations, and picturesque villages. And for a truly unique moment, take a refreshing dip near a secluded beach, accessible only by boat – a hidden gem that could be yours alone.",
     features: [
-      { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Golden sand beach" },
-      { icon: <Utensils className="w-5 h-5 text-secondary" />, text: "Rum distillery tastings" },
-      { icon: <Route className="w-5 h-5 text-secondary" />, text: "Levadas: Rabaçal, 25 Fontes" },
-      { icon: <Sunset className="w-5 h-5 text-secondary" />, text: "Beautiful sunset point" }
+      { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Charming Coastal Villages" },
+      { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Crystal Waters" },
+      { icon: <Route className="w-5 h-5 text-secondary" />, text: "Secluded Beaches" },
+      { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Comfort of Privacy" }
     ],
     link: "/private-cruise",
     buttonText: "Book Private Cruise",
     stats: [
       { value: "2.5h", label: "Duration" },
-      { value: "18", label: "Max Guests" },
-      { value: "Tailor Made", label: "Experience" }
+      { value: "12", label: "Max Guests" },
+      { value: "13:00", label: "Departure Time" }
     ],
     experience: "Private South Coast Cruise",
     experienceDesc: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences.",
@@ -131,7 +131,7 @@ export const destinationData: DestinationType[] = [
       { icon: <Bird className="w-5 h-5 text-secondary" />, text: "Rare seabirds and marine life" },
       { icon: <Anchor className="w-5 h-5 text-secondary" />, text: "Pristine natural reserves" },
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Volcanic Beaches" },
-      { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Natural Deep caves" }
+      { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Natural Caves" }
     ],
     link: "/desertas",
     buttonText: "Book Desertas Adventure",
@@ -146,7 +146,7 @@ export const destinationData: DestinationType[] = [
   },
   {
     name: "Porto Santo",
-    image: "https://extranet.seayou.pt/photos/pxo.jpg",
+    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
     features: [
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
@@ -157,9 +157,9 @@ export const destinationData: DestinationType[] = [
     link: "/porto-santo",
     buttonText: "Book Porto Santo Trip",
     stats: [
-      { value: "2h", label: "Round-Sea Trip Time" },
+      { value: "1h", label: "Sea Trip" },
       { value: "9km", label: "Golden Beach" },
-      { value: "Wed-Fri", label: "Departures" }
+      { value: "9:30", label: "Departure Time" }
     ],
     experience: "Porto Santo Golden Island",
     experienceDesc: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service.",

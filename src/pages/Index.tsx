@@ -17,6 +17,16 @@ const Index = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    // Update any specific text elements that need changing
+    const elements = document.querySelectorAll('.text-to-update');
+    elements.forEach(el => {
+      if (el.textContent?.includes('Our SeaBus Catamaran')) {
+        el.textContent = el.textContent.replace('Our SeaBus Catamaran', 'Our Catamaran');
+      }
+    });
+  }, []);
+
   return (
     <div className="relative">
       <MetaTags 
