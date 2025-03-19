@@ -55,7 +55,7 @@ export const MultiDestinationCard = ({
               }}
             />
             <div className="absolute bottom-4 left-4 z-20">
-              <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">
+              <span className="text-white text-lg sm:text-xl font-medium drop-shadow-md">
                 {dest.name}
               </span>
             </div>
@@ -78,7 +78,7 @@ export const MultiDestinationCard = ({
                 }}
               />
               <div className="absolute bottom-4 left-4 z-20">
-                <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white text-xs font-medium shadow-lg border border-white/20">
+                <span className="text-white text-lg font-medium drop-shadow-md">
                   {dest.name}
                 </span>
               </div>
@@ -144,7 +144,7 @@ export const MultiDestinationCard = ({
             ))}
           </div>
           
-          <Link to={link} className="mt-auto">
+          <Link to={link} className="mt-auto flex justify-center">
             <Button size="lg" className="w-full sm:w-auto bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
               <span className="relative z-10">{buttonText}</span>
               <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>

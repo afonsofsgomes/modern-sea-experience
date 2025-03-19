@@ -1,4 +1,3 @@
-
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar } from "lucide-react";
 
 export type FeatureType = {
@@ -79,7 +78,7 @@ export const destinationData: DestinationType[] = [
       { value: "Tue-Sun", label: "Departures" }
     ],
     experience: "SeaBus Connections",
-    experienceDesc: "Fast & comfortable sea transportation with panoramic views between key destinations in Madeira."
+    experienceDesc: "Fast and comfortable sea transportation with panoramic views between key destinations in Madeira."
   },
   {
     name: "Caniçal",
