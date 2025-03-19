@@ -52,12 +52,12 @@ export const DestinationCard = ({
           }}
         />
         <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
-          <span className="px-4 py-2 sm:px-5 sm:py-2.5 bg-secondary/80 backdrop-blur-sm rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
+          <span className="px-3 py-1 sm:px-4 sm:py-2 bg-secondary/80 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-medium shadow-lg">
             {experience}
           </span>
         </div>
         <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 z-20">
-          <span className="px-4 py-2 sm:px-5 sm:py-2.5 bg-black/40 backdrop-blur-md rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
+          <span className="px-3 py-1 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-medium shadow-lg border border-white/20">
             {name}
           </span>
         </div>
@@ -101,14 +101,12 @@ export const DestinationCard = ({
           ))}
         </div>
         
-        <div className="flex justify-center w-full">
-          <Link to={link}>
-            <Button size="lg" className="w-full sm:w-auto bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
-              <span className="relative z-10">{buttonText}</span>
-              <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-            </Button>
-          </Link>
-        </div>
+        <Link to={link} className="mt-auto">
+          <Button size="lg" className="w-full sm:w-auto bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
+            <span className="relative z-10">{buttonText}</span>
+            <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
+          </Button>
+        </Link>
       </div>
     </div>
   );
