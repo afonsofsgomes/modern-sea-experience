@@ -101,12 +101,14 @@ export const DestinationCard = ({
           ))}
         </div>
         
-        <Link to={link} className="mt-auto">
-          <Button size="lg" className="w-full sm:w-auto bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
-            <span className="relative z-10">{buttonText}</span>
-            <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-          </Button>
-        </Link>
+        <div className="flex justify-center mt-auto">
+          <Link to={link}>
+            <Button size="lg" className="bg-secondary text-white relative overflow-hidden group shadow-lg shadow-secondary/25 hover:shadow-secondary/40 border-2 border-secondary/50 hover:scale-105 transition-all duration-300">
+              <span className="relative z-10">{buttonText}</span>
+              <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
