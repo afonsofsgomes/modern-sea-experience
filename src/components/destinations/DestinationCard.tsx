@@ -38,23 +38,36 @@ export const DestinationCard = ({
   experienceDesc,
   isOdd
 }: DestinationCardProps) => {
+  // Map names to descriptions for image alt text
+  const getImageDescription = (name: string) => {
+    switch (name) {
+      case "Caniçal":
+        return "Ponta de São Lourenço";
+      case "Calheta":
+        return "Marina da Calheta";
+      case "Porto Santo":
+        return "Porto Santo Island";
+      default:
+        return name;
+    }
+  };
+
   return (
     <div className={`flex flex-col lg:flex-row ${isOdd ? 'lg:flex-row-reverse' : ''}`}>
       <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-auto">
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10"></div>
         <img 
           src={image} 
-          alt={name}
+          alt={getImageDescription(name)}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80';
           }}
         />
-        {/* Removed the experience tag that was here */}
         <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 z-20">
           <span className="text-white text-base sm:text-xl font-medium drop-shadow-md">
-            {name}
+            {getImageDescription(name)}
           </span>
         </div>
       </div>

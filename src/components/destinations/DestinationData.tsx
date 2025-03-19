@@ -83,7 +83,7 @@ export const destinationData: DestinationType[] = [
   },
   {
     name: "Caniçal",
-    image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://extranet.seayou.pt/photos/pta-s-lourenco.jpg",
     description: "Discover the raw beauty of the North Coast from the comfort and privacy of our catamaran. Sail along dramatic volcanic cliffs, marvel at the iconic Ponta de São Lourenço Lighthouse, and dive into crystal-clear waters surrounded by breathtaking scenery. An unforgettable experience, where nature's greatness meets total relaxation.",
     features: [
       { icon: <Eye className="w-5 h-5 text-secondary" />, text: "Stunning Views" },
@@ -104,7 +104,7 @@ export const destinationData: DestinationType[] = [
   },
   {
     name: "Calheta",
-    image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://extranet.seayou.pt/photos/calheta-prd.jpg",
     description: "Sail to the sunniest part of Madeira and experience the island's southern charm. Glide past small waterfalls, famous banana plantations, and picturesque villages. And for a truly unique moment, take a refreshing dip near a secluded beach, accessible only by boat – a hidden gem that could be yours alone.",
     features: [
       { icon: <Sun className="w-5 h-5 text-secondary" />, text: "Charming Coastal Villages" },
@@ -146,7 +146,7 @@ export const destinationData: DestinationType[] = [
   },
   {
     name: "Porto Santo",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://extranet.seayou.pt/photos/pxo.jpg",
     description: "Discover Porto Santo's famous 9km golden beach, known for its therapeutic properties. This tranquil island offers the perfect escape with crystal-clear waters, golf courses, and a relaxed atmosphere.",
     features: [
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "9km of therapeutic golden beach" },
