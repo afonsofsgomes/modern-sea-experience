@@ -41,7 +41,7 @@ export const Routes = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div className="max-w-3xl mx-auto text-center mb-16" initial="hidden" animate={routesInView ? "visible" : "hidden"} variants={containerVariants}>
           <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
-            Our SeaBus Catamaran
+            Our Catamaran
           </motion.span>
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-display font-medium mb-6">
             Comfortable & Modern Vessel
