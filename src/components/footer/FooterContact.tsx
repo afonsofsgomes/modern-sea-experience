@@ -10,14 +10,6 @@ export const FooterContact: React.FC = () => {
       <ul className="space-y-3">
         <li>
           <a
-            href="#"
-            className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
-          >
-            <MapPin className="h-4 w-4 mr-2" /> Funchal Marina, Madeira
-          </a>
-        </li>
-        <li>
-          <a
             href="mailto:support@seayou.pt"
             className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
           >
@@ -37,7 +29,7 @@ export const FooterContact: React.FC = () => {
             to="/port-terminal"
             className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
           >
-            <Anchor className="h-4 w-4 mr-2" /> Funchal Port Terminal
+            <Anchor className="h-4 w-4 mr-2" /> Meeting Points
           </Link>
         </li>
         <li>
