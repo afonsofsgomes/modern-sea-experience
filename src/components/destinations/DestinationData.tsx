@@ -1,5 +1,5 @@
 
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar, Eye, Cave } from "lucide-react";
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar, Eye } from "lucide-react";
 
 export type FeatureType = {
   icon: React.ReactNode;
@@ -88,7 +88,7 @@ export const destinationData: DestinationType[] = [
     features: [
       { icon: <Eye className="w-5 h-5 text-secondary" />, text: "Stunning Views" },
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Crystal Waters" },
-      { icon: <Cave className="w-5 h-5 text-secondary" />, text: "Caves and Volcanic Beaches" },
+      { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Caves and Volcanic Beaches" },
       { icon: <Users className="w-5 h-5 text-secondary" />, text: "Comfort of Privacy" }
     ],
     link: "/private-cruise",
