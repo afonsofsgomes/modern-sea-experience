@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -103,7 +102,7 @@ export const Newsletter = () => {
               
               <div>
                 <h4 className="font-medium mb-2">Working Hours</h4>
-                <p className="text-white/80">Monday to Sunday: 9:00 AM - 7:00 PM</p>
+                <p className="text-white/80">Tuesday to Sunday: 9:00 AM - 7:00 PM</p>
                 <p className="text-white/80">Available for bookings year-round</p>
               </div>
             </motion.div>
