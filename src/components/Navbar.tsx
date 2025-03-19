@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NavbarLogo } from "./navbar/NavbarLogo";
@@ -17,15 +16,13 @@ export const Navbar = () => {
 
   useEffect(() => {
     const whiteBackgroundPages = [
-      "/our-fleet", 
-      "/safety-measures", 
       "/careers", 
       "/port-terminal",
       "/schedule",
       "/privacy-policy",
       "/terms",
       "/cookies",
-      "/booking"  // Added booking page to the white background pages list
+      "/booking"
     ];
     
     const shouldForceColor = whiteBackgroundPages.includes(location.pathname);
@@ -56,13 +53,12 @@ export const Navbar = () => {
       
       if (element) {
         setTimeout(() => {
-          // Get the navbar height to use as offset
           const navbar = document.querySelector('header');
-          const navbarHeight = navbar ? navbar.offsetHeight : 80; // Default fallback height
+          const navbarHeight = navbar ? navbar.offsetHeight : 80;
           
           const elementPosition = element.getBoundingClientRect().top + window.scrollY;
           window.scrollTo({
-            top: elementPosition - navbarHeight - 20, // Extra 20px buffer
+            top: elementPosition - navbarHeight - 20,
             behavior: "smooth"
           });
         }, 300);
@@ -79,13 +75,12 @@ export const Navbar = () => {
       
       const element = document.getElementById(sectionId);
       if (element) {
-        // Get the navbar height to use as offset
         const navbar = document.querySelector('header');
-        const navbarHeight = navbar ? navbar.offsetHeight : 80; // Default fallback height
+        const navbarHeight = navbar ? navbar.offsetHeight : 80;
         
         const elementPosition = element.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({
-          top: elementPosition - navbarHeight - 20, // Extra 20px buffer
+          top: elementPosition - navbarHeight - 20,
           behavior: "smooth"
         });
       }

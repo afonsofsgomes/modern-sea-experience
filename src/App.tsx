@@ -11,8 +11,6 @@ import PrivateCruise from "./pages/PrivateCruise";
 import PortoSanto from "./pages/PortoSanto";
 import Desertas from "./pages/Desertas";
 import NotFound from "./pages/NotFound";
-import OurFleet from "./pages/OurFleet";
-import SafetyMeasures from "./pages/SafetyMeasures";
 import Careers from "./pages/Careers";
 import GroupBookings from "./pages/GroupBookings";
 import CorporateEvents from "./pages/CorporateEvents";
@@ -38,8 +36,6 @@ const App = () => (
             <Route path="/private-cruise" element={<PrivateCruise />} />
             <Route path="/porto-santo" element={<PortoSanto />} />
             <Route path="/desertas" element={<Desertas />} />
-            <Route path="/our-fleet" element={<OurFleet />} />
-            <Route path="/safety-measures" element={<SafetyMeasures />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/group-bookings" element={<GroupBookings />} />
             <Route path="/corporate-events" element={<CorporateEvents />} />

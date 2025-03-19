@@ -17,22 +17,6 @@ export const FooterCompany: React.FC = () => {
         </li>
         <li>
           <Link
-            to="/our-fleet"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Our Fleet
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/safety-measures"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Safety Measures
-          </Link>
-        </li>
-        <li>
-          <Link
             to="/careers"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
