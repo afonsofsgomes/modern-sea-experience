@@ -1,4 +1,5 @@
-import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar } from "lucide-react";
+
+import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar, Eye, Cave } from "lucide-react";
 
 export type FeatureType = {
   icon: React.ReactNode;
@@ -85,10 +86,10 @@ export const destinationData: DestinationType[] = [
     image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     description: "Discover the raw beauty of the North Coast from the comfort and privacy of our catamaran. Sail along dramatic volcanic cliffs, marvel at the iconic Ponta de São Lourenço Lighthouse, and dive into crystal-clear waters surrounded by breathtaking scenery. An unforgettable experience, where nature's greatness meets total relaxation.",
     features: [
-      { icon: <MapPin className="w-5 h-5 text-secondary" />, text: "Stunning Views" },
+      { icon: <Eye className="w-5 h-5 text-secondary" />, text: "Stunning Views" },
       { icon: <Waves className="w-5 h-5 text-secondary" />, text: "Crystal Waters" },
-      { icon: <Mountain className="w-5 h-5 text-secondary" />, text: "Caves" },
-      { icon: <Ship className="w-5 h-5 text-secondary" />, text: "Comfort of Privacy" }
+      { icon: <Cave className="w-5 h-5 text-secondary" />, text: "Caves and Volcanic Beaches" },
+      { icon: <Users className="w-5 h-5 text-secondary" />, text: "Comfort of Privacy" }
     ],
     link: "/private-cruise",
     buttonText: "Book Private Cruise",

@@ -51,11 +51,7 @@ export const DestinationCard = ({
             target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80';
           }}
         />
-        <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
-          <span className="px-3 py-1 sm:px-4 sm:py-2 bg-secondary/80 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-medium shadow-lg">
-            {experience}
-          </span>
-        </div>
+        {/* Removed the experience tag that was here */}
         <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 z-20">
           <span className="text-white text-base sm:text-xl font-medium drop-shadow-md">
             {name}
