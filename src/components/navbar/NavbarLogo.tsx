@@ -12,10 +12,6 @@ export const NavbarLogo: React.FC<NavbarLogoProps> = ({ scrolled = false }) => {
       <Link
         to="/"
         className="hover:opacity-80 transition-opacity"
-        onClick={(e) => {
-          e.preventDefault();
-          window.location.href = '/';
-        }}
       >
         <img 
           src={scrolled ? "https://extranet.seayou.pt/logos/logoblack.png" : "https://extranet.seayou.pt/logos/logowhite.png"} 

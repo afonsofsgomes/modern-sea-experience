@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
 
@@ -102,14 +102,6 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
             ))}
           </div>
           
-          <div className="flex items-center space-x-4 py-4">
-            <button
-              aria-label="Search"
-              className="p-2 rounded-full hover:bg-secondary/10 transition-colors"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-          </div>
           <Link
             to="/booking"
             className="text-lg font-medium py-2 border-b border-gray-100 block w-full text-center bg-secondary text-white rounded-md mt-4 p-3"
