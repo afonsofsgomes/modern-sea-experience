@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Clock, MapPin, Wifi, LockKeyhole, TicketCheck } from "lucide-react";
+import { Calendar, Clock, MapPin, Ship, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -41,7 +41,7 @@ export const Hero = () => {
         >
           <div className="flex flex-col items-center justify-center h-20 sm:h-24">
             <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-              <LockKeyhole className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Ship className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <span className="text-xs sm:text-sm text-center">Secure<br />Bookings</span>
           </div>
@@ -59,7 +59,7 @@ export const Hero = () => {
           </div>
           <div className="flex flex-col items-center justify-center h-20 sm:h-24">
             <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-              <TicketCheck className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Wifi className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
             <span className="text-xs sm:text-sm text-center">Flexible<br />Cancellations</span>
           </div>

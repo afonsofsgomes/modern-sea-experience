@@ -113,9 +113,9 @@ export const SeaBusDestinations = () => {
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-3 left-4">
-                  <h3 className="text-white text-lg font-medium">
+                  <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
                     {destination.name}
-                  </h3>
+                  </span>
                 </div>
               </div>
               
@@ -152,14 +152,12 @@ export const SeaBusDestinations = () => {
                   </div>
                 </div>
                 
-                <div className="flex justify-center">
-                  <Link to="/schedule">
-                    <Button className="bg-secondary hover:bg-secondary/90 text-white text-sm relative overflow-hidden group">
-                      <span className="relative z-10">View Schedule</span>
-                      <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
-                    </Button>
-                  </Link>
-                </div>
+                <Link to="/schedule" className="mt-auto block">
+                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white text-sm relative overflow-hidden group">
+                    <span className="relative z-10">View Schedule</span>
+                    <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           ))}
