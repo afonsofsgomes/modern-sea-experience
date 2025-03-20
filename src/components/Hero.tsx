@@ -132,31 +132,42 @@ export const Hero = () => {
                       <div className="relative h-36 sm:h-48">
                         {/* Special rendering for SeaBus with 3 destinations */}
                         {destination.name === "SeaBus Connections" ? (
-                          <div className="grid grid-cols-3 h-full">
-                            {seaBusLocations.map((location, idx) => {
-                              // Order: Calheta (left), Funchal (middle), Caniçal (right)
-                              let actualIdx = idx;
-                              if (location.name === "Funchal") actualIdx = 1;
-                              else if (location.name === "Calheta") actualIdx = 0;
-                              else if (location.name === "Caniçal") actualIdx = 2;
-                              
-                              return (
-                                <div 
-                                  key={location.name} 
-                                  className="relative h-full overflow-hidden"
-                                  style={{ order: actualIdx }}
-                                >
-                                  <OptimizedImage 
-                                    src={location.image} 
-                                    alt={location.name}
-                                    className="w-full h-full object-cover"
-                                  />
-                                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
-                                    <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">{location.name}</p>
-                                  </div>
-                                </div>
-                              );
-                            })}
+                          <div className="flex flex-row h-full">
+                            {/* First city: Calheta */}
+                            <div className="w-1/3 h-full relative overflow-hidden border-r border-white/10">
+                              <OptimizedImage 
+                                src="https://extranet.seayou.pt/photos/Calheta.jpg"
+                                alt="Calheta"
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
+                                <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">Calheta</p>
+                              </div>
+                            </div>
+                            
+                            {/* Second city: Funchal (middle) */}
+                            <div className="w-1/3 h-full relative overflow-hidden border-r border-white/10">
+                              <OptimizedImage 
+                                src="https://extranet.seayou.pt/photos/Funchal.jpg"
+                                alt="Funchal"
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
+                                <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">Funchal</p>
+                              </div>
+                            </div>
+                            
+                            {/* Third city: Caniçal */}
+                            <div className="w-1/3 h-full relative overflow-hidden">
+                              <OptimizedImage 
+                                src="https://extranet.seayou.pt/photos/Canical.jpg"
+                                alt="Caniçal"
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
+                                <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">Caniçal</p>
+                              </div>
+                            </div>
                           </div>
                         ) : (
                           <>
