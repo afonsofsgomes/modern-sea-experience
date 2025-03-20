@@ -46,7 +46,7 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </>
           )}
-          <h3 className="absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl">{destination.name}</h3>
+          <h3 className={`absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl ${destination.name === "SeaBus Connections" ? "pb-6 sm:pb-8" : ""}`}>{destination.name}</h3>
         </div>
         <CardContent className="p-3 sm:p-4 text-white flex flex-col h-[calc(100%-9rem)] sm:h-[calc(100%-12rem)]">
           <p className="text-xs sm:text-sm mb-2 sm:mb-4 flex-grow line-clamp-2 sm:line-clamp-3">{destination.experienceDesc}</p>
