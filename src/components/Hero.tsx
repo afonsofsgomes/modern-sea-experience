@@ -1,134 +1,157 @@
 
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, LockKeyhole, TicketCheck, Anchor, Palmtree, Mountain, Navigation } from "lucide-react";
+import { Calendar, Clock, MapPin, LockKeyhole, TicketCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { destinationData } from "@/components/destinations/DestinationData";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export const Hero = () => {
-  const experienceCards = [
-    {
-      title: "SeaBus",
-      description: "Fast sea connections",
-      icon: <Navigation className="h-6 w-6 text-white" />,
-      link: "/seabus",
-      color: "bg-gradient-to-br from-blue-600 to-blue-800"
-    },
-    {
-      title: "Porto Santo",
-      description: "Golden beach island",
-      icon: <Palmtree className="h-6 w-6 text-white" />,
-      link: "/porto-santo",
-      color: "bg-gradient-to-br from-amber-500 to-amber-700"
-    },
-    {
-      title: "Private",
-      description: "Exclusive experiences",
-      icon: <Anchor className="h-6 w-6 text-white" />,
-      link: "/private-cruise",
-      color: "bg-gradient-to-br from-teal-600 to-teal-800"
-    },
-    {
-      title: "Desertas",
-      description: "Wildlife adventure",
-      icon: <Mountain className="h-6 w-6 text-white" />,
-      link: "/desertas",
-      color: "bg-gradient-to-br from-emerald-600 to-emerald-800"
-    }
-  ];
-
-  return <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-[#253D7F]">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1628413283166-a7666966d26b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sea" className="w-full h-full object-cover object-bottom opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/30 to-[#253D7F]/80" />
+  return (
+    <section className="relative bg-[#253D7F] py-16 sm:py-20 md:py-24 min-h-[90vh] flex items-center">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1628413283166-a7666966d26b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+          alt="Sea" 
+          className="w-full h-full object-cover object-bottom opacity-60" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/40 to-[#253D7F]/90" />
       </div>
 
-      {/* Hero Content */}
-      <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white z-10">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5 }} 
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-4 max-w-4xl leading-tight pt-16 sm:pt-0 whitespace-normal sm:whitespace-nowrap landscape:mt-24"
-        >
-          Exclusive Sea Tours in Madeira
-        </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5, delay: 0.1 }} 
-          className="text-base sm:text-lg md:text-xl max-w-3xl mb-6 md:mb-8 px-2"
-        >
-          Enjoy unforgettable adventures with private experiences, SeaBus connections, tours to Desertas Island, and day trips to Porto Santo.
-        </motion.p>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Hero Text Content */}
+        <div className="text-center mb-12 md:mb-16">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 max-w-4xl mx-auto"
+          >
+            Exclusive Sea Tours in Madeira
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto mb-6"
+          >
+            Enjoy unforgettable adventures with private experiences, SeaBus connections, 
+            tours to Desertas Island, and day trips to Porto Santo.
+          </motion.p>
 
-        {/* Icon Row - Updated icons */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5, delay: 0.2 }} 
-          className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-8 w-full max-w-lg mx-auto px-2"
-        >
-          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
-            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-              <LockKeyhole className="h-5 w-5 sm:h-6 sm:w-6" />
+          {/* Trust Indicators */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-6 md:gap-10 mb-12 text-white/90"
+          >
+            <div className="flex items-center gap-2">
+              <div className="bg-white/10 p-2 rounded-full">
+                <LockKeyhole className="h-5 w-5" />
+              </div>
+              <span className="text-sm">Secure Booking</span>
             </div>
-            <span className="text-xs sm:text-sm text-center">Secure<br />Bookings</span>
-          </div>
-          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
-            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-              <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="flex items-center gap-2">
+              <div className="bg-white/10 p-2 rounded-full">
+                <Clock className="h-5 w-5" />
+              </div>
+              <span className="text-sm">24/7 Support</span>
             </div>
-            <span className="text-xs sm:text-sm text-center">24/7<br />Support</span>
-          </div>
-          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
-            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-              <MapPin className="h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="flex items-center gap-2">
+              <div className="bg-white/10 p-2 rounded-full">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <span className="text-sm">Trusted on TripAdvisor</span>
             </div>
-            <span className="text-xs sm:text-sm text-center">Trusted by<br />TripAdvisor</span>
-          </div>
-          <div className="flex flex-col items-center justify-center h-20 sm:h-24">
-            <div className="bg-white/20 p-2 sm:p-3 rounded-full mb-1 sm:mb-2 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12">
-              <TicketCheck className="h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="flex items-center gap-2">
+              <div className="bg-white/10 p-2 rounded-full">
+                <TicketCheck className="h-5 w-5" />
+              </div>
+              <span className="text-sm">Flexible Cancellation</span>
             </div>
-            <span className="text-xs sm:text-sm text-center">Flexible<br />Cancellations</span>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Experience Cards - New card-based layout */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5, delay: 0.3 }} 
-          className="w-full max-w-4xl px-4 mt-4"
+        {/* Featured Experiences Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="max-w-6xl mx-auto px-4"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {experienceCards.map((card, index) => (
-              <motion.div
-                key={card.title}
-                whileHover={{ y: -5, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 + (index * 0.1) }}
-              >
-                <Link to={card.link} className="block h-full">
-                  <Card className={`overflow-hidden border-none shadow-lg h-full ${card.color} hover:shadow-xl transition-all duration-300`}>
-                    <CardContent className="p-4 text-white flex flex-col items-center h-full">
-                      <div className="bg-white/20 p-3 rounded-full mb-3 flex items-center justify-center w-12 h-12">
-                        {card.icon}
+          <Carousel 
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {destinationData.map((destination, index) => (
+                <CarouselItem key={destination.name} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.3, 
+                      delay: 0.1 + (index * 0.1) 
+                    }}
+                    whileHover={{ y: -10 }}
+                    className="h-full"
+                  >
+                    <Card className="overflow-hidden border-none shadow-lg h-full bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
+                      <div className="relative h-48">
+                        <img 
+                          src={destination.image} 
+                          alt={destination.name} 
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                        <h3 className="absolute bottom-0 left-0 p-4 text-white font-bold text-xl">{destination.name}</h3>
                       </div>
-                      <h3 className="font-bold text-lg mb-1">{card.title}</h3>
-                      <p className="text-sm text-white/80">{card.description}</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                      <CardContent className="p-4 text-white flex flex-col h-[calc(100%-12rem)]">
+                        <p className="text-sm mb-4 flex-grow line-clamp-3">{destination.experienceDesc}</p>
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <div className="bg-white/20 rounded p-1 text-xs">
+                              {destination.stats[0].value}
+                            </div>
+                            <div className="bg-white/20 rounded p-1 text-xs">
+                              {destination.stats[1].value}
+                            </div>
+                          </div>
+                          <Button 
+                            size="sm" 
+                            variant="secondary" 
+                            className="text-xs whitespace-nowrap"
+                            asChild
+                          >
+                            <Link to={destination.link}>{destination.buttonText}</Link>
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:block">
+              <CarouselPrevious className="bg-white/20 text-white border-none hover:bg-white/30" />
+              <CarouselNext className="bg-white/20 text-white border-none hover:bg-white/30" />
+            </div>
+          </Carousel>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
