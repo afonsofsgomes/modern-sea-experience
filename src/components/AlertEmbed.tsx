@@ -6,7 +6,7 @@ import { AlertTriangle, CheckCircle, CloudSun, Info } from "lucide-react";
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(100); // Default height to ensure visibility
-  const [hasContent, setHasContent] = useState(true);
+  const [hasContent, setHasContent] = useState(false); // Default to false until we hear from iframe
   const [isLoading, setIsLoading] = useState(true);
   const [timedOut, setTimedOut] = useState(false);
   const [contentReceived, setContentReceived] = useState(false);
@@ -24,6 +24,8 @@ export const AlertEmbed = () => {
           setHeight(event.data.height);
           setIsLoading(false);
           setContentReceived(true);
+          // If we're getting a height, we definitely have content
+          setHasContent(true);
         }
         // If we receive a hasContent flag, update our state
         if (event.data.hasContent !== undefined) {
@@ -41,7 +43,7 @@ export const AlertEmbed = () => {
       console.log("Alert iframe response timeout");
       setIsLoading(false);
       setTimedOut(true);
-      // When timeout occurs, assume no alerts to display
+      // Only if we haven't received any content by timeout
       if (!contentReceived) {
         setHasContent(false);
       }
@@ -73,7 +75,7 @@ export const AlertEmbed = () => {
           <AlertTriangle className="h-5 w-5 text-amber-500" />
           <p className="text-sm text-amber-700">Loading alerts...</p>
         </div>
-      ) : hasContent && contentReceived ? (
+      ) : hasContent ? (
         <iframe 
           ref={iframeRef}
           src="https://alerts.seayou.pt/embed" 
