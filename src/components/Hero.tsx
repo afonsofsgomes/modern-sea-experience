@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { destinationData } from "@/components/destinations/DestinationData";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Carousel,
   CarouselContent,
@@ -13,9 +14,25 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+// Ordering the destinations as specified
+const orderedDestinationData = [
+  // 1. SeaBus
+  destinationData.find(d => d.name === "SeaBus Connections"),
+  // 2. Porto Santo
+  destinationData.find(d => d.name === "Porto Santo"),
+  // 3. Desertas
+  destinationData.find(d => d.name === "Desertas"),
+  // 4. Caniçal
+  destinationData.find(d => d.name === "Caniçal"),
+  // 5. Calheta
+  destinationData.find(d => d.name === "Calheta"),
+].filter(Boolean); // Filter out any undefined values
+
 export const Hero = () => {
+  const isMobile = useIsMobile();
+  
   return (
-    <section className="relative bg-[#253D7F] py-16 sm:py-20 md:py-24 min-h-[90vh] flex items-center">
+    <section className="relative bg-[#253D7F] py-12 sm:py-16 md:py-20 min-h-[90vh] flex items-center">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -28,12 +45,12 @@ export const Hero = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Text Content */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-8 md:mb-12">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 max-w-4xl mx-auto"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-3 sm:mb-4 max-w-4xl mx-auto"
           >
             Exclusive Sea Tours in Madeira
           </motion.h1>
@@ -42,52 +59,52 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto mb-6"
+            className="text-white/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-4 sm:mb-6 px-2"
           >
             Enjoy unforgettable adventures with private experiences, SeaBus connections, 
             tours to Desertas Island, and day trips to Porto Santo.
           </motion.p>
 
-          {/* Trust Indicators */}
+          {/* Trust Indicators - Responsive Layout */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-6 md:gap-10 mb-12 text-white/90"
+            className="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-10 mb-8 sm:mb-12 text-white/90"
           >
-            <div className="flex items-center gap-2">
-              <div className="bg-white/10 p-2 rounded-full">
-                <LockKeyhole className="h-5 w-5" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
+                <LockKeyhole className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <span className="text-sm">Secure Booking</span>
+              <span className="text-xs sm:text-sm">Secure Booking</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="bg-white/10 p-2 rounded-full">
-                <Clock className="h-5 w-5" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <span className="text-sm">24/7 Support</span>
+              <span className="text-xs sm:text-sm">24/7 Support</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="bg-white/10 p-2 rounded-full">
-                <MapPin className="h-5 w-5" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <span className="text-sm">Trusted on TripAdvisor</span>
+              <span className="text-xs sm:text-sm">Trusted on TripAdvisor</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="bg-white/10 p-2 rounded-full">
-                <TicketCheck className="h-5 w-5" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
+                <TicketCheck className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <span className="text-sm">Flexible Cancellation</span>
+              <span className="text-xs sm:text-sm">Flexible Cancellation</span>
             </div>
           </motion.div>
         </div>
 
-        {/* Featured Experiences Carousel */}
+        {/* Featured Experiences Carousel - Responsive */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="max-w-6xl mx-auto px-4"
+          className="max-w-6xl mx-auto px-1 sm:px-4"
         >
           <Carousel 
             opts={{
@@ -96,44 +113,41 @@ export const Hero = () => {
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {destinationData.map((destination, index) => (
-                <CarouselItem key={destination.name} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
+            <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
+              {orderedDestinationData.map((destination, index) => (
+                <CarouselItem key={destination.name} className="pl-1 sm:pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.3, 
-                      delay: 0.1 + (index * 0.1) 
-                    }}
+                    transition={{ duration: 0.3, delay: 0.1 + (index * 0.1) }}
                     whileHover={{ y: -10 }}
                     className="h-full"
                   >
                     <Card className="overflow-hidden border-none shadow-lg h-full bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
-                      <div className="relative h-48">
+                      <div className="relative h-36 sm:h-48">
                         <img 
                           src={destination.image} 
                           alt={destination.name} 
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                        <h3 className="absolute bottom-0 left-0 p-4 text-white font-bold text-xl">{destination.name}</h3>
+                        <h3 className="absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl">{destination.name}</h3>
                       </div>
-                      <CardContent className="p-4 text-white flex flex-col h-[calc(100%-12rem)]">
-                        <p className="text-sm mb-4 flex-grow line-clamp-3">{destination.experienceDesc}</p>
+                      <CardContent className="p-3 sm:p-4 text-white flex flex-col h-[calc(100%-9rem)] sm:h-[calc(100%-12rem)]">
+                        <p className="text-xs sm:text-sm mb-2 sm:mb-4 flex-grow line-clamp-2 sm:line-clamp-3">{destination.experienceDesc}</p>
                         <div className="flex justify-between items-center">
-                          <div className="flex items-center gap-2">
-                            <div className="bg-white/20 rounded p-1 text-xs">
+                          <div className="flex items-center gap-1 sm:gap-2">
+                            <div className="bg-white/20 rounded p-1 text-[10px] sm:text-xs">
                               {destination.stats[0].value}
                             </div>
-                            <div className="bg-white/20 rounded p-1 text-xs">
+                            <div className="bg-white/20 rounded p-1 text-[10px] sm:text-xs">
                               {destination.stats[1].value}
                             </div>
                           </div>
                           <Button 
                             size="sm" 
                             variant="secondary" 
-                            className="text-xs whitespace-nowrap"
+                            className="text-[10px] sm:text-xs whitespace-nowrap px-2 sm:px-3 py-1 sm:py-2"
                           >
                             <Link to={destination.link}>{destination.buttonText}</Link>
                           </Button>
@@ -144,11 +158,25 @@ export const Hero = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="hidden md:block">
-              <CarouselPrevious className="bg-white/20 text-white border-none hover:bg-white/30" />
-              <CarouselNext className="bg-white/20 text-white border-none hover:bg-white/30" />
-            </div>
+            {!isMobile && (
+              <>
+                <CarouselPrevious className="hidden sm:flex bg-white/20 text-white border-none hover:bg-white/30 -left-10" />
+                <CarouselNext className="hidden sm:flex bg-white/20 text-white border-none hover:bg-white/30 -right-10" />
+              </>
+            )}
           </Carousel>
+          
+          {/* Carousel indicators for mobile */}
+          {isMobile && (
+            <div className="flex justify-center mt-4 gap-1">
+              {orderedDestinationData.map((_, index) => (
+                <div 
+                  key={index} 
+                  className="w-2 h-2 rounded-full bg-white/40"
+                />
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
