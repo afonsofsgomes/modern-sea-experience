@@ -46,12 +46,12 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </>
           )}
-          <h3 className={`absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl ${destination.name === "SeaBus Connections" ? "pb-6 sm:pb-8" : ""}`}>{destination.name}</h3>
+          <h3 className={`absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl ${destination.name === "SeaBus Connections" ? "pb-6 sm:pb-10" : ""}`}>{destination.name}</h3>
         </div>
         <CardContent className="p-3 sm:p-4 text-white flex flex-col h-[calc(100%-9rem)] sm:h-[calc(100%-12rem)]">
           <p className="text-xs sm:text-sm mb-2 sm:mb-4 flex-grow line-clamp-2 sm:line-clamp-3">{destination.experienceDesc}</p>
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-1 sm:gap-2">
+            <div className="hidden sm:flex items-center gap-1 sm:gap-2">
               <div className="bg-white/20 rounded p-1 text-[10px] sm:text-xs">
                 {destination.stats[0].value}
               </div>
@@ -62,7 +62,7 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
             <Button 
               size="sm" 
               variant="secondary" 
-              className="text-[10px] sm:text-xs whitespace-nowrap px-2 sm:px-3 py-1 sm:py-2"
+              className="text-[10px] sm:text-xs whitespace-nowrap px-2 sm:px-3 py-1 sm:py-2 w-full sm:w-auto"
             >
               <Link to={destination.link}>{destination.buttonText}</Link>
             </Button>

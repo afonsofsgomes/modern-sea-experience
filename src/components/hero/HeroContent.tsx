@@ -1,10 +1,9 @@
-
 import { motion } from "framer-motion";
 import { LockKeyhole, Clock, MapPin, TicketCheck } from "lucide-react";
 
 export const HeroContent = () => {
   return (
-    <div className="text-center mb-8 md:mb-12">
+    <div className="text-center mb-8 md:mb-12 pt-8 sm:pt-10 md:pt-12">
       <motion.h1 
         initial={{ opacity: 0, y: 20 }} 
         animate={{ opacity: 1, y: 0 }} 
@@ -24,7 +23,6 @@ export const HeroContent = () => {
         tours to Desertas Island, and day trips to Porto Santo.
       </motion.p>
 
-      {/* Trust Indicators - Responsive Layout */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
