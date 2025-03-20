@@ -45,35 +45,36 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         </CarouselContent>
         
         <motion.div
-          initial={{ opacity: 0 }}
           animate={{ 
-            opacity: [0, 1, 0],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
+            opacity: [0.7, 1, 0.7]
           }}
           transition={{ 
             duration: 2,
             times: [0, 0.5, 1],
-            repeat: 2,
-            delay: 1
+            repeat: Infinity,
+            repeatType: "loop"
           }}
+          className="absolute left-[15%] top-1/2 -translate-y-1/2 z-10"
         >
-          <CarouselPrevious className="sm:flex bg-white/20 text-white border-none hover:bg-white/30 -left-3 sm:-left-6 lg:-left-10 h-8 w-8 sm:h-10 sm:w-10" />
+          <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0 }}
           animate={{ 
-            opacity: [0, 1, 0],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
+            opacity: [0.7, 1, 0.7]
           }}
           transition={{ 
             duration: 2,
             times: [0, 0.5, 1],
-            repeat: 2,
-            delay: 2
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: 1
           }}
+          className="absolute right-[15%] top-1/2 -translate-y-1/2 z-10"
         >
-          <CarouselNext className="sm:flex bg-white/20 text-white border-none hover:bg-white/30 -right-3 sm:-right-6 lg:-right-10 h-8 w-8 sm:h-10 sm:w-10" />
+          <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
       </Carousel>
       
