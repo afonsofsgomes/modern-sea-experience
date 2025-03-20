@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -42,14 +43,18 @@ const Index = () => {
         <Hero />
       </div>
       
+      {/* Dedicated Alert Section */}
+      <section className="py-6 bg-gradient-to-b from-white to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <h3 className="text-center text-lg font-medium text-blue-700 mb-3">Service Alerts</h3>
+            <AlertEmbed />
+          </div>
+        </div>
+      </section>
+      
       <div id="routes">
         <Routes />
-      </div>
-      
-      <div className="w-full bg-white py-4">
-        <div className="container mx-auto px-4">
-          <AlertEmbed />
-        </div>
       </div>
       
       <div id="destinations">
