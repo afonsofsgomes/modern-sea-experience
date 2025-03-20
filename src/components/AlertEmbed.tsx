@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, CheckCircle, CloudSun } from "lucide-react";
 
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -56,7 +56,7 @@ export const AlertEmbed = () => {
           <AlertTriangle className="h-5 w-5 text-amber-500" />
           <p className="text-sm text-amber-700">Loading alerts...</p>
         </div>
-      ) : (
+      ) : hasContent ? (
         <iframe 
           ref={iframeRef}
           src="https://alerts.seayou.pt/embed" 
@@ -71,6 +71,19 @@ export const AlertEmbed = () => {
           className="w-full transition-all duration-300"
           onLoad={() => console.log("Alert iframe loaded")}
         />
+      ) : (
+        <div className="flex items-center justify-center p-6 text-center">
+          <div className="flex flex-col items-center space-y-3">
+            <div className="flex items-center space-x-2 text-green-600">
+              <CheckCircle className="h-6 w-6" />
+              <CloudSun className="h-6 w-6" />
+            </div>
+            <h4 className="font-medium text-green-700">All Services Operating Normally</h4>
+            <p className="text-sm text-gray-600 max-w-md">
+              There are currently no service alerts. All routes and services are running as scheduled.
+            </p>
+          </div>
+        </div>
       )}
     </Card>
   );
