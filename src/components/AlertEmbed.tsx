@@ -69,7 +69,15 @@ export const AlertEmbed = () => {
           <p className="text-sm text-primary">Loading alerts...</p>
         </div>
       ) : (
-        <div className="w-full" style={{ height: iframeHeight ? `${iframeHeight}px` : "auto" }}>
+        <div 
+          className="w-full overflow-hidden" 
+          style={{ 
+            height: `${iframeHeight}px`,
+            maxHeight: `${iframeHeight}px`,
+            display: 'block',
+            lineHeight: 0
+          }}
+        >
           <iframe 
             ref={iframeRef}
             src="https://alerts.seayou.pt/embed" 
@@ -77,6 +85,9 @@ export const AlertEmbed = () => {
               width: "100%", 
               height: "100%",
               border: "none",
+              margin: 0,
+              padding: 0,
+              display: 'block',
               overflow: "hidden"
             }}
             scrolling="no"
