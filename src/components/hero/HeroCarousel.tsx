@@ -44,6 +44,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </CarouselContent>
         
+        {/* Left/Previous button */}
         <motion.div
           animate={{ 
             scale: [1, 1.1, 1],
@@ -55,11 +56,12 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
             repeat: Infinity,
             repeatType: "loop"
           }}
-          className="absolute left-[15%] top-1/2 -translate-y-1/2 z-10"
+          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10"
         >
           <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
         
+        {/* Right/Next button */}
         <motion.div
           animate={{ 
             scale: [1, 1.1, 1],
@@ -72,7 +74,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
             repeatType: "loop",
             delay: 1
           }}
-          className="absolute right-[15%] top-1/2 -translate-y-1/2 z-10"
+          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10"
         >
           <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
