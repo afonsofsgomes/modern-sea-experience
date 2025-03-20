@@ -69,20 +69,21 @@ export const AlertEmbed = () => {
           <p className="text-sm text-primary">Loading alerts...</p>
         </div>
       ) : (
-        <iframe 
-          ref={iframeRef}
-          src="https://alerts.seayou.pt/embed" 
-          style={{ 
-            width: "100%", 
-            height: iframeHeight ? `${iframeHeight}px` : "auto", 
-            minHeight: iframeHeight ? "auto" : "100px",
-            border: "none",
-            overflow: "hidden"
-          }}
-          scrolling="no"
-          title="SeaYou Alerts"
-          className="w-full transition-all duration-300"
-        />
+        <div className="w-full" style={{ height: iframeHeight ? `${iframeHeight}px` : "auto" }}>
+          <iframe 
+            ref={iframeRef}
+            src="https://alerts.seayou.pt/embed" 
+            style={{ 
+              width: "100%", 
+              height: "100%",
+              border: "none",
+              overflow: "hidden"
+            }}
+            scrolling="no"
+            title="SeaYou Alerts"
+            className="w-full"
+          />
+        </div>
       )}
     </Card>
   );
