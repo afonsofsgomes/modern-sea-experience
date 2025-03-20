@@ -1,10 +1,42 @@
 
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, LockKeyhole, TicketCheck } from "lucide-react";
+import { Calendar, Clock, MapPin, LockKeyhole, TicketCheck, Anchor, Palmtree, Mountain, Navigation } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 
 export const Hero = () => {
+  const experienceCards = [
+    {
+      title: "SeaBus",
+      description: "Fast sea connections",
+      icon: <Navigation className="h-6 w-6 text-white" />,
+      link: "/seabus",
+      color: "bg-gradient-to-br from-blue-600 to-blue-800"
+    },
+    {
+      title: "Porto Santo",
+      description: "Golden beach island",
+      icon: <Palmtree className="h-6 w-6 text-white" />,
+      link: "/porto-santo",
+      color: "bg-gradient-to-br from-amber-500 to-amber-700"
+    },
+    {
+      title: "Private",
+      description: "Exclusive experiences",
+      icon: <Anchor className="h-6 w-6 text-white" />,
+      link: "/private-cruise",
+      color: "bg-gradient-to-br from-teal-600 to-teal-800"
+    },
+    {
+      title: "Desertas",
+      description: "Wildlife adventure",
+      icon: <Mountain className="h-6 w-6 text-white" />,
+      link: "/desertas",
+      color: "bg-gradient-to-br from-emerald-600 to-emerald-800"
+    }
+  ];
+
   return <section className="relative h-[85vh] md:h-[90vh] overflow-hidden bg-[#253D7F]">
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -65,26 +97,36 @@ export const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Buttons - Improved contrast with shadow and stronger background colors */}
+        {/* Experience Cards - New card-based layout */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5, delay: 0.3 }} 
-          className="flex flex-wrap justify-center gap-3 w-full max-w-lg px-2"
+          className="w-full max-w-4xl px-4 mt-4"
         >
-          <div className="grid grid-cols-2 xs:grid-cols-4 gap-2 w-full">
-            <Link to="/seabus" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">SeaBus</Button>
-            </Link>
-            <Link to="/porto-santo" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">Porto Santo</Button>
-            </Link>
-            <Link to="/private-cruise" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">Private</Button>
-            </Link>
-            <Link to="/desertas" className="col-span-1">
-              <Button size="sm" variant="primary" className="w-full text-xs sm:text-sm h-10 whitespace-nowrap bg-[#1A2E60] hover:bg-[#122046] border border-white/20 shadow-md">Desertas</Button>
-            </Link>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {experienceCards.map((card, index) => (
+              <motion.div
+                key={card.title}
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 + (index * 0.1) }}
+              >
+                <Link to={card.link} className="block h-full">
+                  <Card className={`overflow-hidden border-none shadow-lg h-full ${card.color} hover:shadow-xl transition-all duration-300`}>
+                    <CardContent className="p-4 text-white flex flex-col items-center h-full">
+                      <div className="bg-white/20 p-3 rounded-full mb-3 flex items-center justify-center w-12 h-12">
+                        {card.icon}
+                      </div>
+                      <h3 className="font-bold text-lg mb-1">{card.title}</h3>
+                      <p className="text-sm text-white/80">{card.description}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

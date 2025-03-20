@@ -155,14 +155,14 @@ export const destinationData: DestinationType[] = [
       { icon: <Palmtree className="w-5 h-5 text-secondary" />, text: "European Maldives" }
     ],
     link: "/porto-santo",
-    buttonText: "Book Porto Santo Trip",
+    buttonText: "Book Porto Santo 1-Day Experience",
     stats: [
       { value: "1h", label: "Sea Trip" },
       { value: "9km", label: "Golden Beach" },
       { value: "9:30", label: "Departure Time" }
     ],
     experience: "Porto Santo Golden Island",
-    experienceDesc: "Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service.",
+    experienceDesc: "Experience the therapeutic golden sands of Porto Santo in one day.",
     destinations: [] // Added empty destinations array to satisfy DestinationType
   }
 ];
