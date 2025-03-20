@@ -7,40 +7,37 @@ export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
-  const [height, setHeight] = useState<number | null>(null);
   
   useEffect(() => {
-    // Function to check if iframe is empty (white page)
-    const checkIframeContent = () => {
-      try {
-        const iframe = iframeRef.current;
-        if (!iframe) return;
-        
-        // Wait for iframe to load
-        iframe.onload = () => {
-          setIsLoading(false);
+    // Function to handle iframe load
+    const handleIframeLoad = () => {
+      setIsLoading(false);
+      
+      // Try to determine if the iframe is empty
+      setTimeout(() => {
+        try {
+          // Try to check if we can access the content
+          const iframe = iframeRef.current;
+          if (!iframe) return;
           
-          try {
-            // Try to access iframe content
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-            
-            // If we can't access it due to same-origin policy, we'll rely on messages
-            if (!iframeDoc) return;
-            
-            // Check if the body is empty or only has white content
-            const bodyContent = iframeDoc.body.innerHTML.trim();
-            setIsEmpty(!bodyContent || bodyContent === "");
-          } catch (e) {
-            console.log("Cannot access iframe content directly due to same-origin policy");
+          // Check if the iframe has a small height
+          const height = iframe.clientHeight || iframe.offsetHeight;
+          if (height <= 20) {
+            console.log("Empty iframe detected: height is tiny", height);
+            setIsEmpty(true);
           }
-        };
-      } catch (e) {
-        console.error("Error checking iframe content:", e);
-      }
+        } catch (e) {
+          console.error("Error checking iframe:", e);
+        }
+      }, 200); // Short delay to ensure accurate height
     };
-
-    checkIframeContent();
-
+    
+    // Add load event listener to iframe
+    const iframe = iframeRef.current;
+    if (iframe) {
+      iframe.addEventListener('load', handleIframeLoad);
+    }
+    
     // Listen for messages from the iframe
     const handleMessage = (event: MessageEvent) => {
       // Only accept messages from the alerts domain
@@ -53,13 +50,13 @@ export const AlertEmbed = () => {
         
         // Check for height message - if height is very small, content is likely empty
         if (event.data.type === "safesailing-widget-height") {
-          const newHeight = event.data.height;
-          setHeight(newHeight);
+          const height = event.data.height;
           
-          // If height is very small (like 12px), consider it empty
-          if (newHeight && newHeight <= 20) {
+          // If height is very small, consider it empty
+          if (height <= 20) {
+            console.log("Empty iframe detected from message: height is", height);
             setIsEmpty(true);
-          } else if (newHeight && newHeight > 20) {
+          } else {
             setIsEmpty(false);
           }
         }
@@ -72,36 +69,25 @@ export const AlertEmbed = () => {
         }
       }
     };
-
-    // Set a timeout to handle cases where the iframe doesn't respond or is empty
-    const timeoutId = setTimeout(() => {
-      console.log("Alert iframe response timeout");
-      setIsLoading(false);
-      
-      // Check iframe height if we received it in a message
-      if (height !== null) {
-        setIsEmpty(height <= 20);
-      } else if (iframeRef.current) {
-        // If we haven't received a height message, check if the iframe appears empty
-        try {
-          const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
-          if (!iframeDoc || !iframeDoc.body.innerHTML.trim()) {
-            setIsEmpty(true);
-          }
-        } catch (e) {
-          // If we can't access iframe content, check if the iframe has size
-          const iframeHeight = iframeRef.current.offsetHeight;
-          setIsEmpty(iframeHeight <= 20); // Consider empty if height is very small
-        }
+    
+    // Set a timeout for initial loading
+    const loadingTimeout = setTimeout(() => {
+      if (isLoading) {
+        console.log("Loading timeout reached");
+        setIsLoading(false);
       }
-    }, 5000);
+    }, 3000);
 
     window.addEventListener("message", handleMessage);
+    
     return () => {
+      if (iframe) {
+        iframe.removeEventListener('load', handleIframeLoad);
+      }
       window.removeEventListener("message", handleMessage);
-      clearTimeout(timeoutId);
+      clearTimeout(loadingTimeout);
     };
-  }, [height]);
+  }, [isLoading]);
 
   return (
     <Card className="w-full overflow-hidden bg-white border border-amber-100 shadow-sm rounded-md">
@@ -137,7 +123,6 @@ export const AlertEmbed = () => {
           scrolling="no"
           title="SeaYou Alerts"
           className="w-full transition-all duration-300"
-          onLoad={() => console.log("Alert iframe loaded")}
         />
       )}
     </Card>
