@@ -6,6 +6,7 @@ import { Loader } from "lucide-react";
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [iframeHeight, setIframeHeight] = useState(0);
 
   useEffect(() => {
     // Function to handle iframe load
@@ -40,6 +41,12 @@ export const AlertEmbed = () => {
         if (isLoading) {
           setIsLoading(false);
         }
+        
+        // Handle height updates from the iframe
+        if (event.data.type === "safesailing-widget-height" && typeof event.data.height === "number") {
+          console.log("Setting iframe height to:", event.data.height);
+          setIframeHeight(event.data.height);
+        }
       }
     };
 
@@ -67,8 +74,8 @@ export const AlertEmbed = () => {
           src="https://alerts.seayou.pt/embed" 
           style={{ 
             width: "100%", 
-            height: "auto", 
-            minHeight: "200px",
+            height: iframeHeight ? `${iframeHeight}px` : "auto", 
+            minHeight: iframeHeight ? "auto" : "100px",
             border: "none",
             overflow: "hidden"
           }}
