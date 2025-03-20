@@ -6,3 +6,4 @@ export * from './TourSchema';
 export * from './FAQSchema';
 export * from './PageHead';
 export { default as SitemapGenerator } from './SitemapGenerator';
+export * from './SitemapUtils';
