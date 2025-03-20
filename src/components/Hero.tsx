@@ -134,7 +134,6 @@ export const Hero = () => {
                             size="sm" 
                             variant="secondary" 
                             className="text-xs whitespace-nowrap"
-                            asChild
                           >
                             <Link to={destination.link}>{destination.buttonText}</Link>
                           </Button>
