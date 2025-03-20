@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { destinationData } from "@/components/destinations/DestinationData";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { OptimizedImage } from "@/components/OptimizedImage";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
 import {
   Carousel,
   CarouselContent,
@@ -28,6 +28,9 @@ const orderedDestinationData = [
   // 5. Calheta
   destinationData.find(d => d.name === "Calheta"),
 ].filter(Boolean); // Filter out any undefined values
+
+// Fallback images for when the primary images fail to load
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80";
 
 export const Hero = () => {
   const isMobile = useIsMobile();
@@ -135,8 +138,9 @@ export const Hero = () => {
                           <div className="flex flex-row h-full">
                             {/* First city: Calheta */}
                             <div className="w-1/3 h-full relative overflow-hidden border-r border-white/10">
-                              <OptimizedImage 
-                                src="https://extranet.seayou.pt/photos/Calheta.jpg"
+                              <ImageWithFallback 
+                                src="/images/calheta.jpg"
+                                fallbackSrc={FALLBACK_IMAGE}
                                 alt="Calheta"
                                 className="w-full h-full object-cover"
                               />
@@ -147,8 +151,9 @@ export const Hero = () => {
                             
                             {/* Second city: Funchal (middle) */}
                             <div className="w-1/3 h-full relative overflow-hidden border-r border-white/10">
-                              <OptimizedImage 
-                                src="https://extranet.seayou.pt/photos/Funchal.jpg"
+                              <ImageWithFallback 
+                                src="/images/funchal.jpg"
+                                fallbackSrc={FALLBACK_IMAGE}
                                 alt="Funchal"
                                 className="w-full h-full object-cover"
                               />
@@ -159,8 +164,9 @@ export const Hero = () => {
                             
                             {/* Third city: Caniçal */}
                             <div className="w-1/3 h-full relative overflow-hidden">
-                              <OptimizedImage 
-                                src="https://extranet.seayou.pt/photos/Canical.jpg"
+                              <ImageWithFallback 
+                                src="/images/canical.jpg"
+                                fallbackSrc={FALLBACK_IMAGE}
                                 alt="Caniçal"
                                 className="w-full h-full object-cover"
                               />
