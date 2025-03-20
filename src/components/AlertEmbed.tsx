@@ -1,35 +1,43 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { AlertTriangle, CheckCircle, CloudSun } from "lucide-react";
+import { AlertTriangle, CheckCircle, CloudSun, Loader } from "lucide-react";
 
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
-  
+  const [hasCheckedContent, setHasCheckedContent] = useState(false);
+
   useEffect(() => {
+    const loadTimeout = setTimeout(() => {
+      if (isLoading) {
+        console.log("Loading timeout reached");
+        setIsLoading(false);
+        checkContent();
+      }
+    }, 3000);
+
+    // Function to check if iframe is empty
+    const checkContent = () => {
+      if (hasCheckedContent) return;
+      
+      try {
+        const iframe = iframeRef.current;
+        if (!iframe) return;
+        
+        // Default to not empty until proven otherwise
+        setIsEmpty(false);
+        setHasCheckedContent(true);
+      } catch (e) {
+        console.error("Error checking iframe:", e);
+      }
+    };
+
     // Function to handle iframe load
     const handleIframeLoad = () => {
       setIsLoading(false);
-      
-      // Try to determine if the iframe is empty
-      setTimeout(() => {
-        try {
-          // Try to check if we can access the content
-          const iframe = iframeRef.current;
-          if (!iframe) return;
-          
-          // Check if the iframe has a small height
-          const height = iframe.clientHeight || iframe.offsetHeight;
-          if (height <= 20) {
-            console.log("Empty iframe detected: height is tiny", height);
-            setIsEmpty(true);
-          }
-        } catch (e) {
-          console.error("Error checking iframe:", e);
-        }
-      }, 200); // Short delay to ensure accurate height
+      checkContent();
     };
     
     // Add load event listener to iframe
@@ -48,35 +56,34 @@ export const AlertEmbed = () => {
       if (event.data && typeof event.data === "object") {
         setIsLoading(false);
         
-        // Check for height message - if height is very small, content is likely empty
+        // If we get a height message
         if (event.data.type === "safesailing-widget-height") {
           const height = event.data.height;
           
           // If height is very small, consider it empty
-          if (height <= 20) {
+          // This is a key check - only mark as empty if height is tiny
+          if (height <= 15) {
             console.log("Empty iframe detected from message: height is", height);
             setIsEmpty(true);
           } else {
+            // If height is significant, content exists
+            console.log("Content detected in iframe: height is", height);
             setIsEmpty(false);
           }
+          
+          setHasCheckedContent(true);
         }
         
         // If we explicitly get a hasContent flag, use it
         if (event.data.hasContent === false) {
           setIsEmpty(true);
+          setHasCheckedContent(true);
         } else if (event.data.hasContent === true) {
           setIsEmpty(false);
+          setHasCheckedContent(true);
         }
       }
     };
-    
-    // Set a timeout for initial loading
-    const loadingTimeout = setTimeout(() => {
-      if (isLoading) {
-        console.log("Loading timeout reached");
-        setIsLoading(false);
-      }
-    }, 3000);
 
     window.addEventListener("message", handleMessage);
     
@@ -85,15 +92,15 @@ export const AlertEmbed = () => {
         iframe.removeEventListener('load', handleIframeLoad);
       }
       window.removeEventListener("message", handleMessage);
-      clearTimeout(loadingTimeout);
+      clearTimeout(loadTimeout);
     };
-  }, [isLoading]);
+  }, [isLoading, hasCheckedContent]);
 
   return (
     <Card className="w-full overflow-hidden bg-white border border-amber-100 shadow-sm rounded-md">
       {isLoading ? (
-        <div className="flex items-center justify-center p-4 space-x-2 animate-pulse">
-          <AlertTriangle className="h-5 w-5 text-amber-500" />
+        <div className="flex items-center justify-center p-4 space-x-2">
+          <Loader className="h-5 w-5 text-amber-500 animate-spin" />
           <p className="text-sm text-amber-700">Loading alerts...</p>
         </div>
       ) : isEmpty ? (
@@ -116,7 +123,7 @@ export const AlertEmbed = () => {
           style={{ 
             width: "100%", 
             height: "auto", 
-            minHeight: "100px",
+            minHeight: "150px", // Increased minimum height
             border: "none",
             overflow: "hidden"
           }}
