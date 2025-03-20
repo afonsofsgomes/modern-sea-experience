@@ -9,7 +9,6 @@ export const AlertEmbed = () => {
   const [hasContent, setHasContent] = useState(false); // Default to false until we hear from iframe
   const [isLoading, setIsLoading] = useState(true);
   const [timedOut, setTimedOut] = useState(false);
-  const [contentReceived, setContentReceived] = useState(false);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -21,19 +20,18 @@ export const AlertEmbed = () => {
       // If the message contains a height, update our iframe height
       if (event.data && typeof event.data === "object") {
         if (event.data.height) {
+          console.log("Setting height from iframe message:", event.data.height);
           setHeight(event.data.height);
           setIsLoading(false);
-          setContentReceived(true);
-          // If we're getting a height, we definitely have content
+          // If we're getting a height, we definitely have content to display
           setHasContent(true);
         }
-        // If we receive a hasContent flag, update our state
+        
+        // If we receive a hasContent flag, update our state directly
         if (event.data.hasContent !== undefined) {
+          console.log("Setting hasContent from iframe message:", event.data.hasContent);
           setHasContent(event.data.hasContent);
-          setContentReceived(true);
-          if (!event.data.hasContent) {
-            setIsLoading(false);
-          }
+          setIsLoading(false);
         }
       }
     };
@@ -43,8 +41,10 @@ export const AlertEmbed = () => {
       console.log("Alert iframe response timeout");
       setIsLoading(false);
       setTimedOut(true);
-      // Only if we haven't received any content by timeout
-      if (!contentReceived) {
+      
+      // If we don't get any response, assume the iframe is empty
+      // but don't change hasContent if we already received a message
+      if (isLoading) {
         setHasContent(false);
       }
     }, 5000);
@@ -54,7 +54,7 @@ export const AlertEmbed = () => {
       window.removeEventListener("message", handleMessage);
       clearTimeout(timeoutId);
     };
-  }, [contentReceived]);
+  }, [isLoading]);
 
   // For debugging
   useEffect(() => {
@@ -62,12 +62,10 @@ export const AlertEmbed = () => {
       height, 
       hasContent, 
       isLoading, 
-      timedOut, 
-      contentReceived 
+      timedOut
     });
-  }, [height, hasContent, isLoading, timedOut, contentReceived]);
+  }, [height, hasContent, isLoading, timedOut]);
 
-  // Always render the component initially to ensure the iframe has a chance to load
   return (
     <Card className="w-full overflow-hidden bg-white border border-amber-100 shadow-sm rounded-md">
       {isLoading ? (
