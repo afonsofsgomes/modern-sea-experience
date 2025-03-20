@@ -43,11 +43,12 @@ const Index = () => {
         <Hero />
       </div>
       
-      {/* Dedicated Alert Section */}
-      <section className="py-6 bg-gradient-to-b from-white to-blue-50">
+      {/* Dedicated Alert Section - Prominently displayed after hero */}
+      <section className="py-8 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <h3 className="text-center text-lg font-medium text-blue-700 mb-3">Service Alerts</h3>
+            <h3 className="text-center text-xl font-semibold text-blue-700 mb-4">Service Alerts</h3>
+            <p className="text-center text-gray-600 mb-6">Stay updated on weather conditions and service changes</p>
             <AlertEmbed />
           </div>
         </div>

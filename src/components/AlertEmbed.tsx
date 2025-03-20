@@ -5,8 +5,8 @@ import { AlertTriangle } from "lucide-react";
 
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(0);
-  const [hasContent, setHasContent] = useState(false);
+  const [height, setHeight] = useState(100); // Default height to ensure visibility
+  const [hasContent, setHasContent] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export const AlertEmbed = () => {
 
     // Set a timeout to handle cases where the iframe doesn't respond
     const timeoutId = setTimeout(() => {
+      console.log("Alert iframe response timeout");
       setIsLoading(false);
     }, 5000);
 
@@ -42,9 +43,12 @@ export const AlertEmbed = () => {
     };
   }, []);
 
-  // Don't render anything if there are no alerts and not loading
-  if (!isLoading && !hasContent && height === 0) return null;
+  // For debugging
+  useEffect(() => {
+    console.log("AlertEmbed state:", { height, hasContent, isLoading });
+  }, [height, hasContent, isLoading]);
 
+  // Always render the component initially to ensure the iframe has a chance to load
   return (
     <Card className="w-full overflow-hidden bg-white border border-amber-100 shadow-sm rounded-md">
       {isLoading ? (
@@ -58,13 +62,14 @@ export const AlertEmbed = () => {
           src="https://alerts.seayou.pt/embed" 
           style={{ 
             width: "100%", 
-            height: height ? `${height}px` : "0", 
+            height: `${height}px`, 
             border: "none",
             overflow: "hidden"
           }}
           scrolling="no"
           title="SeaYou Alerts"
           className="w-full transition-all duration-300"
+          onLoad={() => console.log("Alert iframe loaded")}
         />
       )}
     </Card>
