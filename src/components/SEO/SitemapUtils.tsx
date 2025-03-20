@@ -46,14 +46,28 @@ export const generateSitemapUrls = (domain: string, additionalUrls: SitemapUrl[]
  * Generate sitemap XML content from URLs
  */
 export const generateSitemapXml = (urls: SitemapUrl[]): string => {
-  const urlElements = urls.map(url => 
-`  <url>
-    <loc>${url.loc}</loc>${url.lastmod ? `
-    <lastmod>${url.lastmod}</lastmod>` : ''}${url.changefreq ? `
-    <changefreq>${url.changefreq}</changefreq>` : ''}${url.priority !== undefined ? `
-    <priority>${url.priority.toFixed(1)}</priority>` : ''}
-  </url>`).join('\n');
+  // Create URL elements with strict control over whitespace and line breaks
+  const urlElements = urls.map(url => {
+    let element = '  <url>\n';
+    element += `    <loc>${url.loc}</loc>\n`;
+    
+    if (url.lastmod) {
+      element += `    <lastmod>${url.lastmod}</lastmod>\n`;
+    }
+    
+    if (url.changefreq) {
+      element += `    <changefreq>${url.changefreq}</changefreq>\n`;
+    }
+    
+    if (url.priority !== undefined) {
+      element += `    <priority>${url.priority.toFixed(1)}</priority>\n`;
+    }
+    
+    element += '  </url>';
+    return element;
+  }).join('\n');
 
+  // Ensure the XML declaration is the very first thing in the file with no preceding whitespace
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlElements}
