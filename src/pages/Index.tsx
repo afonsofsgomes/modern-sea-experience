@@ -9,7 +9,7 @@ import {
   Testimonials, 
   Newsletter 
 } from "@/components/sections";
-import { MetaTags, LocalBusinessSchema } from "@/components/SEO";
+import { PageHead, LocalBusinessSchema, StructuredData } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -27,14 +27,32 @@ const Index = () => {
     });
   }, []);
 
+  // Additional structured data for breadcrumbs
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://seayou.pt/"
+      }
+    ]
+  };
+
   return (
     <div className="relative">
-      <MetaTags 
+      <PageHead 
         title="SeaYou Madeira - Maritime Tourism & Sea Transport Services"
         description="Discover Madeira's coastline with SeaYou's premium maritime experiences. Fast SeaBus connections, private cruises, and Porto Santo tours. Book your sea adventure today!"
         keywords="Madeira sea transportation, maritime tourism Madeira, SeaBus Madeira, private cruises Madeira, Porto Santo ferry, boat tours Madeira"
-      />
+        canonicalUrl="https://seayou.pt/"
+      >
+        <meta name="robots" content="index, follow" />
+      </PageHead>
       <LocalBusinessSchema />
+      <StructuredData data={breadcrumbSchema} />
       <TallyScript />
       
       <Navbar />

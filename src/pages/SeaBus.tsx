@@ -9,8 +9,7 @@ import {
   ScheduleDisplay
 } from "@/components/sections";
 import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
-import { MetaTags, TourSchema, FAQSchema } from "@/components/SEO";
-import { Helmet } from "react-helmet";
+import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const SeaBus = () => {
@@ -34,25 +33,38 @@ const SeaBus = () => {
     }
   ];
 
+  // Breadcrumb data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://seayou.pt/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "SeaBus",
+        "item": "https://seayou.pt/seabus"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <MetaTags 
+      <PageHead 
         title="SeaBus Madeira - Fast Marine Connections | SeaYou"
         description="Experience fast and comfortable sea transportation around Madeira with SeaBus. Enjoy panoramic views and easy travel between key destinations. Book your tickets online!"
         keywords="SeaBus Madeira, sea transportation Madeira, Madeira ferry, boat connections Madeira, marine transport Madeira"
-      />
-      <Helmet>
-        <link rel="canonical" href="https://seayou.pt/seabus" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://seayou.pt/seabus" />
-        <meta property="og:title" content="SeaBus Madeira - Fast Marine Connections | SeaYou" />
-        <meta property="og:description" content="Experience fast and comfortable sea transportation around Madeira with SeaBus. Enjoy panoramic views and easy travel between key destinations." />
-        <meta property="og:image" content="https://extranet.seayou.pt/photos/boat1.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SeaBus Madeira - Fast Marine Connections" />
-        <meta name="twitter:description" content="Fast sea transportation around Madeira Island with panoramic views." />
-        <meta name="twitter:image" content="https://extranet.seayou.pt/photos/boat1.jpg" />
-      </Helmet>
+        canonicalUrl="https://seayou.pt/seabus"
+        ogImage="https://extranet.seayou.pt/photos/boat1.jpg"
+      >
+        <meta name="robots" content="index, follow" />
+      </PageHead>
+      
       <TourSchema 
         name="SeaBus Madeira Connections"
         description="Fast and comfortable sea transportation with panoramic views between key destinations in Madeira."
@@ -64,6 +76,7 @@ const SeaBus = () => {
         availability="https://schema.org/InStock"
       />
       <FAQSchema questions={faqQuestions} />
+      <StructuredData data={breadcrumbSchema} />
       
       <Navbar />
       

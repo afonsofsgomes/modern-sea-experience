@@ -1,0 +1,62 @@
+
+import React from 'react';
+import { Helmet } from 'react-helmet';
+
+interface PageHeadProps {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  type?: "website" | "article";
+  locale?: string;
+  children?: React.ReactNode;
+}
+
+export const PageHead: React.FC<PageHeadProps> = ({
+  title,
+  description,
+  keywords = "",
+  ogImage = "/og-image.png",
+  canonicalUrl,
+  type = "website",
+  locale = "en_US",
+  children
+}) => {
+  const siteName = "SeaYou Madeira";
+  // Use the current URL as canonical if not provided
+  const canonical = canonicalUrl || typeof window !== "undefined" ? window.location.href : "";
+  
+  return (
+    <Helmet>
+      {/* Basic Meta Tags */}
+      <html lang="en" />
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
+      
+      {/* Canonical URL */}
+      {canonical && <link rel="canonical" href={canonical} />}
+      
+      {/* Open Graph Tags */}
+      <meta property="og:site_name" content={siteName} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content={type} />
+      <meta property="og:locale" content={locale} />
+      {canonical && <meta property="og:url" content={canonical} />}
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      
+      {/* Twitter Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      
+      {/* Allow child elements - useful for page-specific structured data */}
+      {children}
+    </Helmet>
+  );
+};

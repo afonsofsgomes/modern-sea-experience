@@ -7,17 +7,42 @@ import {
   PortoSantoHighlights,
   PortoSantoBooking
 } from "@/components/sections";
-import { MetaTags, TourSchema } from "@/components/SEO";
+import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const PortoSanto = () => {
+  // Breadcrumb data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://seayou.pt/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Porto Santo",
+        "item": "https://seayou.pt/porto-santo"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <MetaTags 
+      <PageHead 
         title="Porto Santo Golden Island Day Trip | SeaYou Madeira"
         description="Experience the golden beaches of Porto Santo Island with SeaYou's dedicated ferry service. Enjoy a perfect day trip from Madeira to this therapeutic paradise."
         keywords="Porto Santo ferry, Porto Santo from Madeira, Porto Santo day trip, golden beach Porto Santo, Porto Santo tour"
-      />
+        canonicalUrl="https://seayou.pt/porto-santo"
+        ogImage="https://extranet.seayou.pt/photos/pxo.jpg"
+      >
+        <meta name="robots" content="index, follow" />
+      </PageHead>
+      
       <TourSchema 
         name="Porto Santo Golden Island Experience"
         description="Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service from Madeira."
@@ -25,6 +50,7 @@ const PortoSanto = () => {
         price="65.00"
         duration="PT2H30M"
       />
+      <StructuredData data={breadcrumbSchema} />
       
       <Navbar />
       

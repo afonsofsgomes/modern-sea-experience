@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 interface UseSEOProps {
   title?: string;
   description?: string;
+  jsonLd?: Record<string, any>;
 }
 
-export const useSEO = ({ title, description }: UseSEOProps) => {
+export const useSEO = ({ title, description, jsonLd }: UseSEOProps) => {
   useEffect(() => {
     // Update document title if provided
     if (title) {
@@ -26,8 +27,26 @@ export const useSEO = ({ title, description }: UseSEOProps) => {
       }
     }
 
+    // Add JSON-LD structured data if provided
+    if (jsonLd) {
+      let script = document.querySelector('#dynamic-jsonld');
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'dynamic-jsonld';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(jsonLd);
+    }
+
     return () => {
-      // No cleanup needed as we don't want to revert the changes
+      // Clean up JSON-LD when component unmounts
+      if (jsonLd) {
+        const script = document.querySelector('#dynamic-jsonld');
+        if (script) {
+          script.remove();
+        }
+      }
     };
-  }, [title, description]);
+  }, [title, description, jsonLd]);
 };
