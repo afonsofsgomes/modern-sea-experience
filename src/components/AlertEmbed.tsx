@@ -8,6 +8,7 @@ export const AlertEmbed = () => {
   const [height, setHeight] = useState(100); // Default height to ensure visibility
   const [hasContent, setHasContent] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [timedOut, setTimedOut] = useState(false);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -34,6 +35,9 @@ export const AlertEmbed = () => {
     const timeoutId = setTimeout(() => {
       console.log("Alert iframe response timeout");
       setIsLoading(false);
+      setTimedOut(true);
+      // When timeout occurs, assume no alerts to display
+      setHasContent(false);
     }, 5000);
 
     window.addEventListener("message", handleMessage);
@@ -45,8 +49,8 @@ export const AlertEmbed = () => {
 
   // For debugging
   useEffect(() => {
-    console.log("AlertEmbed state:", { height, hasContent, isLoading });
-  }, [height, hasContent, isLoading]);
+    console.log("AlertEmbed state:", { height, hasContent, isLoading, timedOut });
+  }, [height, hasContent, isLoading, timedOut]);
 
   // Always render the component initially to ensure the iframe has a chance to load
   return (
@@ -56,7 +60,7 @@ export const AlertEmbed = () => {
           <AlertTriangle className="h-5 w-5 text-amber-500" />
           <p className="text-sm text-amber-700">Loading alerts...</p>
         </div>
-      ) : hasContent ? (
+      ) : hasContent && !timedOut ? (
         <iframe 
           ref={iframeRef}
           src="https://alerts.seayou.pt/embed" 
