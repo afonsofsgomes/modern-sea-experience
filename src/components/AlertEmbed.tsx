@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { AlertTriangle, CheckCircle, CloudSun } from "lucide-react";
+import { AlertTriangle, CheckCircle, CloudSun, Info } from "lucide-react";
 
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -9,21 +9,26 @@ export const AlertEmbed = () => {
   const [hasContent, setHasContent] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [timedOut, setTimedOut] = useState(false);
+  const [contentReceived, setContentReceived] = useState(false);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       // Only accept messages from the alerts domain
       if (event.origin !== "https://alerts.seayou.pt") return;
       
+      console.log("Received message from alerts iframe:", event.data);
+      
       // If the message contains a height, update our iframe height
       if (event.data && typeof event.data === "object") {
         if (event.data.height) {
           setHeight(event.data.height);
           setIsLoading(false);
+          setContentReceived(true);
         }
         // If we receive a hasContent flag, update our state
         if (event.data.hasContent !== undefined) {
           setHasContent(event.data.hasContent);
+          setContentReceived(true);
           if (!event.data.hasContent) {
             setIsLoading(false);
           }
@@ -37,7 +42,9 @@ export const AlertEmbed = () => {
       setIsLoading(false);
       setTimedOut(true);
       // When timeout occurs, assume no alerts to display
-      setHasContent(false);
+      if (!contentReceived) {
+        setHasContent(false);
+      }
     }, 5000);
 
     window.addEventListener("message", handleMessage);
@@ -45,12 +52,18 @@ export const AlertEmbed = () => {
       window.removeEventListener("message", handleMessage);
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [contentReceived]);
 
   // For debugging
   useEffect(() => {
-    console.log("AlertEmbed state:", { height, hasContent, isLoading, timedOut });
-  }, [height, hasContent, isLoading, timedOut]);
+    console.log("AlertEmbed state:", { 
+      height, 
+      hasContent, 
+      isLoading, 
+      timedOut, 
+      contentReceived 
+    });
+  }, [height, hasContent, isLoading, timedOut, contentReceived]);
 
   // Always render the component initially to ensure the iframe has a chance to load
   return (
@@ -60,7 +73,7 @@ export const AlertEmbed = () => {
           <AlertTriangle className="h-5 w-5 text-amber-500" />
           <p className="text-sm text-amber-700">Loading alerts...</p>
         </div>
-      ) : hasContent && !timedOut ? (
+      ) : hasContent && contentReceived ? (
         <iframe 
           ref={iframeRef}
           src="https://alerts.seayou.pt/embed" 
