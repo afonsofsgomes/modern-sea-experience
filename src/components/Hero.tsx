@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { destinationData } from "@/components/destinations/DestinationData";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import {
   Carousel,
   CarouselContent,
@@ -30,6 +31,10 @@ const orderedDestinationData = [
 
 export const Hero = () => {
   const isMobile = useIsMobile();
+  
+  // Getting SeaBus destinations from the data
+  const seaBusDestination = orderedDestinationData[0]; // This is the SeaBus destination
+  const seaBusLocations = seaBusDestination?.destinations || [];
   
   return (
     <section className="relative bg-[#253D7F] py-12 sm:py-16 md:py-20 min-h-[90vh] flex items-center">
@@ -125,12 +130,44 @@ export const Hero = () => {
                   >
                     <Card className="overflow-hidden border-none shadow-lg h-full bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
                       <div className="relative h-36 sm:h-48">
-                        <img 
-                          src={destination.image} 
-                          alt={destination.name} 
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                        {/* Special rendering for SeaBus with 3 destinations */}
+                        {destination.name === "SeaBus Connections" ? (
+                          <div className="grid grid-cols-3 h-full">
+                            {seaBusLocations.map((location, idx) => {
+                              // Order: Calheta (left), Funchal (middle), Caniçal (right)
+                              let actualIdx = idx;
+                              if (location.name === "Funchal") actualIdx = 1;
+                              else if (location.name === "Calheta") actualIdx = 0;
+                              else if (location.name === "Caniçal") actualIdx = 2;
+                              
+                              return (
+                                <div 
+                                  key={location.name} 
+                                  className="relative h-full overflow-hidden"
+                                  style={{ order: actualIdx }}
+                                >
+                                  <OptimizedImage 
+                                    src={location.image} 
+                                    alt={location.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
+                                    <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">{location.name}</p>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <>
+                            <img 
+                              src={destination.image} 
+                              alt={destination.name} 
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                          </>
+                        )}
                         <h3 className="absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl">{destination.name}</h3>
                       </div>
                       <CardContent className="p-3 sm:p-4 text-white flex flex-col h-[calc(100%-9rem)] sm:h-[calc(100%-12rem)]">
