@@ -1,27 +1,38 @@
 
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface SitemapGeneratorProps {
   domain: string;
 }
 
+/**
+ * SitemapGenerator is a client-side component that helps with sitemap generation.
+ * Note: In production, sitemaps should ideally be generated server-side.
+ * This component can be used in development to track pages and help generate a static sitemap.
+ */
 const SitemapGenerator: React.FC<SitemapGeneratorProps> = ({ domain }) => {
-  const [sitemapGenerated, setSitemapGenerated] = useState<boolean>(false);
   const location = useLocation();
 
   useEffect(() => {
-    // This is just to show in the console that the component is working
-    // In a production environment, you would generate the sitemap server-side
-    if (!sitemapGenerated && process.env.NODE_ENV === 'development') {
-      console.log(`Sitemap would be generated for ${domain} in production environment`);
-      console.log(`Current path: ${location.pathname}`);
-      setSitemapGenerated(true);
+    // Only run in development mode
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[SitemapGenerator] Page visited: ${location.pathname}`);
+      
+      // You could implement logic here to track visited pages
+      // and generate a sitemap for reference
+      
+      // Example of tracking pageviews for sitemap generation
+      const visitedPages = JSON.parse(localStorage.getItem('sitemap-pages') || '[]');
+      if (!visitedPages.includes(location.pathname)) {
+        visitedPages.push(location.pathname);
+        localStorage.setItem('sitemap-pages', JSON.stringify(visitedPages));
+        console.log(`[SitemapGenerator] Updated tracked pages: ${visitedPages.join(', ')}`);
+      }
     }
-  }, [domain, location.pathname, sitemapGenerated]);
+  }, [location.pathname, domain]);
 
-  // This is a client-side component that doesn't render anything visible
+  // This component doesn't render anything visible
   return null;
 };
 
