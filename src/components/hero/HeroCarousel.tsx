@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useEffect, useRef, useState } from "react";
 
 interface HeroCarouselProps {
   destinations: Array<any>;
@@ -17,6 +18,36 @@ interface HeroCarouselProps {
 
 export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps) => {
   const isMobile = useIsMobile();
+  const apiRef = useRef<any>(null);
+  const [autoScrollPaused, setAutoScrollPaused] = useState(false);
+  
+  // Auto-scroll functionality
+  useEffect(() => {
+    // If auto-scroll is paused, don't set up the interval
+    if (autoScrollPaused) return;
+    
+    const interval = setInterval(() => {
+      if (apiRef.current) {
+        apiRef.current.scrollNext();
+      }
+    }, 6000); // Auto-scroll every 6 seconds for a slow pace
+    
+    // Clean up interval on unmount or when paused state changes
+    return () => clearInterval(interval);
+  }, [autoScrollPaused]);
+  
+  // Function to pause auto-scrolling temporarily when user interacts
+  const handleUserInteraction = () => {
+    setAutoScrollPaused(true);
+    
+    // Resume auto-scrolling after 15 seconds of inactivity
+    const timer = setTimeout(() => {
+      setAutoScrollPaused(false);
+    }, 15000);
+    
+    // Clear the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  };
 
   return (
     <motion.div
@@ -24,6 +55,8 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       className="max-w-6xl mx-auto px-1 sm:px-4 relative"
+      onClick={handleUserInteraction}
+      onKeyDown={handleUserInteraction}
     >
       <Carousel 
         opts={{
@@ -31,6 +64,9 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           loop: true,
         }}
         className="w-full"
+        setApi={(api) => {
+          apiRef.current = api;
+        }}
       >
         <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
           {destinations.map((destination, index) => (
@@ -57,6 +93,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
             repeatType: "loop"
           }}
           className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10"
+          onClick={handleUserInteraction}
         >
           <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
@@ -75,6 +112,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
             delay: 1
           }}
           className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10"
+          onClick={handleUserInteraction}
         >
           <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
