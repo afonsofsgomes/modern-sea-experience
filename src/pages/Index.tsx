@@ -11,6 +11,7 @@ import {
 } from "@/components/sections";
 import { MetaTags, LocalBusinessSchema } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
+import { AlertEmbed } from "@/components/AlertEmbed";
 
 const Index = () => {
   useEffect(() => {
@@ -38,6 +39,12 @@ const Index = () => {
       <TallyScript />
       
       <Navbar />
+      
+      {/* Alert banner for weather and tour disruptions */}
+      <div className="w-full bg-white shadow-md">
+        <AlertEmbed />
+      </div>
+      
       <div id="home">
         <Hero />
       </div>

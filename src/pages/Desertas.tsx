@@ -5,6 +5,7 @@ import { DesertasHero } from "@/components/sections/DesertasHero";
 import { DesertasAbout } from "@/components/sections/DesertasAbout";
 import { DesertasBooking } from "@/components/sections/DesertasBooking";
 import { MetaTags, TourSchema } from "@/components/SEO";
+import { AlertEmbed } from "@/components/AlertEmbed";
 
 const Desertas = () => {
   return (
@@ -23,6 +24,12 @@ const Desertas = () => {
       />
       
       <Navbar />
+      
+      {/* Alert banner for weather and tour disruptions */}
+      <div className="w-full bg-white shadow-md">
+        <AlertEmbed />
+      </div>
+      
       <main className="flex-grow">
         <DesertasHero />
         <DesertasAbout />

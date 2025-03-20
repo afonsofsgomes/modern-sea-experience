@@ -8,11 +8,18 @@ import {
   PrivateCruiseBooking,
   PrivateCruiseInfo
 } from "@/components/sections";
+import { AlertEmbed } from "@/components/AlertEmbed";
 
 const PrivateCruise = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      
+      {/* Alert banner for weather and tour disruptions */}
+      <div className="w-full bg-white shadow-md">
+        <AlertEmbed />
+      </div>
+      
       <main className="flex-grow">
         <PrivateCruiseHero />
         <PrivateCruiseOptions />

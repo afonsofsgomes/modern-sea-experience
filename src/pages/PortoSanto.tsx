@@ -8,6 +8,7 @@ import {
   PortoSantoBooking
 } from "@/components/sections";
 import { MetaTags, TourSchema } from "@/components/SEO";
+import { AlertEmbed } from "@/components/AlertEmbed";
 
 const PortoSanto = () => {
   return (
@@ -26,6 +27,12 @@ const PortoSanto = () => {
       />
       
       <Navbar />
+      
+      {/* Alert banner for weather and tour disruptions */}
+      <div className="w-full bg-white shadow-md">
+        <AlertEmbed />
+      </div>
+      
       <main className="flex-grow">
         <PortoSantoHero />
         <PortoSantoAbout />

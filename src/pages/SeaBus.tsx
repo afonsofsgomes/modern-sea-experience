@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -10,6 +11,7 @@ import {
 import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
 import { MetaTags, TourSchema, FAQSchema } from "@/components/SEO";
 import { Helmet } from "react-helmet";
+import { AlertEmbed } from "@/components/AlertEmbed";
 
 const SeaBus = () => {
   // FAQ data for structured data
@@ -64,6 +66,12 @@ const SeaBus = () => {
       <FAQSchema questions={faqQuestions} />
       
       <Navbar />
+      
+      {/* Alert banner for weather and tour disruptions */}
+      <div className="w-full bg-white shadow-md">
+        <AlertEmbed />
+      </div>
+      
       <main className="flex-grow">
         <SeaBusHero />
         <SeaBusRoutes />
