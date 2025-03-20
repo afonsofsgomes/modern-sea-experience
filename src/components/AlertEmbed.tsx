@@ -7,6 +7,7 @@ export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [height, setHeight] = useState<number | null>(null);
   
   useEffect(() => {
     // Function to check if iframe is empty (white page)
@@ -48,19 +49,40 @@ export const AlertEmbed = () => {
       console.log("Received message from alerts iframe:", event.data);
       
       if (event.data && typeof event.data === "object") {
-        // If we get any message with content, the iframe is not empty
         setIsLoading(false);
-        setIsEmpty(event.data.hasContent === false);
+        
+        // Check for height message - if height is very small, content is likely empty
+        if (event.data.type === "safesailing-widget-height") {
+          const newHeight = event.data.height;
+          setHeight(newHeight);
+          
+          // If height is very small (like 12px), consider it empty
+          if (newHeight && newHeight <= 20) {
+            setIsEmpty(true);
+          } else if (newHeight && newHeight > 20) {
+            setIsEmpty(false);
+          }
+        }
+        
+        // If we explicitly get a hasContent flag, use it
+        if (event.data.hasContent === false) {
+          setIsEmpty(true);
+        } else if (event.data.hasContent === true) {
+          setIsEmpty(false);
+        }
       }
     };
 
-    // Set a timeout to handle cases where the iframe doesn't respond
+    // Set a timeout to handle cases where the iframe doesn't respond or is empty
     const timeoutId = setTimeout(() => {
       console.log("Alert iframe response timeout");
       setIsLoading(false);
       
-      // If nothing loaded after timeout, check if iframe appears empty
-      if (iframeRef.current) {
+      // Check iframe height if we received it in a message
+      if (height !== null) {
+        setIsEmpty(height <= 20);
+      } else if (iframeRef.current) {
+        // If we haven't received a height message, check if the iframe appears empty
         try {
           const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
           if (!iframeDoc || !iframeDoc.body.innerHTML.trim()) {
@@ -69,7 +91,7 @@ export const AlertEmbed = () => {
         } catch (e) {
           // If we can't access iframe content, check if the iframe has size
           const iframeHeight = iframeRef.current.offsetHeight;
-          setIsEmpty(iframeHeight <= 10); // Consider empty if height is very small
+          setIsEmpty(iframeHeight <= 20); // Consider empty if height is very small
         }
       }
     }, 5000);
@@ -79,7 +101,7 @@ export const AlertEmbed = () => {
       window.removeEventListener("message", handleMessage);
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [height]);
 
   return (
     <Card className="w-full overflow-hidden bg-white border border-amber-100 shadow-sm rounded-md">
