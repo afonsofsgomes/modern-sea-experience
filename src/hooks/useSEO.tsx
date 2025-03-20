@@ -29,11 +29,12 @@ export const useSEO = ({ title, description, jsonLd }: UseSEOProps) => {
 
     // Add JSON-LD structured data if provided
     if (jsonLd) {
-      let script = document.querySelector('#dynamic-jsonld');
+      let script = document.querySelector('#dynamic-jsonld') as HTMLScriptElement | null;
       if (!script) {
         script = document.createElement('script');
         script.id = 'dynamic-jsonld';
-        script.type = 'application/ld+json';
+        // Use setAttribute method instead of directly setting the type property
+        script.setAttribute('type', 'application/ld+json');
         document.head.appendChild(script);
       }
       script.textContent = JSON.stringify(jsonLd);
