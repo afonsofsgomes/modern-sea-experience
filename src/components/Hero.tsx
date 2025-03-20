@@ -1,19 +1,10 @@
 
-import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, LockKeyhole, TicketCheck } from "lucide-react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
 import { destinationData } from "@/components/destinations/DestinationData";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ImageWithFallback } from "@/components/ImageWithFallback";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { 
+  HeroBackground, 
+  HeroContent, 
+  HeroCarousel 
+} from "@/components/hero";
 
 // Ordering the destinations as specified
 const orderedDestinationData = [
@@ -33,205 +24,16 @@ const orderedDestinationData = [
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80";
 
 export const Hero = () => {
-  const isMobile = useIsMobile();
-  
-  // Getting SeaBus destinations from the data
-  const seaBusDestination = orderedDestinationData[0]; // This is the SeaBus destination
-  const seaBusLocations = seaBusDestination?.destinations || [];
-  
   return (
     <section className="relative bg-[#253D7F] py-12 sm:py-16 md:py-20 min-h-[90vh] flex items-center">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1628413283166-a7666966d26b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-          alt="Sea" 
-          className="w-full h-full object-cover object-bottom opacity-60" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/40 to-[#253D7F]/90" />
-      </div>
+      <HeroBackground imageUrl="https://images.unsplash.com/photo-1628413283166-a7666966d26b?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Hero Text Content */}
-        <div className="text-center mb-8 md:mb-12">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-3 sm:mb-4 max-w-4xl mx-auto"
-          >
-            Exclusive Sea Tours in Madeira
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-white/90 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-4 sm:mb-6 px-2"
-          >
-            Enjoy unforgettable adventures with private experiences, SeaBus connections, 
-            tours to Desertas Island, and day trips to Porto Santo.
-          </motion.p>
-
-          {/* Trust Indicators - Responsive Layout */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-10 mb-8 sm:mb-12 text-white/90"
-          >
-            <div className="flex items-center gap-1 sm:gap-2">
-              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
-                <LockKeyhole className="h-4 w-4 sm:h-5 sm:w-5" />
-              </div>
-              <span className="text-xs sm:text-sm">Secure Booking</span>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2">
-              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
-              </div>
-              <span className="text-xs sm:text-sm">24/7 Support</span>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2">
-              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
-                <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
-              </div>
-              <span className="text-xs sm:text-sm">Trusted on TripAdvisor</span>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2">
-              <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
-                <TicketCheck className="h-4 w-4 sm:h-5 sm:w-5" />
-              </div>
-              <span className="text-xs sm:text-sm">Flexible Cancellation</span>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Featured Experiences Carousel - Responsive */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="max-w-6xl mx-auto px-1 sm:px-4"
-        >
-          <Carousel 
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
-              {orderedDestinationData.map((destination, index) => (
-                <CarouselItem key={destination.name} className="pl-1 sm:pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 + (index * 0.1) }}
-                    whileHover={{ y: -10 }}
-                    className="h-full"
-                  >
-                    <Card className="overflow-hidden border-none shadow-lg h-full bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
-                      <div className="relative h-36 sm:h-48">
-                        {/* Special rendering for SeaBus with 3 destinations */}
-                        {destination.name === "SeaBus Connections" ? (
-                          <div className="flex flex-row h-full">
-                            {/* First city: Calheta */}
-                            <div className="w-1/3 h-full relative overflow-hidden border-r border-white/10">
-                              <ImageWithFallback 
-                                src="/images/calheta.jpg"
-                                fallbackSrc={FALLBACK_IMAGE}
-                                alt="Calheta"
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
-                                <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">Calheta</p>
-                              </div>
-                            </div>
-                            
-                            {/* Second city: Funchal (middle) */}
-                            <div className="w-1/3 h-full relative overflow-hidden border-r border-white/10">
-                              <ImageWithFallback 
-                                src="/images/funchal.jpg"
-                                fallbackSrc={FALLBACK_IMAGE}
-                                alt="Funchal"
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
-                                <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">Funchal</p>
-                              </div>
-                            </div>
-                            
-                            {/* Third city: Caniçal */}
-                            <div className="w-1/3 h-full relative overflow-hidden">
-                              <ImageWithFallback 
-                                src="/images/canical.jpg"
-                                fallbackSrc={FALLBACK_IMAGE}
-                                alt="Caniçal"
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-1">
-                                <p className="text-white text-[10px] sm:text-xs font-medium text-center truncate">Caniçal</p>
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <>
-                            <img 
-                              src={destination.image} 
-                              alt={destination.name} 
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                          </>
-                        )}
-                        <h3 className="absolute bottom-0 left-0 p-3 sm:p-4 text-white font-bold text-base sm:text-xl">{destination.name}</h3>
-                      </div>
-                      <CardContent className="p-3 sm:p-4 text-white flex flex-col h-[calc(100%-9rem)] sm:h-[calc(100%-12rem)]">
-                        <p className="text-xs sm:text-sm mb-2 sm:mb-4 flex-grow line-clamp-2 sm:line-clamp-3">{destination.experienceDesc}</p>
-                        <div className="flex justify-between items-center">
-                          <div className="flex items-center gap-1 sm:gap-2">
-                            <div className="bg-white/20 rounded p-1 text-[10px] sm:text-xs">
-                              {destination.stats[0].value}
-                            </div>
-                            <div className="bg-white/20 rounded p-1 text-[10px] sm:text-xs">
-                              {destination.stats[1].value}
-                            </div>
-                          </div>
-                          <Button 
-                            size="sm" 
-                            variant="secondary" 
-                            className="text-[10px] sm:text-xs whitespace-nowrap px-2 sm:px-3 py-1 sm:py-2"
-                          >
-                            <Link to={destination.link}>{destination.buttonText}</Link>
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            {!isMobile && (
-              <>
-                <CarouselPrevious className="hidden sm:flex bg-white/20 text-white border-none hover:bg-white/30 -left-10" />
-                <CarouselNext className="hidden sm:flex bg-white/20 text-white border-none hover:bg-white/30 -right-10" />
-              </>
-            )}
-          </Carousel>
-          
-          {/* Carousel indicators for mobile */}
-          {isMobile && (
-            <div className="flex justify-center mt-4 gap-1">
-              {orderedDestinationData.map((_, index) => (
-                <div 
-                  key={index} 
-                  className="w-2 h-2 rounded-full bg-white/40"
-                />
-              ))}
-            </div>
-          )}
-        </motion.div>
+        <HeroContent />
+        <HeroCarousel 
+          destinations={orderedDestinationData} 
+          fallbackImage={FALLBACK_IMAGE} 
+        />
       </div>
     </section>
   );
