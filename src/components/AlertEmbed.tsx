@@ -1,44 +1,27 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { AlertTriangle, CheckCircle, CloudSun, Loader } from "lucide-react";
+import { CheckCircle, CloudSun, Loader } from "lucide-react";
 
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
-  const [hasCheckedContent, setHasCheckedContent] = useState(false);
 
   useEffect(() => {
+    // Function to handle iframe load
+    const handleIframeLoad = () => {
+      console.log("Iframe loaded");
+      setIsLoading(false);
+    };
+    
+    // Set a timeout for initial loading
     const loadTimeout = setTimeout(() => {
       if (isLoading) {
         console.log("Loading timeout reached");
         setIsLoading(false);
-        checkContent();
       }
     }, 3000);
-
-    // Function to check if iframe is empty
-    const checkContent = () => {
-      if (hasCheckedContent) return;
-      
-      try {
-        const iframe = iframeRef.current;
-        if (!iframe) return;
-        
-        // Default to not empty until proven otherwise
-        setIsEmpty(false);
-        setHasCheckedContent(true);
-      } catch (e) {
-        console.error("Error checking iframe:", e);
-      }
-    };
-
-    // Function to handle iframe load
-    const handleIframeLoad = () => {
-      setIsLoading(false);
-      checkContent();
-    };
     
     // Add load event listener to iframe
     const iframe = iframeRef.current;
@@ -54,33 +37,34 @@ export const AlertEmbed = () => {
       console.log("Received message from alerts iframe:", event.data);
       
       if (event.data && typeof event.data === "object") {
-        setIsLoading(false);
+        // If loading, stop loading
+        if (isLoading) {
+          setIsLoading(false);
+        }
         
-        // If we get a height message
+        // If we explicitly get a hasContent flag, use it directly
+        if (event.data.hasContent === false) {
+          setIsEmpty(true);
+          return;
+        } else if (event.data.hasContent === true) {
+          setIsEmpty(false);
+          return;
+        }
+        
+        // If we get a height message, only consider empty if height is extremely small
+        // This is the critical fix - we were being too aggressive in marking as empty
         if (event.data.type === "safesailing-widget-height") {
           const height = event.data.height;
           
-          // If height is very small, consider it empty
-          // This is a key check - only mark as empty if height is tiny
-          if (height <= 15) {
-            console.log("Empty iframe detected from message: height is", height);
+          // More conservative approach - only mark as empty if height is incredibly small
+          // Most alert content will have a height significantly larger than 5
+          if (height < 5) {
+            console.log("Empty iframe detected: height is", height);
             setIsEmpty(true);
           } else {
-            // If height is significant, content exists
             console.log("Content detected in iframe: height is", height);
             setIsEmpty(false);
           }
-          
-          setHasCheckedContent(true);
-        }
-        
-        // If we explicitly get a hasContent flag, use it
-        if (event.data.hasContent === false) {
-          setIsEmpty(true);
-          setHasCheckedContent(true);
-        } else if (event.data.hasContent === true) {
-          setIsEmpty(false);
-          setHasCheckedContent(true);
         }
       }
     };
@@ -94,7 +78,7 @@ export const AlertEmbed = () => {
       window.removeEventListener("message", handleMessage);
       clearTimeout(loadTimeout);
     };
-  }, [isLoading, hasCheckedContent]);
+  }, [isLoading]);
 
   return (
     <Card className="w-full overflow-hidden bg-white border border-amber-100 shadow-sm rounded-md">
@@ -123,7 +107,7 @@ export const AlertEmbed = () => {
           style={{ 
             width: "100%", 
             height: "auto", 
-            minHeight: "150px", // Increased minimum height
+            minHeight: "200px", // Increased minimum height further for better visibility
             border: "none",
             overflow: "hidden"
           }}
