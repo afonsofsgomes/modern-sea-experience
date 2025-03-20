@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -19,7 +18,6 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    // Update any specific text elements that need changing
     const elements = document.querySelectorAll('.text-to-update');
     elements.forEach(el => {
       if (el.textContent?.includes('Our SeaBus Catamaran')) {
@@ -40,11 +38,6 @@ const Index = () => {
       
       <Navbar />
       
-      {/* Alert banner for weather and tour disruptions */}
-      <div className="w-full bg-white shadow-md">
-        <AlertEmbed />
-      </div>
-      
       <div id="home">
         <Hero />
       </div>
@@ -52,6 +45,13 @@ const Index = () => {
       <div id="routes">
         <Routes />
       </div>
+      
+      <div className="w-full bg-white py-4">
+        <div className="container mx-auto px-4">
+          <AlertEmbed />
+        </div>
+      </div>
+      
       <div id="destinations">
         <Destinations />
       </div>

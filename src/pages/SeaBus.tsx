@@ -67,14 +67,17 @@ const SeaBus = () => {
       
       <Navbar />
       
-      {/* Alert banner for weather and tour disruptions */}
-      <div className="w-full bg-white shadow-md">
-        <AlertEmbed />
-      </div>
-      
       <main className="flex-grow">
         <SeaBusHero />
         <SeaBusRoutes />
+        
+        {/* Alert banner placed in a white background section */}
+        <div className="w-full bg-white py-4">
+          <div className="container mx-auto px-4">
+            <AlertEmbed />
+          </div>
+        </div>
+        
         <SeaBusDestinations />
         <ScheduleDisplay />
         <SeaBusFeatures />

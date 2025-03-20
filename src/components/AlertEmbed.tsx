@@ -1,9 +1,11 @@
 
 import { useEffect, useRef, useState } from "react";
+import { Card } from "@/components/ui/card";
 
 export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(0);
+  const [hasContent, setHasContent] = useState(false);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -11,8 +13,14 @@ export const AlertEmbed = () => {
       if (event.origin !== "https://alerts.seayou.pt") return;
       
       // If the message contains a height, update our iframe height
-      if (event.data && typeof event.data === "object" && event.data.height) {
-        setHeight(event.data.height);
+      if (event.data && typeof event.data === "object") {
+        if (event.data.height) {
+          setHeight(event.data.height);
+        }
+        // If we receive a hasContent flag, update our state
+        if (event.data.hasContent !== undefined) {
+          setHasContent(event.data.hasContent);
+        }
       }
     };
 
@@ -20,14 +28,17 @@ export const AlertEmbed = () => {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
+  // Don't render anything if there are no alerts
+  if (!hasContent && height === 0) return null;
+
   return (
-    <div className="w-full overflow-hidden">
+    <Card className="w-full overflow-hidden bg-white border-none shadow-sm rounded-md mb-4">
       <iframe 
         ref={iframeRef}
         src="https://alerts.seayou.pt/embed" 
         style={{ 
           width: "100%", 
-          height: height ? `${height}px` : "auto", 
+          height: height ? `${height}px` : "0", 
           border: "none",
           overflow: "hidden"
         }}
@@ -35,6 +46,6 @@ export const AlertEmbed = () => {
         title="SeaYou Alerts"
         className="w-full"
       />
-    </div>
+    </Card>
   );
 };
