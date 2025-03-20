@@ -10,7 +10,7 @@ export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => 
     <div className="flex flex-row h-full">
       {/* First city: Calheta */}
       <LocationImage 
-        imageSrc="/images/calheta.jpg" 
+        imageSrc="https://extranet.seayou.pt/photos/Calheta.jpg" 
         fallbackSrc={fallbackImage} 
         cityName="Calheta" 
         hasBorder={true} 
@@ -18,7 +18,7 @@ export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => 
       
       {/* Second city: Funchal (middle) */}
       <LocationImage 
-        imageSrc="/images/funchal.jpg" 
+        imageSrc="https://extranet.seayou.pt/photos/Funchal.jpg" 
         fallbackSrc={fallbackImage} 
         cityName="Funchal" 
         hasBorder={true} 
@@ -26,7 +26,7 @@ export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => 
       
       {/* Third city: Caniçal */}
       <LocationImage 
-        imageSrc="/images/canical.jpg" 
+        imageSrc="https://extranet.seayou.pt/photos/Canical.jpg" 
         fallbackSrc={fallbackImage} 
         cityName="Caniçal" 
         hasBorder={false} 
