@@ -46,7 +46,7 @@ export const SeaBusRoutes = () => {
                 </div>
                 <h3 className="text-lg font-bold text-blue-900 mb-2">Flexible Schedule</h3>
                 <p className="text-gray-600 text-center">
-                  Daily departures with convenient timings to suit your plans
+                  Departures Tuesday to Sunday with convenient timings to suit your plans
                 </p>
               </div>
             </div>
