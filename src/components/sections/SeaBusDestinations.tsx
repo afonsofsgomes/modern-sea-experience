@@ -3,7 +3,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, Wine, Mountain, Camera, Anchor, Route, Sun, Fish, Waves, Ship, Clock, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 // Animation variants
 const containerVariants = {
@@ -71,6 +70,14 @@ const seabusDestinationsData = [
 export const SeaBusDestinations = () => {
   const destinationsRef = useRef(null);
   const destinationsInView = useInView(destinationsRef, { once: true, amount: 0.1 });
+
+  const scrollToSchedule = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const scheduleSection = document.getElementById('schedule-section');
+    if (scheduleSection) {
+      scheduleSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden" ref={destinationsRef}>
@@ -152,12 +159,12 @@ export const SeaBusDestinations = () => {
                   </div>
                 </div>
                 
-                <Link to="/schedule" className="mt-auto block">
+                <a href="#schedule-section" onClick={scrollToSchedule} className="mt-auto block">
                   <Button className="w-full bg-secondary hover:bg-secondary/90 text-white text-sm relative overflow-hidden group">
                     <span className="relative z-10">View Schedule</span>
                     <div className="absolute -inset-0.5 bg-secondary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-pulse"></div>
                   </Button>
-                </Link>
+                </a>
               </div>
             </motion.div>
           ))}
