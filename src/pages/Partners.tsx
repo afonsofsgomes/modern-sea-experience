@@ -72,8 +72,8 @@ const Partners = () => {
       <div className="flex min-h-screen flex-col">
         <Navbar />
         <main className="flex-1">
-          {/* Updated background with a blue gradient to match SeaYou's brand colors */}
-          <section className="bg-gradient-to-b from-primary/5 to-background py-20">
+          {/* Added pt-32 to ensure the title is visible below the fixed navbar */}
+          <section className="bg-gradient-to-b from-primary/5 to-background py-20 pt-32">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-4">Our Trusted Partners</h1>
