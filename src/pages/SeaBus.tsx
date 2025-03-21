@@ -9,6 +9,7 @@ import {
   ScheduleDisplay
 } from "@/components/sections";
 import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
+import { SeaBusMap } from "@/components/sections/SeaBusMap"; // Import the new component
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -82,6 +83,7 @@ const SeaBus = () => {
       
       <main className="flex-grow">
         <SeaBusHero />
+        <SeaBusMap /> {/* Add the new map section here, right after hero */}
         <SeaBusRoutes />
         
         {/* Alert banner placed in a white background section */}

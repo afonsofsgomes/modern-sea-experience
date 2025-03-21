@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users, Wifi } from "lucide-react";
@@ -28,7 +29,7 @@ export const SeaBusHero = () => {
       }} transition={{
         duration: 0.5
       }} className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4 landscape:mt-24">
-          SEA BUS
+          SCENIC SEA BUS
         </motion.h1>
         <motion.p initial={{
         opacity: 0,
