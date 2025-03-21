@@ -10,14 +10,14 @@ export const SeaBusMapImage = () => {
   return (
     <section 
       ref={mapRef}
-      className="py-16 bg-white overflow-hidden"
+      className="py-12 bg-white overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
           <span className="inline-block py-1 px-3 text-xs font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
             SeaBus Route Map
@@ -34,9 +34,9 @@ export const SeaBusMapImage = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative rounded-xl overflow-hidden shadow-lg"
+          className="relative rounded-xl overflow-hidden shadow-lg max-w-4xl mx-auto"
         >
-          <div className="relative aspect-[16/10] md:aspect-[16/9] lg:aspect-[16/8] w-full">
+          <div className="relative aspect-[16/10] md:aspect-[16/9] w-full">
             <img 
               src="https://extranet.seayou.pt/photos/map-seabus-seayou.png" 
               alt="Map of SeaBus routes in Madeira" 
@@ -48,14 +48,14 @@ export const SeaBusMapImage = () => {
             />
           </div>
 
-          <div className="bg-white p-5 rounded-b-xl">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="bg-white p-4 rounded-b-xl">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
               <div className="flex items-center">
                 <Map className="h-5 w-5 text-blue-600 mr-2" />
                 <span className="text-sm font-medium text-blue-900">SeaBus Routes Network</span>
               </div>
               
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 <div className="flex items-center bg-blue-50 px-3 py-1.5 rounded-lg">
                   <Anchor className="h-4 w-4 text-blue-600 mr-2" />
                   <span className="text-xs text-blue-800">Funchal</span>
@@ -71,7 +71,7 @@ export const SeaBusMapImage = () => {
               </div>
             </div>
             
-            <p className="text-xs text-gray-500 mt-4">
+            <p className="text-xs text-gray-500 mt-3">
               Our SeaBus connects the main coastal cities of Madeira, providing a scenic and comfortable alternative to road travel.
               Enjoy breathtaking views of the coastline while traveling between destinations.
             </p>
