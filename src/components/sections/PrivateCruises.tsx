@@ -63,7 +63,8 @@ export const PrivateCruises = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-8 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
               <h3 className="text-white text-2xl font-display mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">South Coast Cruise</h3>
-              <p className="text-white/80 mb-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">Explore the stunning southern coastline of Madeira with stops at secluded beaches and beautiful bays</p>
+              <p className="text-white/80 mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">Explore the stunning southern coastline of Madeira with stops at secluded beaches and beautiful bays</p>
+              <p className="text-white/90 mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75"><strong>TUESDAY, SATURDAY, SUNDAY</strong> | Departing from Calheta</p>
               <Link to="/private-cruise" className="inline-block bg-secondary text-white font-medium py-2 px-4 rounded-md hover:bg-secondary/90 transition-colors max-w-max transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-100">
                 Book South Coast Trip
               </Link>
@@ -83,7 +84,8 @@ export const PrivateCruises = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-8 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
               <h3 className="text-white text-2xl font-display mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">North Coast Cruise</h3>
-              <p className="text-white/80 mb-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline</p>
+              <p className="text-white/80 mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">Discover the dramatic cliffs and hidden caves of Madeira's rugged northern coastline</p>
+              <p className="text-white/90 mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75"><strong>WEDNESDAY, THURSDAY, FRIDAY</strong> | Departing from Caniçal</p>
               <Link to="/private-cruise" className="inline-block bg-secondary text-white font-medium py-2 px-4 rounded-md hover:bg-secondary/90 transition-colors max-w-max transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-100">
                 Book North Coast Trip
               </Link>

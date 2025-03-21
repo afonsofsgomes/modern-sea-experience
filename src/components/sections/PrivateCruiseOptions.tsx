@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 
 export const PrivateCruiseOptions = () => {
@@ -27,7 +26,8 @@ export const PrivateCruiseOptions = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-display mb-2">Private North Coast Cruise</h3>
               <p className="text-white/80 mb-2">Discover the raw beauty of the North Coast from the comfort and privacy of our catamaran</p>
-              <p className="text-white/90 mb-2 font-semibold">TUESDAY, SATURDAY, SUNDAY | 13:00 - 15:30</p>
+              <p className="text-white/90 mb-2 font-semibold">WEDNESDAY, THURSDAY, FRIDAY | 13:00 - 15:30</p>
+              <p className="text-white/90 mb-2">Departing from Caniçal</p>
               <p className="text-white text-2xl font-bold mb-4">From 243.60€</p>
               <div className="flex justify-center w-full">
                 <Button
@@ -50,7 +50,8 @@ export const PrivateCruiseOptions = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-display mb-2">Private South Coast Cruise</h3>
               <p className="text-white/80 mb-2">Sail to the sunniest part of Madeira and experience the island's southern charm</p>
-              <p className="text-white/90 mb-2 font-semibold">WEDNESDAY, THURSDAY, FRIDAY | 13:00 - 15:30</p>
+              <p className="text-white/90 mb-2 font-semibold">TUESDAY, SATURDAY, SUNDAY | 13:00 - 15:30</p>
+              <p className="text-white/90 mb-2">Departing from Calheta</p>
               <p className="text-white text-2xl font-bold mb-4">From 243.60€</p>
               <div className="flex justify-center w-full">
                 <Button
