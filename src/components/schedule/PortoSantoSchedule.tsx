@@ -18,7 +18,7 @@ export const PortoSantoSchedule = () => {
       
       <div className="grid gap-8">
         <div>
-          <h3 className="text-lg font-medium mb-3">Funchal to Porto Santo</h3>
+          <h3 className="text-lg font-medium mb-3">Caniçal to Porto Santo</h3>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
@@ -33,11 +33,6 @@ export const PortoSantoSchedule = () => {
                   <TableCell>Wednesday, Thursday, Friday</TableCell>
                   <TableCell>09:00</TableCell>
                   <TableCell>17:00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Saturday</TableCell>
-                  <TableCell>08:00</TableCell>
-                  <TableCell>18:00</TableCell>
                 </TableRow>
               </TableBody>
             </Table>

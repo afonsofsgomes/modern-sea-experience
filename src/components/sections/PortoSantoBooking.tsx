@@ -1,4 +1,3 @@
-
 import { BokunWidget } from "@/components/BokunWidget";
 
 export const PortoSantoBooking = () => {
@@ -21,7 +20,7 @@ export const PortoSantoBooking = () => {
           <h3 className="text-xl font-bold text-blue-900 mb-4">Schedule Information</h3>
           <p className="text-lg font-medium text-blue-800 mb-2">WEDNESDAY, THURSDAY, FRIDAY</p>
           <p className="text-gray-700 mb-4">Departure: 09:00 | Return: 17:00</p>
-          <p className="text-sm text-gray-600">All Porto Santo experiences depart from Funchal Harbor.</p>
+          <p className="text-sm text-gray-600">All Porto Santo experiences depart from Caniçal Harbor.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
