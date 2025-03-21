@@ -1,112 +1,77 @@
 
-// Updating import path to use lowercase button
 import { Button } from "@/components/ui/button";
+import { Boat, Navigation, Tag } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const SeaBusRoutes = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center text-blue-900">
-          Roundtrips
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Route Card 1 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-4 text-blue-900">
-                Funchal → Caniçal → Funchal
-              </h3>
-              <p className="text-4xl font-bold text-red-500 mb-6">39€</p>
-              <Button 
-                className="w-full bg-red-500 hover:bg-red-600"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                BOOK NOW
-              </Button>
-            </div>
-          </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-blue-900">
+            Discover Madeira by Sea
+          </h2>
           
-          {/* Route Card 2 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-4 text-blue-900">
-                Funchal → Calheta → Funchal
-              </h3>
-              <p className="text-4xl font-bold text-red-500 mb-6">39€</p>
-              <Button 
-                className="w-full bg-red-500 hover:bg-red-600"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                BOOK NOW
-              </Button>
+          <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl shadow-lg p-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="flex flex-col items-center">
+                <div className="bg-blue-600 text-white p-3 rounded-full mb-4">
+                  <Boat className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-blue-900 mb-2">Multiple Routes</h3>
+                <p className="text-gray-600 text-center">
+                  Connecting Funchal, Caniçal, and Calheta with spectacular coastal views
+                </p>
+              </div>
+              
+              <div className="flex flex-col items-center">
+                <div className="bg-blue-600 text-white p-3 rounded-full mb-4">
+                  <Tag className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-blue-900 mb-2">Affordable Pricing</h3>
+                <p className="text-gray-600 text-center">
+                  All roundtrips at €39, with premium routes at just €59
+                </p>
+              </div>
+              
+              <div className="flex flex-col items-center">
+                <div className="bg-blue-600 text-white p-3 rounded-full mb-4">
+                  <Navigation className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-blue-900 mb-2">Flexible Schedule</h3>
+                <p className="text-gray-600 text-center">
+                  Daily departures with convenient timings to suit your plans
+                </p>
+              </div>
             </div>
-          </div>
-          
-          {/* Route Card 3 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-4 text-blue-900">
-                Caniçal → Funchal → Caniçal
-              </h3>
-              <p className="text-4xl font-bold text-red-500 mb-6">39€</p>
-              <Button 
-                className="w-full bg-red-500 hover:bg-red-600"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                BOOK NOW
-              </Button>
+            
+            <div className="bg-white p-6 rounded-lg shadow-inner mb-8">
+              <p className="text-lg text-blue-900 font-medium mb-3">
+                Explore our popular routes:
+              </p>
+              <p className="text-gray-700 mb-4">
+                Funchal ↔ Caniçal | Funchal ↔ Calheta | Caniçal ↔ Calheta
+              </p>
+              <p className="text-2xl font-bold text-red-500">
+                Starting from €39 per person
+              </p>
             </div>
+            
+            <Button 
+              size="lg" 
+              className="bg-red-500 hover:bg-red-600 text-lg px-10"
+              onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Check Availability & Book Now
+            </Button>
           </div>
-          
-          {/* Route Card 4 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-4 text-blue-900">
-                Caniçal → Calheta → Caniçal
-              </h3>
-              <p className="text-4xl font-bold text-red-500 mb-6">59€</p>
-              <Button 
-                className="w-full bg-red-500 hover:bg-red-600"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                BOOK NOW
-              </Button>
-            </div>
-          </div>
-          
-          {/* Route Card 5 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-4 text-blue-900">
-                Calheta → Caniçal → Calheta
-              </h3>
-              <p className="text-4xl font-bold text-red-500 mb-6">59€</p>
-              <Button 
-                className="w-full bg-red-500 hover:bg-red-600"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                BOOK NOW
-              </Button>
-            </div>
-          </div>
-          
-          {/* Route Card 6 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-            <div className="p-6">
-              <h3 className="text-xl font-medium mb-4 text-blue-900">
-                Calheta → Funchal → Calheta
-              </h3>
-              <p className="text-4xl font-bold text-red-500 mb-6">39€</p>
-              <Button 
-                className="w-full bg-red-500 hover:bg-red-600"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                BOOK NOW
-              </Button>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
