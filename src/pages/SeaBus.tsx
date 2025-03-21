@@ -9,7 +9,6 @@ import {
   ScheduleDisplay,
   SeaBusMapImage
 } from "@/components/sections";
-import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -90,7 +89,6 @@ const SeaBus = () => {
           </div>
         </div>
         
-        <SeaBusDestinations />
         <ScheduleDisplay />
         <SeaBusFeatures />
         <SeaBusBooking />
