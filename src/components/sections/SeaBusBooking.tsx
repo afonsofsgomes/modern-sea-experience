@@ -20,9 +20,9 @@ export const SeaBusBooking = () => {
           </div>
           
           <BokunWidget 
-            isProductPage={true}
             productId="978723"
             bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
+            isCalendarWidget={true}
             className="min-h-[600px]" 
           />
         </div>
