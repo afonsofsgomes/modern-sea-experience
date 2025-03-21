@@ -22,7 +22,8 @@ export const Navbar = () => {
       "/privacy-policy",
       "/terms",
       "/cookies",
-      "/booking"
+      "/booking",
+      "/partners"
     ];
     
     const shouldForceColor = whiteBackgroundPages.includes(location.pathname);
