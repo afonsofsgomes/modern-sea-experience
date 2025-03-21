@@ -1,6 +1,7 @@
 
 import React from "react";
-import { Instagram, Facebook, Twitter, Youtube, TikTok } from "lucide-react";
+import { Instagram, Facebook, Twitter, Youtube } from "lucide-react";
+import { TikTokIcon } from "../icons/TikTokIcon";
 
 export const FooterSocialLinks: React.FC = () => {
   return (
@@ -39,7 +40,7 @@ export const FooterSocialLinks: React.FC = () => {
         aria-label="TikTok"
         className="p-2 rounded-full hover:bg-gray-100 transition-colors"
       >
-        <TikTok className="h-5 w-5" />
+        <TikTokIcon className="h-5 w-5" />
       </a>
       <a
         href="https://www.youtube.com/@seayou.madeira"
