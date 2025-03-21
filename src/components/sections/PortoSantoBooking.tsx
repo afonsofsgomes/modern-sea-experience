@@ -1,8 +1,9 @@
+
 import { BokunWidget } from "@/components/BokunWidget";
 
 export const PortoSantoBooking = () => {
   return (
-    <section className="py-20 bg-white">
+    <section id="booking" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10">
           <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 text-blue-900 rounded-full mb-4">
