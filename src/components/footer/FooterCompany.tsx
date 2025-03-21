@@ -9,10 +9,18 @@ export const FooterCompany: React.FC = () => {
       <ul className="space-y-3">
         <li>
           <Link
-            to="/#about"
+            to="/port-terminal"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            About Us
+            Port Terminal
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/partners"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Partners
           </Link>
         </li>
         <li>
@@ -21,6 +29,30 @@ export const FooterCompany: React.FC = () => {
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             Careers
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/privacy-policy"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Privacy Policy
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/terms"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Terms & Conditions
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/cookies"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Cookies
           </Link>
         </li>
       </ul>

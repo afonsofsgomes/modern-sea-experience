@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Anchor, Ship } from "lucide-react";
+import { Mail, Phone, Ship } from "lucide-react";
 
 export const FooterContact: React.FC = () => {
   return (
@@ -23,14 +23,6 @@ export const FooterContact: React.FC = () => {
           >
             <Phone className="h-4 w-4 mr-2" /> +351 291 000 000
           </a>
-        </li>
-        <li>
-          <Link
-            to="/port-terminal"
-            className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
-          >
-            <Anchor className="h-4 w-4 mr-2" /> Meeting Points
-          </Link>
         </li>
         <li>
           <Link
