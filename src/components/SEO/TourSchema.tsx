@@ -14,6 +14,7 @@ interface TourSchemaProps {
   endLocation?: string;
   tourOperator?: string;
   availability?: string;
+  maxAttendeeCapacity?: number;
 }
 
 export const TourSchema: React.FC<TourSchemaProps> = ({
@@ -27,7 +28,8 @@ export const TourSchema: React.FC<TourSchemaProps> = ({
   startLocation,
   endLocation,
   tourOperator = "SeaYou Madeira",
-  availability = "https://schema.org/InStock"
+  availability = "https://schema.org/InStock",
+  maxAttendeeCapacity
 }) => {
   const tourData = {
     "@context": "https://schema.org",
@@ -50,6 +52,10 @@ export const TourSchema: React.FC<TourSchemaProps> = ({
   // Add additional properties if provided
   if (duration) {
     tourData["duration"] = duration;
+  }
+
+  if (maxAttendeeCapacity) {
+    tourData["maxAttendeeCapacity"] = maxAttendeeCapacity;
   }
 
   if (startLocation) {

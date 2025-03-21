@@ -27,8 +27,8 @@ export const PortoSantoAbout = () => {
                 <p className="text-muted-foreground">Round-Sea Trip Time</p>
               </div>
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
-                <h3 className="text-3xl font-medium mb-2 text-blue-900">Wed-Fri</h3>
-                <p className="text-muted-foreground">Departures</p>
+                <h3 className="text-3xl font-medium mb-2 text-blue-900">12</h3>
+                <p className="text-muted-foreground">Max Passengers</p>
               </div>
             </div>
           </div>

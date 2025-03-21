@@ -17,7 +17,7 @@ export const PrivateCruiseInfo = () => {
             <div className="flex flex-col items-center">
               <Users className="h-10 w-10 text-[#E95543] mb-2" />
               <p className="font-medium">Capacity</p>
-              <p>Up to 12 passengers</p>
+              <p>Up to 18 passengers</p>
             </div>
             <div className="flex flex-col items-center">
               <Ship className="h-10 w-10 text-[#E95543] mb-2" />

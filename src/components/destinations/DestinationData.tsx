@@ -95,7 +95,7 @@ export const destinationData: DestinationType[] = [
     buttonText: "Book Private Cruise",
     stats: [
       { value: "2.5h", label: "Duration" },
-      { value: "12", label: "Max Guests" },
+      { value: "18", label: "Max Guests" },
       { value: "13:00", label: "Departure Time" }
     ],
     experience: "Private North Coast Cruise",
@@ -116,7 +116,7 @@ export const destinationData: DestinationType[] = [
     buttonText: "Book Private Cruise",
     stats: [
       { value: "2.5h", label: "Duration" },
-      { value: "12", label: "Max Guests" },
+      { value: "18", label: "Max Guests" },
       { value: "13:00", label: "Departure Time" }
     ],
     experience: "Private South Coast Cruise",
@@ -158,7 +158,7 @@ export const destinationData: DestinationType[] = [
     buttonText: "Book Porto Santo 1-Day Experience",
     stats: [
       { value: "1h", label: "Sea Trip" },
-      { value: "9km", label: "Golden Beach" },
+      { value: "12", label: "Max Guests" },
       { value: "9:00", label: "Departure Time" }
     ],
     experience: "Porto Santo Golden Island",

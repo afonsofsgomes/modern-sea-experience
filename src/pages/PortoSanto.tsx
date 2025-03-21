@@ -49,6 +49,7 @@ const PortoSanto = () => {
         image="https://extranet.seayou.pt/photos/pxo.jpg"
         price="65.00"
         duration="PT2H30M"
+        maxAttendeeCapacity={12}
       />
       <StructuredData data={breadcrumbSchema} />
       
