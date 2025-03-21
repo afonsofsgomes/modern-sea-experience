@@ -51,24 +51,24 @@ export const SeaBusMapImage = () => {
               />
             </div>
 
-            <div className="bg-white p-4 rounded-b-xl">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div className="bg-white py-3 px-4 rounded-b-xl">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                 <div className="flex items-center">
                   <Map className="h-5 w-5 text-blue-600 mr-2" />
                   <span className="text-sm font-medium text-blue-900">SeaBus Routes Network</span>
                 </div>
                 
-                <div className="flex flex-wrap gap-3">
-                  <div className="flex items-center bg-blue-50 px-3 py-1.5 rounded-lg">
-                    <Anchor className="h-4 w-4 text-blue-600 mr-2" />
+                <div className="flex flex-wrap gap-2">
+                  <div className="flex items-center bg-blue-50 px-2 py-1 rounded-lg">
+                    <Anchor className="h-4 w-4 text-blue-600 mr-1" />
                     <span className="text-xs text-blue-800">Funchal</span>
                   </div>
-                  <div className="flex items-center bg-blue-50 px-3 py-1.5 rounded-lg">
-                    <Ship className="h-4 w-4 text-blue-600 mr-2" />
+                  <div className="flex items-center bg-blue-50 px-2 py-1 rounded-lg">
+                    <Ship className="h-4 w-4 text-blue-600 mr-1" />
                     <span className="text-xs text-blue-800">Caniçal</span>
                   </div>
-                  <div className="flex items-center bg-blue-50 px-3 py-1.5 rounded-lg">
-                    <Anchor className="h-4 w-4 text-blue-600 mr-2" />
+                  <div className="flex items-center bg-blue-50 px-2 py-1 rounded-lg">
+                    <Anchor className="h-4 w-4 text-blue-600 mr-1" />
                     <span className="text-xs text-blue-800">Calheta</span>
                   </div>
                 </div>
