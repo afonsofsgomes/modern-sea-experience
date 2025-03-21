@@ -39,14 +39,6 @@ export const FooterServices: React.FC = () => {
             Group Bookings
           </Link>
         </li>
-        <li>
-          <Link
-            to="/corporate-events"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Corporate Events
-          </Link>
-        </li>
       </ul>
     </div>
   );

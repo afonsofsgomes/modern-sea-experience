@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Users, CalendarDays, Clock, MapPin, Send } from "lucide-react";
@@ -127,11 +128,11 @@ const GroupBookings = () => {
                   <div className="space-y-2 mb-6">
                     <div className="flex items-center text-sm">
                       <Users className="h-4 w-4 mr-2 text-primary" />
-                      <span>{pkg.groupSize}</span>
+                      <span>Customizable group size</span>
                     </div>
                     <div className="flex items-center text-sm">
                       <Clock className="h-4 w-4 mr-2 text-primary" />
-                      <span>{pkg.duration}</span>
+                      <span>Flexible duration</span>
                     </div>
                     <div className="flex items-center text-sm">
                       <MapPin className="h-4 w-4 mr-2 text-primary" />
@@ -246,8 +247,6 @@ const groupPackages = [
     description: "Educational and fun maritime experiences tailored for school groups with special educational content.",
     image: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     badge: "Educational",
-    groupSize: "15-60 students",
-    duration: "2-4 hours",
     location: "Multiple routes available"
   },
   {
@@ -255,8 +254,6 @@ const groupPackages = [
     description: "Build stronger teams while enjoying the beautiful waters around Madeira with customized activities.",
     image: "https://images.unsplash.com/photo-1471967183320-ee018f6e114a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     badge: "Team Building",
-    groupSize: "10-25 colleagues",
-    duration: "Half or full day",
     location: "Private cruise options"
   },
   {
@@ -264,8 +261,6 @@ const groupPackages = [
     description: "Create lasting memories with a special maritime experience for your family gathering.",
     image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     badge: "Family",
-    groupSize: "10-30 family members",
-    duration: "3-6 hours",
     location: "Custom routes available"
   }
 ];

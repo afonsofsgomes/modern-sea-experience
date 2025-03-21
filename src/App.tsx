@@ -13,7 +13,6 @@ import Desertas from "./pages/Desertas";
 import NotFound from "./pages/NotFound";
 import Careers from "./pages/Careers";
 import GroupBookings from "./pages/GroupBookings";
-import CorporateEvents from "./pages/CorporateEvents";
 import PortTerminal from "./pages/PortTerminal";
 import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -41,7 +40,6 @@ const App = () => (
             <Route path="/desertas" element={<Desertas />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/group-bookings" element={<GroupBookings />} />
-            <Route path="/corporate-events" element={<CorporateEvents />} />
             <Route path="/port-terminal" element={<PortTerminal />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
