@@ -138,7 +138,7 @@ export const destinationData: DestinationType[] = [
     stats: [
       { value: "3.5h", label: "Duration" },
       { value: "18", label: "Max Guests" },
-      { value: "Wildlife", label: "Focus" }
+      { value: "12:30", label: "Departure Time" }
     ],
     experience: "Desertas Island Adventure",
     experienceDesc: "Visit the uninhabited Desertas Islands to observe rare wildlife and pristine natural landscapes.",
