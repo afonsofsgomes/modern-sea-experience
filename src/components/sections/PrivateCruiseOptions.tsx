@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
@@ -36,7 +35,7 @@ export const PrivateCruiseOptions = () => {
       time: "13:00 - 15:30",
       location: "Departing from Caniçal",
       price: "From 243.60€",
-      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      image: "https://extranet.seayou.pt/photos/pta-s-lourenco2.jpg",
       gradient: "from-blue-500/70 via-blue-600/60 to-blue-700/70",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
     },
@@ -48,7 +47,7 @@ export const PrivateCruiseOptions = () => {
       time: "13:00 - 15:30",
       location: "Departing from Calheta",
       price: "From 243.60€",
-      image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      image: "https://extranet.seayou.pt/photos/south.jpg",
       gradient: "from-teal-500/70 via-teal-600/60 to-teal-700/70",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
     },
@@ -57,7 +56,7 @@ export const PrivateCruiseOptions = () => {
       title: "Coastal Exploration",
       description: "Discover hidden caves, majestic cliffs and pristine beaches along Madeira's coastline",
       custom: true,
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      image: "https://extranet.seayou.pt/photos/coastal.jpg",
       gradient: "from-purple-500/70 via-purple-600/60 to-purple-700/70",
       buttonAction: scrollToContact
     },
@@ -66,7 +65,7 @@ export const PrivateCruiseOptions = () => {
       title: "Custom Charter",
       description: "Nothing seems to fit your needs? Let's discuss and find a tailor-made cruise experience just for you.",
       custom: true,
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      image: "https://extranet.seayou.pt/photos/custom.jpg",
       gradient: "from-red-500/70 via-red-600/60 to-red-700/70",
       buttonAction: scrollToContact
     }
