@@ -83,9 +83,11 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
             <Button 
               size="sm" 
               variant="secondary" 
-              className="text-[10px] sm:text-xs whitespace-nowrap px-2 sm:px-3 py-1 sm:py-2 w-full sm:w-auto"
+              className="text-[10px] sm:text-xs whitespace-nowrap px-2 sm:px-3 py-1 sm:py-2 w-full sm:w-auto min-w-0 truncate"
             >
-              <Link to={destination.link}>{destination.buttonText}</Link>
+              <Link to={destination.link} className="truncate block w-full">
+                {destination.buttonText}
+              </Link>
             </Button>
           </div>
         </CardContent>
