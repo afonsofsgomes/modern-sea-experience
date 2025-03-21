@@ -1,9 +1,9 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Users, CalendarDays, Clock, MapPin, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import GroupBookingDialog from "@/components/GroupBookingDialog";
+import TallyScript from "@/components/TallyScript";
 
 const GroupBookings = () => {
   return (
@@ -195,65 +195,17 @@ const GroupBookings = () => {
               </div>
               
               <div className="bg-gray-50 p-6 rounded-lg">
-                <form className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                      <input 
-                        type="text" 
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                      <input 
-                        type="email" 
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                        placeholder="Your email"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Group Size</label>
-                      <input 
-                        type="number" 
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                        placeholder="Number of people"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
-                      <input 
-                        type="date" 
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Experience Type</label>
-                    <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                      <option value="">Select an experience</option>
-                      <option value="seabus">SeaBus Route</option>
-                      <option value="porto-santo">Porto Santo Trip</option>
-                      <option value="private-cruise">Private Cruise</option>
-                      <option value="custom">Custom Experience</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
-                    <textarea 
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary h-32"
-                      placeholder="Tell us more about your group and any special requirements"
-                    ></textarea>
-                  </div>
-                  
-                  <GroupBookingDialog size="lg" className="w-full">Submit Group Inquiry</GroupBookingDialog>
-                </form>
+                <div className="h-[600px] w-full">
+                  <iframe 
+                    data-tally-src="https://tally.so/r/wAyZZe?transparentBackground=1" 
+                    width="100%" 
+                    height="100%" 
+                    frameBorder="0" 
+                    title="Group Booking Inquiry"
+                    className="border-none"
+                  />
+                </div>
+                <TallyScript />
               </div>
             </div>
           </div>
