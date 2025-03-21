@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SeaBusCardContent } from "./SeaBusCardContent";
+import { Star } from "lucide-react";
 
 export interface DestinationCardProps {
   destination: {
@@ -13,6 +14,7 @@ export interface DestinationCardProps {
     stats: Array<{ label: string; value: string }>;
     link: string;
     buttonText: string;
+    rating?: number; // Optional rating field
     destinations?: Array<{
       name: string;
       image: string;
@@ -53,6 +55,22 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
         </div>
         <CardContent className="p-3 sm:p-4 text-white flex flex-col h-[calc(100%-9rem)] sm:h-[calc(100%-12rem)]">
           <p className="text-xs sm:text-sm mb-2 sm:mb-4 flex-grow line-clamp-2 sm:line-clamp-3">{destination.experienceDesc}</p>
+          
+          {/* Rating display */}
+          {destination.rating && (
+            <div className="flex items-center mb-2">
+              <div className="flex text-yellow-400 mr-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star 
+                    key={i}
+                    className={`w-3 h-3 sm:w-4 sm:h-4 ${i < Math.floor(destination.rating || 0) ? 'fill-yellow-400' : ''}`} 
+                  />
+                ))}
+              </div>
+              <span className="text-[10px] sm:text-xs">{destination.rating.toFixed(1)}</span>
+            </div>
+          )}
+          
           <div className="flex justify-between items-center">
             <div className="hidden sm:flex items-center gap-1 sm:gap-2">
               <div className="bg-white/20 rounded p-1 text-[10px] sm:text-xs">

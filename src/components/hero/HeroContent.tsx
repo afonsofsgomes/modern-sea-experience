@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { LockKeyhole, Clock, MapPin, TicketCheck } from "lucide-react";
 
@@ -49,7 +50,7 @@ const TrustIndicator = ({ icon, text }: TrustIndicatorProps) => {
       <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
         {icon}
       </div>
-      <span className="text-xs sm:text-sm">{text}</span>
+      <span className="text-xs sm:text-sm font-bold">{text}</span>
     </div>
   );
 };
