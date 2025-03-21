@@ -1,4 +1,3 @@
-
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { Helmet } from "react-helmet";
@@ -103,7 +102,7 @@ const PrivacyPolicy = () => {
                 <div>
                   <h2 className="text-2xl font-semibold mb-3">Cookies</h2>
                   <p className="text-gray-700">
-                    We use cookies and similar technologies to improve your browsing experience, analyze site traffic, and personalize content. You can manage your cookie preferences through your browser settings. For more information, please see our <a href="/cookies" className="text-blue-600 hover:underline">Cookie Policy</a>.
+                    We use cookies and similar technologies to improve your browsing experience, analyze site traffic, and personalize content. You can manage your cookie preferences through your browser settings.
                   </p>
                 </div>
                 

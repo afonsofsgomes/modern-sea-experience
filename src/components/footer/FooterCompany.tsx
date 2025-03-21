@@ -47,14 +47,6 @@ export const FooterCompany: React.FC = () => {
             Terms & Conditions
           </Link>
         </li>
-        <li>
-          <Link
-            to="/cookies"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Cookies
-          </Link>
-        </li>
       </ul>
     </div>
   );

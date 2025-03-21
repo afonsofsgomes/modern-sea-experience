@@ -21,12 +21,6 @@ export const FooterCopyright: React.FC = () => {
         >
           Terms of Service
         </Link>
-        <Link
-          to="/cookies"
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Cookies
-        </Link>
       </div>
     </div>
   );
