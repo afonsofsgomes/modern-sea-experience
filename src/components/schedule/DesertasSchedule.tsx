@@ -18,6 +18,7 @@ export const DesertasSchedule = () => {
                   <th className="border px-4 py-2 text-left">Tour Type</th>
                   <th className="border px-4 py-2 text-left">Days</th>
                   <th className="border px-4 py-2 text-left">Departure Time</th>
+                  <th className="border px-4 py-2 text-left">Return Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -25,16 +26,19 @@ export const DesertasSchedule = () => {
                   <td className="border px-4 py-2">Day Tour (8 hours)</td>
                   <td className="border px-4 py-2">Tuesday, Thursday</td>
                   <td className="border px-4 py-2">09:00</td>
+                  <td className="border px-4 py-2">17:00</td>
                 </tr>
                 <tr>
                   <td className="border px-4 py-2">Half-Day Tour (5 hours)</td>
                   <td className="border px-4 py-2">Monday, Wednesday, Friday</td>
-                  <td className="border px-4 py-2">10:00</td>
+                  <td className="border px-4 py-2">12:30</td>
+                  <td className="border px-4 py-2">17:30</td>
                 </tr>
                 <tr>
                   <td className="border px-4 py-2">Weekend Special (6 hours)</td>
                   <td className="border px-4 py-2">Saturday, Sunday</td>
-                  <td className="border px-4 py-2">09:30</td>
+                  <td className="border px-4 py-2">12:30</td>
+                  <td className="border px-4 py-2">18:30</td>
                 </tr>
               </tbody>
             </table>

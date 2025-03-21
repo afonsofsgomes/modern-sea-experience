@@ -10,27 +10,35 @@ export const SeaBusSchedule = () => {
       
       <div className="grid gap-8">
         <div>
-          <h3 className="text-lg font-medium mb-3">Funchal to Caniçal</h3>
+          <h3 className="text-lg font-medium mb-3">Tuesday, Saturday, Sunday</h3>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="border px-4 py-2 text-left">Days</th>
-                  <th className="border px-4 py-2 text-left">Departure Times</th>
+                  <th className="border px-4 py-2 text-left">Route</th>
+                  <th className="border px-4 py-2 text-left">Departure</th>
+                  <th className="border px-4 py-2 text-left">Return</th>
+                  <th className="border px-4 py-2 text-left">Duration</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border px-4 py-2">Monday - Friday</td>
-                  <td className="border px-4 py-2">07:00, 09:30, 12:00, 14:30, 17:00, 19:30</td>
+                  <td className="border px-4 py-2">Calheta → Funchal</td>
+                  <td className="border px-4 py-2">09:00</td>
+                  <td className="border px-4 py-2">18:15</td>
+                  <td className="border px-4 py-2">1h 15m</td>
                 </tr>
                 <tr>
-                  <td className="border px-4 py-2">Saturday</td>
-                  <td className="border px-4 py-2">08:00, 11:00, 14:00, 17:00</td>
+                  <td className="border px-4 py-2">Calheta → Caniçal</td>
+                  <td className="border px-4 py-2">09:00</td>
+                  <td className="border px-4 py-2">17:00</td>
+                  <td className="border px-4 py-2">2h 30m</td>
                 </tr>
                 <tr>
-                  <td className="border px-4 py-2">Sunday</td>
-                  <td className="border px-4 py-2">09:00, 13:00, 17:00</td>
+                  <td className="border px-4 py-2">Funchal → Caniçal</td>
+                  <td className="border px-4 py-2">10:30</td>
+                  <td className="border px-4 py-2">17:00</td>
+                  <td className="border px-4 py-2">1h</td>
                 </tr>
               </tbody>
             </table>
@@ -38,27 +46,35 @@ export const SeaBusSchedule = () => {
         </div>
         
         <div>
-          <h3 className="text-lg font-medium mb-3">Caniçal to Funchal</h3>
+          <h3 className="text-lg font-medium mb-3">Wednesday, Thursday, Friday</h3>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="border px-4 py-2 text-left">Days</th>
-                  <th className="border px-4 py-2 text-left">Departure Times</th>
+                  <th className="border px-4 py-2 text-left">Route</th>
+                  <th className="border px-4 py-2 text-left">Departure</th>
+                  <th className="border px-4 py-2 text-left">Return</th>
+                  <th className="border px-4 py-2 text-left">Duration</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border px-4 py-2">Monday - Friday</td>
-                  <td className="border px-4 py-2">08:15, 10:45, 13:15, 15:45, 18:15, 20:45</td>
+                  <td className="border px-4 py-2">Caniçal → Funchal</td>
+                  <td className="border px-4 py-2">09:00</td>
+                  <td className="border px-4 py-2">18:30</td>
+                  <td className="border px-4 py-2">1h</td>
                 </tr>
                 <tr>
-                  <td className="border px-4 py-2">Saturday</td>
-                  <td className="border px-4 py-2">09:30, 12:30, 15:30, 18:30</td>
+                  <td className="border px-4 py-2">Caniçal → Calheta</td>
+                  <td className="border px-4 py-2">09:00</td>
+                  <td className="border px-4 py-2">17:00</td>
+                  <td className="border px-4 py-2">2h 30m</td>
                 </tr>
                 <tr>
-                  <td className="border px-4 py-2">Sunday</td>
-                  <td className="border px-4 py-2">11:00, 15:00, 19:00</td>
+                  <td className="border px-4 py-2">Funchal → Calheta</td>
+                  <td className="border px-4 py-2">10:15</td>
+                  <td className="border px-4 py-2">17:00</td>
+                  <td className="border px-4 py-2">1h 15m</td>
                 </tr>
               </tbody>
             </table>

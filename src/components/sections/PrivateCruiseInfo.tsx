@@ -21,8 +21,9 @@ export const PrivateCruiseInfo = () => {
             </div>
             <div className="flex flex-col items-center">
               <Ship className="h-10 w-10 text-[#E95543] mb-2" />
-              <p className="font-medium">Departure Time</p>
-              <p>13:00</p>
+              <p className="font-medium">Schedule</p>
+              <p>North Coast: Tue, Sat, Sun 13:00-15:30</p>
+              <p>South Coast: Wed, Thu, Fri 13:00-15:30</p>
             </div>
           </div>
           <p className="text-center text-gray-600">All private cruises from Calheta or Caniçal depart at 13:00.</p>

@@ -159,7 +159,7 @@ export const destinationData: DestinationType[] = [
     stats: [
       { value: "1h", label: "Sea Trip" },
       { value: "9km", label: "Golden Beach" },
-      { value: "9:30", label: "Departure Time" }
+      { value: "9:00", label: "Departure Time" }
     ],
     experience: "Porto Santo Golden Island",
     experienceDesc: "Experience the therapeutic golden sands of Porto Santo in one day.",
