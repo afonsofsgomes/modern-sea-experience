@@ -119,7 +119,7 @@ export const SeaBusMapImage = () => {
                   Popular routes:
                 </p>
                 <p className="text-sm text-gray-700 my-2">
-                  Funchal ↔ Caniçal | Funchal ↔ Calheta | Caniçal ↔ Calheta
+                  Funchal ↔ Caniçal | Funchal ↔ Calheta
                 </p>
                 <p className="text-xl font-bold text-red-500">
                   From €39
