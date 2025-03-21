@@ -33,10 +33,11 @@ const IMAGE_GALLERY = [
 ];
 
 // Fixed route points with proper longitude and latitude format for Mapbox
+// Each coordinate is explicitly typed as [number, number] to satisfy the LngLatLike type
 const ROUTE_POINTS = [
-  { city: "Funchal", coordinates: [-16.9108, 32.6471] },
-  { city: "Caniçal", coordinates: [-16.7352, 32.7411] },
-  { city: "Calheta", coordinates: [-17.1744, 32.7183] }
+  { city: "Funchal", coordinates: [-16.9108, 32.6471] as [number, number] },
+  { city: "Caniçal", coordinates: [-16.7352, 32.7411] as [number, number] },
+  { city: "Calheta", coordinates: [-17.1744, 32.7183] as [number, number] }
 ];
 
 export const SeaBusMap = () => {
@@ -59,7 +60,7 @@ export const SeaBusMap = () => {
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: [-16.9667, 32.7505], // Center on Madeira (longitude first, latitude second)
+        center: [-16.9667, 32.7505] as [number, number], // Center on Madeira (longitude first, latitude second)
         zoom: 9
       });
       
@@ -83,7 +84,7 @@ export const SeaBusMap = () => {
           
           console.log("Adding marker at:", point.coordinates);
           
-          // Add marker to map
+          // Add marker to map - Fix: properly type the coordinates as [number, number]
           new mapboxgl.Marker(markerEl)
             .setLngLat(point.coordinates)
             .setPopup(popup)

@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -9,11 +8,11 @@ import {
   ScheduleDisplay
 } from "@/components/sections";
 import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
+import { SeaBusMap } from "@/components/sections/SeaBusMap";
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const SeaBus = () => {
-  // FAQ data for structured data
   const faqQuestions = [
     {
       question: "What is the SeaBus service in Madeira?",
@@ -33,7 +32,6 @@ const SeaBus = () => {
     }
   ];
 
-  // Breadcrumb data
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -82,9 +80,9 @@ const SeaBus = () => {
       
       <main className="flex-grow">
         <SeaBusHero />
+        <SeaBusMap />
         <SeaBusRoutes />
         
-        {/* Alert banner placed in a white background section */}
         <div className="w-full bg-white py-4">
           <div className="container mx-auto px-4">
             <AlertEmbed />
