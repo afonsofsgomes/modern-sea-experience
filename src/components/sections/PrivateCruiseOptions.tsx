@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
@@ -36,7 +37,6 @@ export const PrivateCruiseOptions = () => {
       location: "Departing from Caniçal",
       price: "From 243.60€",
       image: "https://extranet.seayou.pt/photos/pta-s-lourenco2.jpg",
-      gradient: "from-blue-500/70 via-blue-600/60 to-blue-700/70",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
     },
     {
@@ -48,7 +48,6 @@ export const PrivateCruiseOptions = () => {
       location: "Departing from Calheta",
       price: "From 243.60€",
       image: "https://extranet.seayou.pt/photos/south.jpg",
-      gradient: "from-teal-500/70 via-teal-600/60 to-teal-700/70",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
     },
     {
@@ -57,7 +56,6 @@ export const PrivateCruiseOptions = () => {
       description: "Discover hidden caves, majestic cliffs and pristine beaches along Madeira's coastline",
       custom: true,
       image: "https://extranet.seayou.pt/photos/coastal.jpg",
-      gradient: "from-purple-500/70 via-purple-600/60 to-purple-700/70",
       buttonAction: scrollToContact
     },
     {
@@ -66,7 +64,6 @@ export const PrivateCruiseOptions = () => {
       description: "Nothing seems to fit your needs? Let's discuss and find a tailor-made cruise experience just for you.",
       custom: true,
       image: "https://extranet.seayou.pt/photos/custom.jpg",
-      gradient: "from-red-500/70 via-red-600/60 to-red-700/70",
       buttonAction: scrollToContact
     }
   ];
@@ -113,11 +110,11 @@ export const PrivateCruiseOptions = () => {
                   className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                   style={{ backgroundImage: `url(${option.image})` }}
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${option.gradient} opacity-90`}></div>
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
               <Card className="relative h-full bg-transparent border-0 overflow-hidden shadow-xl backdrop-blur-sm text-white">
-                <div className="absolute inset-0 bg-black/20 rounded-xl"></div>
+                <div className="absolute inset-0 bg-black/30 rounded-xl"></div>
                 <CardHeader className="relative">
                   <CardTitle className="text-2xl md:text-3xl font-display">{option.title}</CardTitle>
                   <CardDescription className="text-white/90 text-base mt-2">{option.description}</CardDescription>
