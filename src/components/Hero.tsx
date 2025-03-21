@@ -6,18 +6,18 @@ import {
   HeroCarousel 
 } from "@/components/hero";
 
-// Ordering the destinations as specified
+// Ordering the destinations as specified and adding ratings
 const orderedDestinationData = [
   // 1. SeaBus
-  destinationData.find(d => d.name === "SeaBus Connections"),
+  {...destinationData.find(d => d.name === "SeaBus Connections"), rating: 4.8},
   // 2. Porto Santo
-  destinationData.find(d => d.name === "Porto Santo"),
+  {...destinationData.find(d => d.name === "Porto Santo"), rating: 4.9},
   // 3. Desertas
-  destinationData.find(d => d.name === "Desertas"),
+  {...destinationData.find(d => d.name === "Desertas"), rating: 4.7},
   // 4. Caniçal
-  destinationData.find(d => d.name === "Caniçal"),
+  {...destinationData.find(d => d.name === "Caniçal"), rating: 4.6},
   // 5. Calheta
-  destinationData.find(d => d.name === "Calheta"),
+  {...destinationData.find(d => d.name === "Calheta"), rating: 4.5},
 ].filter(Boolean); // Filter out any undefined values
 
 // Fallback images for when the primary images fail to load
