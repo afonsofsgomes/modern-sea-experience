@@ -18,10 +18,10 @@ export const FooterContact: React.FC = () => {
         </li>
         <li>
           <a
-            href="tel:+351291000000"
+            href="tel:+351913514961"
             className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
           >
-            <Phone className="h-4 w-4 mr-2" /> +351 291 000 000
+            <Phone className="h-4 w-4 mr-2" /> +351 913 514 961
           </a>
         </li>
         <li>

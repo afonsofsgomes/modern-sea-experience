@@ -7,11 +7,11 @@ export const LocalBusinessSchema: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     "name": "SeaYou Maritime Tourism",
-    "description": "Maritime tourism services in Madeira including SeaBus connections, private cruises, and tours to Porto Santo.",
+    "description": "Seayou Madeira specializes in scenic seabus connections, exclusive private cruises, and unforgettable maritime tours across Madeira's coastline.",
     "url": "https://seayou.pt",
     "logo": "https://seayou.pt/logo.png",
     "image": "https://extranet.seayou.pt/photos/boat1.jpg",
-    "telephone": "+351291000000",
+    "telephone": "+351913514961",
     "email": "info@seayou.pt",
     "address": {
       "@type": "PostalAddress",
@@ -46,7 +46,9 @@ export const LocalBusinessSchema: React.FC = () => {
     "sameAs": [
       "https://www.facebook.com/seayoumadeira",
       "https://www.instagram.com/seayoumadeira",
-      "https://twitter.com/seayoumadeira"
+      "https://twitter.com/seayoumadeira",
+      "https://www.tiktok.com/@seayou.pt",
+      "https://www.youtube.com/@seayou.madeira"
     ]
   };
 
