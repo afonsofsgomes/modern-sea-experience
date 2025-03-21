@@ -11,11 +11,15 @@ import { ReactNode, useState } from "react";
 interface GroupBookingDialogProps {
   children: ReactNode;
   buttonProps?: ButtonProps;
+  size?: string; // Add size prop
+  className?: string; // Add className prop
 }
 
 export const GroupBookingDialog = ({ 
   children, 
-  buttonProps 
+  buttonProps,
+  size, // Include size in destructuring
+  className // Include className in destructuring
 }: GroupBookingDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +27,7 @@ export const GroupBookingDialog = ({
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button {...buttonProps}>{children}</Button>
+          <Button {...buttonProps} size={size as "sm" | "md" | "lg" | undefined} className={className}>{children}</Button>
         </DialogTrigger>
         <DialogContent className="max-w-3xl w-[90vw] h-[80vh] p-0">
           <div className="w-full h-full">
