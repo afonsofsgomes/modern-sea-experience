@@ -29,7 +29,7 @@ export const SeaBusHero = () => {
       }} transition={{
         duration: 0.5
       }} className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4 landscape:mt-24">
-          SCENIC SEA BUS
+          SCENIC SEABUS
         </motion.h1>
         <motion.p initial={{
         opacity: 0,

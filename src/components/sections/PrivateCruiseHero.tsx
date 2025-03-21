@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Users, Clock, Compass, Wifi, Calendar } from "lucide-react";
@@ -34,7 +33,7 @@ export const PrivateCruiseHero = () => {
           transition={{ duration: 0.5 }}
           className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-2 md:mb-4 landscape:mt-24"
         >
-          PRIVATE
+          PRIVATE CRUISE
         </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,16 +41,8 @@ export const PrivateCruiseHero = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="bg-[#E95543] text-white px-8 py-3 rounded-md mb-6 md:mb-8 text-xl"
         >
-          CRUISE - SPECIAL REQUEST
+          Calheta or Caniçal
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl md:text-2xl max-w-3xl mb-8 md:mb-10"
-        >
-          Your Private Cruise
-        </motion.p>
         
         {/* Icon Row with larger sizes */}
         <motion.div

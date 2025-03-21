@@ -32,7 +32,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
   // Page links to separate pages
   const pageLinks = [
     { label: "SeaBus", path: "/seabus" },
-    { label: "Private Cruises", path: "/private-cruise" },
+    { label: "Private Cruise", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
     { label: "Desertas Islands", path: "/desertas" }
   ];
