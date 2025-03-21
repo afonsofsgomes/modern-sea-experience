@@ -40,7 +40,7 @@ export const PrivateCruiseHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-[#E95543] text-white px-8 py-3 rounded-md mb-6 md:mb-8 text-xl"
+          className="bg-white/20 text-white px-6 py-2 rounded-full mb-6 md:mb-8 text-sm md:text-base font-light tracking-wide backdrop-blur-sm"
         >
           Calheta or Caniçal
         </motion.div>
