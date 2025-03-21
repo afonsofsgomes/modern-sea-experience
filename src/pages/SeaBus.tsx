@@ -3,13 +3,11 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
   SeaBusHero, 
-  SeaBusRoutes, 
   SeaBusFeatures, 
   SeaBusBooking,
   ScheduleDisplay,
   SeaBusMapImage
 } from "@/components/sections";
-import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -82,7 +80,6 @@ const SeaBus = () => {
       <main className="flex-grow">
         <SeaBusHero />
         <SeaBusMapImage />
-        <SeaBusRoutes />
         
         <div className="w-full bg-white py-4">
           <div className="container mx-auto px-4">
@@ -90,7 +87,6 @@ const SeaBus = () => {
           </div>
         </div>
         
-        <SeaBusDestinations />
         <ScheduleDisplay />
         <SeaBusFeatures />
         <SeaBusBooking />

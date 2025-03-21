@@ -10,8 +10,6 @@ export * from './Newsletter';
 
 // Add SeaBus section components exports
 export * from './SeaBusHero';
-// SeaBusMap export removed
-export * from './SeaBusRoutes';
 export * from './SeaBusFeatures';
 export * from './SeaBusBooking';
 export * from './SeaBusMapImage';
@@ -28,6 +26,3 @@ export * from './PrivateCruiseOptions';
 export * from './PrivateCruiseFeatures';
 export * from './PrivateCruiseBooking';
 export * from './PrivateCruiseInfo';
-
-// New export
-export { SeaBusDestinations } from "./SeaBusDestinations";
