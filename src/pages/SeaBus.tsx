@@ -81,6 +81,7 @@ const SeaBus = () => {
       
       <main className="flex-grow">
         <SeaBusHero />
+        <SeaBusMapImage />
         <SeaBusRoutes />
         
         <div className="w-full bg-white py-4">
@@ -90,7 +91,6 @@ const SeaBus = () => {
         </div>
         
         <SeaBusDestinations />
-        <SeaBusMapImage />
         <ScheduleDisplay />
         <SeaBusFeatures />
         <SeaBusBooking />

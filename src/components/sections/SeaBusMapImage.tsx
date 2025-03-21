@@ -20,10 +20,10 @@ export const SeaBusMapImage = () => {
           className="text-center mb-10"
         >
           <span className="inline-block py-1 px-3 text-xs font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
-            SeaBus Routes
+            SeaBus Route Map
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-blue-900">
-            Discover Madeira by Sea
+            Our Coastal Connections
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Our SeaBus connects the beautiful coastal cities of Madeira, providing a scenic and comfortable travel experience.
