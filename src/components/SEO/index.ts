@@ -4,6 +4,6 @@ export * from './StructuredData';
 export * from './LocalBusinessSchema';
 export * from './TourSchema';
 export * from './FAQSchema';
-export { PageHead } from './PageHead';
+export * from './PageHead';
 export { default as SitemapGenerator } from './SitemapGenerator';
 export * from './SitemapUtils';

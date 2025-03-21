@@ -1,60 +1,105 @@
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Users, Clock, Compass, Wifi, Calendar } from "lucide-react";
 
 export const PrivateCruiseHero = () => {
-  const heroRef = useRef(null);
-  const isInView = useInView(heroRef, { once: true });
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
-    <section 
-      ref={heroRef}
-      className="relative h-[70vh] lg:h-[80vh] bg-gray-900 overflow-hidden"
-    >
+    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-[#253D7F] pt-20 md:pt-28 pb-12">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0">
         <img 
-          src="https://extranet.seayou.pt/photos/charters/private_pta-s-lourenco.jpg" 
-          alt="Private Cruise in Madeira" 
-          className="w-full h-full object-cover opacity-70"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = 'https://images.unsplash.com/photo-1517816428104-797678c7cf0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80';
-          }}
+          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" 
+          alt="Private Cruise" 
+          className="w-full h-full object-cover object-center opacity-70"
+          loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/30 to-[#253D7F]/80" />
       </div>
-
+      
       {/* Hero Content */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block py-1 px-3 text-xs font-medium bg-blue-100 text-blue-800 rounded-full mb-5">
-                Calheta or Caniçal
-              </span>
-              
-              <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white drop-shadow-lg">
-                Private Cruise
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
-                Experience the beauty of Madeira from the sea with your private luxury catamaran charter
-              </p>
-              
-              <a
-                href="#booking"
-                className="inline-block bg-red-500 hover:bg-red-600 text-white text-lg font-medium py-3 px-8 rounded-lg transition-colors duration-300 shadow-lg"
-              >
-                Book Your Private Experience
-              </a>
-            </motion.div>
+      <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white z-10 max-w-full">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-2 md:mb-4 landscape:mt-24"
+        >
+          PRIVATE
+        </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="bg-[#E95543] text-white px-8 py-3 rounded-md mb-6 md:mb-8 text-xl"
+        >
+          CRUISE - SPECIAL REQUEST
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-xl md:text-2xl max-w-3xl mb-8 md:mb-10"
+        >
+          Your Private Cruise
+        </motion.p>
+        
+        {/* Icon Row with larger sizes */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-8 md:gap-12 mb-8 md:mb-10"
+        >
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Clock className="h-7 w-7 md:h-8 md:w-8" />
+            </div>
+            <span className="text-sm md:text-base text-center font-medium">2.5h</span>
           </div>
-        </div>
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Users className="h-7 w-7 md:h-8 md:w-8" />
+            </div>
+            <span className="text-sm md:text-base text-center font-medium">up to 12 PAX</span>
+          </div>
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Wifi className="h-7 w-7 md:h-8 md:w-8" />
+            </div>
+            <span className="text-sm md:text-base text-center font-medium">FREE WiFi</span>
+          </div>
+          <div className="flex flex-col items-center justify-center w-20 md:w-24">
+            <div className="bg-white/20 p-3 md:p-4 rounded-full mb-2 md:mb-3 flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+              <Calendar className="h-7 w-7 md:h-8 md:w-8" />
+            </div>
+            <span className="text-sm md:text-base text-center font-medium">REFRESHMENTS</span>
+          </div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex justify-center w-full"
+        >
+          <Button 
+            size="lg" 
+            className="bg-[#E95543] hover:bg-[#E95543]/90 text-white text-lg px-10 py-4"
+            onClick={scrollToBooking}
+          >
+            BOOK NOW
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
