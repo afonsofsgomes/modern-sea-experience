@@ -6,9 +6,14 @@ import { NavbarLink } from "./NavbarLink";
 interface NavbarDesktopLinksProps {
   onScrollToSection: (sectionId: string) => void;
   scrolled?: boolean;
+  activeSection?: string;
 }
 
-export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScrollToSection, scrolled = false }) => {
+export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ 
+  onScrollToSection, 
+  scrolled = false,
+  activeSection = 'home'
+}) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   
@@ -29,12 +34,10 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({ onScroll
     { label: "Desertas Islands", path: "/desertas" }
   ];
 
-  // Check if current hash matches one of our section IDs
-  const currentHash = location.hash.replace('#', '');
+  // Check if current section is active
   const isActiveSectionLink = (sectionId: string) => {
     if (isHomePage) {
-      if (sectionId === 'home' && !currentHash) return true;
-      return currentHash === sectionId;
+      return activeSection === sectionId;
     }
     return false;
   };

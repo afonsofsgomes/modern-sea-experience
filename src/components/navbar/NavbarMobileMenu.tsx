@@ -8,12 +8,14 @@ interface NavbarMobileMenuProps {
   isOpen: boolean;
   onScrollToSection: (sectionId: string) => void;
   onClose: () => void;
+  activeSection?: string;
 }
 
 export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({ 
   isOpen, 
   onScrollToSection,
-  onClose
+  onClose,
+  activeSection = 'home'
 }) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -37,12 +39,10 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
 
   if (!isOpen) return null;
 
-  // Check if current hash matches one of our section IDs
-  const currentHash = location.hash.replace('#', '');
+  // Check if current section is active
   const isActiveSectionLink = (sectionId: string) => {
     if (isHomePage) {
-      if (sectionId === 'home' && !currentHash) return true;
-      return currentHash === sectionId;
+      return activeSection === sectionId;
     }
     return false;
   };
