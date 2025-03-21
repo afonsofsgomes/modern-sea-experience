@@ -6,28 +6,42 @@ import {
 } from "@/components/ui/dialog";
 import TallyScript from "./TallyScript";
 import { Button, ButtonProps } from "./ui/button";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 
 interface GroupBookingDialogProps {
   children: ReactNode;
   buttonProps?: ButtonProps;
-  size?: string; // Add size prop
-  className?: string; // Add className prop
+  size?: "sm" | "md" | "lg"; // Properly type size
+  className?: string;
 }
 
 export const GroupBookingDialog = ({ 
   children, 
   buttonProps,
-  size, // Include size in destructuring
-  className // Include className in destructuring
+  size,
+  className
 }: GroupBookingDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Load Tally widgets when dialog opens
+  useEffect(() => {
+    if (isOpen && typeof window !== 'undefined' && (window as any).Tally) {
+      setTimeout(() => {
+        try {
+          console.log('Attempting to load Tally embeds');
+          (window as any).Tally.loadEmbeds();
+        } catch (e) {
+          console.error('Error loading Tally embeds:', e);
+        }
+      }, 300); // Short delay to ensure content is rendered
+    }
+  }, [isOpen]);
 
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button {...buttonProps} size={size as "sm" | "md" | "lg" | undefined} className={className}>{children}</Button>
+          <Button {...buttonProps} size={size} className={className}>{children}</Button>
         </DialogTrigger>
         <DialogContent className="max-w-3xl w-[90vw] h-[80vh] p-0">
           <div className="w-full h-full">
