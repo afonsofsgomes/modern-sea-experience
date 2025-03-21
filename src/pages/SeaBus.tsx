@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -8,7 +9,6 @@ import {
   ScheduleDisplay
 } from "@/components/sections";
 import { SeaBusDestinations } from "@/components/sections/SeaBusDestinations";
-import { SeaBusMap } from "@/components/sections/SeaBusMap";
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -80,7 +80,6 @@ const SeaBus = () => {
       
       <main className="flex-grow">
         <SeaBusHero />
-        <SeaBusMap />
         <SeaBusRoutes />
         
         <div className="w-full bg-white py-4">

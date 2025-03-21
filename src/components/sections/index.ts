@@ -10,7 +10,7 @@ export * from './Newsletter';
 
 // Add SeaBus section components exports
 export * from './SeaBusHero';
-export * from './SeaBusMap'; // Add the export back
+// SeaBusMap export removed
 export * from './SeaBusRoutes';
 export * from './SeaBusFeatures';
 export * from './SeaBusBooking';
