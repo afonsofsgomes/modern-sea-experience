@@ -4,12 +4,13 @@ import { motion, useInView } from "framer-motion";
 import { Map as MapIcon, Ship } from "lucide-react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { toast } from "@/hooks/use-toast";
 
 // Map configuration
 const ROUTE_POINTS = [
-  { city: "Funchal", coordinates: [32.6471, 16.9108] },
-  { city: "Caniçal", coordinates: [32.7411, 16.7352] },
-  { city: "Calheta", coordinates: [32.7183, 17.1744] }
+  { city: "Funchal", coordinates: [-16.9108, 32.6471] },
+  { city: "Caniçal", coordinates: [-16.7352, 32.7411] },
+  { city: "Calheta", coordinates: [-17.1744, 32.7183] }
 ];
 
 const IMAGE_GALLERY = [
@@ -41,6 +42,7 @@ export const SeaBusMap = () => {
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapKey, setMapKey] = useState('');
+  const mapRef = useRef<mapboxgl.Map | null>(null);
 
   // Set up input for Mapbox token
   useEffect(() => {
@@ -59,18 +61,28 @@ export const SeaBusMap = () => {
       // Initialize Mapbox
       mapboxgl.accessToken = mapKey;
       
+      console.log("Initializing map with coordinates:", ROUTE_POINTS.map(p => p.coordinates));
+      
       // Create the map
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: [32.7505, 16.9667], // Center on Madeira
+        center: [-16.9667, 32.7505], // Center on Madeira (longitude first, latitude second)
         zoom: 9,
         projection: 'mercator'
       });
+      
+      mapRef.current = map;
 
       // Handle map loading
       map.on('load', () => {
+        console.log("Map loaded successfully");
         setMapLoaded(true);
+        toast({
+          title: "Map loaded successfully",
+          description: "The SeaBus route map is now displayed.",
+          duration: 3000,
+        });
 
         // Add markers for each city
         ROUTE_POINTS.forEach(point => {
@@ -82,6 +94,8 @@ export const SeaBusMap = () => {
           // Add popup
           const popup = new mapboxgl.Popup({ offset: 25 })
             .setHTML(`<strong>${point.city}</strong><p>SeaBus stop</p>`);
+          
+          console.log("Adding marker at:", point.coordinates);
           
           // Add marker to map
           new mapboxgl.Marker(markerEl)
@@ -124,6 +138,15 @@ export const SeaBusMap = () => {
         });
       });
 
+      map.on('error', (e) => {
+        console.error("Mapbox error:", e);
+        toast({
+          title: "Map Error",
+          description: "There was an error loading the map. Please check your API key.",
+          variant: "destructive",
+        });
+      });
+
       // Add navigation controls
       map.addControl(new mapboxgl.NavigationControl(), 'top-right');
       
@@ -133,6 +156,11 @@ export const SeaBusMap = () => {
       };
     } catch (error) {
       console.error("Error initializing map:", error);
+      toast({
+        title: "Map Initialization Error",
+        description: "Failed to initialize the map. Please check your API key and try again.",
+        variant: "destructive",
+      });
     }
   }, [mapKey, mapLoaded]);
 
@@ -146,6 +174,11 @@ export const SeaBusMap = () => {
     if (token) {
       localStorage.setItem('mapbox_token', token);
       setMapKey(token);
+      setMapLoaded(false); // Reset to trigger map reinitialization
+      toast({
+        title: "API Key Saved",
+        description: "Your Mapbox API key has been saved and the map will now load.",
+      });
       form.reset();
     }
   };
