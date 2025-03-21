@@ -98,7 +98,7 @@ export const SeaBusMapImage = () => {
                 <div className="bg-blue-600 text-white p-3 rounded-full mb-4">
                   <Tag className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-bold text-blue-900 mb-2">Affordable Pricing</h3>
+                <h3 className="text-lg font-bold text-blue-900 mb-2">Pricing</h3>
                 <p className="text-gray-600 text-center sm:text-left">
                   Roundtrips to/from Funchal at €39, Calheta↔Caniçal routes at €59
                 </p>
