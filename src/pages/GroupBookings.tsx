@@ -2,8 +2,8 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Users, CalendarDays, Clock, MapPin, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import GroupBookingDialog from "@/components/GroupBookingDialog";
 
 const GroupBookings = () => {
   return (
@@ -64,12 +64,12 @@ const GroupBookings = () => {
                 ))}
               </div>
               
-              <Button size="lg">Request Group Quote</Button>
+              <GroupBookingDialog size="lg">Request Group Quote</GroupBookingDialog>
             </div>
             <div className="relative">
               <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
                 <img 
-                  src="https://images.unsplash.com/photo-1534970028765-db07030e942a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                  src="https://extranet.seayou.pt/photos/private1.jpg" 
                   alt="Group trip on boat" 
                   className="w-full h-full object-cover"
                 />
@@ -138,7 +138,7 @@ const GroupBookings = () => {
                       <span>{pkg.location}</span>
                     </div>
                   </div>
-                  <Button className="w-full">Inquire Now</Button>
+                  <GroupBookingDialog className="w-full">Inquire Now</GroupBookingDialog>
                 </div>
               </motion.div>
             ))}
@@ -252,7 +252,7 @@ const GroupBookings = () => {
                     ></textarea>
                   </div>
                   
-                  <Button size="lg" className="w-full">Submit Group Inquiry</Button>
+                  <GroupBookingDialog size="lg" className="w-full">Submit Group Inquiry</GroupBookingDialog>
                 </form>
               </div>
             </div>
