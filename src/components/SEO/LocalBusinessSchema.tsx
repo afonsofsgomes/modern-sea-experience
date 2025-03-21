@@ -12,7 +12,7 @@ export const LocalBusinessSchema: React.FC = () => {
     "logo": "https://seayou.pt/logo.png",
     "image": "https://extranet.seayou.pt/photos/boat1.jpg",
     "telephone": "+351913514961",
-    "email": "info@seayou.pt",
+    "email": "support@seayou.pt",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Marina do Funchal",

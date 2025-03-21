@@ -120,7 +120,7 @@ const PrivacyPolicy = () => {
                     If you have any questions about this Privacy Policy, please contact us at:
                   </p>
                   <p className="text-gray-700 mt-2">
-                    Email: privacy@seayou.pt<br />
+                    Email: support@seayou.pt<br />
                     Address: Funchal Marina, Madeira, Portugal
                   </p>
                 </div>

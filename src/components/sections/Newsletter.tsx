@@ -1,6 +1,8 @@
+
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
+
 export const Newsletter = () => {
   const [iframeHeight, setIframeHeight] = useState(276);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -35,6 +37,7 @@ export const Newsletter = () => {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
+  
   return <section id="contact" className="py-20 bg-[#253D7F] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div className="max-w-4xl mx-auto" initial={{

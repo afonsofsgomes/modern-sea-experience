@@ -109,7 +109,7 @@ serve(async (req) => {
     const confirmationHtmlContent = `
       <h2>Thank you for contacting us, ${name}!</h2>
       <p>We have received your message and will get back to you as soon as possible.</p>
-      <p>If you have an urgent matter, please call us at +351 291 123 456.</p>
+      <p>If you have an urgent matter, please call us at +351 913 514 961.</p>
       <p>
         Best regards,<br>
         The SeaYou Madeira Team

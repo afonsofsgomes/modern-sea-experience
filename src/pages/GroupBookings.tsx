@@ -189,7 +189,7 @@ const GroupBookings = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">Direct Contact</p>
-                    <p className="text-muted-foreground">groups@seayou.pt | +351 291 000 111</p>
+                    <p className="text-muted-foreground">support@seayou.pt | +351 913 514 961</p>
                   </div>
                 </div>
               </div>
