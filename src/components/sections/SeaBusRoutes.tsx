@@ -36,7 +36,7 @@ export const SeaBusRoutes = () => {
                 </div>
                 <h3 className="text-lg font-bold text-blue-900 mb-2">Affordable Pricing</h3>
                 <p className="text-gray-600 text-center">
-                  All roundtrips at €39, with premium routes at just €59
+                  Roundtrips to/from Funchal at €39, Calheta↔Caniçal routes at €59
                 </p>
               </div>
               
@@ -59,7 +59,7 @@ export const SeaBusRoutes = () => {
                 Funchal ↔ Caniçal | Funchal ↔ Calheta | Caniçal ↔ Calheta
               </p>
               <p className="text-2xl font-bold text-red-500">
-                Starting from €39 per person
+                From €39 for Funchal routes, €59 for Caniçal↔Calheta
               </p>
             </div>
             
