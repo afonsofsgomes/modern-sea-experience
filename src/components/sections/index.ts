@@ -14,6 +14,7 @@ export * from './SeaBusHero';
 export * from './SeaBusRoutes';
 export * from './SeaBusFeatures';
 export * from './SeaBusBooking';
+export * from './SeaBusMapImage';
 
 // Add Porto Santo section components exports
 export * from './PortoSantoHero';
