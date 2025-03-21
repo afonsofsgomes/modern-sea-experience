@@ -12,7 +12,7 @@ export const PortoSantoAbout = () => {
               Porto Santo Island Tour
             </h2>
             <p className="text-base text-muted-foreground mb-6">
-              Visit the golden sands of Porto Santo Island with our comfortable ferry service. Enjoy a day trip or stay longer to explore this beautiful island just a short journey from Madeira.
+              Visit the golden sands of Porto Santo Island with our comfortable sea transportation. Enjoy a day trip to explore this beautiful island just a short journey from Madeira.
             </p>
             <p className="text-base text-muted-foreground mb-8">
               Our Porto Santo tours include transportation, guided options, and flexible schedules to make your island hopping experience memorable and hassle-free.

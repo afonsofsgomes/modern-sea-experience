@@ -2,37 +2,45 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { 
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
 
 export const PortoSantoSchedule = () => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-semibold mb-6">Porto Santo Ferry</h2>
+      <h2 className="text-2xl font-semibold mb-6">Porto Santo 1-Day Experience</h2>
       
       <div className="grid gap-8">
         <div>
           <h3 className="text-lg font-medium mb-3">Funchal to Porto Santo</h3>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="border px-4 py-2 text-left">Days</th>
-                  <th className="border px-4 py-2 text-left">Departure Time</th>
-                  <th className="border px-4 py-2 text-left">Return Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border px-4 py-2">Wednesday, Thursday, Friday</td>
-                  <td className="border px-4 py-2">09:00</td>
-                  <td className="border px-4 py-2">17:00</td>
-                </tr>
-                <tr>
-                  <td className="border px-4 py-2">Saturday</td>
-                  <td className="border px-4 py-2">08:00</td>
-                  <td className="border px-4 py-2">18:00</td>
-                </tr>
-              </tbody>
-            </table>
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-100">
+                  <TableHead>Days</TableHead>
+                  <TableHead>Departure Time</TableHead>
+                  <TableHead>Return Time</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Wednesday, Thursday, Friday</TableCell>
+                  <TableCell>09:00</TableCell>
+                  <TableCell>17:00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Saturday</TableCell>
+                  <TableCell>08:00</TableCell>
+                  <TableCell>18:00</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
         </div>
       </div>

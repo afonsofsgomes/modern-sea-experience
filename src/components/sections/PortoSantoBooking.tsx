@@ -21,14 +21,14 @@ export const PortoSantoBooking = () => {
           <h3 className="text-xl font-bold text-blue-900 mb-4">Schedule Information</h3>
           <p className="text-lg font-medium text-blue-800 mb-2">WEDNESDAY, THURSDAY, FRIDAY</p>
           <p className="text-gray-700 mb-4">Departure: 09:00 | Return: 17:00</p>
-          <p className="text-sm text-gray-600">All Porto Santo ferry services operate from Funchal Harbor.</p>
+          <p className="text-sm text-gray-600">All Porto Santo experiences depart from Funchal Harbor.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Porto Santo Just Tour */}
           <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-4 text-blue-900">Porto Santo 1-Day Experience</h3>
-            <p className="text-muted-foreground mb-4">Self-guided tour with ferry transportation to Porto Santo's golden beaches.</p>
+            <p className="text-muted-foreground mb-4">Self-guided tour with transportation to Porto Santo's golden beaches.</p>
             <div className="bg-blue-50 text-blue-800 py-2 px-3 rounded text-sm font-medium mb-6">Just Tour</div>
             <BokunWidget 
               isCalendarWidget={true}
@@ -65,7 +65,7 @@ export const PortoSantoBooking = () => {
         
         <div className="text-center">
           <p className="text-gray-500 text-sm mt-4">
-            All tours include round-trip ferry transportation from Funchal to Porto Santo.
+            All tours include round-trip transportation from Funchal to Porto Santo.
           </p>
           <p className="text-gray-500 text-sm mt-2">
             By booking, you agree to our terms and conditions.
