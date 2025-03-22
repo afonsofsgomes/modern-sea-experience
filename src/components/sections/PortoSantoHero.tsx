@@ -19,7 +19,7 @@ export const PortoSantoHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/pxo_visit_madeira.jpg" 
+          src="https://extranet.seayou.pt/photos/pxo_visit_madeira.jpg" 
           alt="Porto Santo Golden Beach" 
           className="w-full h-full object-cover object-center"
           loading="eager"
