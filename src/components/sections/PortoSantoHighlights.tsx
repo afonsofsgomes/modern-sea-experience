@@ -1,4 +1,7 @@
 
+import { Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
 export const PortoSantoHighlights = () => {
   return (
     <section className="py-20 bg-gray-50">
@@ -33,17 +36,38 @@ export const PortoSantoHighlights = () => {
           
           {/* Highlight 2 */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="h-60 overflow-hidden">
+            <div className="h-60 overflow-hidden relative">
               <img 
                 src="https://extranet.seayou.pt/photos/pxo-activities.jpg" 
                 alt="Water Sports" 
                 className="w-full h-full object-cover"
               />
+              {/* Photo Credit Icon with Tooltip */}
+              <div className="absolute bottom-2 right-2 z-10">
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button 
+                        className="p-1.5 bg-black/50 rounded-full hover:bg-black/60 transition-colors touch-manipulation"
+                        type="button"
+                        aria-label="Photo credits"
+                      >
+                        <Info className="h-3.5 w-3.5 text-white/90" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="bg-black/80 text-white border-0 text-xs">
+                      <p>Photo: <a href="https://visitmadeira.com/en/blog/francisco-lufinha/water-sports-in-porto-santo/" 
+                         target="_blank" rel="noopener noreferrer" 
+                         className="underline hover:text-blue-200">Visit Madeira</a>
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
             <div className="p-6">
               <h3 className="text-xl font-medium mb-2 text-blue-900">Water Sports Paradise</h3>
               <p className="text-muted-foreground">Perfect conditions for windsurfing, kitesurfing, and paddleboarding in crystal clear waters.</p>
-              <p className="text-xs text-gray-500 mt-2">Credit: Visit Madeira</p>
             </div>
           </div>
           
