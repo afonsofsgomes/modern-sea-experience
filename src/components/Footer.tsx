@@ -9,7 +9,7 @@ import { WhatsAppWidget } from "./WhatsAppWidget";
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-50 pt-20 pb-10 relative">
+    <footer className="bg-gray-50 pt-20 pb-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <FooterBranding />
@@ -17,9 +17,11 @@ export const Footer = () => {
           <FooterCompany />
           <FooterContact />
         </div>
+        <div className="mt-8 flex justify-center">
+          <WhatsAppWidget whatsappLink="https://api.whatsapp.com/message/POVZQIDMQYJGD1" />
+        </div>
         <FooterCopyright />
       </div>
-      <WhatsAppWidget whatsappLink="https://api.whatsapp.com/message/POVZQIDMQYJGD1" />
     </footer>
   );
 };
