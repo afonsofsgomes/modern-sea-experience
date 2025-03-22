@@ -81,8 +81,12 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         setApi={(api) => {
           apiRef.current = api;
         }}
-        onSelect={(selectedIndex) => {
-          setCurrentIndex(selectedIndex);
+        onSelect={(api) => {
+          // Extract the selected index from the API
+          if (api && typeof api.selectedScrollSnap === 'function') {
+            const index = api.selectedScrollSnap();
+            setCurrentIndex(index);
+          }
           handleUserInteraction();
         }}
       >
