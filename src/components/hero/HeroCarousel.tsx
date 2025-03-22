@@ -56,7 +56,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           loop: true,
           dragFree: false,
           containScroll: "trimSnaps",
-          duration: 25, // Add smooth transition animation
+          duration: 25, // Controls the animation speed
         }}
         className="w-full"
         setApi={(api) => {

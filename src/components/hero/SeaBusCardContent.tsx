@@ -7,8 +7,8 @@ interface SeaBusCardContentProps {
 
 export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => {
   return (
-    <div className="flex flex-col h-full">
-      {/* First city: Calheta */}
+    <div className="flex h-full">
+      {/* Cities arranged horizontally instead of vertically */}
       <LocationImage 
         imageSrc="https://extranet.seayou.pt/photos/Calheta.jpg" 
         fallbackSrc={fallbackImage} 
@@ -16,7 +16,6 @@ export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => 
         hasBorder={true} 
       />
       
-      {/* Second city: Funchal (middle) */}
       <LocationImage 
         imageSrc="https://extranet.seayou.pt/photos/Funchal.jpg" 
         fallbackSrc={fallbackImage} 
@@ -24,7 +23,6 @@ export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => 
         hasBorder={true} 
       />
       
-      {/* Third city: Caniçal */}
       <LocationImage 
         imageSrc="https://extranet.seayou.pt/photos/Canical.jpg" 
         fallbackSrc={fallbackImage} 
@@ -44,7 +42,7 @@ interface LocationImageProps {
 
 const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationImageProps) => {
   return (
-    <div className={`w-full h-1/3 relative overflow-hidden ${hasBorder ? 'border-b border-white/10' : ''}`}>
+    <div className={`h-full w-1/3 relative overflow-hidden ${hasBorder ? 'border-r border-white/10' : ''}`}>
       <ImageWithFallback 
         src={imageSrc}
         fallbackSrc={fallbackSrc}
