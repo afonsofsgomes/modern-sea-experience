@@ -1,12 +1,13 @@
-
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Map, Ship } from "lucide-react";
-import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { toast } from "@/hooks/use-toast";
 
-// Mapbox public token (this is a public key, safe to use in client-side code)
+// Defer loading mapboxgl until the component is visible
+const loadMapbox = () => import('mapbox-gl').then(module => module.default);
+
+// Mapbox public token
 const MAPBOX_TOKEN = "pk.eyJ1IjoiYWZvbnNvZ29tZXMiLCJhIjoiY201Z25pYnNwMDhmdDJrczdiOHN0Mm1uOCJ9.QH70VSahz9ZRgfhZ8cDJIA";
 
 const IMAGE_GALLERY = [
@@ -33,7 +34,6 @@ const IMAGE_GALLERY = [
 ];
 
 // Fixed route points with proper longitude and latitude format for Mapbox
-// Each coordinate is explicitly typed as [number, number] to satisfy the LngLatLike type
 const ROUTE_POINTS = [
   { city: "Funchal", coordinates: [-16.9108, 32.6471] as [number, number] },
   { city: "Caniçal", coordinates: [-16.7352, 32.7411] as [number, number] },
@@ -43,112 +43,122 @@ const ROUTE_POINTS = [
 export const SeaBusMap = () => {
   const sectionRef = useRef(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<mapboxgl.Map | null>(null);
+  const mapRef = useRef<any>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [mapLoaded, setMapLoaded] = useState(false);
+  const mapboxPromiseRef = useRef<Promise<any> | null>(null);
 
-  // Initialize map when component is in view
   useEffect(() => {
     if (!mapContainerRef.current || !isInView || mapLoaded) return;
 
-    try {
-      // Initialize Mapbox
-      mapboxgl.accessToken = MAPBOX_TOKEN;
-      
-      console.log("Initializing map with token:", MAPBOX_TOKEN);
-      
-      const map = new mapboxgl.Map({
-        container: mapContainerRef.current,
-        style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: [-16.9667, 32.7505] as [number, number], // Center on Madeira (longitude first, latitude second)
-        zoom: 9
-      });
-      
-      mapRef.current = map;
-
-      // Handle map loading
-      map.on('load', () => {
-        console.log("Map loaded successfully");
-        setMapLoaded(true);
+    const initializeMap = async () => {
+      try {
+        if (!mapboxPromiseRef.current) {
+          mapboxPromiseRef.current = loadMapbox();
+        }
         
-        // Add markers for each city
-        ROUTE_POINTS.forEach(point => {
-          // Create a custom marker element
-          const markerEl = document.createElement('div');
-          markerEl.className = 'flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full shadow-lg';
-          markerEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>';
-          
-          // Add popup
-          const popup = new mapboxgl.Popup({ offset: 25 })
-            .setHTML(`<strong>${point.city}</strong><p>SeaBus stop</p>`);
-          
-          console.log("Adding marker at:", point.coordinates);
-          
-          // Add marker to map - Fix: properly type the coordinates as [number, number]
-          new mapboxgl.Marker(markerEl)
-            .setLngLat(point.coordinates)
-            .setPopup(popup)
-            .addTo(map);
+        const mapboxgl = await mapboxPromiseRef.current;
+        
+        // Initialize Mapbox
+        mapboxgl.accessToken = MAPBOX_TOKEN;
+        
+        const map = new mapboxgl.Map({
+          container: mapContainerRef.current!,
+          style: 'mapbox://styles/mapbox/outdoors-v12',
+          center: [-16.9667, 32.7505] as [number, number],
+          zoom: 9,
+          attributionControl: false,
+          maxZoom: 15,
+          minZoom: 8,
+          renderWorldCopies: false
         });
+        
+        mapRef.current = map;
 
-        // Add route lines
-        map.addSource('route', {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'LineString',
-              coordinates: [
-                ROUTE_POINTS[0].coordinates, // Funchal
-                ROUTE_POINTS[1].coordinates, // Caniçal
-                ROUTE_POINTS[2].coordinates, // Calheta
-                ROUTE_POINTS[0].coordinates  // Back to Funchal to complete the loop
-              ]
+        // Handle map loading
+        map.on('load', () => {
+          setMapLoaded(true);
+          
+          // Add markers for each city
+          ROUTE_POINTS.forEach(point => {
+            // Create a custom marker element
+            const markerEl = document.createElement('div');
+            markerEl.className = 'flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full shadow-lg';
+            markerEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>';
+            
+            // Add popup
+            const popup = new mapboxgl.Popup({ offset: 25 })
+              .setHTML(`<strong>${point.city}</strong><p>SeaBus stop</p>`);
+            
+            // Add marker to map
+            new mapboxgl.Marker(markerEl)
+              .setLngLat(point.coordinates)
+              .setPopup(popup)
+              .addTo(map);
+          });
+
+          // Add route lines
+          map.addSource('route', {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: [
+                  ROUTE_POINTS[0].coordinates,
+                  ROUTE_POINTS[1].coordinates,
+                  ROUTE_POINTS[2].coordinates,
+                  ROUTE_POINTS[0].coordinates
+                ]
+              }
             }
-          }
+          });
+
+          map.addLayer({
+            id: 'route',
+            type: 'line',
+            source: 'route',
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round'
+            },
+            paint: {
+              'line-color': '#0369a1',
+              'line-width': 3,
+              'line-dasharray': [2, 2]
+            }
+          });
         });
 
-        map.addLayer({
-          id: 'route',
-          type: 'line',
-          source: 'route',
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round'
-          },
-          paint: {
-            'line-color': '#0369a1',
-            'line-width': 3,
-            'line-dasharray': [2, 2]
-          }
+        map.on('error', (e) => {
+          console.error("Mapbox error:", e);
+          toast({
+            title: "Map Error",
+            description: "There was an error rendering the map.",
+            variant: "destructive",
+          });
         });
-      });
 
-      map.on('error', (e) => {
-        console.error("Mapbox error:", e);
+        // Add navigation controls
+        map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      } catch (error) {
+        console.error("Error initializing map:", error);
         toast({
-          title: "Map Error",
-          description: "There was an error rendering the map.",
+          title: "Map Initialization Error",
+          description: "Failed to initialize the map.",
           variant: "destructive",
         });
-      });
+      }
+    };
 
-      // Add navigation controls
-      map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      
-      // Cleanup
-      return () => {
-        map.remove();
-      };
-    } catch (error) {
-      console.error("Error initializing map:", error);
-      toast({
-        title: "Map Initialization Error",
-        description: "Failed to initialize the map.",
-        variant: "destructive",
-      });
-    }
+    initializeMap();
+    
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+      }
+    };
   }, [isInView, mapLoaded]);
 
   return (
@@ -216,6 +226,7 @@ export const SeaBusMap = () => {
                 <img
                   src={image.src}
                   alt={image.alt}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;

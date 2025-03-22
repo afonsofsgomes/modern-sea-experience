@@ -10,6 +10,8 @@ export const HeroBackground = ({ imageUrl }: HeroBackgroundProps) => {
         src={imageUrl} 
         alt="Background" 
         className="w-full h-full object-cover object-bottom opacity-60" 
+        fetchPriority="high"
+        decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/40 to-[#253D7F]/90" />
     </div>

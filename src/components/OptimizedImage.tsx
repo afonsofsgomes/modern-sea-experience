@@ -35,6 +35,7 @@ export const OptimizedImage = ({
 
   useEffect(() => {
     if (priority) {
+      // Preload priority images
       const img = new Image();
       img.src = src;
     }
@@ -64,6 +65,8 @@ export const OptimizedImage = ({
             isLoaded ? "opacity-100" : "opacity-0")}
           onLoad={() => setIsLoaded(true)}
           onError={handleError}
+          fetchPriority="high"
+          decoding="async"
         />
       ) : (
         <picture>
@@ -79,6 +82,7 @@ export const OptimizedImage = ({
               isLoaded ? "opacity-100" : "opacity-0")}
             onLoad={() => setIsLoaded(true)}
             onError={handleError}
+            decoding="async"
           />
         </picture>
       )}

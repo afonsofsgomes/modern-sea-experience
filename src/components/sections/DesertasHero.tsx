@@ -15,13 +15,15 @@ export const DesertasHero = () => {
 
   return (
     <section className="relative h-[70vh] md:h-[80vh] overflow-hidden bg-green-900 pt-20 md:pt-28 pb-12">
-      {/* Background Image */}
+      {/* Background Image with optimized loading */}
       <div className="absolute inset-0">
         <img 
           src="/lovable-uploads/fd11f644-1594-4d22-a02d-78fa2310f4e6.png" 
           alt="Desertas Islands" 
           className="w-full h-full object-cover object-center opacity-70"
           loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-green-900/30 to-green-900/80" />
       </div>

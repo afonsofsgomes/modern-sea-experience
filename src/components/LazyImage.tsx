@@ -19,6 +19,7 @@ export const LazyImage = ({
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // Using Intersection Observer API for better performance
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -27,7 +28,8 @@ export const LazyImage = ({
         }
       },
       {
-        rootMargin: '200px',
+        rootMargin: '200px', // Load images 200px before they come into view
+        threshold: 0.01
       }
     );
 
@@ -45,14 +47,18 @@ export const LazyImage = ({
   };
 
   return (
-    <div className="relative overflow-hidden" style={{ background: '#f5f5f5' }} ref={imgRef}>
+    <div 
+      className="relative overflow-hidden" 
+      style={{ background: '#f5f5f5' }} 
+      ref={imgRef}
+    >
       {/* Placeholder image shown until the main image loads */}
       {!isLoaded && (
         <img
           src={placeholderSrc}
           alt=""
           className={className}
-          style={{ filter: 'blur(10px)' }}
+          style={{ filter: 'blur(5px)' }}
           {...props}
         />
       )}
@@ -62,9 +68,9 @@ export const LazyImage = ({
         <img
           src={src}
           alt={alt}
-          className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transition: 'opacity 0.3s' }}
+          className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={handleLoad}
+          decoding="async"
           {...props}
         />
       )}
