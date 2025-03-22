@@ -63,6 +63,15 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     };
   }, []);
 
+  // Handle carousel slide change
+  const handleSlideChange = useCallback(() => {
+    if (apiRef.current && typeof apiRef.current.selectedScrollSnap === 'function') {
+      const index = apiRef.current.selectedScrollSnap();
+      setCurrentIndex(index);
+    }
+    handleUserInteraction();
+  }, [handleUserInteraction]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -81,13 +90,8 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         setApi={(api) => {
           apiRef.current = api;
         }}
-        onSelect={(api) => {
-          // Extract the selected index from the API
-          if (api && typeof api.selectedScrollSnap === 'function') {
-            const index = api.selectedScrollSnap();
-            setCurrentIndex(index);
-          }
-          handleUserInteraction();
+        onSelect={() => {
+          handleSlideChange();
         }}
       >
         <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
