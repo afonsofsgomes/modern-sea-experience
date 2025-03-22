@@ -32,7 +32,11 @@ export const PortoSantoHero = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <button className="p-1 bg-black/30 rounded-full hover:bg-black/40 transition-colors">
+              <button 
+                className="p-1 bg-black/30 rounded-full hover:bg-black/40 transition-colors"
+                type="button"
+                aria-label="Photo credits"
+              >
                 <Info className="h-4 w-4 text-white/80" />
               </button>
             </TooltipTrigger>
@@ -81,7 +85,7 @@ export const PortoSantoHero = () => {
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
               <Users className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm text-center">up to 12 PAX</span>
+            <span className="text-xs md:text-sm text-center">12 PAX</span>
           </div>
           <div className="flex flex-col items-center justify-center w-16 md:w-20">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
