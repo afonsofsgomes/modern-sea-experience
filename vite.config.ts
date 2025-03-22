@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => ({
         drop_debugger: true,
       },
     },
+    cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -39,8 +40,36 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
+    // Ensure images are processed and optimized
+    assetsInlineLimit: 4096, // 4kb - smaller assets will be inlined
   },
+  // Performance optimizations
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+    esbuildOptions: {
+      target: 'es2020',
+    }
+  },
+  css: {
+    // Optimize CSS
+    devSourcemap: true,
+    postcss: {
+      plugins: [
+        // Already configured in postcss.config.js
+      ],
+    },
+  },
+  // Preload key assets
+  experimental: {
+    renderBuiltUrl(filename, { hostType }) {
+      // Add preload hint for critical assets (like fonts)
+      if (filename.endsWith('.woff2') || filename.endsWith('.woff')) {
+        return { 
+          relative: true,
+          preload: true 
+        };
+      }
+      return { relative: true };
+    },
   },
 }));
