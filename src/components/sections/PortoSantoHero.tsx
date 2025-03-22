@@ -1,8 +1,9 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, Wifi, Calendar, Info } from "lucide-react";
+import { Clock, Users, Wifi, Calendar, Info, Timer } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 
 export const PortoSantoHero = () => {
   const scrollToBooking = () => {
@@ -75,12 +76,26 @@ export const PortoSantoHero = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-4 md:gap-8 mb-6 md:mb-8"
         >
-          <div className="flex flex-col items-center justify-center w-16 md:w-20">
+          <div className="flex flex-col items-center justify-center w-16 md:w-20 relative">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
               <Clock className="h-5 w-5 md:h-6 md:w-6" />
             </div>
             <span className="text-xs md:text-sm text-center">1h</span>
+            
+            {/* Paradise in 1 hour highlight */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="absolute top-0 right-0 md:right-auto md:top-auto md:left-14 md:bottom-1 translate-x-1/2 md:translate-x-0 -translate-y-3/4 md:translate-y-0 z-10 whitespace-nowrap"
+            >
+              <div className="flex items-center gap-2 bg-yellow-300 text-blue-900 px-3 py-1.5 rounded-full shadow-md">
+                <Timer className="h-4 w-4 animate-pulse" />
+                <span className="text-xs font-medium">Yes, that's right, paradise in just 1 hour!</span>
+              </div>
+            </motion.div>
           </div>
+          
           <div className="flex flex-col items-center justify-center w-16 md:w-20">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
               <Users className="h-5 w-5 md:h-6 md:w-6" />
