@@ -1,8 +1,11 @@
 
 import { motion } from "framer-motion";
 import { LockKeyhole, Clock, MapPin, TicketCheck } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const HeroContent = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="text-center mb-8 md:mb-12 pt-8 sm:pt-10 md:pt-12">
       <motion.h1 
@@ -28,7 +31,7 @@ export const HeroContent = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-10 mb-8 sm:mb-12 text-white/90"
+        className={`${isMobile ? 'grid grid-cols-2 gap-y-3 gap-x-2 max-w-xs' : 'flex flex-wrap gap-3 sm:gap-6 md:gap-10'} justify-center mx-auto mb-8 sm:mb-12 text-white/90`}
       >
         <TrustIndicator icon={<LockKeyhole className="h-4 w-4 sm:h-5 sm:w-5" />} text="Secure Booking" />
         <TrustIndicator icon={<Clock className="h-4 w-4 sm:h-5 sm:w-5" />} text="24/7 Support" />
@@ -45,8 +48,10 @@ interface TrustIndicatorProps {
 }
 
 const TrustIndicator = ({ icon, text }: TrustIndicatorProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="flex items-center gap-1 sm:gap-2">
+    <div className={`flex items-center gap-1 sm:gap-2 ${isMobile ? 'justify-center' : ''}`}>
       <div className="bg-white/10 p-1.5 sm:p-2 rounded-full">
         {icon}
       </div>
