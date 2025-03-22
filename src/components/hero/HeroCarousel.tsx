@@ -22,6 +22,24 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const interactionTimerRef = useRef<number | null>(null);
+  const [visibleItems, setVisibleItems] = useState<number[]>([0, 1, 2]);
+  
+  // Update visible items when currentIndex changes
+  useEffect(() => {
+    const newVisibleItems = [];
+    const length = destinations.length;
+    
+    // Include current item and a few items before and after
+    for (let i = -1; i <= 3; i++) {
+      // Handle wrapping around for loop effect
+      const index = (currentIndex + i + length) % length;
+      if (!newVisibleItems.includes(index)) {
+        newVisibleItems.push(index);
+      }
+    }
+    
+    setVisibleItems(newVisibleItems);
+  }, [currentIndex, destinations.length]);
   
   // Auto-scroll functionality with performance optimizations
   useEffect(() => {
@@ -72,6 +90,23 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     handleUserInteraction();
   }, [handleUserInteraction]);
 
+  // Preload adjacent slides for smoother experience
+  useEffect(() => {
+    const preloadImages = () => {
+      // Preload current and next 2-3 images
+      for (let i = 0; i <= 3; i++) {
+        const index = (currentIndex + i) % destinations.length;
+        const destination = destinations[index];
+        if (destination && destination.image) {
+          const img = new Image();
+          img.src = destination.image;
+        }
+      }
+    };
+    
+    preloadImages();
+  }, [currentIndex, destinations]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -104,7 +139,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
                 destination={destination} 
                 index={index} 
                 fallbackImage={fallbackImage} 
-                isVisible={Math.abs(currentIndex - index) <= 2} // Only render cards near the visible area
+                isVisible={visibleItems.includes(index)} 
               />
             </CarouselItem>
           ))}
