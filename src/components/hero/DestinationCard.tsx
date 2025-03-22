@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SeaBusCardContent } from "./SeaBusCardContent";
 import { Star } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export interface DestinationCardProps {
   destination: {
@@ -22,9 +23,35 @@ export interface DestinationCardProps {
   };
   index: number;
   fallbackImage: string;
+  isVisible?: boolean; // Add this prop to optimize rendering
 }
 
-export const DestinationCard = ({ destination, index, fallbackImage }: DestinationCardProps) => {
+export const DestinationCard = ({ destination, index, fallbackImage, isVisible = true }: DestinationCardProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [shouldRender, setShouldRender] = useState(isVisible);
+  
+  // Handle visibility changes for performance optimization
+  useEffect(() => {
+    if (isVisible && !shouldRender) {
+      setShouldRender(true);
+    }
+  }, [isVisible, shouldRender]);
+  
+  // If not visible and not yet rendered, return placeholder
+  if (!shouldRender) {
+    return (
+      <div className="h-full">
+        <Card className="overflow-hidden border-none shadow-lg h-full bg-white/10 backdrop-blur-sm">
+          <div className="h-36 sm:h-48 bg-gray-700/50 animate-pulse"></div>
+          <div className="p-3 sm:p-4">
+            <div className="h-4 w-3/4 bg-white/20 rounded mb-2"></div>
+            <div className="h-8 w-full bg-white/10 rounded"></div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -40,10 +67,16 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
             <SeaBusCardContent fallbackImage={fallbackImage} />
           ) : (
             <>
+              {!imageLoaded && (
+                <div className="absolute inset-0 bg-gray-700/50 animate-pulse"></div>
+              )}
               <img 
                 src={destination.image} 
                 alt={destination.name} 
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setImageLoaded(true)}
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </>

@@ -5,13 +5,15 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   placeholderSrc?: string;
   alt: string;
+  fetchPriority?: 'high' | 'low' | 'auto';
 }
 
 export const LazyImage = ({
   src,
-  placeholderSrc = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23cccccc" /%3E%3C/svg%3E',
+  placeholderSrc = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23f3f4f6" /%3E%3C/svg%3E',
   alt,
   className,
+  fetchPriority = 'auto',
   ...props
 }: LazyImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,6 +21,13 @@ export const LazyImage = ({
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // Use Intersection Observer API for better performance than scroll events
+    if (!('IntersectionObserver' in window)) {
+      // Fallback for browsers that don't support IntersectionObserver
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -27,7 +36,8 @@ export const LazyImage = ({
         }
       },
       {
-        rootMargin: '200px',
+        rootMargin: '200px', // Load images 200px before they enter viewport
+        threshold: 0.01,
       }
     );
 
@@ -44,15 +54,28 @@ export const LazyImage = ({
     setIsLoaded(true);
   };
 
+  // For images that are important but not top priority, preload when in view
+  useEffect(() => {
+    if (isInView && fetchPriority === 'high' && !isLoaded) {
+      const img = new Image();
+      img.src = src;
+    }
+  }, [isInView, fetchPriority, src, isLoaded]);
+
   return (
-    <div className="relative overflow-hidden" style={{ background: '#f5f5f5' }} ref={imgRef}>
+    <div 
+      className="relative overflow-hidden" 
+      style={{ background: '#f5f5f5' }} 
+      ref={imgRef}
+    >
       {/* Placeholder image shown until the main image loads */}
       {!isLoaded && (
         <img
           src={placeholderSrc}
           alt=""
           className={className}
-          style={{ filter: 'blur(10px)' }}
+          style={{ filter: 'blur(8px)', transform: 'scale(1.05)' }}
+          aria-hidden="true"
           {...props}
         />
       )}
@@ -63,8 +86,10 @@ export const LazyImage = ({
           src={src}
           alt={alt}
           className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transition: 'opacity 0.3s' }}
+          style={{ transition: 'opacity 0.4s ease' }}
           onLoad={handleLoad}
+          fetchPriority={fetchPriority}
+          decoding="async"
           {...props}
         />
       )}

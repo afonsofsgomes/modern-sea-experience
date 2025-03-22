@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface HeroCarouselProps {
   destinations: Array<any>;
@@ -20,8 +20,10 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
   const isMobile = useIsMobile();
   const apiRef = useRef<any>(null);
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const interactionTimerRef = useRef<number | null>(null);
   
-  // Auto-scroll functionality
+  // Auto-scroll functionality with performance optimizations
   useEffect(() => {
     // If auto-scroll is paused, don't set up the interval
     if (autoScrollPaused) return;
@@ -29,25 +31,37 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     const interval = setInterval(() => {
       if (apiRef.current) {
         apiRef.current.scrollNext();
+        setCurrentIndex((prev) => (prev + 1) % destinations.length);
       }
     }, 6000); // Auto-scroll every 6 seconds for a slow pace
     
     // Clean up interval on unmount or when paused state changes
     return () => clearInterval(interval);
-  }, [autoScrollPaused]);
+  }, [autoScrollPaused, destinations.length]);
   
   // Function to pause auto-scrolling temporarily when user interacts
-  const handleUserInteraction = () => {
+  const handleUserInteraction = useCallback(() => {
     setAutoScrollPaused(true);
     
+    // Clear any existing timer
+    if (interactionTimerRef.current) {
+      window.clearTimeout(interactionTimerRef.current);
+    }
+    
     // Resume auto-scrolling after 15 seconds of inactivity
-    const timer = setTimeout(() => {
+    interactionTimerRef.current = window.setTimeout(() => {
       setAutoScrollPaused(false);
     }, 15000);
-    
-    // Clear the timeout if the component unmounts
-    return () => clearTimeout(timer);
-  };
+  }, []);
+  
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (interactionTimerRef.current) {
+        window.clearTimeout(interactionTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <motion.div
@@ -67,14 +81,22 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         setApi={(api) => {
           apiRef.current = api;
         }}
+        onSelect={(index) => {
+          setCurrentIndex(index);
+          handleUserInteraction();
+        }}
       >
         <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
           {destinations.map((destination, index) => (
-            <CarouselItem key={destination.name} className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3">
+            <CarouselItem 
+              key={destination.name} 
+              className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3"
+            >
               <DestinationCard 
                 destination={destination} 
                 index={index} 
                 fallbackImage={fallbackImage} 
+                isVisible={Math.abs(currentIndex - index) <= 2} // Only render cards near the visible area
               />
             </CarouselItem>
           ))}
@@ -124,7 +146,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           {destinations.map((_, index) => (
             <div 
               key={index} 
-              className="w-2 h-2 rounded-full bg-white/40"
+              className={`w-2 h-2 rounded-full ${currentIndex === index ? 'bg-white' : 'bg-white/40'} transition-colors`}
             />
           ))}
         </div>
