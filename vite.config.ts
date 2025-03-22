@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        passes: 2,
       },
     },
     rollupOptions: {
@@ -39,8 +40,19 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
+    cssCodeSplit: true,
+    assetsInlineLimit: 4096, // 4KB - inline small assets
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000, // KB
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+  },
+  css: {
+    // Optimize CSS
+    devSourcemap: true,
+    modules: {
+      scopeBehaviour: 'local',
+    },
   },
 }));

@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils';
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   className?: string;
   loading?: 'lazy' | 'eager';
   sizes?: string;
@@ -16,8 +16,8 @@ interface OptimizedImageProps {
 export const OptimizedImage = ({
   src,
   alt,
-  width,
-  height,
+  width = "100%",
+  height = "auto",
   className,
   loading = 'lazy',
   sizes = '100vw',
@@ -59,8 +59,8 @@ export const OptimizedImage = ({
         <img
           src={src}
           alt={alt}
-          width={width}
-          height={height}
+          width={typeof width === 'number' ? width : undefined}
+          height={typeof height === 'number' ? height : undefined}
           className={cn("w-full h-full object-cover transition-opacity duration-300", 
             isLoaded ? "opacity-100" : "opacity-0")}
           onLoad={() => setIsLoaded(true)}
@@ -74,8 +74,8 @@ export const OptimizedImage = ({
           <img
             src={src}
             alt={alt}
-            width={width}
-            height={height}
+            width={typeof width === 'number' ? width : undefined}
+            height={typeof height === 'number' ? height : undefined}
             loading={loading}
             sizes={sizes}
             className={cn("w-full h-full object-cover transition-opacity duration-300", 

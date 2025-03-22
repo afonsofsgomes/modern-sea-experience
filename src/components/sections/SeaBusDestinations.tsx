@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Coffee, Wine, Mountain, Camera, Anchor, Route, Sun, Fish, Waves, Ship, Clock, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 // Animation variants
 const containerVariants = {
@@ -109,14 +110,12 @@ export const SeaBusDestinations = () => {
               className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative h-48 overflow-hidden">
-                <img 
+                <OptimizedImage 
                   src={destination.image} 
                   alt={`SeaBus destination: ${destination.name}`}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80';
-                  }}
+                  className="w-full h-full object-cover"
+                  width={400}
+                  height={200}
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-3 left-4">

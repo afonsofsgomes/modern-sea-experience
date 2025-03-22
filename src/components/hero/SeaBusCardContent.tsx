@@ -50,6 +50,8 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
         fallbackSrc={fallbackSrc}
         alt={cityName}
         className="w-full h-full object-cover object-center scale-125"
+        width="200"
+        height="150"
       />
       <div className="absolute inset-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 py-3">
