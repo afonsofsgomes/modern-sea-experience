@@ -43,6 +43,7 @@ interface LocationImageProps {
 }
 
 const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationImageProps) => {
+  // Using border-b (bottom) instead of border-r (right) for vertical layout
   return (
     <div className={`w-full h-1/3 relative overflow-hidden ${hasBorder ? 'border-b border-white/10' : ''}`}>
       <ImageWithFallback 
@@ -50,6 +51,10 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
         fallbackSrc={fallbackSrc}
         alt={cityName}
         className="w-full h-full object-cover"
+        onLoad={() => {
+          // Force the browser to render the image immediately
+          window.dispatchEvent(new Event('resize'));
+        }}
       />
       <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent py-2">
         <p className="text-white text-[8px] sm:text-xs font-medium text-center truncate drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{cityName}</p>

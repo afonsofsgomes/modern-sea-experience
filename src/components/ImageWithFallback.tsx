@@ -21,17 +21,25 @@ export const ImageWithFallback = ({
     // Reset when src changes
     setImgSrc(src);
     setIsLoading(true);
-  }, [src]);
-  
-  const handleError = () => {
-    console.log(`Image failed to load: ${imgSrc}, using fallback`);
-    setImgSrc(fallbackSrc);
-  };
-  
-  const handleLoad = () => {
-    setIsLoading(false);
-    onLoad?.();
-  };
+    
+    // Preload the image
+    const img = new Image();
+    img.src = src || '';
+    img.onload = () => {
+      setIsLoading(false);
+      onLoad?.();
+    };
+    img.onerror = () => {
+      console.log(`Image failed to load: ${src}, using fallback`);
+      setImgSrc(fallbackSrc);
+      setIsLoading(false);
+    };
+    
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [src, fallbackSrc, onLoad]);
   
   return (
     <div className="relative">
@@ -44,9 +52,16 @@ export const ImageWithFallback = ({
       <img
         src={imgSrc || src}
         alt={alt}
-        onError={handleError}
-        onLoad={handleLoad}
-        loading="lazy"
+        onError={() => {
+          if (imgSrc !== fallbackSrc) {
+            setImgSrc(fallbackSrc);
+          }
+        }}
+        onLoad={() => {
+          setIsLoading(false);
+          onLoad?.();
+        }}
+        loading="eager" // Change to eager for critical images
         decoding="async"
         {...props}
       />

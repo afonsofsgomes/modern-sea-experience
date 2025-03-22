@@ -29,8 +29,8 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     const newVisibleItems = [];
     const length = destinations.length;
     
-    // Include current item and a few items before and after
-    for (let i = -1; i <= 3; i++) {
+    // Include current item and more surrounding items for better performance
+    for (let i = -2; i <= 4; i++) {
       // Handle wrapping around for loop effect
       const index = (currentIndex + i + length) % length;
       if (!newVisibleItems.includes(index)) {
@@ -40,6 +40,20 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     
     setVisibleItems(newVisibleItems);
   }, [currentIndex, destinations.length]);
+  
+  // Preload all images initially for better UX
+  useEffect(() => {
+    const preloadAllImages = () => {
+      destinations.forEach(destination => {
+        if (destination && destination.image) {
+          const img = new Image();
+          img.src = destination.image;
+        }
+      });
+    };
+    
+    preloadAllImages();
+  }, [destinations]);
   
   // Auto-scroll functionality with performance optimizations
   useEffect(() => {
@@ -90,22 +104,17 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     handleUserInteraction();
   }, [handleUserInteraction]);
 
-  // Preload adjacent slides for smoother experience
+  // Force update on window resize to fix any rendering issues
   useEffect(() => {
-    const preloadImages = () => {
-      // Preload current and next 2-3 images
-      for (let i = 0; i <= 3; i++) {
-        const index = (currentIndex + i) % destinations.length;
-        const destination = destinations[index];
-        if (destination && destination.image) {
-          const img = new Image();
-          img.src = destination.image;
-        }
+    const handleResize = () => {
+      if (apiRef.current) {
+        apiRef.current.reInit();
       }
     };
     
-    preloadImages();
-  }, [currentIndex, destinations]);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <motion.div

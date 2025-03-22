@@ -37,6 +37,15 @@ export const DestinationCard = ({ destination, index, fallbackImage, isVisible =
     }
   }, [isVisible, shouldRender]);
   
+  // Preload the image when the component becomes visible
+  useEffect(() => {
+    if (isVisible && destination.image && destination.name !== "SeaBus Connections") {
+      const img = new Image();
+      img.src = destination.image;
+      img.onload = () => setImageLoaded(true);
+    }
+  }, [isVisible, destination.image, destination.name]);
+  
   // If not visible and not yet rendered, return placeholder
   if (!shouldRender) {
     return (
@@ -75,7 +84,7 @@ export const DestinationCard = ({ destination, index, fallbackImage, isVisible =
                 alt={destination.name} 
                 className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 onLoad={() => setImageLoaded(true)}
-                loading="lazy"
+                loading={index <= 2 ? "eager" : "lazy"} // Load first few images eagerly
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
