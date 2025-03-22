@@ -1,4 +1,3 @@
-
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar, Eye } from "lucide-react";
 
 export type FeatureType = {
@@ -120,7 +119,7 @@ export const destinationData: DestinationType[] = [
       { value: "13:00", label: "Departure Time" }
     ],
     experience: "Private South Coast Cruise",
-    experienceDesc: "Explore Madeira's beautiful south coast with a private luxury cruise tailored to your preferences.",
+    experienceDesc: "Explore Madeira's beautiful south western coast with a private cruise tailored to your preferences.",
     destinations: [] // Added empty destinations array to satisfy DestinationType
   },
   {
