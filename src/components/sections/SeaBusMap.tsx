@@ -1,15 +1,9 @@
-import { useRef, useEffect, useState } from "react";
+
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Map, Ship } from "lucide-react";
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { toast } from "@/hooks/use-toast";
+import { Map } from "lucide-react";
 
-// Defer loading mapboxgl until the component is visible
-const loadMapbox = () => import('mapbox-gl').then(module => module.default);
-
-// Mapbox public token
-const MAPBOX_TOKEN = "pk.eyJ1IjoiYWZvbnNvZ29tZXMiLCJhIjoiY201Z25pYnNwMDhmdDJrczdiOHN0Mm1uOCJ9.QH70VSahz9ZRgfhZ8cDJIA";
-
+// Static data for image gallery
 const IMAGE_GALLERY = [
   {
     src: "https://extranet.seayou.pt/photos/Funchal.jpg",
@@ -33,7 +27,7 @@ const IMAGE_GALLERY = [
   }
 ];
 
-// Fixed route points with proper longitude and latitude format for Mapbox
+// Route points data (no longer used for Mapbox but kept for reference)
 const ROUTE_POINTS = [
   { city: "Funchal", coordinates: [-16.9108, 32.6471] as [number, number] },
   { city: "Caniçal", coordinates: [-16.7352, 32.7411] as [number, number] },
@@ -42,124 +36,7 @@ const ROUTE_POINTS = [
 
 export const SeaBusMap = () => {
   const sectionRef = useRef(null);
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<any>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const mapboxPromiseRef = useRef<Promise<any> | null>(null);
-
-  useEffect(() => {
-    if (!mapContainerRef.current || !isInView || mapLoaded) return;
-
-    const initializeMap = async () => {
-      try {
-        if (!mapboxPromiseRef.current) {
-          mapboxPromiseRef.current = loadMapbox();
-        }
-        
-        const mapboxgl = await mapboxPromiseRef.current;
-        
-        // Initialize Mapbox
-        mapboxgl.accessToken = MAPBOX_TOKEN;
-        
-        const map = new mapboxgl.Map({
-          container: mapContainerRef.current!,
-          style: 'mapbox://styles/mapbox/outdoors-v12',
-          center: [-16.9667, 32.7505] as [number, number],
-          zoom: 9,
-          attributionControl: false,
-          maxZoom: 15,
-          minZoom: 8,
-          renderWorldCopies: false
-        });
-        
-        mapRef.current = map;
-
-        // Handle map loading
-        map.on('load', () => {
-          setMapLoaded(true);
-          
-          // Add markers for each city
-          ROUTE_POINTS.forEach(point => {
-            // Create a custom marker element
-            const markerEl = document.createElement('div');
-            markerEl.className = 'flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full shadow-lg';
-            markerEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>';
-            
-            // Add popup
-            const popup = new mapboxgl.Popup({ offset: 25 })
-              .setHTML(`<strong>${point.city}</strong><p>SeaBus stop</p>`);
-            
-            // Add marker to map
-            new mapboxgl.Marker(markerEl)
-              .setLngLat(point.coordinates)
-              .setPopup(popup)
-              .addTo(map);
-          });
-
-          // Add route lines
-          map.addSource('route', {
-            type: 'geojson',
-            data: {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'LineString',
-                coordinates: [
-                  ROUTE_POINTS[0].coordinates,
-                  ROUTE_POINTS[1].coordinates,
-                  ROUTE_POINTS[2].coordinates,
-                  ROUTE_POINTS[0].coordinates
-                ]
-              }
-            }
-          });
-
-          map.addLayer({
-            id: 'route',
-            type: 'line',
-            source: 'route',
-            layout: {
-              'line-join': 'round',
-              'line-cap': 'round'
-            },
-            paint: {
-              'line-color': '#0369a1',
-              'line-width': 3,
-              'line-dasharray': [2, 2]
-            }
-          });
-        });
-
-        map.on('error', (e) => {
-          console.error("Mapbox error:", e);
-          toast({
-            title: "Map Error",
-            description: "There was an error rendering the map.",
-            variant: "destructive",
-          });
-        });
-
-        // Add navigation controls
-        map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      } catch (error) {
-        console.error("Error initializing map:", error);
-        toast({
-          title: "Map Initialization Error",
-          description: "Failed to initialize the map.",
-          variant: "destructive",
-        });
-      }
-    };
-
-    initializeMap();
-    
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
-      }
-    };
-  }, [isInView, mapLoaded]);
 
   return (
     <section
@@ -184,21 +61,34 @@ export const SeaBusMap = () => {
           </p>
         </motion.div>
 
-        {/* Map Container */}
+        {/* Static Map Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="relative bg-blue-50 rounded-xl overflow-hidden shadow-lg mb-12"
         >
-          {/* Interactive Mapbox Map */}
-          <div className="relative h-[400px] md:h-[500px]">
-            <div ref={mapContainerRef} className="absolute inset-0 rounded-lg" />
-            {!mapLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-blue-50">
-                <div className="text-blue-600 animate-pulse">Loading map...</div>
-              </div>
-            )}
+          <div className="relative h-[400px] md:h-[500px] overflow-hidden rounded-t-lg">
+            <img 
+              src="https://extranet.seayou.pt/photos/madeira-map.jpg" 
+              alt="SeaBus Routes Map"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                // Fallback to a simple styled div if image fails to load
+                target.parentElement?.classList.add('bg-blue-100');
+                target.style.display = 'none';
+                target.parentElement!.innerHTML = `
+                  <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                    <div class="bg-blue-600 text-white p-3 rounded-full mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">SeaBus Routes</h3>
+                    <p class="text-blue-700">Connecting Funchal, Caniçal, and Calheta</p>
+                  </div>
+                `;
+              }}
+            />
           </div>
 
           <div className="bg-white p-4 rounded-b-xl">

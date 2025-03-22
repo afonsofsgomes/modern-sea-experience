@@ -36,7 +36,6 @@ export default defineConfig(({ mode }) => ({
           framer: ['framer-motion'],
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-toast', '@radix-ui/react-slot'],
           router: ['react-router-dom'],
-          mapbox: ['mapbox-gl'],
         },
       },
     },
