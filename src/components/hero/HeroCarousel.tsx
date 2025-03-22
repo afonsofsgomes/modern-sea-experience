@@ -6,10 +6,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect } from "react";
+import { CarouselControls } from "./CarouselControls";
+import { CarouselIndicators } from "./CarouselIndicators";
+import { useCarouselController } from "@/hooks/use-carousel-controller";
 
 interface HeroCarouselProps {
   destinations: Array<any>;
@@ -18,28 +19,13 @@ interface HeroCarouselProps {
 
 export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps) => {
   const isMobile = useIsMobile();
-  const apiRef = useRef<any>(null);
-  const [autoScrollPaused, setAutoScrollPaused] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const interactionTimerRef = useRef<number | null>(null);
-  const [visibleItems, setVisibleItems] = useState<number[]>([0, 1, 2, 3, 4]);
-  
-  // Update visible items when currentIndex changes
-  useEffect(() => {
-    const newVisibleItems = [];
-    const length = destinations.length;
-    
-    // Include current item and more surrounding items for better performance
-    for (let i = -2; i <= 4; i++) {
-      // Handle wrapping around for loop effect
-      const index = (currentIndex + i + length) % length;
-      if (!newVisibleItems.includes(index)) {
-        newVisibleItems.push(index);
-      }
-    }
-    
-    setVisibleItems(newVisibleItems);
-  }, [currentIndex, destinations.length]);
+  const { 
+    apiRef, 
+    currentIndex, 
+    visibleItems, 
+    handleUserInteraction, 
+    handleSlideChange 
+  } = useCarouselController({ itemsCount: destinations.length });
   
   // Preload all images initially for better UX
   useEffect(() => {
@@ -54,71 +40,6 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     
     preloadAllImages();
   }, [destinations]);
-  
-  // Auto-scroll functionality with performance optimizations
-  useEffect(() => {
-    // If auto-scroll is paused, don't set up the interval
-    if (autoScrollPaused) return;
-    
-    const interval = setInterval(() => {
-      if (apiRef.current) {
-        apiRef.current.scrollNext();
-        setCurrentIndex((prev) => (prev + 1) % destinations.length);
-      }
-    }, 6000); // Auto-scroll every 6 seconds for a slow pace
-    
-    // Clean up interval on unmount or when paused state changes
-    return () => clearInterval(interval);
-  }, [autoScrollPaused, destinations.length]);
-  
-  // Function to pause auto-scrolling temporarily when user interacts
-  const handleUserInteraction = useCallback(() => {
-    setAutoScrollPaused(true);
-    
-    // Clear any existing timer
-    if (interactionTimerRef.current) {
-      window.clearTimeout(interactionTimerRef.current);
-    }
-    
-    // Resume auto-scrolling after 15 seconds of inactivity
-    interactionTimerRef.current = window.setTimeout(() => {
-      setAutoScrollPaused(false);
-    }, 15000);
-  }, []);
-  
-  // Clean up timer on unmount
-  useEffect(() => {
-    return () => {
-      if (interactionTimerRef.current) {
-        window.clearTimeout(interactionTimerRef.current);
-      }
-    };
-  }, []);
-
-  // Handle carousel slide change
-  const handleSlideChange = useCallback(() => {
-    if (apiRef.current && typeof apiRef.current.selectedScrollSnap === 'function') {
-      try {
-        const index = apiRef.current.selectedScrollSnap();
-        setCurrentIndex(index);
-      } catch (error) {
-        console.error("Error getting selected scroll snap:", error);
-      }
-    }
-    handleUserInteraction();
-  }, [handleUserInteraction]);
-
-  // Force update on window resize to fix any rendering issues
-  useEffect(() => {
-    const handleResize = () => {
-      if (apiRef.current) {
-        apiRef.current.reInit();
-      }
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <motion.div
@@ -159,54 +80,15 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </CarouselContent>
         
-        {/* Left/Previous button */}
-        <motion.div
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7]
-          }}
-          transition={{ 
-            duration: 2,
-            times: [0, 0.5, 1],
-            repeat: Infinity,
-            repeatType: "loop"
-          }}
-          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10"
-          onClick={handleUserInteraction}
-        >
-          <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
-        </motion.div>
-        
-        {/* Right/Next button */}
-        <motion.div
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7]
-          }}
-          transition={{ 
-            duration: 2,
-            times: [0, 0.5, 1],
-            repeat: Infinity,
-            repeatType: "loop",
-            delay: 1
-          }}
-          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10"
-          onClick={handleUserInteraction}
-        >
-          <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
-        </motion.div>
+        <CarouselControls onInteraction={handleUserInteraction} />
       </Carousel>
       
       {/* Carousel indicators for mobile */}
       {isMobile && (
-        <div className="flex justify-center mt-4 gap-1">
-          {destinations.map((_, index) => (
-            <div 
-              key={index} 
-              className={`w-2 h-2 rounded-full ${currentIndex === index ? 'bg-white' : 'bg-white/40'} transition-colors`}
-            />
-          ))}
-        </div>
+        <CarouselIndicators 
+          totalItems={destinations.length}
+          currentIndex={currentIndex}
+        />
       )}
     </motion.div>
   );
