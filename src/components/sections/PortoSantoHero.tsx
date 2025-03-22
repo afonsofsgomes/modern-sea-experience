@@ -29,15 +29,15 @@ export const PortoSantoHero = () => {
       
       {/* Photo Credits */}
       <div className="absolute bottom-3 right-3 z-20">
-        <TooltipProvider>
+        <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
               <button 
-                className="p-1 bg-black/30 rounded-full hover:bg-black/40 transition-colors"
+                className="p-2 bg-black/50 rounded-full hover:bg-black/60 transition-colors touch-manipulation"
                 type="button"
                 aria-label="Photo credits"
               >
-                <Info className="h-4 w-4 text-white/80" />
+                <Info className="h-4 w-4 text-white/90" />
               </button>
             </TooltipTrigger>
             <TooltipContent side="top" className="bg-black/80 text-white border-0 text-xs">
