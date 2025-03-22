@@ -1,23 +1,23 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 export const TallyScript = () => {
-  const scriptLoaded = useRef(false);
-  const loadedEmbeds = useRef(false);
-
   useEffect(() => {
-    // Avoid loading script multiple times
-    if (scriptLoaded.current) return;
-    scriptLoaded.current = true;
+    // Safety check to prevent duplicate script injection
+    if (document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) {
+      return;
+    }
 
+    // Create and inject the Tally script
+    const script = document.createElement('script');
+    script.src = 'https://tally.so/widgets/embed.js';
+    script.async = true;
+    
     // Function to load embeds once Tally is available
     const loadEmbeds = () => {
-      if (loadedEmbeds.current) return;
-      
       if (typeof (window as any).Tally !== 'undefined') {
         console.log('Tally object found, loading embeds');
         (window as any).Tally.loadEmbeds();
-        loadedEmbeds.current = true;
       } else {
         console.log('Tally object not found, setting iframes manually');
         // If Tally object is not available, manually set src on iframes
@@ -27,15 +27,8 @@ export const TallyScript = () => {
             console.log('Manual iframe src set:', iframe.dataset.tallySrc);
           }
         });
-        loadedEmbeds.current = true;
       }
     };
-    
-    // Create and inject the Tally script with defer attribute for performance
-    const script = document.createElement('script');
-    script.src = 'https://tally.so/widgets/embed.js';
-    script.async = true;
-    script.defer = true;
     
     // Set up callbacks
     script.onload = () => {
@@ -49,23 +42,46 @@ export const TallyScript = () => {
       loadEmbeds(); // Still try to load iframes directly if script fails
     };
     
-    // Add the script to the document body
+    // Add the script to the document
     document.body.appendChild(script);
     console.log('Tally script added to document');
     
-    // Create a timeout to ensure embeds are loaded even if onload doesn't fire
-    const timeoutId = setTimeout(() => {
-      console.log('Loading timeout reached');
-      loadEmbeds();
-    }, 3000);
+    // Also inject a style tag to override Tally styles for better visibility
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `
+      /* Improve placeholder visibility in iframes */
+      iframe[data-tally-src] {
+        background: rgba(255, 255, 255, 0.05) !important;
+      }
+      
+      /* This targets the iframe content when possible */
+      @media (prefers-color-scheme: dark) {
+        input::placeholder, textarea::placeholder {
+          color: rgba(255, 255, 255, 0.6) !important;
+          opacity: 1 !important;
+        }
+      }
+    `;
+    document.head.appendChild(styleTag);
+    
+    // Run loadEmbeds immediately in case the script is already loaded
+    // And also as a fallback in case the onload event doesn't fire
+    setTimeout(loadEmbeds, 500);
+    
+    // Additional fallback - try again after a longer delay
+    setTimeout(loadEmbeds, 2000);
     
     // Cleanup on component unmount
     return () => {
-      clearTimeout(timeoutId);
+      // We don't remove the script as it might be needed by other components
+      // But we can remove our custom style
+      if (document.head.contains(styleTag)) {
+        document.head.removeChild(styleTag);
+      }
     };
   }, []);
 
-  return null;
+  return null; // This component doesn't render anything
 };
 
 export default TallyScript;

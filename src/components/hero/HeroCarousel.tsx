@@ -6,11 +6,10 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef } from "react";
-import { CarouselControls } from "./CarouselControls";
-import { CarouselIndicators } from "./CarouselIndicators";
-import { useCarouselController } from "@/hooks/use-carousel-controller";
+import { useEffect, useRef, useState } from "react";
 
 interface HeroCarouselProps {
   destinations: Array<any>;
@@ -19,27 +18,36 @@ interface HeroCarouselProps {
 
 export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps) => {
   const isMobile = useIsMobile();
-  const { 
-    apiRef, 
-    currentIndex, 
-    visibleItems, 
-    handleUserInteraction, 
-    handleSlideChange 
-  } = useCarouselController({ itemsCount: destinations.length });
+  const apiRef = useRef<any>(null);
+  const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   
-  // Preload all images initially for better UX
+  // Auto-scroll functionality
   useEffect(() => {
-    const preloadAllImages = () => {
-      destinations.forEach(destination => {
-        if (destination && destination.image) {
-          const img = new Image();
-          img.src = destination.image;
-        }
-      });
-    };
+    // If auto-scroll is paused, don't set up the interval
+    if (autoScrollPaused) return;
     
-    preloadAllImages();
-  }, [destinations]);
+    const interval = setInterval(() => {
+      if (apiRef.current) {
+        apiRef.current.scrollNext();
+      }
+    }, 6000); // Auto-scroll every 6 seconds for a slow pace
+    
+    // Clean up interval on unmount or when paused state changes
+    return () => clearInterval(interval);
+  }, [autoScrollPaused]);
+  
+  // Function to pause auto-scrolling temporarily when user interacts
+  const handleUserInteraction = () => {
+    setAutoScrollPaused(true);
+    
+    // Resume auto-scrolling after 15 seconds of inactivity
+    const timer = setTimeout(() => {
+      setAutoScrollPaused(false);
+    }, 15000);
+    
+    // Clear the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  };
 
   return (
     <motion.div
@@ -54,41 +62,72 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         opts={{
           align: "start",
           loop: true,
-          dragFree: false,
-          containScroll: "trimSnaps",
-          duration: 800, // Smooth, slower animation duration
         }}
         className="w-full"
         setApi={(api) => {
           apiRef.current = api;
         }}
-        onSelect={handleSlideChange}
       >
         <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
           {destinations.map((destination, index) => (
-            <CarouselItem 
-              key={destination.name} 
-              className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3 transition-all duration-800 ease-in-out" 
-            >
+            <CarouselItem key={destination.name} className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3">
               <DestinationCard 
                 destination={destination} 
                 index={index} 
                 fallbackImage={fallbackImage} 
-                isVisible={visibleItems.includes(index)} 
               />
             </CarouselItem>
           ))}
         </CarouselContent>
         
-        <CarouselControls onInteraction={handleUserInteraction} />
+        {/* Left/Previous button */}
+        <motion.div
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.7, 1, 0.7]
+          }}
+          transition={{ 
+            duration: 2,
+            times: [0, 0.5, 1],
+            repeat: Infinity,
+            repeatType: "loop"
+          }}
+          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10"
+          onClick={handleUserInteraction}
+        >
+          <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
+        </motion.div>
+        
+        {/* Right/Next button */}
+        <motion.div
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.7, 1, 0.7]
+          }}
+          transition={{ 
+            duration: 2,
+            times: [0, 0.5, 1],
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: 1
+          }}
+          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10"
+          onClick={handleUserInteraction}
+        >
+          <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
+        </motion.div>
       </Carousel>
       
       {/* Carousel indicators for mobile */}
       {isMobile && (
-        <CarouselIndicators 
-          totalItems={destinations.length}
-          currentIndex={currentIndex}
-        />
+        <div className="flex justify-center mt-4 gap-1">
+          {destinations.map((_, index) => (
+            <div 
+              key={index} 
+              className="w-2 h-2 rounded-full bg-white/40"
+            />
+          ))}
+        </div>
       )}
     </motion.div>
   );

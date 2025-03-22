@@ -16,21 +16,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="SeaYou Madeira" />
     
-    <!-- Performance optimizations -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-    <link rel="dns-prefetch" href="https://extranet.seayou.pt" />
-    <link rel="dns-prefetch" href="https://tally.so" />
-    <link rel="preconnect" href="https://extranet.seayou.pt" crossorigin />
+    <!-- Preconnect to external domains to improve performance -->
+    <link rel="preconnect" href="https://extranet.seayou.pt" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://tally.so" crossorigin />
     
     <!-- Preload critical assets -->
     <link rel="preload" href="/src/main.tsx" as="script" type="module" />
     <link rel="preload" href="/src/index.css" as="style" />
     
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     
     <!-- Cache control -->
