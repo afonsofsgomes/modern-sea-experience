@@ -47,13 +47,13 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
         src={imageSrc}
         fallbackSrc={fallbackSrc}
         alt={cityName}
-        className="w-full h-full object-cover object-center scale-110" /* Added scale-110 to zoom in slightly */
+        className="w-full h-full object-cover object-center scale-115" 
         onLoad={() => {
           // Force the browser to render the image immediately
           window.dispatchEvent(new Event('resize'));
         }}
       />
-      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent py-2">
+      <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent py-2 pb-0">
         <p className="text-white text-[8px] sm:text-xs font-medium text-center truncate drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{cityName}</p>
       </div>
     </div>

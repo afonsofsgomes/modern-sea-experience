@@ -11,6 +11,7 @@ export const useCarouselController = ({ itemsCount }: UseCarouselControllerProps
   const [currentIndex, setCurrentIndex] = useState(0);
   const interactionTimerRef = useRef<number | null>(null);
   const [visibleItems, setVisibleItems] = useState<number[]>([0, 1, 2, 3, 4]);
+  const animationInProgressRef = useRef(false);
   
   // Update visible items when currentIndex changes
   useEffect(() => {
@@ -29,21 +30,31 @@ export const useCarouselController = ({ itemsCount }: UseCarouselControllerProps
     setVisibleItems(newVisibleItems);
   }, [currentIndex, itemsCount]);
   
-  // Auto-scroll functionality with performance optimizations
+  // Auto-scroll functionality with improved animations
   useEffect(() => {
     // If auto-scroll is paused, don't set up the interval
     if (autoScrollPaused) return;
     
     const interval = setInterval(() => {
-      if (apiRef.current) {
+      if (apiRef.current && !animationInProgressRef.current) {
         try {
-          apiRef.current.scrollNext({ animation: true });
-          setCurrentIndex((prev) => (prev + 1) % itemsCount);
+          animationInProgressRef.current = true;
+          apiRef.current.scrollNext({ 
+            animation: true,
+            velocity: 0.2 // Slower velocity for smoother transitions
+          });
+          
+          // Add a small delay to update the index after animation starts
+          setTimeout(() => {
+            setCurrentIndex((prev) => (prev + 1) % itemsCount);
+            animationInProgressRef.current = false;
+          }, 100);
         } catch (error) {
           console.error("Error during auto-scroll:", error);
+          animationInProgressRef.current = false;
         }
       }
-    }, 6000); // Auto-scroll every 6 seconds for a slow pace
+    }, 8000); // Increased interval to give animations more time
     
     // Clean up interval on unmount or when paused state changes
     return () => clearInterval(interval);
@@ -73,18 +84,21 @@ export const useCarouselController = ({ itemsCount }: UseCarouselControllerProps
     };
   }, []);
 
-  // Handle carousel slide change
+  // Handle carousel slide change with smooth animation
   const handleSlideChange = useCallback(() => {
     if (apiRef.current && typeof apiRef.current.selectedScrollSnap === 'function') {
       try {
         const index = apiRef.current.selectedScrollSnap();
-        setCurrentIndex(index);
+        // Only update if the index actually changed to avoid jerking
+        if (index !== currentIndex) {
+          setCurrentIndex(index);
+        }
       } catch (error) {
         console.error("Error getting selected scroll snap:", error);
       }
     }
     handleUserInteraction();
-  }, [handleUserInteraction]);
+  }, [handleUserInteraction, currentIndex]);
 
   // Force update on window resize to fix any rendering issues
   useEffect(() => {
