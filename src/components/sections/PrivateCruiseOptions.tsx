@@ -16,6 +16,7 @@ import {
   CardTitle 
 } from "@/components/ui/card";
 import { useState } from "react";
+import GroupBookingDialog from "@/components/GroupBookingDialog";
 
 export const PrivateCruiseOptions = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -37,7 +38,8 @@ export const PrivateCruiseOptions = () => {
       location: "Departing from Caniçal",
       price: "From 243.60€",
       image: "https://extranet.seayou.pt/photos/pta-s-lourenco2.jpg",
-      buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
+      buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
+      useContactForm: false
     },
     {
       id: 2,
@@ -48,7 +50,8 @@ export const PrivateCruiseOptions = () => {
       location: "Departing from Calheta",
       price: "From 243.60€",
       image: "https://extranet.seayou.pt/photos/south.jpg",
-      buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
+      buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
+      useContactForm: false
     },
     {
       id: 3,
@@ -56,7 +59,7 @@ export const PrivateCruiseOptions = () => {
       description: "Discover hidden caves, majestic cliffs and pristine beaches along Madeira's coastline",
       custom: true,
       image: "https://extranet.seayou.pt/photos/coastal.jpg",
-      buttonAction: scrollToContact
+      useContactForm: true
     },
     {
       id: 4,
@@ -64,16 +67,9 @@ export const PrivateCruiseOptions = () => {
       description: "Nothing seems to fit your needs? Let's discuss and find a tailor-made cruise experience just for you.",
       custom: true,
       image: "https://extranet.seayou.pt/photos/custom.jpg",
-      buttonAction: scrollToContact
+      useContactForm: true
     }
   ];
-
-  function scrollToContact() {
-    const contactSection = document.getElementById("booking");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
@@ -141,21 +137,40 @@ export const PrivateCruiseOptions = () => {
                 </CardContent>
                 
                 <CardFooter className="relative pt-3">
-                  <Button
-                    className={`relative overflow-hidden group transition-all duration-200 ease-in-out ${
-                      hoveredCard === option.id 
-                        ? 'bg-white text-[#253D7F]' 
-                        : 'bg-[#E95543] hover:bg-[#E95543]/90 text-white'
-                    }`}
-                    onClick={option.buttonAction}
-                  >
-                    <span className="relative z-10 flex items-center">
-                      {option.custom ? 'Contact Us' : 'Book Now'}
-                      <ChevronRight className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-                        hoveredCard === option.id ? 'translate-x-1' : ''
-                      }`} />
-                    </span>
-                  </Button>
+                  {option.useContactForm ? (
+                    <GroupBookingDialog 
+                      buttonProps={{
+                        className: `relative overflow-hidden group transition-all duration-200 ease-in-out ${
+                          hoveredCard === option.id 
+                            ? 'bg-white text-[#253D7F]' 
+                            : 'bg-[#E95543] hover:bg-[#E95543]/90 text-white'
+                        }`
+                      }}
+                    >
+                      <span className="relative z-10 flex items-center">
+                        Contact Us
+                        <ChevronRight className={`ml-1 h-4 w-4 transition-transform duration-300 ${
+                          hoveredCard === option.id ? 'translate-x-1' : ''
+                        }`} />
+                      </span>
+                    </GroupBookingDialog>
+                  ) : (
+                    <Button
+                      className={`relative overflow-hidden group transition-all duration-200 ease-in-out ${
+                        hoveredCard === option.id 
+                          ? 'bg-white text-[#253D7F]' 
+                          : 'bg-[#E95543] hover:bg-[#E95543]/90 text-white'
+                      }`}
+                      onClick={option.buttonAction}
+                    >
+                      <span className="relative z-10 flex items-center">
+                        Book Now
+                        <ChevronRight className={`ml-1 h-4 w-4 transition-transform duration-300 ${
+                          hoveredCard === option.id ? 'translate-x-1' : ''
+                        }`} />
+                      </span>
+                    </Button>
+                  )}
                 </CardFooter>
               </Card>
             </motion.div>

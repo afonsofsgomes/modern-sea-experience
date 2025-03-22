@@ -37,11 +37,11 @@ const PrivateCruise = () => {
   const privateCruiseFAQs = [
     {
       question: "How many people can join a private cruise?",
-      answer: "Our private cruises can accommodate up to 12 guests comfortably. For larger groups, please contact us in advance to discuss options for multiple vessels or alternative arrangements."
+      answer: "Our private cruises can accommodate up to 18 guests comfortably."
     },
     {
       question: "Can we customize the route for our private cruise?",
-      answer: "Yes! While we offer suggested north and south coast routes, we're happy to customize your journey based on your preferences, weather conditions, and time constraints. Just discuss your wishes with the captain before departure."
+      answer: "Yes! While we offer suggested north and south coast routes, we're happy to customize your journey based on your preferences, weather conditions, and time constraints. Please contact us in advance and let us know your wishes!"
     },
     {
       question: "Are food and drinks included on private cruises?",
@@ -49,7 +49,7 @@ const PrivateCruise = () => {
     },
     {
       question: "Can we stop for swimming during the cruise?",
-      answer: "Absolutely! Weather and sea conditions permitting, we can make stops at secluded bays for swimming and snorkeling. We provide snorkeling equipment for all guests at no extra charge."
+      answer: "Absolutely! Weather and sea conditions permitting, we can make stops at secluded bays for swimming and snorkeling. We can provide snorkeling equipment for guests, subject to availability."
     },
     {
       question: "What happens if the weather is bad on our booked date?",
@@ -105,7 +105,7 @@ const PrivateCruise = () => {
         {/* FAQ Section */}
         <FAQSection 
           title="Private Cruise FAQs"
-          description="Everything you need to know about our luxury private charters."
+          description="Everything you need to know about our private cruise."
           questions={privateCruiseFAQs}
         />
       </main>

@@ -1,7 +1,8 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Users, Clock, Compass, Wifi, GlassWater } from "lucide-react";
+import { Users, Clock, Compass, Beer, Ship } from "lucide-react";
+import GroupBookingDialog from "@/components/GroupBookingDialog";
 
 export const PrivateCruiseHero = () => {
   const scrollToBooking = () => {
@@ -34,7 +35,7 @@ export const PrivateCruiseHero = () => {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-2 md:mb-4 landscape:mt-24"
         >
-          PRIVATE CRUISE
+          Private Cruise
         </motion.h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,19 +63,19 @@ export const PrivateCruiseHero = () => {
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
               <Users className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm text-center">18 PAX</span>
+            <span className="text-xs md:text-sm text-center">18 pax</span>
           </div>
           <div className="flex flex-col items-center justify-center w-16 md:w-20">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
-              <Wifi className="h-5 w-5 md:h-6 md:w-6" />
+              <Compass className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm text-center">FREE WiFi</span>
+            <span className="text-xs md:text-sm text-center">South/North</span>
           </div>
           <div className="flex flex-col items-center justify-center w-16 md:w-20">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
-              <GlassWater className="h-5 w-5 md:h-6 md:w-6" />
+              <Beer className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm text-center">REFRESHMENTS</span>
+            <span className="text-xs md:text-sm text-center">Bar</span>
           </div>
         </motion.div>
         
@@ -88,7 +89,7 @@ export const PrivateCruiseHero = () => {
             className="bg-[#E95543] hover:bg-[#E95543]/90 text-white"
             onClick={scrollToBooking}
           >
-            BOOK NOW
+            Book Now
           </Button>
         </motion.div>
       </div>
