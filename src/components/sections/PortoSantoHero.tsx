@@ -1,7 +1,8 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, Wifi, Calendar } from "lucide-react";
+import { Clock, Users, Wifi, Calendar, Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const PortoSantoHero = () => {
   const scrollToBooking = () => {
@@ -18,12 +19,31 @@ export const PortoSantoHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" 
+          src="/lovable-uploads/pxo_visit_madeira.jpg" 
           alt="Porto Santo Golden Beach" 
-          className="w-full h-full object-cover object-center opacity-70"
+          className="w-full h-full object-cover object-center"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-blue-900/80" />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+      
+      {/* Photo Credits */}
+      <div className="absolute bottom-3 right-3 z-20">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button className="p-1 bg-black/30 rounded-full hover:bg-black/40 transition-colors">
+                <Info className="h-4 w-4 text-white/80" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="bg-black/80 text-white border-0 text-xs">
+              <p>Photo: <a href="https://visitmadeira.com/pt/onde-ir/porto-santo/porto-santo/" 
+                 target="_blank" rel="noopener noreferrer" 
+                 className="underline hover:text-blue-200">Visit Madeira</a>
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       
       {/* Hero Content */}
