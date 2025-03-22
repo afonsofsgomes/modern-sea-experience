@@ -8,31 +8,30 @@ const IMAGE_GALLERY = [
   {
     src: "https://extranet.seayou.pt/photos/Funchal.jpg",
     alt: "Funchal SeaBus Tour",
-    caption: "Scenic views of Funchal's coast",
-    width: 800,
-    height: 600
+    caption: "Scenic views of Funchal's coast"
   },
   {
     src: "https://extranet.seayou.pt/photos/Canical.jpg",
     alt: "Caniçal SeaBus Tour",
-    caption: "Exploring the eastern shores",
-    width: 800,
-    height: 600
+    caption: "Exploring the eastern shores"
   },
   {
     src: "https://extranet.seayou.pt/photos/Calheta.jpg",
     alt: "Calheta SeaBus Tour",
-    caption: "Beautiful Calheta coast",
-    width: 800,
-    height: 600
+    caption: "Beautiful Calheta coast"
   },
   {
     src: "https://extranet.seayou.pt/photos/boat1.jpg",
     alt: "SeaBus Experience",
-    caption: "Comfortable journey between destinations",
-    width: 800,
-    height: 600
+    caption: "Comfortable journey between destinations"
   }
+];
+
+// Route points data (no longer used for Mapbox but kept for reference)
+const ROUTE_POINTS = [
+  { city: "Funchal", coordinates: [-16.9108, 32.6471] as [number, number] },
+  { city: "Caniçal", coordinates: [-16.7352, 32.7411] as [number, number] },
+  { city: "Calheta", coordinates: [-17.1744, 32.7183] as [number, number] }
 ];
 
 export const SeaBusMap = () => {
@@ -70,38 +69,26 @@ export const SeaBusMap = () => {
           className="relative bg-blue-50 rounded-xl overflow-hidden shadow-lg mb-12"
         >
           <div className="relative h-[400px] md:h-[500px] overflow-hidden rounded-t-lg">
-            <picture>
-              <source 
-                srcSet="/lovable-uploads/59a41830-d3fd-4eb5-9899-3154e727fcdb.png" 
-                type="image/png" 
-                width="1200" 
-                height="800"
-              />
-              <img 
-                src="/lovable-uploads/59a41830-d3fd-4eb5-9899-3154e727fcdb.png" 
-                alt="SeaBus Routes Map"
-                className="w-full h-full object-cover"
-                width="1200" 
-                height="800"
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  // Fallback to a simple styled div if image fails to load
-                  target.parentElement?.classList.add('bg-blue-100');
-                  target.style.display = 'none';
-                  target.parentElement!.innerHTML = `
-                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                      <div class="bg-blue-600 text-white p-3 rounded-full mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                      </div>
-                      <h3 class="text-xl font-bold text-blue-900 mb-2">SeaBus Routes</h3>
-                      <p class="text-blue-700">Connecting Funchal, Caniçal, and Calheta</p>
+            <img 
+              src="https://extranet.seayou.pt/photos/madeira-map.jpg" 
+              alt="SeaBus Routes Map"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                // Fallback to a simple styled div if image fails to load
+                target.parentElement?.classList.add('bg-blue-100');
+                target.style.display = 'none';
+                target.parentElement!.innerHTML = `
+                  <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                    <div class="bg-blue-600 text-white p-3 rounded-full mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
                     </div>
-                  `;
-                }}
-              />
-            </picture>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">SeaBus Routes</h3>
+                    <p class="text-blue-700">Connecting Funchal, Caniçal, and Calheta</p>
+                  </div>
+                `;
+              }}
+            />
           </div>
 
           <div className="bg-white p-4 rounded-b-xl">
@@ -126,24 +113,16 @@ export const SeaBusMap = () => {
               className="relative group overflow-hidden rounded-lg shadow-md"
             >
               <div className="aspect-w-16 aspect-h-12">
-                <picture>
-                  <source
-                    srcSet={image.src.replace('.jpg', '.webp')}
-                    type="image/webp"
-                  />
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    loading="lazy"
-                    width={image.width}
-                    height={image.height}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-                    }}
-                  />
-                </picture>
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                  }}
+                />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">

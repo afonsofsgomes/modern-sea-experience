@@ -33,25 +33,13 @@ export const OptimizedImage = ({
       ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
       : null;
 
-  // Determine dimensions with fallbacks
-  const imgWidth = width || 800;
-  const imgHeight = height || Math.round(imgWidth * 0.75); // 4:3 aspect ratio fallback
-
   useEffect(() => {
     if (priority) {
       // Preload priority images
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = webpSrc || src;
-      link.type = webpSrc ? 'image/webp' : undefined;
-      document.head.appendChild(link);
-      
-      return () => {
-        document.head.removeChild(link);
-      };
+      const img = new Image();
+      img.src = src;
     }
-  }, [priority, src, webpSrc]);
+  }, [priority, src]);
 
   // Fallback logic for when original image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -67,31 +55,27 @@ export const OptimizedImage = ({
   return (
     <div className={cn("overflow-hidden", className)} style={{ width, height }}>
       {priority ? (
-        // For priority images, use preload and eager loading
-        <picture>
-          {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
-          <img
-            src={src}
-            alt={alt}
-            width={imgWidth}
-            height={imgHeight}
-            className={cn("w-full h-full object-cover transition-opacity duration-300", 
-              isLoaded ? "opacity-100" : "opacity-0")}
-            onLoad={() => setIsLoaded(true)}
-            onError={handleError}
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+        // For priority images, don't use picture element to avoid delays
+        <img
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className={cn("w-full h-full object-cover transition-opacity duration-300", 
+            isLoaded ? "opacity-100" : "opacity-0")}
+          onLoad={() => setIsLoaded(true)}
+          onError={handleError}
+          fetchPriority="high"
+          decoding="async"
+        />
       ) : (
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
             src={src}
             alt={alt}
-            width={imgWidth}
-            height={imgHeight}
+            width={width}
+            height={height}
             loading={loading}
             sizes={sizes}
             className={cn("w-full h-full object-cover transition-opacity duration-300", 

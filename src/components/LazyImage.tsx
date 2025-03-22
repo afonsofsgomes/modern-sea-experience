@@ -5,29 +5,18 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   placeholderSrc?: string;
   alt: string;
-  width?: number;
-  height?: number;
 }
 
 export const LazyImage = ({
   src,
   placeholderSrc = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect width="400" height="300" fill="%23cccccc" /%3E%3C/svg%3E',
   alt,
-  width = 800,
-  height = 600,
   className,
   ...props
 }: LazyImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const imgRef = useRef<HTMLDivElement>(null);
-
-  // Generate WebP version of the source if it's jpg or png
-  const hasExtension = src.includes('.');
-  const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
-  const webpSrc = hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') 
-    ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
-    : null;
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     // Using Intersection Observer API for better performance
@@ -60,7 +49,7 @@ export const LazyImage = ({
   return (
     <div 
       className="relative overflow-hidden" 
-      style={{ background: '#f5f5f5', width, height }} 
+      style={{ background: '#f5f5f5' }} 
       ref={imgRef}
     >
       {/* Placeholder image shown until the main image loads */}
@@ -70,27 +59,20 @@ export const LazyImage = ({
           alt=""
           className={className}
           style={{ filter: 'blur(5px)' }}
-          width={width}
-          height={height}
+          {...props}
         />
       )}
       
       {/* Main image, only loaded when in viewport */}
       {isInView && (
-        <picture>
-          {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
-          <img
-            src={src}
-            alt={alt}
-            width={width}
-            height={height}
-            className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-            onLoad={handleLoad}
-            decoding="async"
-            loading="lazy"
-            {...props}
-          />
-        </picture>
+        <img
+          src={src}
+          alt={alt}
+          className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          onLoad={handleLoad}
+          decoding="async"
+          {...props}
+        />
       )}
     </div>
   );
