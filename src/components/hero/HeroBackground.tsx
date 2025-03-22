@@ -21,7 +21,7 @@ export const HeroBackground = ({ imageUrl }: HeroBackgroundProps) => {
           height="1080"
           loading="eager"
         />
-      </div>
+      </picture>
       <div className="absolute inset-0 bg-gradient-to-b from-[#253D7F]/40 to-[#253D7F]/90" />
     </div>
   );
