@@ -1,6 +1,21 @@
 
 import { BokunWidget } from "@/components/BokunWidget";
-import { ArrowRight, CalendarDays, Car, Clock, Compass, Fish, MapPin, Sailboat, Sunrise, Utensils } from "lucide-react";
+import { 
+  ArrowRight, 
+  CalendarDays, 
+  Car, 
+  Clock, 
+  Compass, 
+  Fish, 
+  MapPin, 
+  Sailboat, 
+  Sunrise, 
+  Utensils, 
+  Ship,
+  Umbrella,
+  Beach,
+  Map
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -43,7 +58,7 @@ export const PortoSantoBooking = () => {
           {/* Card 1: Basic Experience */}
           <Card className="bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
             <div className="h-48 bg-gradient-to-r from-blue-500 to-blue-700 relative overflow-hidden">
-              <Sailboat className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
+              <Ship className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="absolute bottom-0 left-0 w-full p-6">
                 <h3 className="text-2xl font-bold text-white">Basic Experience</h3>
@@ -67,11 +82,11 @@ export const PortoSantoBooking = () => {
                   <span className="text-gray-700">Self-guided exploration of Porto Santo</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Sunrise className="h-5 w-5 text-blue-700 mt-0.5 flex-shrink-0" />
+                  <Beach className="h-5 w-5 text-blue-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Full day on the golden beach</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-blue-700 mt-0.5 flex-shrink-0" />
+                  <Ship className="h-5 w-5 text-blue-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Round-trip boat transportation</span>
                 </div>
               </div>
@@ -88,7 +103,7 @@ export const PortoSantoBooking = () => {
           {/* Card 2: Half-Day Tour */}
           <Card className="bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
             <div className="h-48 bg-gradient-to-r from-green-500 to-green-700 relative overflow-hidden">
-              <Car className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
+              <Map className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="absolute bottom-0 left-0 w-full p-6">
                 <h3 className="text-2xl font-bold text-white">Half-Day Tour</h3>
@@ -109,14 +124,14 @@ export const PortoSantoBooking = () => {
               <div className="space-y-3 mb-6">
                 <div className="flex items-start gap-3">
                   <Car className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Morning guided island tour with local history</span>
+                  <span className="text-gray-700">Guided island tour with local history</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Compass className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
+                  <Beach className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Free afternoon for beach & exploration</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
+                  <Ship className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Round-trip boat transportation</span>
                 </div>
               </div>
@@ -158,7 +173,7 @@ export const PortoSantoBooking = () => {
               <div className="space-y-3 mb-6">
                 <div className="flex items-start gap-3">
                   <Car className="h-5 w-5 text-purple-700 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Morning guided island tour with pirate stories</span>
+                  <span className="text-gray-700">Guided island tour with pirate stories</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <Utensils className="h-5 w-5 text-purple-700 mt-0.5 flex-shrink-0" />
@@ -169,7 +184,7 @@ export const PortoSantoBooking = () => {
                   <span className="text-gray-700">Afternoon kayaking near pristine caves</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-purple-700 mt-0.5 flex-shrink-0" />
+                  <Ship className="h-5 w-5 text-purple-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Round-trip boat transportation</span>
                 </div>
               </div>
