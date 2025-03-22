@@ -8,6 +8,7 @@ import {
   ScheduleDisplay,
   SeaBusMapImage
 } from "@/components/sections";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -28,6 +29,18 @@ const SeaBus = () => {
     {
       question: "Is the SeaBus service wheelchair accessible?",
       answer: "Yes, our SeaBus vessels are designed to accommodate wheelchair users with accessible facilities and boarding assistance."
+    },
+    {
+      question: "Can I bring luggage on the SeaBus?",
+      answer: "Yes, passengers are allowed to bring a reasonable amount of luggage. There's dedicated storage space on board, but we recommend traveling light for comfort."
+    },
+    {
+      question: "Do I need to book tickets in advance?",
+      answer: "While you can purchase tickets at our terminals, we strongly recommend booking in advance, especially during peak tourist season, to guarantee your seat."
+    },
+    {
+      question: "Are pets allowed on the SeaBus?",
+      answer: "Small pets in appropriate carriers are permitted on board. Service animals are always welcome. Please inform us in advance if you'll be traveling with a pet."
     }
   ];
 
@@ -72,7 +85,8 @@ const SeaBus = () => {
         endLocation="Caniçal"
         availability="https://schema.org/InStock"
       />
-      <FAQSchema questions={faqQuestions} />
+      {/* We no longer need this since we're using the FAQSection component which includes FAQSchema */}
+      {/* <FAQSchema questions={faqQuestions} /> */}
       <StructuredData data={breadcrumbSchema} />
       
       <Navbar />
@@ -90,6 +104,13 @@ const SeaBus = () => {
         <ScheduleDisplay />
         <SeaBusFeatures />
         <SeaBusBooking />
+        
+        {/* FAQ Section */}
+        <FAQSection 
+          title="SeaBus Service FAQs"
+          description="Find answers to common questions about our SeaBus marine connections."
+          questions={faqQuestions}
+        />
       </main>
       <Footer />
     </div>

@@ -8,6 +8,7 @@ import {
   PrivateCruiseBooking,
   PrivateCruiseInfo
 } from "@/components/sections";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -31,6 +32,34 @@ const PrivateCruise = () => {
       }
     ]
   };
+
+  // FAQ data for Private Cruise
+  const privateCruiseFAQs = [
+    {
+      question: "How many people can join a private cruise?",
+      answer: "Our private cruises can accommodate up to 12 guests comfortably. For larger groups, please contact us in advance to discuss options for multiple vessels or alternative arrangements."
+    },
+    {
+      question: "Can we customize the route for our private cruise?",
+      answer: "Yes! While we offer suggested north and south coast routes, we're happy to customize your journey based on your preferences, weather conditions, and time constraints. Just discuss your wishes with the captain before departure."
+    },
+    {
+      question: "Are food and drinks included on private cruises?",
+      answer: "We provide complimentary water, soft drinks, and local Madeira wine on all private cruises. Light snacks are also included. Full meal catering can be arranged for an additional fee with advance notice."
+    },
+    {
+      question: "Can we stop for swimming during the cruise?",
+      answer: "Absolutely! Weather and sea conditions permitting, we can make stops at secluded bays for swimming and snorkeling. We provide snorkeling equipment for all guests at no extra charge."
+    },
+    {
+      question: "What happens if the weather is bad on our booked date?",
+      answer: "Your safety is our priority. If weather conditions are unsuitable for sailing, we'll contact you to reschedule for another day during your stay or provide a full refund if rescheduling isn't possible."
+    },
+    {
+      question: "Is the private cruise suitable for children and elderly passengers?",
+      answer: "Yes, our cruises are designed to be enjoyed by guests of all ages. Our crew is experienced in assisting passengers with different mobility needs, and safety measures are in place for children, including appropriately sized life jackets."
+    }
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -72,6 +101,13 @@ const PrivateCruise = () => {
         <PrivateCruiseFeatures />
         <PrivateCruiseInfo />
         <PrivateCruiseBooking />
+        
+        {/* FAQ Section */}
+        <FAQSection 
+          title="Private Cruise FAQs"
+          description="Everything you need to know about our luxury private charters."
+          questions={privateCruiseFAQs}
+        />
       </main>
       <Footer />
     </div>

@@ -7,6 +7,7 @@ import {
   PortoSantoHighlights,
   PortoSantoBooking
 } from "@/components/sections";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -30,6 +31,34 @@ const PortoSanto = () => {
       }
     ]
   };
+
+  // FAQ data for Porto Santo
+  const portoSantoFAQs = [
+    {
+      question: "How long is the boat trip to Porto Santo?",
+      answer: "The boat trip from Caniçal to Porto Santo takes approximately 2 hours each way. This time can vary slightly depending on sea conditions, but you'll be able to enjoy the scenic views throughout the journey."
+    },
+    {
+      question: "What should I bring for a day trip to Porto Santo?",
+      answer: "We recommend bringing sunscreen, a hat, swimwear, a towel, water, and a light jacket or windbreaker for the boat journey. You may also want to bring some cash for food or souvenirs, although most places accept credit cards."
+    },
+    {
+      question: "Are food and drinks included in the Porto Santo experiences?",
+      answer: "The basic experience does not include food or drinks. The half-day tour includes light refreshments during the guided portion, while the full-day tour (coming soon) will include a traditional Porto Santo lunch. You're welcome to bring your own snacks and water for all experiences."
+    },
+    {
+      question: "Is the golden beach of Porto Santo suitable for children?",
+      answer: "Yes! Porto Santo's beach is perfect for families with children. The sand slopes gently into the sea, creating shallow waters near the shore, and the water is typically calm and clear, making it ideal for young swimmers."
+    },
+    {
+      question: "What makes Porto Santo's sand special?",
+      answer: "Porto Santo's sand is renowned for its therapeutic properties. Rich in minerals like calcium and magnesium, the sand is believed to help with various ailments, particularly rheumatic and orthopedic conditions. Many visitors enjoy sand therapy by burying parts of their body in the warm golden sand."
+    },
+    {
+      question: "Can I explore the island on my own during the free time?",
+      answer: "Absolutely! During your free time, you can explore the island at your leisure. There are taxis and car rental services available if you wish to venture further from the main beach area."
+    }
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -71,6 +100,13 @@ const PortoSanto = () => {
         
         <PortoSantoHighlights />
         <PortoSantoBooking />
+        
+        {/* FAQ Section */}
+        <FAQSection 
+          title="Porto Santo Experience FAQs"
+          description="Common questions about our Porto Santo day trips and experiences."
+          questions={portoSantoFAQs}
+        />
       </main>
       <Footer />
     </div>

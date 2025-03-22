@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { DesertasHero } from "@/components/sections/DesertasHero";
 import { DesertasAbout } from "@/components/sections/DesertasAbout";
 import { DesertasBooking } from "@/components/sections/DesertasBooking";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -27,6 +28,34 @@ const Desertas = () => {
       }
     ]
   };
+
+  // FAQ data for Desertas
+  const desertasFAQs = [
+    {
+      question: "What wildlife might we see on the Desertas Islands tour?",
+      answer: "The Desertas Islands are home to several unique species, including the endangered Desertas large wolf spider, the rare monk seal, various seabirds like Cory's shearwaters and Bulwer's petrels, and many endemic plant species. Marine life like dolphins and whales may also be spotted during the boat journey."
+    },
+    {
+      question: "Is there any walking or hiking involved in the Desertas tour?",
+      answer: "Yes, the tour includes a guided walk on Deserta Grande, the main island. The terrain can be uneven, so comfortable walking shoes are recommended. The walk is moderate in difficulty but can be adjusted based on group capabilities."
+    },
+    {
+      question: "Can we swim at the Desertas Islands?",
+      answer: "Depending on sea conditions and time constraints, there may be opportunities for swimming in the crystal-clear waters around the islands. This is subject to the guide's discretion and weather conditions on the day."
+    },
+    {
+      question: "Are meals included in the Desertas Islands tour?",
+      answer: "Yes, a light lunch is included in your Desertas Islands adventure. We typically serve local specialties that showcase Madeiran cuisine. Please inform us of any dietary restrictions when booking."
+    },
+    {
+      question: "What should I bring for the Desertas Islands tour?",
+      answer: "We recommend bringing sunscreen, a hat, sunglasses, a light jacket or windbreaker, comfortable walking shoes, a camera, binoculars if you have them for wildlife spotting, and a small backpack. Water bottles will be provided."
+    },
+    {
+      question: "Is the Desertas Islands tour suitable for children?",
+      answer: "The tour is suitable for children ages 8 and up who are comfortable on boats. Keep in mind that the journey involves a few hours at sea and limited facilities on the islands. For younger children, we recommend our shorter coastal cruises instead."
+    }
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -66,6 +95,13 @@ const Desertas = () => {
         
         <DesertasAbout />
         <DesertasBooking />
+        
+        {/* FAQ Section */}
+        <FAQSection 
+          title="Desertas Islands Tour FAQs"
+          description="Essential information about our wildlife and nature adventures to the Desertas Islands."
+          questions={desertasFAQs}
+        />
       </main>
       <Footer />
     </div>
