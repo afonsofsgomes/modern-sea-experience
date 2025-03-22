@@ -13,7 +13,6 @@ import {
   Utensils, 
   Ship,
   Umbrella,
-  Beach,
   Map
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -82,7 +81,7 @@ export const PortoSantoBooking = () => {
                   <span className="text-gray-700">Self-guided exploration of Porto Santo</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Beach className="h-5 w-5 text-blue-700 mt-0.5 flex-shrink-0" />
+                  <Umbrella className="h-5 w-5 text-blue-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Full day on the golden beach</span>
                 </div>
                 <div className="flex items-start gap-3">
@@ -127,7 +126,7 @@ export const PortoSantoBooking = () => {
                   <span className="text-gray-700">Guided island tour with local history</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Beach className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
+                  <Umbrella className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700">Free afternoon for beach & exploration</span>
                 </div>
                 <div className="flex items-start gap-3">
