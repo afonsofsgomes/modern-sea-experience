@@ -20,7 +20,7 @@ const SeaBus = () => {
     },
     {
       question: "How long does the SeaBus journey take?",
-      answer: "Journey times vary by route. Funchal to Caniçal takes approximately 1 hour, while Funchal to Calheta takes about 1 hour and 15 minutes."
+      answer: "Journey times vary by route. Funchal to Calheta or Caniçal takes approximately 1 hour, while Calheta to Caniçal takes about 2 hours."
     },
     {
       question: "Are there refreshments available on board?",
@@ -28,7 +28,7 @@ const SeaBus = () => {
     },
     {
       question: "Is the SeaBus service wheelchair accessible?",
-      answer: "Yes, our SeaBus vessels are designed to accommodate wheelchair users with accessible facilities and boarding assistance."
+      answer: "Yes, our SeaBus vessels are designed to accommodate wheelchair users with accessible facilities and boarding assistance. Please note that the bathroom on the boat is not wheelchair accessible, therefore wheelchair users should use the restrooms before entering the boat."
     },
     {
       question: "Can I bring luggage on the SeaBus?",
@@ -40,7 +40,7 @@ const SeaBus = () => {
     },
     {
       question: "Are pets allowed on the SeaBus?",
-      answer: "Small pets in appropriate carriers are permitted on board. Service animals are always welcome. Please inform us in advance if you'll be traveling with a pet."
+      answer: "As much as we love pets, we do not allow them on the boat, unless it's a service animal, properly trained. However, on our private tours, you can bring your friend!"
     }
   ];
 
@@ -85,8 +85,6 @@ const SeaBus = () => {
         endLocation="Caniçal"
         availability="https://schema.org/InStock"
       />
-      {/* We no longer need this since we're using the FAQSection component which includes FAQSchema */}
-      {/* <FAQSchema questions={faqQuestions} /> */}
       <StructuredData data={breadcrumbSchema} />
       
       <Navbar />
@@ -108,7 +106,7 @@ const SeaBus = () => {
         {/* FAQ Section */}
         <FAQSection 
           title="SeaBus Service FAQs"
-          description="Find answers to common questions about our SeaBus marine connections."
+          description="Find answers to common questions about our SeaBus connections."
           questions={faqQuestions}
         />
       </main>
