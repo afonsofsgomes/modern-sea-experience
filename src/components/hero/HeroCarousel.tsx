@@ -56,7 +56,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           loop: true,
           dragFree: false,
           containScroll: "trimSnaps",
-          duration: 25, // Controls the animation speed
+          duration: 500, // Increased duration for smoother animation (in ms)
         }}
         className="w-full"
         setApi={(api) => {
@@ -68,7 +68,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           {destinations.map((destination, index) => (
             <CarouselItem 
               key={destination.name} 
-              className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3"
+              className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3 transition-transform duration-500" // Added transition classes
             >
               <DestinationCard 
                 destination={destination} 

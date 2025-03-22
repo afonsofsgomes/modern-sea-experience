@@ -8,7 +8,7 @@ interface SeaBusCardContentProps {
 export const SeaBusCardContent = ({ fallbackImage }: SeaBusCardContentProps) => {
   return (
     <div className="flex h-full">
-      {/* Cities arranged horizontally instead of vertically */}
+      {/* Cities arranged vertically in three columns */}
       <LocationImage 
         imageSrc="https://extranet.seayou.pt/photos/Calheta.jpg" 
         fallbackSrc={fallbackImage} 
@@ -47,7 +47,7 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
         src={imageSrc}
         fallbackSrc={fallbackSrc}
         alt={cityName}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-center scale-110" /* Added scale-110 to zoom in slightly */
         onLoad={() => {
           // Force the browser to render the image immediately
           window.dispatchEvent(new Event('resize'));

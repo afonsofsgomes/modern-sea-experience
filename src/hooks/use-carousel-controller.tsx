@@ -36,8 +36,12 @@ export const useCarouselController = ({ itemsCount }: UseCarouselControllerProps
     
     const interval = setInterval(() => {
       if (apiRef.current) {
-        apiRef.current.scrollNext();
-        setCurrentIndex((prev) => (prev + 1) % itemsCount);
+        try {
+          apiRef.current.scrollNext({ animation: true });
+          setCurrentIndex((prev) => (prev + 1) % itemsCount);
+        } catch (error) {
+          console.error("Error during auto-scroll:", error);
+        }
       }
     }, 6000); // Auto-scroll every 6 seconds for a slow pace
     
@@ -86,20 +90,16 @@ export const useCarouselController = ({ itemsCount }: UseCarouselControllerProps
   useEffect(() => {
     const handleResize = () => {
       if (apiRef.current) {
-        apiRef.current.reInit();
+        try {
+          apiRef.current.reInit();
+        } catch (error) {
+          console.error("Error reinitializing carousel:", error);
+        }
       }
     };
     
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Preload all images initially for better UX
-  useEffect(() => {
-    // This is just a placeholder to be implemented in the component
-    const preloadAllImages = () => {};
-    
-    preloadAllImages();
   }, []);
 
   return {
