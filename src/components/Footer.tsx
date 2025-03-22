@@ -5,7 +5,6 @@ import { FooterServices } from "./footer/FooterServices";
 import { FooterCompany } from "./footer/FooterCompany";
 import { FooterContact } from "./footer/FooterContact";
 import { FooterCopyright } from "./footer/FooterCopyright";
-import { WhatsAppWidget } from "./WhatsAppWidget";
 
 export const Footer = () => {
   return (
@@ -16,9 +15,6 @@ export const Footer = () => {
           <FooterServices />
           <FooterCompany />
           <FooterContact />
-        </div>
-        <div className="mt-8 flex justify-center">
-          <WhatsAppWidget whatsappLink="https://api.whatsapp.com/message/POVZQIDMQYJGD1" />
         </div>
         <FooterCopyright />
       </div>

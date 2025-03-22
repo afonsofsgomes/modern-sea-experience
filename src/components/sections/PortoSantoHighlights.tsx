@@ -20,7 +20,7 @@ export const PortoSantoHighlights = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-60 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80" 
+                src="https://extranet.seayou.pt/photos/pxo.jpg" 
                 alt="Golden Beach" 
                 className="w-full h-full object-cover"
               />
@@ -35,7 +35,7 @@ export const PortoSantoHighlights = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-60 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1552353617-f0bc93b0fddf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1228&q=80" 
+                src="https://extranet.seayou.pt/photos/pxo-activities.jpg" 
                 alt="Water Sports" 
                 className="w-full h-full object-cover"
               />
@@ -43,6 +43,7 @@ export const PortoSantoHighlights = () => {
             <div className="p-6">
               <h3 className="text-xl font-medium mb-2 text-blue-900">Water Sports Paradise</h3>
               <p className="text-muted-foreground">Perfect conditions for windsurfing, kitesurfing, and paddleboarding in crystal clear waters.</p>
+              <p className="text-xs text-gray-500 mt-2">Credit: Visit Madeira</p>
             </div>
           </div>
           
@@ -50,7 +51,7 @@ export const PortoSantoHighlights = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-60 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1543836282-501d561b9ab7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                src="https://extranet.seayou.pt/photos/porto-santo-golfe.jpg" 
                 alt="Golf Course" 
                 className="w-full h-full object-cover"
               />

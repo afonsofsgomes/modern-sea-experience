@@ -2,10 +2,11 @@
 import React from "react";
 import { Instagram, Facebook, Twitter, Youtube } from "lucide-react";
 import { TikTokIcon } from "../icons/TikTokIcon";
+import { WhatsAppWidget } from "../WhatsAppWidget";
 
 export const FooterSocialLinks: React.FC = () => {
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-4 items-center">
       <a
         href="https://www.instagram.com/seayou.madeira"
         target="_blank"
@@ -51,6 +52,7 @@ export const FooterSocialLinks: React.FC = () => {
       >
         <Youtube className="h-5 w-5" />
       </a>
+      <WhatsAppWidget whatsappLink="https://api.whatsapp.com/message/POVZQIDMQYJGD1" />
     </div>
   );
 };
