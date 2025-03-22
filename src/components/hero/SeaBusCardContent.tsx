@@ -43,7 +43,6 @@ interface LocationImageProps {
 }
 
 const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationImageProps) => {
-  // Using border-b (bottom) instead of border-r (right) for vertical layout
   return (
     <div className={`w-full h-1/3 relative overflow-hidden ${hasBorder ? 'border-b border-white/10' : ''}`}>
       <ImageWithFallback 

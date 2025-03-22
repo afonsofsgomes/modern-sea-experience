@@ -22,7 +22,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const interactionTimerRef = useRef<number | null>(null);
-  const [visibleItems, setVisibleItems] = useState<number[]>([0, 1, 2]);
+  const [visibleItems, setVisibleItems] = useState<number[]>([0, 1, 2, 3, 4]);
   
   // Update visible items when currentIndex changes
   useEffect(() => {
@@ -98,8 +98,12 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
   // Handle carousel slide change
   const handleSlideChange = useCallback(() => {
     if (apiRef.current && typeof apiRef.current.selectedScrollSnap === 'function') {
-      const index = apiRef.current.selectedScrollSnap();
-      setCurrentIndex(index);
+      try {
+        const index = apiRef.current.selectedScrollSnap();
+        setCurrentIndex(index);
+      } catch (error) {
+        console.error("Error getting selected scroll snap:", error);
+      }
     }
     handleUserInteraction();
   }, [handleUserInteraction]);
@@ -129,14 +133,15 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         opts={{
           align: "start",
           loop: true,
+          dragFree: false,
+          containScroll: "trimSnaps",
+          duration: 25, // Add smooth transition animation
         }}
         className="w-full"
         setApi={(api) => {
           apiRef.current = api;
         }}
-        onSelect={() => {
-          handleSlideChange();
-        }}
+        onSelect={handleSlideChange}
       >
         <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
           {destinations.map((destination, index) => (
