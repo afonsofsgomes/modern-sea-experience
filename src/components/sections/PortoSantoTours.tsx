@@ -24,10 +24,10 @@ export const PortoSantoTours = () => {
               Porto Santo Golden Island
             </h2>
             <p className="text-base text-muted-foreground mb-6">
-              Experience the therapeutic golden sands of Porto Santo with our dedicated ferry service. Our comfortable vessels make the journey part of your vacation.
+              Experience the therapeutic golden sands of Porto Santo with our 1-Day Experience. Our comfortable vessels make the journey part of your adventure.
             </p>
             <p className="text-base text-muted-foreground mb-8">
-              Choose from day trips with guided tours or transport-only options for those who prefer to explore independently. Special packages available for overnight stays.
+              Choose from day trips with guided tours or self-guided options for those who prefer to explore independently. Enjoy a full day of relaxation and exploration.
             </p>
             <div className="flex flex-wrap gap-4">
               <motion.div 
@@ -43,8 +43,8 @@ export const PortoSantoTours = () => {
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <h3 className="text-3xl font-medium mb-2">2h</h3>
-                <p className="text-muted-foreground">Round-Sea Trip Time</p>
+                <h3 className="text-3xl font-medium mb-2">1h</h3>
+                <p className="text-muted-foreground">Connection Time</p>
               </motion.div>
               <motion.div 
                 className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"

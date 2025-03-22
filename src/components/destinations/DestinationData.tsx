@@ -157,9 +157,9 @@ export const destinationData: DestinationType[] = [
     link: "/porto-santo",
     buttonText: "Book Porto Santo 1-Day Experience",
     stats: [
-      { value: "1h", label: "Sea Trip" },
+      { value: "1h", label: "Connection Time" },
       { value: "12", label: "Max Guests" },
-      { value: "9:00", label: "Departure Time" }
+      { value: "Wed-Fri", label: "Departures" }
     ],
     experience: "Porto Santo Golden Island",
     experienceDesc: "Experience the therapeutic golden sands of Porto Santo in one day.",

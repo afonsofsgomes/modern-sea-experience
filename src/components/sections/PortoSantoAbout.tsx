@@ -12,10 +12,10 @@ export const PortoSantoAbout = () => {
               Porto Santo Island Tour
             </h2>
             <p className="text-base text-muted-foreground mb-6">
-              Visit the golden sands of Porto Santo Island with our comfortable sea transportation. Enjoy a day trip to explore this beautiful island just a short journey from Madeira.
+              Visit the golden sands of Porto Santo Island with our exclusive 1-Day Experience. Enjoy a perfect day trip to explore this beautiful island just a short journey from Madeira.
             </p>
             <p className="text-base text-muted-foreground mb-8">
-              Our Porto Santo tours include transportation, guided options, and flexible schedules to make your island hopping experience memorable and hassle-free.
+              Our Porto Santo experiences include guided options and flexible schedules to make your island hopping adventure memorable and hassle-free.
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
@@ -23,23 +23,23 @@ export const PortoSantoAbout = () => {
                 <p className="text-muted-foreground">Golden Beach</p>
               </div>
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
-                <h3 className="text-3xl font-medium mb-2 text-blue-900">2h</h3>
-                <p className="text-muted-foreground">Round-Sea Trip Time</p>
+                <h3 className="text-3xl font-medium mb-2 text-blue-900">1h</h3>
+                <p className="text-muted-foreground">Connection Time</p>
               </div>
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
-                <h3 className="text-3xl font-medium mb-2 text-blue-900">12</h3>
-                <p className="text-muted-foreground">Max Passengers</p>
+                <h3 className="text-3xl font-medium mb-2 text-blue-900">Wed-Fri</h3>
+                <p className="text-muted-foreground">09:00 - 17:00</p>
               </div>
             </div>
           </div>
           <div className="relative">
             <div className="aspect-square rounded-md overflow-hidden shadow-lg">
-              <img alt="Porto Santo Island" className="w-full h-full object-cover" src="/lovable-uploads/c34d4041-df25-48dd-93ee-62f9d51a080d.jpg" />
+              <img alt="Porto Santo Island" className="w-full h-full object-cover" src="https://extranet.seayou.pt/photos/pxo2.jpg" />
             </div>
             <div className="absolute -bottom-8 -left-8 w-2/3 aspect-video bg-white/80 backdrop-blur-sm p-6 rounded-md shadow-lg">
               <h3 className="font-display text-lg mb-2 text-blue-900">Porto Santo Experience</h3>
               <p className="text-sm text-muted-foreground">
-                Therapeutic sands, crystal waters, and tranquil atmosphere just a boat ride away.
+                Therapeutic sands, crystal waters, and tranquil atmosphere just a short journey away.
               </p>
             </div>
           </div>

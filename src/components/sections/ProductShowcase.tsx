@@ -38,6 +38,14 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
   const displayStat2 = title === "SeaBus Connections" ? { value: "18", label: "Passengers" } : stat2;
   const displayStat3 = title === "SeaBus Connections" ? { value: "Daily*", label: "Departures" } : stat3;
   
+  // Customize stats for Porto Santo
+  if (title === "Porto Santo") {
+    displayStat1.value = "1h";
+    displayStat1.label = "Connection Time";
+    displayStat3.value = "Wed-Fri";
+    displayStat3.label = "Departures";
+  }
+  
   // Custom message for Limited Availability section
   const limitedAvailabilityMessage = title === "SeaBus Connections" 
     ? "Enhance your SeaBus journey by combining it with hiking trails, local tours, or restaurant visits at each destination."
