@@ -85,13 +85,13 @@ export const PortoSantoBooking = () => {
             </CardContent>
           </Card>
           
-          {/* Card 2: Half-Day Guided */}
+          {/* Card 2: Half-Day Tour */}
           <Card className="bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
             <div className="h-48 bg-gradient-to-r from-green-500 to-green-700 relative overflow-hidden">
               <Car className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="absolute bottom-0 left-0 w-full p-6">
-                <h3 className="text-2xl font-bold text-white">Half-Day Guided</h3>
+                <h3 className="text-2xl font-bold text-white">Half-Day Tour</h3>
                 <p className="text-white/90 text-sm mt-1">Morning tour + afternoon leisure</p>
               </div>
             </div>
@@ -100,7 +100,7 @@ export const PortoSantoBooking = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Popular</span>
                 </div>
-                <h4 className="text-lg font-semibold mb-3">1-Day Experience + Half-Day Guided Tour</h4>
+                <h4 className="text-lg font-semibold mb-3">1-Day Experience + Half-Day Tour</h4>
                 <p className="text-gray-600 mb-4">
                   Morning guided tour with stories of Porto Santo's history, followed by free time to enjoy the beaches.
                 </p>
@@ -130,7 +130,7 @@ export const PortoSantoBooking = () => {
             </CardContent>
           </Card>
           
-          {/* Card 3: Full-Day Guided (Coming Soon) */}
+          {/* Card 3: Full-Day Tour (Coming Soon) */}
           <Card className="bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 relative">
             <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px] z-10 flex flex-col items-center justify-center">
               <span className="bg-red-500 text-white font-bold py-2 px-6 rounded-full text-sm mb-4">Coming Soon</span>
@@ -140,7 +140,7 @@ export const PortoSantoBooking = () => {
               <Fish className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="absolute bottom-0 left-0 w-full p-6">
-                <h3 className="text-2xl font-bold text-white">Full-Day Guided</h3>
+                <h3 className="text-2xl font-bold text-white">Full-Day Tour</h3>
                 <p className="text-white/90 text-sm mt-1">Complete experience with activities</p>
               </div>
             </div>
@@ -149,7 +149,7 @@ export const PortoSantoBooking = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">Premium</span>
                 </div>
-                <h4 className="text-lg font-semibold mb-3">1-Day Experience + Full-Day Guided Tour</h4>
+                <h4 className="text-lg font-semibold mb-3">1-Day Experience + Full-Day Tour</h4>
                 <p className="text-gray-600 mb-4">
                   Complete island experience with guided tour, local lunch, and water activities.
                 </p>
