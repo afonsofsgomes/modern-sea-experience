@@ -47,6 +47,11 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
                 loading="lazy"
                 width="400"
                 height="300"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  console.log(`Failed to load image: ${target.src}, using fallback`);
+                  target.src = fallbackImage;
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </>

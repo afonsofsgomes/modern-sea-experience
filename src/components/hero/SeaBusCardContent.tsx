@@ -1,5 +1,5 @@
 
-import { ImageWithFallback } from "@/components/ImageWithFallback";
+import { useState } from "react";
 
 interface SeaBusCardContentProps {
   fallbackImage: string;
@@ -43,16 +43,27 @@ interface LocationImageProps {
 }
 
 const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationImageProps) => {
+  const [imgSrc, setImgSrc] = useState(imageSrc);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <div className={`w-1/3 h-full relative overflow-hidden ${hasBorder ? 'border-r border-white/10' : ''}`}>
-      <ImageWithFallback 
-        src={imageSrc}
-        fallbackSrc={fallbackSrc}
+      <img 
+        src={imgSrc}
         alt={cityName}
-        className="w-full h-full object-cover object-center scale-125"
+        className={`w-full h-full object-cover object-center scale-125 transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         width="200"
         height="150"
+        loading="eager"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => {
+          console.log(`Failed to load image: ${imgSrc}, using fallback`);
+          setImgSrc(fallbackSrc);
+        }}
       />
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+      )}
       <div className="absolute inset-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 py-3">
         <p className="text-white text-[8px] sm:text-xs font-medium text-center truncate drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{cityName}</p>
