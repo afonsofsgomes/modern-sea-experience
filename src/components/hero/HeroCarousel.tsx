@@ -64,7 +64,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     return () => clearTimeout(timer);
   };
 
-  // Less demanding animation variants
+  // Fixed animation variants with properly typed repeatType
   const buttonAnimation = {
     animate: { 
       opacity: [0.7, 1, 0.7],
@@ -72,7 +72,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         duration: 3,
         times: [0, 0.5, 1],
         repeat: Infinity,
-        repeatType: "loop"
+        repeatType: "loop" as const // Explicitly typed as "loop"
       }
     }
   };
@@ -109,7 +109,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </CarouselContent>
         
-        {/* Simplified animation for navigation buttons */}
+        {/* Simplified animation for navigation buttons with fixed type */}
         <motion.div
           variants={buttonAnimation}
           animate="animate"
