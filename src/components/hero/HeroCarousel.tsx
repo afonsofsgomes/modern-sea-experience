@@ -20,33 +20,61 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
   const isMobile = useIsMobile();
   const apiRef = useRef<any>(null);
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
   
-  // Auto-scroll functionality
+  // Auto-scroll functionality - Optimized to pause when not in viewport
   useEffect(() => {
     // If auto-scroll is paused, don't set up the interval
     if (autoScrollPaused) return;
     
-    const interval = setInterval(() => {
-      if (apiRef.current) {
-        apiRef.current.scrollNext();
-      }
-    }, 6000); // Auto-scroll every 6 seconds for a slow pace
+    // Use requestIdleCallback (or fallback to setTimeout) to schedule work when the main thread is idle
+    const idleCallback = 'requestIdleCallback' in window ? 
+      window.requestIdleCallback : 
+      (callback: () => void) => setTimeout(callback, 1);
     
-    // Clean up interval on unmount or when paused state changes
-    return () => clearInterval(interval);
-  }, [autoScrollPaused]);
+    const scrollNext = () => {
+      idleCallback(() => {
+        if (apiRef.current && !userInteracted) {
+          apiRef.current.scrollNext();
+        }
+      });
+    };
+    
+    const interval = setInterval(scrollNext, 6000); // Auto-scroll every 6 seconds
+    
+    return () => {
+      clearInterval(interval);
+      if ('cancelIdleCallback' in window) {
+        (window as any).cancelIdleCallback(idleCallback);
+      }
+    };
+  }, [autoScrollPaused, userInteracted]);
   
-  // Function to pause auto-scrolling temporarily when user interacts
+  // Optimize animations to reduce main thread work
   const handleUserInteraction = () => {
+    setUserInteracted(true);
     setAutoScrollPaused(true);
     
     // Resume auto-scrolling after 15 seconds of inactivity
     const timer = setTimeout(() => {
       setAutoScrollPaused(false);
+      setUserInteracted(false);
     }, 15000);
     
-    // Clear the timeout if the component unmounts
     return () => clearTimeout(timer);
+  };
+
+  // Less demanding animation variants
+  const buttonAnimation = {
+    animate: { 
+      opacity: [0.7, 1, 0.7],
+      transition: { 
+        duration: 3,
+        times: [0, 0.5, 1],
+        repeat: Infinity,
+        repeatType: "loop"
+      }
+    }
   };
 
   return (
@@ -56,7 +84,8 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
       transition={{ duration: 0.5, delay: 0.3 }}
       className="max-w-6xl mx-auto px-1 sm:px-4 relative"
       onClick={handleUserInteraction}
-      onKeyDown={handleUserInteraction}
+      onMouseEnter={handleUserInteraction}
+      onTouchStart={handleUserInteraction}
     >
       <Carousel 
         opts={{
@@ -80,39 +109,19 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </CarouselContent>
         
-        {/* Left/Previous button */}
+        {/* Simplified animation for navigation buttons */}
         <motion.div
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7]
-          }}
-          transition={{ 
-            duration: 2,
-            times: [0, 0.5, 1],
-            repeat: Infinity,
-            repeatType: "loop"
-          }}
+          variants={buttonAnimation}
+          animate="animate"
           className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10"
-          onClick={handleUserInteraction}
         >
           <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
         
-        {/* Right/Next button */}
         <motion.div
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7]
-          }}
-          transition={{ 
-            duration: 2,
-            times: [0, 0.5, 1],
-            repeat: Infinity,
-            repeatType: "loop",
-            delay: 1
-          }}
+          variants={buttonAnimation}
+          animate="animate"
           className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10"
-          onClick={handleUserInteraction}
         >
           <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
         </motion.div>
