@@ -16,6 +16,19 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Add preconnect for extranet.seayou.pt
+    const preconnectLink = document.createElement('link');
+    preconnectLink.rel = 'preconnect';
+    preconnectLink.href = 'https://extranet.seayou.pt';
+    preconnectLink.crossOrigin = 'anonymous';
+    document.head.appendChild(preconnectLink);
+    
+    return () => {
+      if (document.head.contains(preconnectLink)) {
+        document.head.removeChild(preconnectLink);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -50,6 +63,8 @@ const Index = () => {
         canonicalUrl="https://seayou.pt/"
       >
         <meta name="robots" content="index, follow" />
+        <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpeg" as="image" type="image/jpeg" />
+        <link rel="preload" href="https://extranet.seayou.pt/photos/bc.webp" as="image" type="image/webp" />
       </PageHead>
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
