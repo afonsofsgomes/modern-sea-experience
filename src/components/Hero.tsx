@@ -1,4 +1,5 @@
 
+import React, { useEffect } from 'react';
 import { destinationData } from "@/components/destinations/DestinationData";
 import { 
   HeroBackground, 
@@ -28,7 +29,7 @@ const HERO_BACKGROUND_IMAGE = "https://extranet.seayou.pt/photos/bc.jpeg";
 
 export const Hero = () => {
   // Add preload link for the hero background image
-  React.useEffect(() => {
+  useEffect(() => {
     // Create link for preloading image
     const preloadLink = document.createElement('link');
     preloadLink.rel = 'preload';
