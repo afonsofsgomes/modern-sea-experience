@@ -44,6 +44,9 @@ export const DestinationCard = ({ destination, index, fallbackImage }: Destinati
                 src={destination.image} 
                 alt={destination.name} 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                width="400"
+                height="300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </>

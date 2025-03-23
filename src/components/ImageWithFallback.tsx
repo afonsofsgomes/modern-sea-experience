@@ -26,6 +26,12 @@ export const ImageWithFallback = ({
       ? imgSrc.substring(0, imgSrc.lastIndexOf('.')) + '.webp' 
       : null;
   
+  // Force reload image if src prop changes
+  // This is important to ensure the component reacts to prop changes
+  if (src !== imgSrc && !isLoaded) {
+    setImgSrc(src);
+  }
+  
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {!isLoaded && (
