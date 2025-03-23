@@ -90,9 +90,10 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
           setImgSrc(fallbackSrc);
         }}
       />
-      <div className="absolute inset-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+      {/* Reduced the gradient opacity from black/90 to black/50 and via-black/60 to via-black/30 */}
+      <div className="absolute inset-0 bottom-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 py-3">
-        <p className="text-white text-[8px] sm:text-xs font-medium text-center truncate drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{cityName}</p>
+        <p className="text-white text-[8px] sm:text-xs font-medium text-center truncate drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{cityName}</p>
       </div>
     </div>
   );
