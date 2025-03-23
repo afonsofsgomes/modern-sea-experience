@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 
+// Properly define the Smartlook global types
 declare global {
   interface Window {
     smartlook?: {
@@ -21,23 +22,31 @@ export const SmartlookScript = () => {
     
     scriptLoaded.current = true;
     
-    // Initialize Smartlook
-    window.smartlook || (function(d) {
-      const o = window.smartlook = function() { 
-        o.api.push(arguments);
+    // Initialize Smartlook with the correct typing
+    if (!window.smartlook) {
+      // Create the smartlook function with proper typing
+      const smartlook = function(action: string, ...args: any[]) {
+        smartlook.api.push(arguments);
       };
-      o.api = [];
-      const h = d.getElementsByTagName('head')[0];
-      const c = d.createElement('script');
-      c.async = true;
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.src = 'https://web-sdk.smartlook.com/recorder.js';
-      h.appendChild(c);
-    })(document);
+      
+      // Add the api property to the function
+      smartlook.api = [];
+      
+      // Assign it to window
+      window.smartlook = smartlook;
+      
+      // Create and add the script element
+      const head = document.getElementsByTagName('head')[0];
+      const script = document.createElement('script');
+      script.async = true;
+      script.type = 'text/javascript';
+      script.charset = 'utf-8';
+      script.src = 'https://web-sdk.smartlook.com/recorder.js';
+      head.appendChild(script);
+    }
     
     // Initialize with project key
-    window.smartlook?.('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
+    window.smartlook('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
     
     console.log('Smartlook analytics initialized');
     
