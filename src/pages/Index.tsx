@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -12,12 +13,26 @@ import { PageHead, LocalBusinessSchema, StructuredData } from "@/components/SEO"
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
+// Make sure these URLs are correct
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpeg";
 const HERO_IMAGE_WEBP_URL = "https://extranet.seayou.pt/photos/bc.webp";
+// Also try alternative file extensions
+const HERO_IMAGE_JPG_URL = "https://extranet.seayou.pt/photos/bc.jpg";
 
 const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Debug available files
+    console.log('Index page - checking image availability');
+    
+    // Check each possible file extension
+    [HERO_IMAGE_URL, HERO_IMAGE_WEBP_URL, HERO_IMAGE_JPG_URL].forEach(url => {
+      const testImg = new Image();
+      testImg.src = url;
+      testImg.onload = () => console.log(`Image exists: ${url}`);
+      testImg.onerror = () => console.log(`Image does NOT exist: ${url}`);
+    });
     
     // Add preconnect for external resources
     const preconnectLinks = [
@@ -55,22 +70,22 @@ const Index = () => {
       createdLinks.push(dnsPrefetchLink);
     });
     
-    // Explicitly preload the hero image 
-    const preloadImageLink = document.createElement('link');
-    preloadImageLink.rel = 'preload';
-    preloadImageLink.href = HERO_IMAGE_URL;
-    preloadImageLink.as = 'image';
-    preloadImageLink.type = 'image/jpeg';
-    document.head.appendChild(preloadImageLink);
-    createdLinks.push(preloadImageLink);
+    // Try different image formats and file extensions
+    const imageFormatsToTry = [
+      { url: HERO_IMAGE_URL, type: 'image/jpeg' },
+      { url: HERO_IMAGE_WEBP_URL, type: 'image/webp' },
+      { url: HERO_IMAGE_JPG_URL, type: 'image/jpeg' }
+    ];
     
-    const preloadWebpLink = document.createElement('link');
-    preloadWebpLink.rel = 'preload';
-    preloadWebpLink.href = HERO_IMAGE_WEBP_URL;
-    preloadWebpLink.as = 'image';
-    preloadWebpLink.type = 'image/webp';
-    document.head.appendChild(preloadWebpLink);
-    createdLinks.push(preloadWebpLink);
+    imageFormatsToTry.forEach(img => {
+      const preloadImageLink = document.createElement('link');
+      preloadImageLink.rel = 'preload';
+      preloadImageLink.href = img.url;
+      preloadImageLink.as = 'image';
+      preloadImageLink.type = img.type;
+      document.head.appendChild(preloadImageLink);
+      createdLinks.push(preloadImageLink);
+    });
     
     return () => {
       // Clean up all created links
@@ -116,6 +131,7 @@ const Index = () => {
         <meta name="robots" content="index, follow" />
         <link rel="preload" href={HERO_IMAGE_URL} as="image" type="image/jpeg" />
         <link rel="preload" href={HERO_IMAGE_WEBP_URL} as="image" type="image/webp" />
+        <link rel="preload" href={HERO_IMAGE_JPG_URL} as="image" type="image/jpeg" />
       </PageHead>
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
