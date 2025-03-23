@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -12,6 +11,7 @@ import {
 import { PageHead, LocalBusinessSchema, StructuredData } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
+import SmartlookScript from "@/components/SmartlookScript";
 
 // Correct image URL that works
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
@@ -88,6 +88,7 @@ const Index = () => {
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
       <TallyScript />
+      <SmartlookScript />
       
       {/* Hidden element to force preload */}
       <div className="hero-bg-preload" aria-hidden="true"></div>

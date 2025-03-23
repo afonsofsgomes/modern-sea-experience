@@ -19,6 +19,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Partners from "./pages/Partners";
 import { SitemapGenerator } from "@/components/SEO";
+import SmartlookScript from "@/components/SmartlookScript";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
       <div className="overflow-x-hidden w-full">
         <Toaster />
         <Sonner />
+        <SmartlookScript />
         <BrowserRouter>
           <SitemapGenerator domain="seayou.pt" />
           <Routes>
