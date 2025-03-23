@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
@@ -24,9 +24,18 @@ const Index = () => {
     preconnectLink.crossOrigin = 'anonymous';
     document.head.appendChild(preconnectLink);
     
+    // Add dns-prefetch for faster lookup
+    const dnsPrefetchLink = document.createElement('link');
+    dnsPrefetchLink.rel = 'dns-prefetch';
+    dnsPrefetchLink.href = 'https://extranet.seayou.pt';
+    document.head.appendChild(dnsPrefetchLink);
+    
     return () => {
       if (document.head.contains(preconnectLink)) {
         document.head.removeChild(preconnectLink);
+      }
+      if (document.head.contains(dnsPrefetchLink)) {
+        document.head.removeChild(dnsPrefetchLink);
       }
     };
   }, []);
