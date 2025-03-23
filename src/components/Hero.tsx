@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { destinationData } from "@/components/destinations/DestinationData";
 import { 
@@ -28,9 +27,20 @@ const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1507525428034-b723cf96
 const HERO_BACKGROUND_IMAGE = "https://extranet.seayou.pt/photos/bc.jpeg";
 
 export const Hero = () => {
-  // Add preload link for the hero background image
+  // Preload images for better performance
   useEffect(() => {
-    // Create link for preloading image
+    const preloadImages = [
+      HERO_BACKGROUND_IMAGE,
+      HERO_BACKGROUND_IMAGE.replace('.jpeg', '.webp')
+    ];
+    
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.fetchPriority = "high";
+    });
+    
+    // Add preload links
     const preloadLink = document.createElement('link');
     preloadLink.rel = 'preload';
     preloadLink.as = 'image';
@@ -38,7 +48,6 @@ export const Hero = () => {
     preloadLink.type = 'image/jpeg';
     document.head.appendChild(preloadLink);
     
-    // Create link for preloading webp version
     const preloadWebpLink = document.createElement('link');
     preloadWebpLink.rel = 'preload';
     preloadWebpLink.as = 'image';
@@ -47,7 +56,9 @@ export const Hero = () => {
     document.head.appendChild(preloadWebpLink);
     
     return () => {
-      document.head.removeChild(preloadLink);
+      if (document.head.contains(preloadLink)) {
+        document.head.removeChild(preloadLink);
+      }
       if (document.head.contains(preloadWebpLink)) {
         document.head.removeChild(preloadWebpLink);
       }

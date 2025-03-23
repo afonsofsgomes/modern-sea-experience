@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -13,30 +12,73 @@ import { PageHead, LocalBusinessSchema, StructuredData } from "@/components/SEO"
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
+const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpeg";
+const HERO_IMAGE_WEBP_URL = "https://extranet.seayou.pt/photos/bc.webp";
+
 const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Add preconnect for extranet.seayou.pt
-    const preconnectLink = document.createElement('link');
-    preconnectLink.rel = 'preconnect';
-    preconnectLink.href = 'https://extranet.seayou.pt';
-    preconnectLink.crossOrigin = 'anonymous';
-    document.head.appendChild(preconnectLink);
+    // Add preconnect for external resources
+    const preconnectLinks = [
+      { href: 'https://extranet.seayou.pt', crossOrigin: 'anonymous' },
+      { href: 'https://cdn.gpteng.co', crossOrigin: 'anonymous' },
+      { href: 'https://tally.so', crossOrigin: 'anonymous' }
+    ];
     
-    // Add dns-prefetch for faster lookup
-    const dnsPrefetchLink = document.createElement('link');
-    dnsPrefetchLink.rel = 'dns-prefetch';
-    dnsPrefetchLink.href = 'https://extranet.seayou.pt';
-    document.head.appendChild(dnsPrefetchLink);
+    const dnsPrefetchLinks = [
+      'https://extranet.seayou.pt',
+      'https://cdn.gpteng.co',
+      'https://tally.so'
+    ];
+    
+    const createdLinks = [];
+    
+    // Add preconnect links
+    preconnectLinks.forEach(link => {
+      const preconnectLink = document.createElement('link');
+      preconnectLink.rel = 'preconnect';
+      preconnectLink.href = link.href;
+      if (link.crossOrigin) {
+        preconnectLink.crossOrigin = link.crossOrigin;
+      }
+      document.head.appendChild(preconnectLink);
+      createdLinks.push(preconnectLink);
+    });
+    
+    // Add dns-prefetch links
+    dnsPrefetchLinks.forEach(href => {
+      const dnsPrefetchLink = document.createElement('link');
+      dnsPrefetchLink.rel = 'dns-prefetch';
+      dnsPrefetchLink.href = href;
+      document.head.appendChild(dnsPrefetchLink);
+      createdLinks.push(dnsPrefetchLink);
+    });
+    
+    // Explicitly preload the hero image 
+    const preloadImageLink = document.createElement('link');
+    preloadImageLink.rel = 'preload';
+    preloadImageLink.href = HERO_IMAGE_URL;
+    preloadImageLink.as = 'image';
+    preloadImageLink.type = 'image/jpeg';
+    document.head.appendChild(preloadImageLink);
+    createdLinks.push(preloadImageLink);
+    
+    const preloadWebpLink = document.createElement('link');
+    preloadWebpLink.rel = 'preload';
+    preloadWebpLink.href = HERO_IMAGE_WEBP_URL;
+    preloadWebpLink.as = 'image';
+    preloadWebpLink.type = 'image/webp';
+    document.head.appendChild(preloadWebpLink);
+    createdLinks.push(preloadWebpLink);
     
     return () => {
-      if (document.head.contains(preconnectLink)) {
-        document.head.removeChild(preconnectLink);
-      }
-      if (document.head.contains(dnsPrefetchLink)) {
-        document.head.removeChild(dnsPrefetchLink);
-      }
+      // Clean up all created links
+      createdLinks.forEach(link => {
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
+      });
     };
   }, []);
 
@@ -72,8 +114,8 @@ const Index = () => {
         canonicalUrl="https://seayou.pt/"
       >
         <meta name="robots" content="index, follow" />
-        <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpeg" as="image" type="image/jpeg" />
-        <link rel="preload" href="https://extranet.seayou.pt/photos/bc.webp" as="image" type="image/webp" />
+        <link rel="preload" href={HERO_IMAGE_URL} as="image" type="image/jpeg" />
+        <link rel="preload" href={HERO_IMAGE_WEBP_URL} as="image" type="image/webp" />
       </PageHead>
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
