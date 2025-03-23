@@ -1,4 +1,5 @@
 
+import React, { ReactNode, useState, useEffect } from "react";
 import { 
   Dialog, 
   DialogContent, 
@@ -6,12 +7,11 @@ import {
 } from "@/components/ui/dialog";
 import TallyScript from "./TallyScript";
 import { Button, ButtonProps } from "./ui/button";
-import { ReactNode, useState, useEffect } from "react";
 
 interface GroupBookingDialogProps {
   children: ReactNode;
   buttonProps?: ButtonProps;
-  size?: "sm" | "md" | "lg"; // Properly type size
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
