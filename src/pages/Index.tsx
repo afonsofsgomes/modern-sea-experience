@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -19,7 +20,7 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Preload the hero image
+    // Preload the hero image with direct approach
     const preloadImage = new Image();
     preloadImage.src = HERO_IMAGE_URL;
     console.log('Preloading hero image:', HERO_IMAGE_URL);
@@ -71,10 +72,25 @@ const Index = () => {
       >
         <meta name="robots" content="index, follow" />
         <link rel="preload" href={HERO_IMAGE_URL} as="image" />
+        {/* Add direct style preload to ensure image is fetched early */}
+        <style>
+          {`
+            .hero-bg-preload {
+              background-image: url(${HERO_IMAGE_URL});
+              position: absolute;
+              width: 1px;
+              height: 1px;
+              opacity: 0.01;
+            }
+          `}
+        </style>
       </PageHead>
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
       <TallyScript />
+      
+      {/* Hidden element to force preload */}
+      <div className="hero-bg-preload" aria-hidden="true"></div>
       
       <Navbar />
       
