@@ -36,8 +36,8 @@ const PrivateCruise = () => {
   // FAQ data for Private Cruise
   const privateCruiseFAQs = [
     {
-      question: "How many people can join a private cruise?",
-      answer: "Our private cruises can accommodate up to 18 guests comfortably."
+      question: "How many passengers can join a private cruise?",
+      answer: "Our private cruises can accommodate up to 18 passengers comfortably."
     },
     {
       question: "Can we customize the route for our private cruise?",
@@ -57,7 +57,7 @@ const PrivateCruise = () => {
     },
     {
       question: "Is the private cruise suitable for children and elderly passengers?",
-      answer: "Yes, our cruises are designed to be enjoyed by guests of all ages. Our crew is experienced in assisting passengers with different mobility needs, and safety measures are in place for children, including appropriately sized life jackets."
+      answer: "Yes, our cruises are designed to be enjoyed by passengers of all ages. Our crew is experienced in assisting passengers with different mobility needs, and safety measures are in place for children, including appropriately sized life jackets."
     },
     {
       question: "Can we bring pets on the private cruise?",

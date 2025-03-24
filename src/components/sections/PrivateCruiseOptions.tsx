@@ -38,7 +38,7 @@ export const PrivateCruiseOptions = () => {
       time: "13:00 - 15:30",
       location: "Departing from Caniçal",
       price: "60€ per person",
-      minPeople: "Minimum 4 people",
+      minPeople: "Minimum 4 passengers",
       image: "https://extranet.seayou.pt/photos/pta-s-lourenco2.jpg",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
       useContactForm: false
@@ -51,7 +51,7 @@ export const PrivateCruiseOptions = () => {
       time: "13:00 - 15:30",
       location: "Departing from Calheta",
       price: "60€ per person",
-      minPeople: "Minimum 4 people",
+      minPeople: "Minimum 4 passengers",
       image: "https://extranet.seayou.pt/photos/south.jpg",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
       useContactForm: false
@@ -93,7 +93,7 @@ export const PrivateCruiseOptions = () => {
           <div className="mt-4 inline-block bg-[#E95543]/10 text-[#E95543] px-4 py-2 rounded-lg font-medium">
             <span className="flex items-center justify-center">
               <Users className="h-4 w-4 mr-2" />
-              60€ per person • Minimum 4 people required
+              60€ per person • Minimum 4 passengers required
             </span>
           </div>
         </motion.div>
