@@ -44,7 +44,23 @@ const PortoSanto = () => {
     },
     {
       question: "Are food and drinks included in the Porto Santo experiences?",
-      answer: "The basic experience does not include food or drinks. The half-day tour includes light refreshments during the guided portion, while the full-day tour (coming soon) will include a traditional Porto Santo lunch. You're welcome to bring your own snacks and water for all experiences."
+      answer: "None of the experiences currently includes food or drinks. Soon, the full-day tour (coming soon) will include a traditional lunch. You're welcome to bring your own snacks and water for all experiences."
+    },
+    {
+      question: "Where does the boat depart from?",
+      answer: "Marina da Quinta do Lorde - Madeira."
+    },
+    {
+      question: "Is there an onboard bar?",
+      answer: "Yes, there's an onboard bar with light refreshments and drinks."
+    },
+    {
+      question: "Can I stay in Porto Santo and come back on a different day?",
+      answer: "No, the tours are sold on a same-day roundtrip purpose, therefore, all passengers who go to Porto Santo must come back on the same day to Madeira."
+    },
+    {
+      question: "Can we bring pets?",
+      answer: "No, pets are not allowed on our Porto Santo experiences."
     },
     {
       question: "Is the golden beach of Porto Santo suitable for children?",
