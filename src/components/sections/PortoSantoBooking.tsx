@@ -33,7 +33,7 @@ export const PortoSantoBooking = () => {
             features={[
               { icon: Compass, text: "Self-guided exploration of Porto Santo" },
               { icon: Umbrella, text: "Full day on the golden beach" },
-              { icon: Ship, text: "Round-trip boat transportation" }
+              { icon: Ship, text: "Round-trip boat tour" }
             ]}
             productId="982788"
             bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
@@ -50,7 +50,7 @@ export const PortoSantoBooking = () => {
             features={[
               { icon: Car, text: "Guided island tour with local history" },
               { icon: Umbrella, text: "Free afternoon for beach & exploration" },
-              { icon: Ship, text: "Round-trip boat transportation" }
+              { icon: Ship, text: "Round-trip boat tour" }
             ]}
             productId="985324"
             bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
@@ -68,7 +68,7 @@ export const PortoSantoBooking = () => {
               { icon: Car, text: "Guided island tour with pirate stories" },
               { icon: Utensils, text: "Traditional Porto Santo lunch included" },
               { icon: Fish, text: "Afternoon kayaking near pristine caves" },
-              { icon: Ship, text: "Round-trip boat transportation" }
+              { icon: Ship, text: "Round-trip boat tour" }
             ]}
             isComingSoon={true}
           />
