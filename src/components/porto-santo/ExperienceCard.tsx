@@ -50,9 +50,9 @@ export const ExperienceCard = ({
   return (
     <Card className={`bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 ${isComingSoon ? '' : 'hover:shadow-xl transform hover:-translate-y-1'} relative`}>
       {isComingSoon && (
-        <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px] z-10 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[3px] z-10 flex flex-col items-center justify-center select-none">
           <span className="bg-red-500 text-white font-bold py-2 px-6 rounded-full text-sm mb-4">Coming Soon</span>
-          <p className="text-center text-gray-700 max-w-[80%]">Our Full Day Guided Experience will be available soon!</p>
+          <p className="text-center text-white max-w-[80%]">Our Full Day Guided Experience will be available soon!</p>
         </div>
       )}
       <div className={`h-48 bg-gradient-to-r from-${gradient.from}-500 to-${gradient.to}-700 relative overflow-hidden`}>
@@ -103,3 +103,4 @@ export const ExperienceCard = ({
     </Card>
   );
 };
+
