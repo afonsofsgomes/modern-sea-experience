@@ -29,7 +29,7 @@ export const BookingHeader = () => {
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="h-5 w-5 text-blue-700" />
-            <p className="font-medium">Caniçal Harbor</p>
+            <p className="font-medium">Marina da Quinta do Lorde - Caniçal</p>
           </div>
         </div>
       </div>
