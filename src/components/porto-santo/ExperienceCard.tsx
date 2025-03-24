@@ -103,4 +103,3 @@ export const ExperienceCard = ({
     </Card>
   );
 };
-
