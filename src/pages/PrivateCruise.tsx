@@ -58,6 +58,10 @@ const PrivateCruise = () => {
     {
       question: "Is the private cruise suitable for children and elderly passengers?",
       answer: "Yes, our cruises are designed to be enjoyed by guests of all ages. Our crew is experienced in assisting passengers with different mobility needs, and safety measures are in place for children, including appropriately sized life jackets."
+    },
+    {
+      question: "Can we bring pets on the private cruise?",
+      answer: "Yes, on private cruises we do allow pets on board if they are properly groomed. Please inform us in advance when booking so we can prepare accordingly."
     }
   ];
 
