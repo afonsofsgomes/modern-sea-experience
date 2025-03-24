@@ -5,7 +5,8 @@ import {
   Calendar, 
   MapPin, 
   Clock, 
-  ChevronRight 
+  ChevronRight,
+  Users
 } from "lucide-react";
 import { 
   Card, 
@@ -36,7 +37,8 @@ export const PrivateCruiseOptions = () => {
       days: "WEDNESDAY, THURSDAY, FRIDAY",
       time: "13:00 - 15:30",
       location: "Departing from Caniçal",
-      price: "From 243.60€",
+      price: "60€ per person",
+      minPeople: "Minimum 4 people",
       image: "https://extranet.seayou.pt/photos/pta-s-lourenco2.jpg",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
       useContactForm: false
@@ -48,7 +50,8 @@ export const PrivateCruiseOptions = () => {
       days: "TUESDAY, SATURDAY, SUNDAY",
       time: "13:00 - 15:30",
       location: "Departing from Calheta",
-      price: "From 243.60€",
+      price: "60€ per person",
+      minPeople: "Minimum 4 people",
       image: "https://extranet.seayou.pt/photos/south.jpg",
       buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
       useContactForm: false
@@ -87,6 +90,12 @@ export const PrivateCruiseOptions = () => {
           <p className="text-gray-600 max-w-2xl mx-auto">
             Choose from our selection of exclusive private cruises, each offering a unique way to experience Madeira's stunning coastlines
           </p>
+          <div className="mt-4 inline-block bg-[#E95543]/10 text-[#E95543] px-4 py-2 rounded-lg font-medium">
+            <span className="flex items-center justify-center">
+              <Users className="h-4 w-4 mr-2" />
+              60€ per person • Minimum 4 people required
+            </span>
+          </div>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -131,7 +140,13 @@ export const PrivateCruiseOptions = () => {
                         <MapPin className="h-5 w-5 opacity-75" />
                         <span>{option.location}</span>
                       </div>
-                      <div className="mt-4 text-2xl font-bold">{option.price}</div>
+                      <div className="mt-4">
+                        <div className="text-xl font-bold">{option.price}</div>
+                        <div className="text-sm font-medium text-white/90 flex items-center">
+                          <Users className="h-4 w-4 mr-1 opacity-75" />
+                          {option.minPeople}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </CardContent>

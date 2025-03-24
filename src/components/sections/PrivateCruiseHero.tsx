@@ -79,6 +79,20 @@ export const PrivateCruiseHero = () => {
           </div>
         </motion.div>
         
+        {/* Price Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="bg-[#E95543]/90 text-white px-5 py-2 rounded-lg mb-5 backdrop-blur-sm shadow-md"
+        >
+          <div className="flex items-center justify-center gap-2">
+            <span className="font-bold text-base md:text-lg">60€ per person</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+            <span className="text-sm md:text-base">Minimum 4 people</span>
+          </div>
+        </motion.div>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

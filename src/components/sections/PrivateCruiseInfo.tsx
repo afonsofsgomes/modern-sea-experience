@@ -1,5 +1,5 @@
 
-import { Clock, Ship, Users } from "lucide-react";
+import { Clock, Ship, Users, Euro } from "lucide-react";
 import { motion } from "framer-motion";
 import { 
   Table,
@@ -17,7 +17,7 @@ export const PrivateCruiseInfo = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm max-w-3xl mx-auto">
           <h3 className="text-2xl font-medium mb-4 text-center text-[#253D7F]">Important Information</h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center mb-6">
             <motion.div 
               className="flex flex-col items-center"
               initial={{ opacity: 0, y: 10 }}
@@ -39,6 +39,18 @@ export const PrivateCruiseInfo = () => {
               <Users className="h-10 w-10 text-[#E95543] mb-2" />
               <p className="font-medium">Capacity</p>
               <p>Up to 18 passengers</p>
+              <p className="text-sm text-gray-600">Minimum 4 people</p>
+            </motion.div>
+            <motion.div 
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Euro className="h-10 w-10 text-[#E95543] mb-2" />
+              <p className="font-medium">Price</p>
+              <p>60€ per person</p>
             </motion.div>
           </div>
           
