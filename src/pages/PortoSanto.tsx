@@ -36,7 +36,7 @@ const PortoSanto = () => {
   const portoSantoFAQs = [
     {
       question: "How long is the boat trip to Porto Santo?",
-      answer: "The boat trip from Caniçal to Porto Santo takes approximately 2 hours each way. This time can vary slightly depending on sea conditions, but you'll be able to enjoy the scenic views throughout the journey."
+      answer: "The boat trip from Caniçal to Porto Santo takes approximately 1 hour each way. This time can vary depending on the sea conditions and operations, but you'll be able to enjoy the scenic views throughout the journey."
     },
     {
       question: "What should I bring for a day trip to Porto Santo?",
