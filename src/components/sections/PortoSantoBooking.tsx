@@ -26,7 +26,7 @@ export const PortoSantoBooking = () => {
           <ExperienceCard 
             title="Basic Experience"
             subtitle="Self-guided island exploration"
-            description="Round-trip transportation to Porto Santo's golden beaches. Explore the island at your own leisure."
+            description="Round-trip boat tour to Porto Santo's golden beaches. Explore the island at your own leisure."
             badge={{ text: "Standard", color: "blue" }}
             gradient={{ from: "blue", to: "blue" }}
             icon={Ship}
@@ -43,7 +43,7 @@ export const PortoSantoBooking = () => {
           <ExperienceCard 
             title="Half-Day Tour"
             subtitle="Morning tour + afternoon leisure"
-            description="Guided tour with stories of Porto Santo's history, followed by free time to enjoy the beaches."
+            description="Guided boat tour with stories of Porto Santo's history, followed by free time to enjoy the beaches."
             badge={{ text: "Popular", color: "green" }}
             gradient={{ from: "green", to: "green" }}
             icon={Map}
@@ -60,7 +60,7 @@ export const PortoSantoBooking = () => {
           <ExperienceCard 
             title="Full-Day Tour"
             subtitle="Complete experience with activities"
-            description="Complete island experience with guided tour, local lunch, and water activities."
+            description="Complete island experience with guided boat tour, local lunch, and water activities."
             badge={{ text: "Premium", color: "purple" }}
             gradient={{ from: "purple", to: "purple" }}
             icon={Fish}

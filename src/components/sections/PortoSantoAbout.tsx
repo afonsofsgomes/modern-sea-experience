@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 export const PortoSantoAbout = () => {
   return <section className="py-20 bg-white">
@@ -6,16 +5,16 @@ export const PortoSantoAbout = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 text-blue-900 rounded-full mb-4">
-              Island Hopping
+              Island Tour
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-blue-900">
               Porto Santo Island Tour
             </h2>
             <p className="text-base text-muted-foreground mb-6">
-              Visit the golden sands of Porto Santo Island with our exclusive 1-Day Experience. Enjoy a perfect day trip to explore this beautiful island just a short journey from Madeira.
+              Visit the golden sands of Porto Santo Island with our exclusive 1-Day Island Tour. Enjoy a perfect boat tour to explore this beautiful island just a short journey from Madeira.
             </p>
             <p className="text-base text-muted-foreground mb-8">
-              Our Porto Santo experiences include guided options and flexible schedules to make your island hopping adventure memorable and hassle-free.
+              Our Porto Santo tours include guided options and flexible schedules to make your island hopping adventure memorable and hassle-free.
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
