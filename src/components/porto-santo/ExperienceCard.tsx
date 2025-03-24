@@ -47,6 +47,15 @@ export const ExperienceCard = ({
   const badgeColor = colorMap[badge.color] || "blue";
   const iconColor = colorMap[badge.color] || "blue";
   
+  // Pastel gradient background map
+  const gradientMap: Record<string, string> = {
+    blue: "from-blue-100 to-blue-300",
+    green: "from-green-100 to-green-300",
+    purple: "from-purple-100 to-purple-300",
+  };
+  
+  const cardGradient = gradientMap[gradient.from] || "from-blue-100 to-blue-300";
+  
   return (
     <Card className={`bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 ${isComingSoon ? '' : 'hover:shadow-xl transform hover:-translate-y-1'} relative`}>
       {isComingSoon && (
@@ -55,12 +64,12 @@ export const ExperienceCard = ({
           <p className="text-center text-white max-w-[80%]">Our Full Day Guided Experience will be available soon!</p>
         </div>
       )}
-      <div className={`h-48 bg-gradient-to-r from-${gradient.from}-500 to-${gradient.to}-700 relative overflow-hidden`}>
-        <Icon className="absolute right-6 bottom-6 h-20 w-20 text-white/20" />
-        <div className="absolute inset-0 bg-black/20"></div>
+      <div className={`h-48 bg-gradient-to-r ${cardGradient} relative overflow-hidden`}>
+        <Icon className="absolute right-6 bottom-6 h-20 w-20 text-white/30" />
+        <div className="absolute inset-0 bg-white/5"></div>
         <div className="absolute bottom-0 left-0 w-full p-6">
-          <h3 className="text-2xl font-bold text-white">{title}</h3>
-          <p className="text-white/90 text-sm mt-1">{subtitle}</p>
+          <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
+          <p className="text-gray-700 text-sm mt-1">{subtitle}</p>
         </div>
       </div>
       <CardContent className="p-6">
