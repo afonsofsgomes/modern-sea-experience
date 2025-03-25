@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -109,12 +108,14 @@ const PrivateCruise = () => {
         <PrivateCruiseInfo />
         <PrivateCruiseBooking />
         
-        {/* FAQ Section */}
-        <FAQSection 
-          title="Private Cruise FAQs"
-          description="Everything you need to know about our private cruise."
-          questions={privateCruiseFAQs}
-        />
+        {/* FAQ Section with reduced top padding */}
+        <div className="pt-0 -mt-8">
+          <FAQSection 
+            title="Private Cruise FAQs"
+            description="Everything you need to know about our private cruise."
+            questions={privateCruiseFAQs}
+          />
+        </div>
       </main>
       <Footer />
     </div>

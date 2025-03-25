@@ -24,7 +24,7 @@ export const PrivateCruiseBooking = () => {
           Book Your Private Cruise
         </h2>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Inclusions */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-xl font-semibold mb-4 text-blue-800">What's Included</h3>
@@ -62,20 +62,9 @@ export const PrivateCruiseBooking = () => {
               ))}
             </ul>
           </div>
-          
-          {/* Booking Notes */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 text-blue-800">Booking Information</h3>
-            <p className="text-gray-700 mb-4">
-              While it's possible to purchase tickets onboard, we strongly recommend booking in advance, especially during peak tourist season, to guarantee your seat.
-            </p>
-            <p className="text-gray-700">
-              All private cruises are subject to availability and weather conditions. We'll contact you if there are any changes to your booking.
-            </p>
-          </div>
         </div>
         
-        <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
+        <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-4">
           <div 
             className="bokunWidget w-full min-h-[600px]" 
             data-src="https://widgets.bokun.io/online-sales/51f490fc-f867-4e8b-a0d8-cf7730297dde/experience-calendar/936700"
