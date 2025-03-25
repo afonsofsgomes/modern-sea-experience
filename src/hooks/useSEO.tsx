@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 
 // Default OG image URL
-const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/og.png";
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
 
 interface UseSEOProps {
   title?: string;

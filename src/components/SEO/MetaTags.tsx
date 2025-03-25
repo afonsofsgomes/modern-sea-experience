@@ -2,7 +2,7 @@
 import { Helmet } from "react-helmet";
 
 // Default OG image URL
-const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/og.png";
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
 
 interface MetaTagsProps {
   title: string;
@@ -42,8 +42,8 @@ export const MetaTags = ({
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:url" content={ogImage} />
       <meta property="og:image:secure_url" content={ogImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="420" />
       <meta property="og:image:type" content="image/png" />
       
       {/* Twitter Tags */}

@@ -14,7 +14,7 @@ interface PageHeadProps {
 }
 
 // Original OG image URL - always use this as default
-const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/og.png";
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
 
 export const PageHead: React.FC<PageHeadProps> = ({
   title,
@@ -51,8 +51,8 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:url" content={ogImage} />
       <meta property="og:image:secure_url" content={ogImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="420" />
       <meta property="og:image:type" content="image/png" />
       
       {/* Twitter Tags */}
