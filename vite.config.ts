@@ -23,6 +23,8 @@ export default defineConfig(({ mode }) => ({
       deny: ['.env', '.env.*', '*.{pem,crt,key}', 'node_modules/.cache'],
       strict: true,
     },
+    // Allow requests to seayou.pt domain
+    allowedHosts: ['seayou.pt', 'extranet.seayou.pt'],
     // Prevent CORS issues with development server
     cors: true,
   },
