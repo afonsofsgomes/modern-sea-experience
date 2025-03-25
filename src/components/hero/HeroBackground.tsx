@@ -13,13 +13,13 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
   return (
     <>
       {/* Overlay to soften the background with a light blue tint */}
-      <div className="absolute inset-0 bg-blue-900/40 z-0"></div>
+      <div className="absolute inset-0 bg-blue-900/40 z-10"></div>
       
       {/* Background image */}
       <div 
-        className="absolute inset-0 z-[-1] bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: `url(${imageUrl})`, 
+          backgroundImage: `url(${imageUrl || "https://extranet.seayou.pt/photos/bc.jpg"})`, 
           backgroundSize: 'cover',
           backgroundPosition: 'center 30%',
           filter: 'brightness(0.8)'

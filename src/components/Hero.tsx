@@ -21,9 +21,9 @@ const orderedDestinationData = [
   {...destinationData.find(d => d.name === "Calheta"), rating: 5.0},
 ].filter(Boolean); // Filter out any undefined values
 
-// Direct image URL that works
+// Correct image URL that works - using the right one
 const HERO_BACKGROUND_IMAGE = "https://extranet.seayou.pt/photos/bc.jpg";
-// Default image
+// Default image 
 const DEFAULT_IMAGE = "https://extranet.seayou.pt/photos/og.png";
 
 export const Hero = () => {
@@ -34,7 +34,7 @@ export const Hero = () => {
         fallbackUrl={DEFAULT_IMAGE}
       />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         <HeroContent />
         <HeroCarousel 
           destinations={orderedDestinationData} 
