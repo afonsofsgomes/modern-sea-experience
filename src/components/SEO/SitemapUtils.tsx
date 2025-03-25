@@ -67,8 +67,8 @@ export const generateSitemapXml = (urls: SitemapUrl[]): string => {
     return element;
   }).join('\n');
 
-  // Generate XML with proper formatting to avoid any whitespace issues
-  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urlElements + '\n</urlset>';
+  // Ensure the XML declaration is the very first thing without any whitespace
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlElements}\n</urlset>`;
 };
 
 /**
