@@ -15,7 +15,9 @@ if (!container) {
 // Create a root using createRoot API
 const root = ReactDOM.createRoot(container);
 
-// Render the app
+// Render the app with explicit React import
 root.render(
-  <App />
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
