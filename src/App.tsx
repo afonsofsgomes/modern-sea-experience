@@ -12,7 +12,6 @@ import PortoSanto from "./pages/PortoSanto";
 import Desertas from "./pages/Desertas";
 import NotFound from "./pages/NotFound";
 import GroupBookings from "./pages/GroupBookings";
-import PortTerminal from "./pages/PortTerminal";
 import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
@@ -38,7 +37,6 @@ const App = () => (
             <Route path="/porto-santo" element={<PortoSanto />} />
             <Route path="/desertas" element={<Desertas />} />
             <Route path="/group-bookings" element={<GroupBookings />} />
-            <Route path="/port-terminal" element={<PortTerminal />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
