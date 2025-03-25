@@ -125,6 +125,7 @@ const PortoSanto = () => {
                 altPrefix="Porto Santo Island"
                 className="mx-auto shadow-lg rounded-lg overflow-hidden"
                 aspectRatio="wide"
+                objectFit="contain"
               />
             </div>
           </div>

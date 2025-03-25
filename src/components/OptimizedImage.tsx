@@ -12,6 +12,7 @@ interface OptimizedImageProps {
   sizes?: string;
   priority?: boolean;
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+  fallbackSrc?: string;
 }
 
 export const OptimizedImage = ({
@@ -24,8 +25,10 @@ export const OptimizedImage = ({
   sizes = '100vw',
   priority = false,
   onError,
+  fallbackSrc = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState(src);
   const hasExtension = src.includes('.');
   const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
   
@@ -41,16 +44,27 @@ export const OptimizedImage = ({
       const img = new Image();
       img.src = src;
     }
+    
+    // Reset image source when src prop changes
+    setImgSrc(src);
+    setIsLoaded(false);
   }, [priority, src]);
 
   // Fallback logic for when original image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.warn(`Failed to load image: ${src}`);
+    console.warn(`Failed to load image: ${imgSrc}`);
     const imgElement = e.currentTarget;
     
     // If this is the webp version that failed, switch to original
     if (imgElement.src.endsWith('.webp') && webpSrc) {
       imgElement.src = src;
+      return; // Early return to allow the original format to try loading
+    }
+    
+    // If original format fails, use fallback image
+    if (imgSrc !== fallbackSrc) {
+      console.log(`Using fallback image for: ${imgSrc}`);
+      setImgSrc(fallbackSrc);
     }
 
     // Call the provided onError handler if it exists
@@ -64,22 +78,22 @@ export const OptimizedImage = ({
       {priority ? (
         // For priority images, don't use picture element to avoid delays
         <img
-          src={src}
+          src={imgSrc}
           alt={alt}
           width={typeof width === 'number' ? width : undefined}
           height={typeof height === 'number' ? height : undefined}
           className={cn("w-full h-full object-cover transition-opacity duration-300", 
             isLoaded ? "opacity-100" : "opacity-0")}
-          onLoad={() => setIsLoaded(true)}
+          onLoad={() => setImgSrc === fallbackSrc ? null : setIsLoaded(true)}
           onError={handleError}
           fetchPriority="high"
           decoding="async"
         />
       ) : (
         <picture>
-          {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
+          {webpSrc && imgSrc === src && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            src={src}
+            src={imgSrc}
             alt={alt}
             width={typeof width === 'number' ? width : undefined}
             height={typeof height === 'number' ? height : undefined}
@@ -87,7 +101,7 @@ export const OptimizedImage = ({
             sizes={sizes}
             className={cn("w-full h-full object-cover transition-opacity duration-300", 
               isLoaded ? "opacity-100" : "opacity-0")}
-            onLoad={() => setIsLoaded(true)}
+            onLoad={() => imgSrc === fallbackSrc ? null : setIsLoaded(true)}
             onError={handleError}
             decoding="async"
           />
