@@ -64,7 +64,7 @@ export const DesertasHero = () => {
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
               <Users className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <span className="text-xs md:text-sm text-center">up to 18 PAX</span>
+            <span className="text-xs md:text-sm text-center">18 Pax</span>
           </div>
           <div className="flex flex-col items-center justify-center w-16 md:w-20">
             <div className="bg-white/20 p-2 md:p-3 rounded-full mb-1 md:mb-2 flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
