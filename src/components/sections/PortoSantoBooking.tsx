@@ -119,8 +119,8 @@ export const PortoSantoBooking = () => {
               </div>
             </div>
             
-            {/* Full-Day Tour - Mobile - Updated to remove Coming Soon overlay */}
-            <div className="bg-white border border-purple-100 rounded-lg shadow-sm overflow-hidden">
+            {/* Full-Day Tour - Mobile - Updated to show Coming Soon instead of Join Waitlist */}
+            <div className="bg-white border border-purple-100 rounded-lg shadow-sm overflow-hidden relative">
               <div className="bg-gradient-to-r from-purple-100 to-purple-200 p-4">
                 <div className="flex justify-between items-center">
                   <div>
@@ -154,9 +154,9 @@ export const PortoSantoBooking = () => {
                 </div>
               </div>
               <div className="bg-gray-50 p-3">
-                <button className="w-full bg-purple-600 text-white text-sm font-medium py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
-                  Join Waitlist
-                </button>
+                <div className="w-full bg-purple-200 text-purple-800 text-sm font-medium py-2 px-4 rounded-md text-center">
+                  Coming Soon
+                </div>
               </div>
             </div>
           </div>
@@ -197,21 +197,58 @@ export const PortoSantoBooking = () => {
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
             />
             
-            {/* Full-Day Tour - Updated to show a join waitlist UI instead of Coming Soon overlay */}
-            <ExperienceCard 
-              title="Full-Day Tour"
-              subtitle="Complete experience with activities"
-              description="Complete island experience with guided boat tour, local lunch, and water activities."
-              badge={{ text: "Premium", color: "purple" }}
-              gradient={{ from: "purple", to: "purple" }}
-              icon={Fish}
-              features={[
-                { icon: Car, text: "Guided island tour with pirate stories" },
-                { icon: Utensils, text: "Traditional Porto Santo lunch included" },
-                { icon: Fish, text: "Afternoon kayaking near pristine caves" },
-                { icon: Ship, text: "Round-trip boat tour" }
-              ]}
-            />
+            {/* Full-Day Tour - Updated to show Coming Soon message */}
+            <div className="bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl relative">
+              <div className="h-36 sm:h-48 bg-gradient-to-r from-purple-100 to-purple-300 relative overflow-hidden">
+                <Fish className="absolute right-6 bottom-6 h-20 w-20 text-white/30" />
+                <div className="absolute inset-0 bg-white/5"></div>
+                <div className="absolute bottom-0 left-0 w-full p-6">
+                  <h3 className="text-2xl font-bold text-gray-800">Full-Day Tour</h3>
+                  <p className="text-gray-700 text-sm mt-1">Complete experience with activities</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">
+                      Premium
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-semibold mb-3">1-Day Porto Santo Experience</h4>
+                  <p className="text-gray-600 mb-4">
+                    Complete island experience with guided boat tour, local lunch, and water activities.
+                  </p>
+                </div>
+
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-3">
+                    <Car className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                    <span className="text-gray-700">Guided island tour with pirate stories</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Utensils className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                    <span className="text-gray-700">Traditional Porto Santo lunch included</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Fish className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                    <span className="text-gray-700">Afternoon kayaking near pristine caves</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Ship className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                    <span className="text-gray-700">Round-trip boat tour</span>
+                  </div>
+                </div>
+                
+                <div className="flex justify-center items-center h-[300px] bg-purple-50 rounded-lg">
+                  <div className="text-center px-6">
+                    <h3 className="text-xl font-semibold text-purple-800 mb-2">Coming Soon</h3>
+                    <p className="text-sm text-purple-600">
+                      We're preparing an unforgettable full-day experience for you. Stay tuned!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
         

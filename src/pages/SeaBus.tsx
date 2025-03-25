@@ -37,11 +37,11 @@ const SeaBus = () => {
     },
     {
       question: "Do I need to book tickets in advance?",
-      answer: "While you can purchase tickets at our terminals, we strongly recommend booking in advance, especially during peak tourist season, to guarantee your seat."
+      answer: "While you can purchase tickets, we strongly recommend booking in advance, especially during peak tourist season, to guarantee your seat."
     },
     {
       question: "Are pets allowed on the SeaBus?",
-      answer: "As much as we love pets, we do not allow them on the boat, unless it's a service animal, properly trained. However, on our private tours, you can bring your friend!"
+      answer: "As much as we love pets, we do not allow them on the boat, unless it's a service animal, properly trained. However, on our <a href='/private-cruise' class='font-semibold text-blue-600 underline underline-offset-2'>private tours</a>, you can bring your friend!"
     }
   ];
 

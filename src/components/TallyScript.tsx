@@ -35,7 +35,8 @@ export const TallyScript = () => {
     
     // Set up callbacks
     script.onload = () => {
-      setTimeout(loadEmbeds, 100);
+      // Immediately trigger load instead of waiting
+      loadEmbeds();
     };
     
     script.onerror = () => {
@@ -45,9 +46,18 @@ export const TallyScript = () => {
     // Add the script to the document
     document.body.appendChild(script);
     
-    // Also inject a style tag to override Tally styles for better visibility
+    // Inject a style tag to ensure Tally forms are visible while loading
     const styleTag = document.createElement('style');
     styleTag.textContent = `
+      /* Set initial dimensions for iframe placeholders */
+      iframe[data-tally-src]:not([src]) {
+        min-height: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        width: 100%;
+        display: block;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
       /* Improve placeholder visibility in iframes */
       iframe[data-tally-src] {
         background: rgba(255, 255, 255, 0.05) !important;
@@ -64,10 +74,10 @@ export const TallyScript = () => {
     document.head.appendChild(styleTag);
     
     // Run loadEmbeds immediately as a fallback
-    setTimeout(loadEmbeds, 500);
+    setTimeout(loadEmbeds, 100);
     
-    // Additional fallback - try again after a longer delay
-    const finalTimeout = setTimeout(loadEmbeds, 2000);
+    // Additional fallback - try once more after a shorter delay
+    const finalTimeout = setTimeout(loadEmbeds, 500);
     
     // Cleanup on component unmount
     return () => {
