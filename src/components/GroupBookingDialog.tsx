@@ -31,10 +31,7 @@ export const GroupBookingDialog = ({
         try {
           console.log('Attempting to load Tally embeds');
           (window as any).Tally.loadEmbeds();
-          toast({
-            title: "Form loaded",
-            description: "Please fill out the group booking form",
-          });
+          // Toast notification removed
         } catch (e) {
           console.error('Error loading Tally embeds:', e);
           toast({
