@@ -111,6 +111,7 @@ const SeaBus = () => {
                 altPrefix="SeaBus Service"
                 className="mx-auto shadow-lg rounded-lg overflow-hidden"
                 aspectRatio="wide"
+                objectFit="contain"
               />
             </div>
           </div>

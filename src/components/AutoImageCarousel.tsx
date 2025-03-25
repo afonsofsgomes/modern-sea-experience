@@ -18,6 +18,7 @@ interface AutoImageCarouselProps {
   autoplaySpeed?: number; // in milliseconds
   showControls?: boolean;
   aspectRatio?: "square" | "video" | "wide";
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
 }
 
 export const AutoImageCarousel = ({
@@ -27,6 +28,7 @@ export const AutoImageCarousel = ({
   autoplaySpeed = 5000, // default 5 seconds per slide
   showControls = true,
   aspectRatio = "video",
+  objectFit = "contain", // Changed default from "cover" to "contain" to prevent cropping
 }: AutoImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi | null>(null);
@@ -73,6 +75,11 @@ export const AutoImageCarousel = ({
     }
   };
 
+  // Function to handle image loading errors
+  const handleImageError = (index: number) => {
+    console.error(`Failed to load image at index ${index}:`, images[index]);
+  };
+
   return (
     <div className={cn("w-full relative", className)}>
       <Carousel 
@@ -90,8 +97,9 @@ export const AutoImageCarousel = ({
                 <OptimizedImage
                   src={image}
                   alt={`${altPrefix} - Image ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  className={`w-full h-full object-${objectFit} transition-transform duration-500 hover:scale-105`}
                   priority={index === 0}
+                  onError={() => handleImageError(index)}
                 />
               </div>
             </CarouselItem>
