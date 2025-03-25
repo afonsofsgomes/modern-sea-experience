@@ -63,9 +63,12 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
-    // This option helps prevent the Babel RegExp issue
+    // Updated esbuild options to ensure compatibility with version 0.25.0+
     esbuildOptions: {
       target: 'es2020',
+      supported: {
+        'top-level-await': true,
+      },
     },
   },
   css: {
