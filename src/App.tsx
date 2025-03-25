@@ -12,7 +12,6 @@ import SeaBus from "./pages/SeaBus";
 import PrivateCruise from "./pages/PrivateCruise";
 import PortoSanto from "./pages/PortoSanto";
 import Desertas from "./pages/Desertas";
-import NotFound from "./pages/NotFound";
 import GroupBookings from "./pages/GroupBookings";
 import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -55,8 +54,8 @@ const App = () => (
                 element={DESERTAS_ENABLED ? <Desertas /> : <Navigate to="/" replace />} 
               />
               
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
+              {/* Redirect all other routes to the homepage */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
         </div>
