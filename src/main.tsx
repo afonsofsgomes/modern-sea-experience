@@ -27,8 +27,8 @@ if (!container) {
 // Remove the initial loader immediately after React hydration
 const removeLoader = () => {
   const loader = document.querySelector('.initial-loader');
-  if (loader) {
-    // Use opacity transition before removing for smooth UX
+  if (loader && loader instanceof HTMLElement) {
+    // Type assertion to HTMLElement to safely access style property
     loader.style.opacity = '0';
     loader.style.transition = 'opacity 0.3s ease';
     setTimeout(() => {
