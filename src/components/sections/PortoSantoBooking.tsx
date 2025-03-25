@@ -64,13 +64,13 @@ export const PortoSantoBooking = () => {
             <MobileExperienceCard
               title="Half-Day Tour"
               subtitle="Morning tour + leisure"
-              description="Guided boat tour with local history, followed by free beach time."
+              description="Round-trip boat tour to Porto Santo + Guided van tour with stories of Porto Santo's Pirates history, followed by free time to enjoy the beaches and the island"
               badgeText="Popular"
               badgeColor="green"
               gradientFrom="green"
               gradientTo="green"
               features={[
-                { icon: Car, text: "Guided island tour with history" },
+                { icon: Car, text: "Guided island tour with pirate stories" },
                 { icon: Binoculars, text: "Free time for beach & exploration" },
                 { icon: Ship, text: "Round-trip boat tour" }
               ]}
@@ -135,12 +135,12 @@ export const PortoSantoBooking = () => {
             <ExperienceCard 
               title="Half-Day Tour"
               subtitle="Morning tour + afternoon leisure"
-              description="Guided boat tour with stories of Porto Santo's history, followed by free time to enjoy the beaches."
+              description="Round-trip boat tour to Porto Santo + Guided van tour with stories of Porto Santo's Pirates history, followed by free time to enjoy the beaches and the island"
               badge={{ text: "Popular", color: "green" }}
               gradient={{ from: "green", to: "green" }}
               icon={Map}
               features={[
-                { icon: Car, text: "Guided island tour with local history" },
+                { icon: Car, text: "Guided island tour with pirate stories" },
                 { icon: Binoculars, text: "Free afternoon for beach & exploration" },
                 { icon: Ship, text: "Round-trip boat tour" }
               ]}

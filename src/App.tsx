@@ -17,7 +17,6 @@ import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import { SitemapGenerator } from "@/components/SEO";
-import SmartlookScript from "@/components/SmartlookScript";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import FacebookPixel from "@/components/FacebookPixel";
 
@@ -89,7 +88,6 @@ const App = () => {
             <FacebookPixel pixelId={FB_PIXEL_ID} />
             <Toaster />
             <Sonner />
-            <SmartlookScript />
             <BrowserRouter>
               <SitemapGenerator domain="seayou.pt" />
               <Routes>
