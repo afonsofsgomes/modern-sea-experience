@@ -116,11 +116,8 @@ export const PortoSantoBooking = () => {
               </div>
             </div>
             
-            {/* Full-Day Tour - Mobile */}
-            <div className="bg-white border border-purple-100 rounded-lg shadow-sm overflow-hidden relative">
-              <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center select-none">
-                <span className="bg-red-500 text-white font-bold py-1.5 px-4 rounded-full text-xs mb-2">Coming Soon</span>
-              </div>
+            {/* Full-Day Tour - Mobile - Updated to remove Coming Soon overlay */}
+            <div className="bg-white border border-purple-100 rounded-lg shadow-sm overflow-hidden">
               <div className="bg-gradient-to-r from-purple-100 to-purple-200 p-4">
                 <div className="flex justify-between items-center">
                   <div>
@@ -154,14 +151,14 @@ export const PortoSantoBooking = () => {
                 </div>
               </div>
               <div className="bg-gray-50 p-3">
-                <button className="w-full bg-purple-400 text-white text-sm font-medium py-2 px-4 rounded-md cursor-not-allowed opacity-70">
-                  Coming Soon
+                <button className="w-full bg-purple-600 text-white text-sm font-medium py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
+                  Join Waitlist
                 </button>
               </div>
             </div>
           </div>
         ) : (
-          // Desktop version - keep the original layout
+          // Desktop version - keep the original layout but update the Full-Day Tour
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             {/* Basic Experience */}
             <ExperienceCard 
@@ -197,7 +194,7 @@ export const PortoSantoBooking = () => {
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
             />
             
-            {/* Full-Day Tour (Coming Soon) */}
+            {/* Full-Day Tour - Updated to show a join waitlist UI instead of Coming Soon overlay */}
             <ExperienceCard 
               title="Full-Day Tour"
               subtitle="Complete experience with activities"
@@ -211,7 +208,6 @@ export const PortoSantoBooking = () => {
                 { icon: Fish, text: "Afternoon kayaking near pristine caves" },
                 { icon: Ship, text: "Round-trip boat tour" }
               ]}
-              isComingSoon={true}
             />
           </div>
         )}

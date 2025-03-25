@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, Wifi, Calendar, Info, Timer } from "lucide-react";
+import { Clock, Users, Wifi, Calendar, Info, Timer, ChevronDown } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 
@@ -120,14 +120,16 @@ export const PortoSantoHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col items-center gap-2"
         >
           <Button 
             size="lg" 
-            className="bg-red-500 hover:bg-red-600 text-white"
+            className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2"
             onClick={scrollToBooking}
           >
-            COMING SOON
+            BOOK NOW <ChevronDown className="h-4 w-4 animate-bounce" />
           </Button>
+          <span className="text-xs text-white/80">Limited spots available</span>
         </motion.div>
       </div>
     </section>

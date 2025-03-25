@@ -57,13 +57,7 @@ export const ExperienceCard = ({
   const cardGradient = gradientMap[gradient.from] || "from-blue-100 to-blue-300";
   
   return (
-    <Card className={`bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 ${isComingSoon ? '' : 'hover:shadow-xl transform hover:-translate-y-1'} relative`}>
-      {isComingSoon && (
-        <div className="absolute inset-0 bg-black/30 backdrop-blur-[3px] z-10 flex flex-col items-center justify-center select-none">
-          <span className="bg-red-500 text-white font-bold py-2 px-6 rounded-full text-sm mb-4">Coming Soon</span>
-          <p className="text-center text-white max-w-[80%]">Our Full Day Guided Experience will be available soon!</p>
-        </div>
-      )}
+    <Card className={`bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 relative`}>
       <div className={`h-36 sm:h-48 bg-gradient-to-r ${cardGradient} relative overflow-hidden`}>
         <Icon className="absolute right-6 bottom-6 h-20 w-20 text-white/30" />
         <div className="absolute inset-0 bg-white/5"></div>
@@ -96,17 +90,17 @@ export const ExperienceCard = ({
           ))}
         </div>
         
-        {isComingSoon ? (
-          <div className="h-[300px] flex items-center justify-center bg-gray-100 rounded-lg">
-            <p className="text-gray-500">Booking available soon</p>
-          </div>
-        ) : (
+        {productId && bookingChannelUUID ? (
           <BokunWidget 
             isCalendarWidget={true}
             productId={productId}
             bookingChannelUUID={bookingChannelUUID}
             className="min-h-[300px]" 
           />
+        ) : (
+          <div className="h-[300px] flex items-center justify-center bg-gray-100 rounded-lg">
+            <p className="text-gray-500">Coming soon - Join our waitlist</p>
+          </div>
         )}
       </CardContent>
     </Card>
