@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 export const PortoSantoAbout = () => {
   return <section className="py-20 bg-white">
@@ -22,8 +23,9 @@ export const PortoSantoAbout = () => {
                 <p className="text-muted-foreground">Golden Beach</p>
               </div>
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
-                <h3 className="text-3xl font-medium mb-2 text-blue-900">1h</h3>
+                <h3 className="text-3xl font-medium mb-2 text-blue-900">1h*</h3>
                 <p className="text-muted-foreground">Connection Time</p>
+                <p className="text-xs text-muted-foreground mt-1">*Depends on weather, sea conditions, and operational factors</p>
               </div>
               <div className="bg-gray-50 rounded-md p-6 flex-1 min-w-[160px]">
                 <h3 className="text-3xl font-medium mb-2 text-blue-900">Wed-Fri</h3>

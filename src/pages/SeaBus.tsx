@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -36,7 +37,7 @@ const SeaBus = () => {
     },
     {
       question: "Do I need to book tickets in advance?",
-      answer: "While you can purchase tickets, we strongly recommend booking in advance, especially during peak tourist season, to guarantee your seat."
+      answer: "While it's possible to purchase tickets onboard, we strongly recommend booking in advance, especially during peak tourist season, to guarantee your seat."
     },
     {
       question: "Are pets allowed on the SeaBus?",
