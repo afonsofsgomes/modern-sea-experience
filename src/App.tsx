@@ -28,43 +28,41 @@ const GTM_ID = "GTM-MBXFXGKX";
 const DESERTAS_ENABLED = false;
 
 const App = () => (
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="light">
-        <TooltipProvider>
-          <div className="overflow-x-hidden w-full">
-            <GoogleTagManager id={GTM_ID} />
-            <Toaster />
-            <Sonner />
-            <SmartlookScript />
-            <BrowserRouter>
-              <SitemapGenerator domain="seayou.pt" />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/booking" element={<Booking />} />
-                <Route path="/seabus" element={<SeaBus />} />
-                <Route path="/private-cruise" element={<PrivateCruise />} />
-                <Route path="/porto-santo" element={<PortoSanto />} />
-                <Route path="/group-bookings" element={<GroupBookings />} />
-                <Route path="/schedule" element={<Schedule />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms" element={<Terms />} />
-                
-                {/* Desertas page - redirects to home if not enabled */}
-                <Route 
-                  path="/desertas" 
-                  element={DESERTAS_ENABLED ? <Desertas /> : <Navigate to="/" replace />} 
-                />
-                
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </div>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider attribute="class" defaultTheme="light">
+      <TooltipProvider>
+        <div className="overflow-x-hidden w-full">
+          <GoogleTagManager id={GTM_ID} />
+          <Toaster />
+          <Sonner />
+          <SmartlookScript />
+          <BrowserRouter>
+            <SitemapGenerator domain="seayou.pt" />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/seabus" element={<SeaBus />} />
+              <Route path="/private-cruise" element={<PrivateCruise />} />
+              <Route path="/porto-santo" element={<PortoSanto />} />
+              <Route path="/group-bookings" element={<GroupBookings />} />
+              <Route path="/schedule" element={<Schedule />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              
+              {/* Desertas page - redirects to home if not enabled */}
+              <Route 
+                path="/desertas" 
+                element={DESERTAS_ENABLED ? <Desertas /> : <Navigate to="/" replace />} 
+              />
+              
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </TooltipProvider>
+    </ThemeProvider>
+  </QueryClientProvider>
 );
 
 export default App;

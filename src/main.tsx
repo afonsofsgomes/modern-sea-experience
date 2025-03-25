@@ -17,7 +17,5 @@ const root = ReactDOM.createRoot(container);
 
 // Render the app with explicit React import
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );

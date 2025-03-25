@@ -26,7 +26,7 @@ export const OptimizedImage = ({
   objectFit = 'cover',
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const hasExtension = src.includes('.');
+  const hasExtension = typeof src === 'string' && src.includes('.');
   const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
   
   // Generate webp URL if the image is a JPEG or PNG
@@ -45,12 +45,14 @@ export const OptimizedImage = ({
 
   // Fallback logic for when original image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.warn(`Failed to load image: ${src}`);
     const imgElement = e.currentTarget;
     
     // If this is the webp version that failed, switch to original
     if (imgElement.src.endsWith('.webp') && src) {
+      console.warn(`WebP image failed to load: ${imgElement.src}, falling back to original`);
       imgElement.src = src;
+    } else {
+      console.warn(`Image failed to load: ${src}`);
     }
   };
 

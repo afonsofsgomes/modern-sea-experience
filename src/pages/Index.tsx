@@ -12,7 +12,6 @@ import {
 import { PageHead, LocalBusinessSchema, StructuredData } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
-import SmartlookScript from "@/components/SmartlookScript";
 
 // Correct image URL that works
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
@@ -21,23 +20,9 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Preload the hero image with direct approach
+    // Preload the hero image with direct approach - more efficient than using preconnect
     const preloadImage = new Image();
     preloadImage.src = HERO_IMAGE_URL;
-    console.log('Preloading hero image:', HERO_IMAGE_URL);
-    
-    // Add preconnect for external resource
-    const preconnectLink = document.createElement('link');
-    preconnectLink.rel = 'preconnect';
-    preconnectLink.href = 'https://extranet.seayou.pt';
-    preconnectLink.crossOrigin = 'anonymous';
-    document.head.appendChild(preconnectLink);
-    
-    return () => {
-      if (document.head.contains(preconnectLink)) {
-        document.head.removeChild(preconnectLink);
-      }
-    };
   }, []);
 
   useEffect(() => {
@@ -73,27 +58,10 @@ const Index = () => {
         ogImage="https://extranet.seayou.pt/photos/og.png"
       >
         <meta name="robots" content="index, follow" />
-        <link rel="preload" href={HERO_IMAGE_URL} as="image" />
-        {/* Add direct style preload to ensure image is fetched early */}
-        <style>
-          {`
-            .hero-bg-preload {
-              background-image: url(${HERO_IMAGE_URL});
-              position: absolute;
-              width: 1px;
-              height: 1px;
-              opacity: 0.01;
-            }
-          `}
-        </style>
       </PageHead>
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
       <TallyScript />
-      <SmartlookScript />
-      
-      {/* Hidden element to force preload */}
-      <div className="hero-bg-preload" aria-hidden="true"></div>
       
       <Navbar />
       

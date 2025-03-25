@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface BokunWidgetProps {
   productId?: string;
@@ -18,29 +18,47 @@ export const BokunWidget = ({
   className = "",
   bookingChannelUUID = "51f490fc-f867-4e8b-a0d8-cf7730297dde" // Default UUID
 }: BokunWidgetProps) => {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  
   useEffect(() => {
-    // Create script element for Bokun Widget Loader
-    const script = document.createElement("script");
-    script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bookingChannelUUID}`;
-    script.async = true;
-    script.type = "text/javascript";
+    // Function to load Bokun script
+    const loadScript = () => {
+      // Cleanup previous script if it exists
+      if (scriptRef.current) {
+        scriptRef.current.remove();
+        scriptRef.current = null;
+      }
+      
+      // Check if script already exists in the document
+      const existingScript = document.querySelector(`script[src*="BokunWidgetsLoader.js"]`);
+      if (existingScript) {
+        existingScript.remove();
+      }
+      
+      // Create new script
+      const script = document.createElement("script");
+      script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bookingChannelUUID}`;
+      script.async = true;
+      script.type = "text/javascript";
+      script.onload = () => setScriptLoaded(true);
+      
+      document.body.appendChild(script);
+      scriptRef.current = script;
+    };
     
-    // Cleanup previous script if it exists
-    const existingScript = document.querySelector(`script[src*="BokunWidgetsLoader.js"]`);
-    if (existingScript) {
-      existingScript.remove();
-    }
+    // Load the script
+    loadScript();
     
-    document.body.appendChild(script);
-
     // Cleanup function to remove the script when component unmounts
     return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
+      if (scriptRef.current && document.body.contains(scriptRef.current)) {
+        document.body.removeChild(scriptRef.current);
       }
     };
-  }, [bookingChannelUUID, productId, isCalendarWidget, isProductPage]);
-
+  }, [bookingChannelUUID]);
+  
   // Generate the correct data-src URL based on widget type
   let dataSrc = "";
   
@@ -51,9 +69,27 @@ export const BokunWidget = ({
   } else {
     dataSrc = `https://widgets.bokun.io/online-sales/${bookingChannelUUID}/product-list/${productListId}`;
   }
+  
+  // Manually initialize widget when script is loaded
+  useEffect(() => {
+    if (scriptLoaded && containerRef.current) {
+      // Use setTimeout to ensure the DOM is fully rendered
+      const timer = setTimeout(() => {
+        if (window && (window as any).BokunWidgetsLoader) {
+          try {
+            (window as any).BokunWidgetsLoader.loadWidgets();
+          } catch (e) {
+            console.error("Error initializing Bokun widget:", e);
+          }
+        }
+      }, 300);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [scriptLoaded]);
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={`w-full ${className}`} ref={containerRef}>
       <div 
         className="bokunWidget w-full" 
         data-src={dataSrc}
