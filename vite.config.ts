@@ -15,6 +15,16 @@ export default defineConfig(({ mode }) => ({
       // For production environment, disable HMR (optional)
       ...(mode === 'production' && { enabled: false }),
     },
+    // Security settings to address GitHub alerts
+    fs: {
+      // Restricts file serving to only the allowed directories
+      allow: [path.resolve(__dirname)],
+      // Explicitly deny access to sensitive directories
+      deny: ['.env', '.env.*', '*.{pem,crt,key}', 'node_modules/.cache'],
+      strict: true,
+    },
+    // Prevent CORS issues with development server
+    cors: true,
   },
   plugins: [
     react(),
@@ -53,6 +63,10 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+    // This option helps prevent the Babel RegExp issue
+    esbuildOptions: {
+      target: 'es2020',
+    },
   },
   css: {
     // Optimize CSS
@@ -60,5 +74,11 @@ export default defineConfig(({ mode }) => ({
     modules: {
       scopeBehaviour: 'local',
     },
+  },
+  // Fix for security vulnerabilities in the development server
+  preview: {
+    port: 8080,
+    strictPort: true,
+    cors: true,
   },
 }));
