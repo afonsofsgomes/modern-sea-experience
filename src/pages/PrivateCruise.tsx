@@ -6,7 +6,8 @@ import {
   PrivateCruiseOptions,
   PrivateCruiseFeatures,
   PrivateCruiseBooking,
-  PrivateCruiseInfo
+  PrivateCruiseInfo,
+  PrivateCruiseGallery
 } from "@/components/sections";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
@@ -104,6 +105,7 @@ const PrivateCruise = () => {
         </div>
         
         <PrivateCruiseFeatures />
+        <PrivateCruiseGallery />
         <PrivateCruiseInfo />
         <PrivateCruiseBooking />
         

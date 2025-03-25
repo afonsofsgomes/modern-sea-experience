@@ -5,7 +5,8 @@ import {
   PortoSantoHero,
   PortoSantoAbout,
   PortoSantoHighlights,
-  PortoSantoBooking
+  PortoSantoBooking,
+  PortoSantoGallery
 } from "@/components/sections";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
@@ -115,6 +116,7 @@ const PortoSanto = () => {
         </div>
         
         <PortoSantoHighlights />
+        <PortoSantoGallery />
         <PortoSantoBooking />
         
         {/* FAQ Section */}

@@ -1,29 +1,46 @@
 
-export * from './Routes';
 export * from './Destinations';
-export * from './QuickBooking';
-export * from './schedule/ScheduleDisplay';
-export * from './PrivateCruises';
-export * from './PortoSantoTours';
-export * from './Testimonials';
 export * from './Newsletter';
+export * from './PrivateCruises';
+export * from './ProductShowcase';
+export * from './QuickBooking';
+export * from './Routes';
+export * from './Testimonials';
+export * from './FAQSection';
 
-// Add SeaBus section components exports
+// SeaBus sections
 export * from './SeaBusHero';
 export * from './SeaBusFeatures';
 export * from './SeaBusBooking';
+export * from './SeaBusDestinations';
 export * from './SeaBusMap';
 export * from './SeaBusMapImage';
+export * from './SeaBusRoutes';
+export * from './SeaBusGallery';
 
-// Add Porto Santo section components exports
+// Porto Santo sections
 export * from './PortoSantoHero';
 export * from './PortoSantoAbout';
 export * from './PortoSantoHighlights';
 export * from './PortoSantoBooking';
+export * from './PortoSantoTours';
+export * from './PortoSantoGallery';
 
-// Add Private Cruise section components exports
+// Private Cruise sections
 export * from './PrivateCruiseHero';
 export * from './PrivateCruiseOptions';
 export * from './PrivateCruiseFeatures';
-export * from './PrivateCruiseBooking';
 export * from './PrivateCruiseInfo';
+export * from './PrivateCruiseBooking';
+export * from './PrivateCruiseGallery';
+
+// Desertas sections
+export * from './DesertasHero';
+export * from './DesertasAbout';
+export * from './DesertasBooking';
+export * from './DesertasGallery';
+
+// Schedule sections
+export * from './schedule/ScheduleDisplay';
+export * from './schedule/ScheduleHeader';
+export * from './schedule/BookingButton';

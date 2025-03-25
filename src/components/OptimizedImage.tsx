@@ -11,6 +11,7 @@ interface OptimizedImageProps {
   loading?: 'lazy' | 'eager';
   sizes?: string;
   priority?: boolean;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 }
 
 export const OptimizedImage = ({
@@ -22,6 +23,7 @@ export const OptimizedImage = ({
   loading = 'lazy',
   sizes = '100vw',
   priority = false,
+  objectFit = 'cover',
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const hasExtension = src.includes('.');
@@ -47,10 +49,17 @@ export const OptimizedImage = ({
     const imgElement = e.currentTarget;
     
     // If this is the webp version that failed, switch to original
-    if (imgElement.src.endsWith('.webp') && webpSrc) {
+    if (imgElement.src.endsWith('.webp') && src) {
       imgElement.src = src;
     }
   };
+
+  const objectFitClass = 
+    objectFit === 'contain' ? 'object-contain' :
+    objectFit === 'fill' ? 'object-fill' :
+    objectFit === 'none' ? 'object-none' :
+    objectFit === 'scale-down' ? 'object-scale-down' :
+    'object-cover';
 
   return (
     <div className={cn("overflow-hidden", className)} style={{ width, height }}>
@@ -61,7 +70,7 @@ export const OptimizedImage = ({
           alt={alt}
           width={typeof width === 'number' ? width : undefined}
           height={typeof height === 'number' ? height : undefined}
-          className={cn("w-full h-full object-cover transition-opacity duration-300", 
+          className={cn(`w-full h-full ${objectFitClass} transition-opacity duration-300`, 
             isLoaded ? "opacity-100" : "opacity-0")}
           onLoad={() => setIsLoaded(true)}
           onError={handleError}
@@ -78,7 +87,7 @@ export const OptimizedImage = ({
             height={typeof height === 'number' ? height : undefined}
             loading={loading}
             sizes={sizes}
-            className={cn("w-full h-full object-cover transition-opacity duration-300", 
+            className={cn(`w-full h-full ${objectFitClass} transition-opacity duration-300`, 
               isLoaded ? "opacity-100" : "opacity-0")}
             onLoad={() => setIsLoaded(true)}
             onError={handleError}

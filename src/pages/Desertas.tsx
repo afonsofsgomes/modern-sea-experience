@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { DesertasHero } from "@/components/sections/DesertasHero";
 import { DesertasAbout } from "@/components/sections/DesertasAbout";
 import { DesertasBooking } from "@/components/sections/DesertasBooking";
+import { DesertasGallery } from "@/components/sections/DesertasGallery";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
@@ -94,6 +95,7 @@ const Desertas = () => {
         </div>
         
         <DesertasAbout />
+        <DesertasGallery />
         <DesertasBooking />
         
         {/* FAQ Section */}
