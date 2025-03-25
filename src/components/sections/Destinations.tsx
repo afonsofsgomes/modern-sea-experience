@@ -1,6 +1,7 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
-import { Boat, Island, Anchor } from "lucide-react";
+import { Ship, PalmtreeIcon, Anchor } from "lucide-react";
 
 interface DestinationCardProps {
   title: string;
@@ -61,7 +62,7 @@ export const Destinations = () => {
             description="Experience the thrill of coastal exploration on our SeaBus Catamaran, offering daily routes."
             image="/lovable-uploads/4916a25d-a9c9-4401-855f-3959288a908b.jpg"
             link="/seabus"
-            icon={Boat}
+            icon={Ship}
             gradient="from-blue-500/90 to-blue-700/90"
           />
           
@@ -71,7 +72,7 @@ export const Destinations = () => {
             description="Embark on a day trip to Porto Santo, known for its golden beaches and tranquil atmosphere."
             image="/lovable-uploads/990a9965-8959-4196-852a-481849549943.jpg"
             link="/porto-santo"
-            icon={Island}
+            icon={PalmtreeIcon}
             gradient="from-yellow-500/90 to-yellow-700/90"
           />
           

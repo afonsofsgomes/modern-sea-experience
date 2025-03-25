@@ -35,10 +35,27 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: "primary" | "secondary" | "ghost" | "link" | "outline";
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
+  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", isLoading = false, children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", isLoading = false, asChild = false, children, ...props }, ref) => {
+    const Comp = asChild ? React.Fragment : "button";
+    
+    // If using asChild, just pass children
+    if (asChild) {
+      return React.cloneElement(children as React.ReactElement, {
+        className: cn(
+          "relative inline-flex items-center justify-center rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 btn-shine mx-auto",
+          buttonVariants[variant],
+          buttonSizes[size],
+          className
+        ),
+        ref,
+        ...props
+      });
+    }
+    
     return (
       <button
         className={cn(
