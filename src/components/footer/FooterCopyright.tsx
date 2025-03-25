@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const FooterCopyright: React.FC = () => {
   return (
-    <div className="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <div className="border-t border-gray-200 mt-16 pt-8 pb-8 flex flex-col md:flex-row justify-between items-center">
       <p className="text-sm text-muted-foreground">
         © {new Date().getFullYear()} SeaYou. All rights reserved.
       </p>

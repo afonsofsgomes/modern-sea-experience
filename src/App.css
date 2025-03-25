@@ -23,6 +23,12 @@ footer {
   padding-bottom: 0;
 }
 
+/* Ensure the footer sticks to the bottom of its container */
+.container:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 /* Section scroll offset - this helps with section title visibility when scrolling */
 section[id] {
   scroll-margin-top: 100px; /* Provides extra space for fixed navbar */
