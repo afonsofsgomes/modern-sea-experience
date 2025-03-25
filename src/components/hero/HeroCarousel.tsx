@@ -1,5 +1,4 @@
 
-import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DestinationCard } from "./DestinationCard";
 import {
@@ -9,7 +8,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
+
+// Memoize the destination card to prevent unnecessary re-renders
+const MemoizedDestinationCard = memo(DestinationCard);
 
 interface HeroCarouselProps {
   destinations: Array<any>;
@@ -19,36 +21,60 @@ interface HeroCarouselProps {
 export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps) => {
   const isMobile = useIsMobile();
   const apiRef = useRef<any>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   
-  // Auto-scroll functionality - Optimized to pause when not in viewport
+  // Use IntersectionObserver to only auto-scroll when in viewport
   useEffect(() => {
-    // If auto-scroll is paused, don't set up the interval
-    if (autoScrollPaused) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          setIsVisible(entry.isIntersecting);
+          // Pause auto-scroll when not in viewport
+          if (!entry.isIntersecting) {
+            setAutoScrollPaused(true);
+          } else if (!userInteracted) {
+            setAutoScrollPaused(false);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
     
-    // Use requestIdleCallback (or fallback to setTimeout) to schedule work when the main thread is idle
-    const idleCallback = 'requestIdleCallback' in window ? 
-      window.requestIdleCallback : 
-      (callback: () => void) => setTimeout(callback, 1);
-    
-    const scrollNext = () => {
-      idleCallback(() => {
-        if (apiRef.current && !userInteracted) {
-          apiRef.current.scrollNext();
-        }
-      });
-    };
-    
-    const interval = setInterval(scrollNext, 6000); // Auto-scroll every 6 seconds
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current);
+    }
     
     return () => {
-      clearInterval(interval);
-      if ('cancelIdleCallback' in window) {
-        (window as any).cancelIdleCallback(idleCallback);
+      if (carouselRef.current) {
+        observer.unobserve(carouselRef.current);
       }
     };
-  }, [autoScrollPaused, userInteracted]);
+  }, [userInteracted]);
+  
+  // Auto-scroll functionality - Optimized to only run when visible and not paused
+  useEffect(() => {
+    if (autoScrollPaused || !isVisible) return;
+    
+    // Schedule scrolling for idle periods
+    let scrollTimerId: number;
+    const scheduleScroll = () => {
+      scrollTimerId = window.setTimeout(() => {
+        if (apiRef.current && !userInteracted && isVisible) {
+          apiRef.current.scrollNext();
+        }
+        scheduleScroll();
+      }, 6000); // Auto-scroll every 6 seconds
+    };
+    
+    scheduleScroll();
+    
+    return () => {
+      window.clearTimeout(scrollTimerId);
+    };
+  }, [autoScrollPaused, userInteracted, isVisible]);
   
   // Optimize animations to reduce main thread work
   const handleUserInteraction = () => {
@@ -64,25 +90,11 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     return () => clearTimeout(timer);
   };
 
-  // Fixed animation variants with properly typed repeatType
-  const buttonAnimation = {
-    animate: { 
-      opacity: [0.7, 1, 0.7],
-      transition: { 
-        duration: 3,
-        times: [0, 0.5, 1],
-        repeat: Infinity,
-        repeatType: "loop" as const // Explicitly typed as "loop"
-      }
-    }
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="max-w-6xl mx-auto px-1 sm:px-4 relative"
+    <div
+      ref={carouselRef}
+      className="max-w-6xl mx-auto px-1 sm:px-4 relative opacity-0 animate-fade-in"
+      style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
       onClick={handleUserInteraction}
       onMouseEnter={handleUserInteraction}
       onTouchStart={handleUserInteraction}
@@ -100,7 +112,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-4">
           {destinations.map((destination, index) => (
             <CarouselItem key={destination.name} className="pl-1 sm:pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3">
-              <DestinationCard 
+              <MemoizedDestinationCard 
                 destination={destination} 
                 index={index} 
                 fallbackImage={fallbackImage} 
@@ -109,22 +121,13 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </CarouselContent>
         
-        {/* Simplified animation for navigation buttons with fixed type */}
-        <motion.div
-          variants={buttonAnimation}
-          animate="animate"
-          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10"
-        >
+        <div className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 opacity-70 hover:opacity-100 transition-opacity">
           <CarouselPrevious className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
-        </motion.div>
+        </div>
         
-        <motion.div
-          variants={buttonAnimation}
-          animate="animate"
-          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10"
-        >
+        <div className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 opacity-70 hover:opacity-100 transition-opacity">
           <CarouselNext className="sm:flex bg-white/30 text-white border-none hover:bg-white/50 h-8 w-8 sm:h-12 sm:w-12 shadow-md" />
-        </motion.div>
+        </div>
       </Carousel>
       
       {/* Carousel indicators for mobile */}
@@ -138,6 +141,6 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
