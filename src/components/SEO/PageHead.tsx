@@ -30,13 +30,10 @@ export const PageHead: React.FC<PageHeadProps> = ({
   // Always use the domain canonical URL as default
   const canonical = canonicalUrl || "https://seayou.pt" + (typeof window !== "undefined" ? window.location.pathname : "");
   
-  // Ensure the OG image URL is absolute
-  const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `https://seayou.pt${ogImage}`;
-  
   return (
     <Helmet>
       {/* Basic Meta Tags */}
-      <html lang="en" prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb#" />
+      <html lang="en" prefix="og: https://ogp.me/ns#" />
       <title>{title}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
@@ -51,22 +48,18 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta property="og:type" content={type} />
       <meta property="og:locale" content={locale} />
       <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={absoluteOgImage} />
-      <meta property="og:image:url" content={absoluteOgImage} />
-      <meta property="og:image:secure_url" content={absoluteOgImage} />
-      <meta property="og:image:width" content="800" />
-      <meta property="og:image:height" content="420" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:url" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:alt" content={`SeaYou Madeira - ${title}`} />
-      
-      {/* Facebook specific tags */}
-      <meta property="fb:app_id" content="1324423168329224" />
       
       {/* Twitter Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={absoluteOgImage} />
+      <meta name="twitter:image" content={ogImage} />
       
       {/* Allow child elements - useful for page-specific structured data */}
       {children}

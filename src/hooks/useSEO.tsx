@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 
 // Default OG image URL
@@ -13,9 +14,6 @@ interface UseSEOProps {
 
 export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT_OG_IMAGE }: UseSEOProps) => {
   useEffect(() => {
-    // Ensure the OG image URL is absolute
-    const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `https://seayou.pt${ogImage}`;
-    
     // Update document title if provided
     if (title) {
       document.title = title;
@@ -48,93 +46,26 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
     }
 
     // Update OG image if provided
-    if (absoluteOgImage) {
-      // Update og:image
+    if (ogImage) {
       const ogImageMeta = document.querySelector('meta[property="og:image"]');
       if (ogImageMeta) {
-        ogImageMeta.setAttribute('content', absoluteOgImage);
+        ogImageMeta.setAttribute('content', ogImage);
       } else {
         const newOgImage = document.createElement('meta');
         newOgImage.setAttribute('property', 'og:image');
-        newOgImage.content = absoluteOgImage;
+        newOgImage.content = ogImage;
         document.head.appendChild(newOgImage);
-      }
-      
-      // Update og:image:url
-      const ogImageUrlMeta = document.querySelector('meta[property="og:image:url"]');
-      if (ogImageUrlMeta) {
-        ogImageUrlMeta.setAttribute('content', absoluteOgImage);
-      } else {
-        const newOgImageUrl = document.createElement('meta');
-        newOgImageUrl.setAttribute('property', 'og:image:url');
-        newOgImageUrl.content = absoluteOgImage;
-        document.head.appendChild(newOgImageUrl);
-      }
-      
-      // Update og:image:secure_url
-      const ogImageSecureUrlMeta = document.querySelector('meta[property="og:image:secure_url"]');
-      if (ogImageSecureUrlMeta) {
-        ogImageSecureUrlMeta.setAttribute('content', absoluteOgImage);
-      } else {
-        const newOgImageSecureUrl = document.createElement('meta');
-        newOgImageSecureUrl.setAttribute('property', 'og:image:secure_url');
-        newOgImageSecureUrl.content = absoluteOgImage;
-        document.head.appendChild(newOgImageSecureUrl);
-      }
-      
-      // Update image dimensions
-      const widthMeta = document.querySelector('meta[property="og:image:width"]');
-      if (widthMeta) {
-        widthMeta.setAttribute('content', '800');
-      } else {
-        const newWidthMeta = document.createElement('meta');
-        newWidthMeta.setAttribute('property', 'og:image:width');
-        newWidthMeta.content = '800';
-        document.head.appendChild(newWidthMeta);
-      }
-      
-      const heightMeta = document.querySelector('meta[property="og:image:height"]');
-      if (heightMeta) {
-        heightMeta.setAttribute('content', '420');
-      } else {
-        const newHeightMeta = document.createElement('meta');
-        newHeightMeta.setAttribute('property', 'og:image:height');
-        newHeightMeta.content = '420';
-        document.head.appendChild(newHeightMeta);
-      }
-      
-      // Ensure Facebook-specific tags
-      if (!document.querySelector('meta[property="fb:app_id"]')) {
-        const appIdMeta = document.createElement('meta');
-        appIdMeta.setAttribute('property', 'fb:app_id');
-        appIdMeta.content = '1324423168329224';
-        document.head.appendChild(appIdMeta);
       }
       
       // Also update Twitter image
       const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
       if (twitterImageMeta) {
-        twitterImageMeta.setAttribute('content', absoluteOgImage);
+        twitterImageMeta.setAttribute('content', ogImage);
       } else {
         const newTwitterImage = document.createElement('meta');
         newTwitterImage.name = 'twitter:image';
-        newTwitterImage.content = absoluteOgImage;
+        newTwitterImage.content = ogImage;
         document.head.appendChild(newTwitterImage);
-      }
-      
-      // Add image type and alt for Facebook
-      if (!document.querySelector('meta[property="og:image:type"]')) {
-        const typeMeta = document.createElement('meta');
-        typeMeta.setAttribute('property', 'og:image:type');
-        typeMeta.content = 'image/png';
-        document.head.appendChild(typeMeta);
-      }
-      
-      if (!document.querySelector('meta[property="og:image:alt"]')) {
-        const altMeta = document.createElement('meta');
-        altMeta.setAttribute('property', 'og:image:alt');
-        altMeta.content = 'SeaYou Madeira';
-        document.head.appendChild(altMeta);
       }
     }
 
@@ -144,6 +75,7 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
       if (!script) {
         script = document.createElement('script');
         script.id = 'dynamic-jsonld';
+        // Use setAttribute method instead of directly setting the type property
         script.setAttribute('type', 'application/ld+json');
         document.head.appendChild(script);
       }
@@ -151,6 +83,7 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
     }
 
     return () => {
+      // Clean up JSON-LD when component unmounts
       if (jsonLd) {
         const script = document.querySelector('#dynamic-jsonld');
         if (script) {

@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb#">
+<html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,13 +15,11 @@
     <meta property="og:image" content="https://extranet.seayou.pt/photos/og.png" />
     <meta property="og:image:url" content="https://extranet.seayou.pt/photos/og.png" />
     <meta property="og:image:secure_url" content="https://extranet.seayou.pt/photos/og.png" />
-    <meta property="og:image:width" content="800" />
-    <meta property="og:image:height" content="420" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="SeaYou Madeira - Boat Tours in Madeira" />
     <meta property="og:site_name" content="SeaYou Madeira" />
     <meta property="og:locale" content="en_US" />
-    <meta property="fb:app_id" content="1324423168329224" />
     
     <meta name="theme-color" content="#253D7F" />
     <meta name="robots" content="index, follow" />
@@ -36,7 +33,38 @@
     
     <!-- Critical CSS inline for faster rendering -->
     <style>
-      /* ... keep existing code (Critical path CSS for preventing render blocking) */
+      /* Critical path CSS to prevent render blocking */
+      body, html { margin: 0; padding: 0; font-family: Inter, sans-serif; overflow-x: hidden; width: 100%; }
+      .initial-loader { 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        background-color: #253D7F;
+        color: white;
+        font-family: 'Inter', sans-serif;
+      }
+      .initial-loader img {
+        max-width: 180px;
+        margin-bottom: 20px;
+      }
+      .initial-loader .loading-text {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+      .initial-loader .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 16px auto;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
     </style>
     
     <!-- Preload critical assets -->
