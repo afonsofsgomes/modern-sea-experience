@@ -1,8 +1,8 @@
 
 import { Helmet } from "react-helmet";
 
-// Fallback image if the main OG image fails
-const FALLBACK_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
+// Default OG image URL
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
 
 interface MetaTagsProps {
   title: string;
@@ -17,7 +17,7 @@ export const MetaTags = ({
   title,
   description,
   keywords = "boat tours madeira, seayou, porto santo tours, desertas tours, private cruises, luxury boat tours, 1 day experience",
-  ogImage = FALLBACK_OG_IMAGE,
+  ogImage = DEFAULT_OG_IMAGE,
   canonicalUrl,
   type = "website"
 }: MetaTagsProps) => {

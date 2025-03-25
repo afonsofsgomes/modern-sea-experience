@@ -1,8 +1,8 @@
 
 import { useEffect } from 'react';
 
-// Fallback image if the main OG image fails
-const FALLBACK_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
+// Default OG image URL
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
 
 interface UseSEOProps {
   title?: string;
@@ -12,7 +12,7 @@ interface UseSEOProps {
   ogImage?: string;
 }
 
-export const useSEO = ({ title, description, keywords, jsonLd, ogImage = FALLBACK_OG_IMAGE }: UseSEOProps) => {
+export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT_OG_IMAGE }: UseSEOProps) => {
   useEffect(() => {
     // Update document title if provided
     if (title) {

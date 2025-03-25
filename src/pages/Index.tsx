@@ -15,8 +15,8 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 
 // Correct image URL that works - preload this in head
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
-// Fallback for OG image
-const FALLBACK_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
+// Default OG image
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -72,7 +72,7 @@ const Index = () => {
         description="Discover Madeira's coastline with SeaYou's premium maritime experiences. Exclusive boat tours, private cruises, and unforgettable day trips to Porto Santo and Desertas."
         keywords="boat tours madeira, seayou, seabus, desertas tours, porto santo tours, private cruises, luxury boat tours, 1 day experience, madeira island boat tours, maritime tourism"
         canonicalUrl="https://seayou.pt/"
-        ogImage={FALLBACK_OG_IMAGE}
+        ogImage={DEFAULT_OG_IMAGE}
       >
         <meta name="robots" content="index, follow" />
       </PageHead>
