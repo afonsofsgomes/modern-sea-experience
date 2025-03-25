@@ -73,13 +73,7 @@ export default defineConfig(({ mode }) => ({
     },
     postcss: {
       plugins: [
-        require('autoprefixer'),
-        require('cssnano')({
-          preset: ['default', {
-            discardComments: { removeAll: true },
-            minifyFontValues: { removeQuotes: false },
-          }],
-        }),
+        // Import plugins using import statements in postcss.config.js instead
       ],
     },
   },
