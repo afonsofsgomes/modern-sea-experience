@@ -1,4 +1,5 @@
 
+// Export all SEO-related components
 export * from './MetaTags';
 export * from './StructuredData';
 export * from './LocalBusinessSchema';
