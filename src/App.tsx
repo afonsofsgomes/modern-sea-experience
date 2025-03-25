@@ -19,6 +19,7 @@ import Terms from "./pages/Terms";
 import { SitemapGenerator } from "@/components/SEO";
 import SmartlookScript from "@/components/SmartlookScript";
 import GoogleTagManager from "@/components/GoogleTagManager";
+import FacebookPixel from "@/components/FacebookPixel";
 
 // Create QueryClient with optimized settings
 const queryClient = new QueryClient({
@@ -32,6 +33,7 @@ const queryClient = new QueryClient({
 });
 
 const GTM_ID = "GTM-MBXFXGKX";
+const FB_PIXEL_ID = "2645591515649546";
 
 // Flag to check if the Desertas page is accessible
 const DESERTAS_ENABLED = false;
@@ -84,6 +86,7 @@ const App = () => {
         <TooltipProvider>
           <div className="overflow-x-hidden w-full">
             <GoogleTagManager id={GTM_ID} />
+            <FacebookPixel pixelId={FB_PIXEL_ID} />
             <Toaster />
             <Sonner />
             <SmartlookScript />
