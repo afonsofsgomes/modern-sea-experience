@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -41,7 +40,9 @@ const SeaBus = () => {
     },
     {
       question: "Are pets allowed on the SeaBus?",
-      answer: "As much as we love pets, we do not allow them on the boat, unless it's a service animal, properly trained. However, on our <a href='/private-cruise' class='font-semibold text-blue-600 underline underline-offset-2'>private tours</a>, you can bring your friend!"
+      answer: "As much as we love pets, we do not allow them on the boat, unless it's a service animal, properly trained. However, on our private tours, you can bring your friend!",
+      linkText: "private tours",
+      linkUrl: "/private-cruise"
     }
   ];
 
