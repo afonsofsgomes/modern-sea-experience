@@ -10,8 +10,18 @@ import {
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
+import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const PortoSanto = () => {
+  // Carousel images for Porto Santo
+  const portoSantoImages = [
+    "https://extranet.seayou.pt/photos/products/pxo/1.jpg",
+    "https://extranet.seayou.pt/photos/products/pxo/2.jpg",
+    "https://extranet.seayou.pt/photos/products/pxo/3.jpg",
+    "https://extranet.seayou.pt/photos/products/pxo/4.jpg",
+    "https://extranet.seayou.pt/photos/products/pxo/5.jpg",
+  ];
+
   // Breadcrumb data
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -102,6 +112,24 @@ const PortoSanto = () => {
       
       <main className="flex-grow">
         <PortoSantoHero />
+        
+        {/* Image Carousel Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-display font-medium mb-8 text-center text-blue-900">
+                Porto Santo's Golden Beaches
+              </h2>
+              <AutoImageCarousel 
+                images={portoSantoImages} 
+                altPrefix="Porto Santo Island"
+                className="mx-auto shadow-lg rounded-lg overflow-hidden"
+                aspectRatio="wide"
+              />
+            </div>
+          </div>
+        </section>
+        
         <PortoSantoAbout />
         
         {/* Alert banner placed in a white background section */}

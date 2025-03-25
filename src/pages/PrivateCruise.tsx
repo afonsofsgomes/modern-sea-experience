@@ -11,8 +11,18 @@ import {
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
+import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const PrivateCruise = () => {
+  // Carousel images for Private Cruise
+  const privateCruiseImages = [
+    "https://extranet.seayou.pt/photos/products/private/1.jpg",
+    "https://extranet.seayou.pt/photos/products/private/2.webp",
+    "https://extranet.seayou.pt/photos/products/private/3.webp",
+    "https://extranet.seayou.pt/photos/products/private/4.jpg",
+    "https://extranet.seayou.pt/photos/products/private/5.webp",
+  ];
+
   // Breadcrumb data
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -91,6 +101,24 @@ const PrivateCruise = () => {
       
       <main className="flex-grow">
         <PrivateCruiseHero />
+        
+        {/* Image Carousel Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-display font-medium mb-8 text-center text-blue-900">
+                Experience Luxury at Sea
+              </h2>
+              <AutoImageCarousel 
+                images={privateCruiseImages} 
+                altPrefix="Private Cruise"
+                className="mx-auto shadow-lg rounded-lg overflow-hidden"
+                aspectRatio="wide"
+              />
+            </div>
+          </div>
+        </section>
+        
         <PrivateCruiseOptions />
         
         {/* Alert banner placed in a white background section */}
