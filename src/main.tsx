@@ -1,12 +1,23 @@
 
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-// Use createRoot for concurrent mode and better performance
-const container = document.getElementById("root");
-if (!container) throw new Error('Root element not found');
+// Get the root element
+const container = document.getElementById('root');
 
-const root = createRoot(container);
-root.render(<App />);
+// Ensure the root element exists
+if (!container) {
+  throw new Error('Root element not found');
+}
+
+// Create a root using createRoot API
+const root = ReactDOM.createRoot(container);
+
+// Render the app with StrictMode for better development experience
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
