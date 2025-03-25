@@ -5,7 +5,8 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
+  CarouselPrevious,
+  type CarouselApi
 } from "@/components/ui/carousel";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,7 @@ export const AutoImageCarousel = ({
   aspectRatio = "video",
 }: AutoImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [api, setApi] = useState<CarouselApi | null>(null);
   
   // Calculate aspect ratio class
   const aspectRatioClass = {
@@ -38,15 +40,37 @@ export const AutoImageCarousel = ({
 
   // Automatic rotation of slides
   useEffect(() => {
+    if (!api) return;
+    
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      api.scrollNext();
     }, autoplaySpeed);
     
     return () => clearInterval(interval);
-  }, [images.length, autoplaySpeed]);
+  }, [api, autoplaySpeed]);
+
+  // When the carousel api changes slides
+  useEffect(() => {
+    if (!api) return;
+    
+    const onSelect = () => {
+      setCurrentIndex(api.selectedScrollSnap());
+    };
+    
+    api.on("select", onSelect);
+    
+    // Initial setup
+    setCurrentIndex(api.selectedScrollSnap());
+    
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
 
   const moveToIndex = (index: number) => {
-    setCurrentIndex(index);
+    if (api) {
+      api.scrollTo(index);
+    }
   };
 
   return (
@@ -56,15 +80,8 @@ export const AutoImageCarousel = ({
         opts={{
           align: "center",
           loop: true,
-          startIndex: currentIndex
         }}
-        onSelect={(api) => {
-          // Check if api exists and then set the current index
-          if (api) {
-            // The api is the Embla API instance, not an event
-            setCurrentIndex(api.selectedScrollSnap());
-          }
-        }}
+        setApi={setApi}
       >
         <CarouselContent>
           {images.map((image, index) => (
