@@ -8,10 +8,10 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8081, // Using port 8081 to match production environment
+    port: 8080, // Changed to 8080 as required
     hmr: {
       // HMR configurations to fix WebSocket connection issues
-      clientPort: 8081, // Match client port
+      clientPort: 8080, // Match client port
       // For production environment, disable HMR (optional)
       ...(mode === 'production' && { enabled: false }),
     },
@@ -35,7 +35,12 @@ export default defineConfig(({ mode }) => ({
         drop_debugger: true,
         passes: 2,
       },
+      format: {
+        comments: false,
+        indent_level: 0,
+      },
     },
+    cssMinify: true, // Ensure CSS is minified
     rollupOptions: {
       output: {
         manualChunks: {
@@ -44,6 +49,12 @@ export default defineConfig(({ mode }) => ({
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-toast', '@radix-ui/react-slot'],
           router: ['react-router-dom'],
         },
+        assetFileNames: (assetInfo) => {
+          const extType = assetInfo.name?.split('.').at(1);
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
     cssCodeSplit: true,
@@ -59,6 +70,17 @@ export default defineConfig(({ mode }) => ({
     devSourcemap: true,
     modules: {
       scopeBehaviour: 'local',
+    },
+    postcss: {
+      plugins: [
+        require('autoprefixer'),
+        require('cssnano')({
+          preset: ['default', {
+            discardComments: { removeAll: true },
+            minifyFontValues: { removeQuotes: false },
+          }],
+        }),
+      ],
     },
   },
 }));
