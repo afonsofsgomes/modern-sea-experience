@@ -12,8 +12,8 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
 }) => {
   return (
     <>
-      {/* Overlay to darken the background */}
-      <div className="absolute inset-0 bg-blue-900/60 z-0"></div>
+      {/* Overlay to darken the background - reduced opacity */}
+      <div className="absolute inset-0 bg-blue-900/40 z-0"></div>
       
       {/* Background image */}
       <div 
