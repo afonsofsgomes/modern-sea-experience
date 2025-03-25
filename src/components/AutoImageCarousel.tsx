@@ -33,6 +33,7 @@ export const AutoImageCarousel = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(images.length).fill(false));
   
   // Calculate aspect ratio class
   const aspectRatioClass = {
@@ -89,6 +90,15 @@ export const AutoImageCarousel = ({
     });
   };
 
+  // Function to handle image loading success
+  const handleImageLoad = (index: number) => {
+    setImagesLoaded(prev => {
+      const updated = [...prev];
+      updated[index] = true;
+      return updated;
+    });
+  };
+
   // If no valid images, show a message
   if (validImages.length === 0) {
     return (
@@ -98,8 +108,17 @@ export const AutoImageCarousel = ({
     );
   }
 
+  // If images are still loading, show a loading state
+  const allImagesLoaded = imagesLoaded.some(loaded => loaded);
+
   return (
     <div className={cn("w-full relative", className)}>
+      {!allImagesLoaded && (
+        <div className={cn("absolute inset-0 flex items-center justify-center bg-gray-100", aspectRatioClass)}>
+          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+      
       <Carousel 
         className={cn("w-full", className)}
         opts={{
@@ -118,6 +137,7 @@ export const AutoImageCarousel = ({
                   className={`w-full h-full object-${objectFit} transition-transform duration-500 hover:scale-105`}
                   priority={index === 0}
                   onError={() => handleImageError(index)}
+                  onLoad={() => handleImageLoad(index)}
                   fallbackSrc="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
                 />
               </div>

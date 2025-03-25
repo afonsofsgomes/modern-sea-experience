@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -13,6 +14,7 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const SeaBus = () => {
+  // SeaBus images updated with exact URLs
   const seaBusImages = [
     "https://extranet.seayou.pt/photos/products/seabus/1.webp",
     "https://extranet.seayou.pt/photos/products/seabus/2.webp",

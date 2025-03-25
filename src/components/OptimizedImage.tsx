@@ -12,6 +12,7 @@ interface OptimizedImageProps {
   sizes?: string;
   priority?: boolean;
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+  onLoad?: () => void;
   fallbackSrc?: string;
 }
 
@@ -25,6 +26,7 @@ export const OptimizedImage = ({
   sizes = '100vw',
   priority = false,
   onError,
+  onLoad,
   fallbackSrc = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,26 +34,37 @@ export const OptimizedImage = ({
   const hasExtension = src.includes('.');
   const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
   
-  // Generate webp URL if the image is a JPEG or PNG
+  // Generate webp URL if the image is a JPEG or PNG and not already a WebP
   const webpSrc = 
-    hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') 
+    hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') && imageType !== 'webp'
       ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
       : null;
 
   useEffect(() => {
+    // Reset state when src changes
+    setImgSrc(src);
+    setIsLoaded(false);
+    
     if (priority) {
       // Preload priority images
       const img = new Image();
       img.src = src;
+      img.onload = () => {
+        setIsLoaded(true);
+        if (onLoad) onLoad();
+      };
+      img.onerror = (e) => handleImageError(e as unknown as React.SyntheticEvent<HTMLImageElement, Event>);
     }
-    
-    // Reset image source when src prop changes
-    setImgSrc(src);
-    setIsLoaded(false);
   }, [priority, src]);
 
+  // Internal handler for successful image load
+  const handleImageLoad = () => {
+    setIsLoaded(true);
+    if (onLoad) onLoad();
+  };
+
   // Fallback logic for when original image fails to load
-  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     console.warn(`Failed to load image: ${imgSrc}`);
     const imgElement = e.currentTarget;
     
@@ -84,8 +97,8 @@ export const OptimizedImage = ({
           height={typeof height === 'number' ? height : undefined}
           className={cn("w-full h-full object-cover transition-opacity duration-300", 
             isLoaded ? "opacity-100" : "opacity-0")}
-          onLoad={() => setIsLoaded(true)}
-          onError={handleError}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
           fetchPriority="high"
           decoding="async"
         />
@@ -101,8 +114,8 @@ export const OptimizedImage = ({
             sizes={sizes}
             className={cn("w-full h-full object-cover transition-opacity duration-300", 
               isLoaded ? "opacity-100" : "opacity-0")}
-            onLoad={() => setIsLoaded(true)}
-            onError={handleError}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
             decoding="async"
           />
         </picture>

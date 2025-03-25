@@ -14,7 +14,7 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const PrivateCruise = () => {
-  // Carousel images for Private Cruise
+  // Carousel images for Private Cruise - updated with exact URLs
   const privateCruiseImages = [
     "https://extranet.seayou.pt/photos/products/private/1.jpg",
     "https://extranet.seayou.pt/photos/products/private/2.webp",
@@ -114,6 +114,7 @@ const PrivateCruise = () => {
                 altPrefix="Private Cruise"
                 className="mx-auto shadow-lg rounded-lg overflow-hidden"
                 aspectRatio="wide"
+                objectFit="contain"
               />
             </div>
           </div>

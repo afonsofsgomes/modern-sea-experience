@@ -13,7 +13,7 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const PortoSanto = () => {
-  // Carousel images for Porto Santo
+  // Carousel images for Porto Santo - updated with exact URLs
   const portoSantoImages = [
     "https://extranet.seayou.pt/photos/products/pxo/1.jpg",
     "https://extranet.seayou.pt/photos/products/pxo/2.jpg",

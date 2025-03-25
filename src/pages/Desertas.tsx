@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DesertasHero } from "@/components/sections/DesertasHero";
@@ -9,7 +10,7 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const Desertas = () => {
-  // Carousel images for Desertas
+  // Carousel images for Desertas - updated with exact URLs
   const desertasImages = [
     "https://extranet.seayou.pt/photos/products/desertas/1.jpg",
     "https://extranet.seayou.pt/photos/products/desertas/2.jpg",
