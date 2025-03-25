@@ -1,7 +1,7 @@
 
 export const BookingFooter = () => {
   return (
-    <div className="text-center">
+    <div className="text-center mb-0 pb-0">
       <p className="text-gray-500 text-sm mb-2">
         All experiences include round-trip boat tour from Funchal to Porto Santo.
       </p>
