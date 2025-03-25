@@ -64,7 +64,7 @@ export const ExperienceCard = ({
           <p className="text-center text-white max-w-[80%]">Our Full Day Guided Experience will be available soon!</p>
         </div>
       )}
-      <div className={`h-48 bg-gradient-to-r ${cardGradient} relative overflow-hidden`}>
+      <div className={`h-36 sm:h-48 bg-gradient-to-r ${cardGradient} relative overflow-hidden`}>
         <Icon className="absolute right-6 bottom-6 h-20 w-20 text-white/30" />
         <div className="absolute inset-0 bg-white/5"></div>
         <div className="absolute bottom-0 left-0 w-full p-6">
