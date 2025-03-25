@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Clock, Ship, Award, Umbrella, Binoculars } from "lucide-react";
+import { Clock, Ship, Award, Compass, Binoculars } from "lucide-react";
 import { ExperienceCard } from "@/components/porto-santo/ExperienceCard";
 
 export const PortoSantoTours = () => {
@@ -28,7 +28,7 @@ export const PortoSantoTours = () => {
             features={[
               { icon: Clock, text: "8:00 AM - 6:30 PM" },
               { icon: Ship, text: "1 hour boat ride each way" },
-              { icon: Umbrella, text: "Full day on the beach" },
+              { icon: Compass, text: "Full day on the beach" },
               { icon: Award, text: "Includes audio guide" }
             ]}
             badge={{
@@ -39,7 +39,7 @@ export const PortoSantoTours = () => {
               from: "blue",
               to: "blue"
             }}
-            icon={Umbrella}
+            icon={Compass}
             productId="14f7e6e4-cff0-4ee4-aaba-2b8a8f48ad82"
             bookingChannelUUID="d9265611-23d5-4c75-997d-0cb5c76a70fe"
           />

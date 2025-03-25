@@ -51,6 +51,7 @@ export const PortoSantoHighlights = () => {
                         className="p-1.5 bg-black/50 rounded-full hover:bg-black/60 transition-colors touch-manipulation"
                         type="button"
                         aria-label="Photo credits"
+                        onClick={() => {}} // Empty click handler to make it work on mobile
                       >
                         <Info className="h-3.5 w-3.5 text-white/90" />
                       </button>
