@@ -29,25 +29,11 @@ const reportWebVitals = () => {
   });
 };
 
-// Remove the initial loader with fade-out animation
-const removeLoader = () => {
-  const loader = document.querySelector('.initial-loader');
-  if (loader && loader instanceof HTMLElement) {
-    loader.style.opacity = '0';
-    loader.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => {
-      loader.remove();
-    }, 300);
-  }
-};
-
-// Render the app
+// Render the app immediately without waiting for loader
 root.render(<App />);
 
 // Perform non-critical operations after initial render
 window.addEventListener('load', () => {
-  // Remove loader after page is fully loaded
-  removeLoader();
   // Report metrics only after page is loaded
   reportWebVitals();
   
