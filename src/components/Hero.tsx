@@ -26,11 +26,16 @@ const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1507525428034-b723cf96
 
 // Direct image URL that works
 const HERO_BACKGROUND_IMAGE = "https://extranet.seayou.pt/photos/bc.jpg";
+// Fallback for hero background
+const HERO_BACKGROUND_FALLBACK = "https://extranet.seayou.pt/logos/logowhite.png";
 
 export const Hero = () => {
   return (
     <section className="relative bg-[#253D7F] py-12 sm:py-16 md:py-20 min-h-[90vh] flex items-center">
-      <HeroBackground imageUrl={HERO_BACKGROUND_IMAGE} />
+      <HeroBackground 
+        imageUrl={HERO_BACKGROUND_IMAGE} 
+        fallbackUrl={HERO_BACKGROUND_FALLBACK}
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         <HeroContent />

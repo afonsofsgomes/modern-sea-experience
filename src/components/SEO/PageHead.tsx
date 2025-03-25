@@ -13,11 +13,14 @@ interface PageHeadProps {
   children?: React.ReactNode;
 }
 
+// Fallback image if the main OG image fails
+const FALLBACK_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
+
 export const PageHead: React.FC<PageHeadProps> = ({
   title,
   description,
   keywords = "boat tours madeira, seayou, porto santo tours, desertas tours, private cruises, luxury boat tours, 1 day experience",
-  ogImage = "https://extranet.seayou.pt/photos/og.png",
+  ogImage = FALLBACK_OG_IMAGE,
   canonicalUrl,
   type = "website",
   locale = "en_US",

@@ -12,6 +12,7 @@ interface OptimizedImageProps {
   sizes?: string;
   priority?: boolean;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  fallbackSrc?: string;
 }
 
 export const OptimizedImage = ({
@@ -24,8 +25,10 @@ export const OptimizedImage = ({
   sizes = '100vw',
   priority = false,
   objectFit = 'cover',
+  fallbackSrc,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState(src);
   const hasExtension = typeof src === 'string' && src.includes('.');
   const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
   
@@ -69,6 +72,9 @@ export const OptimizedImage = ({
     if (imgElement.src.endsWith('.webp') && src) {
       console.warn(`WebP image failed to load: ${imgElement.src}, falling back to original`);
       imgElement.src = src;
+    } else if (fallbackSrc && imgElement.src !== fallbackSrc) {
+      console.warn(`Image failed to load: ${src}, falling back to provided fallback`);
+      setImgSrc(fallbackSrc);
     } else {
       console.warn(`Image failed to load: ${src}`);
     }
@@ -99,7 +105,7 @@ export const OptimizedImage = ({
       {priority ? (
         // For priority images, don't use picture element to avoid delays
         <img
-          src={src}
+          src={imgSrc}
           alt={alt}
           width={finalWidth}
           height={finalHeight}
@@ -114,7 +120,7 @@ export const OptimizedImage = ({
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            src={src}
+            src={imgSrc}
             alt={alt}
             width={finalWidth}
             height={finalHeight}
