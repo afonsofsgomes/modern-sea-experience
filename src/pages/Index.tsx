@@ -15,7 +15,7 @@ import { AlertEmbed } from "@/components/AlertEmbed";
 
 // Correct image URL that works - preload this in head
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
-// Default OG image
+// Default OG image with absolute URL
 const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/og.png";
 
 const Index = () => {

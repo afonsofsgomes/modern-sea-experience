@@ -24,6 +24,9 @@ export const MetaTags = ({
   // Use the current URL as canonical if not provided
   const canonical = canonicalUrl || typeof window !== "undefined" ? window.location.href : "";
   
+  // Ensure the OG image URL is absolute
+  const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `https://seayou.pt${ogImage}`;
+  
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -39,18 +42,19 @@ export const MetaTags = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
       {canonical && <meta property="og:url" content={canonical} />}
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:image:url" content={ogImage} />
-      <meta property="og:image:secure_url" content={ogImage} />
+      <meta property="og:image" content={absoluteOgImage} />
+      <meta property="og:image:url" content={absoluteOgImage} />
+      <meta property="og:image:secure_url" content={absoluteOgImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content={`SeaYou Madeira - ${title}`} />
       
       {/* Twitter Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image" content={absoluteOgImage} />
     </Helmet>
   );
 };
