@@ -67,9 +67,9 @@ const SeaBus = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHead 
-        title="SeaBus Madeira - Fast Marine Connections | SeaYou"
-        description="Experience fast and comfortable sea transportation around Madeira with SeaBus. Enjoy panoramic views and easy travel between key destinations. Book your tickets online!"
-        keywords="SeaBus Madeira, sea transportation Madeira, Madeira ferry, boat connections Madeira, marine transport Madeira"
+        title="SeaBus Madeira - Fast Marine Tours | SeaYou"
+        description="Experience fast and comfortable boat tours around Madeira with SeaBus. Enjoy panoramic views and easy travel between key destinations. Book your tickets online!"
+        keywords="SeaBus Madeira, boat tours Madeira, Madeira boat trips, marine excursions Madeira, seabus boat tours, coastal tours Madeira"
         canonicalUrl="https://seayou.pt/seabus"
         ogImage="https://extranet.seayou.pt/photos/boat1.jpg"
       >
@@ -77,8 +77,8 @@ const SeaBus = () => {
       </PageHead>
       
       <TourSchema 
-        name="SeaBus Madeira Connections"
-        description="Fast and comfortable sea transportation with panoramic views between key destinations in Madeira."
+        name="SeaBus Madeira Tours"
+        description="Fast and comfortable boat tours with panoramic views between key destinations in Madeira."
         image="https://extranet.seayou.pt/photos/boat1.jpg"
         price="25.00"
         duration="PT1H"

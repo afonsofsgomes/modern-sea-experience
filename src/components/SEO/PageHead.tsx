@@ -16,14 +16,14 @@ interface PageHeadProps {
 export const PageHead: React.FC<PageHeadProps> = ({
   title,
   description,
-  keywords = "",
+  keywords = "boat tours madeira, seayou, porto santo tours, desertas tours, private cruises, luxury boat tours, 1 day experience",
   ogImage = "/og-image.png",
   canonicalUrl,
   type = "website",
   locale = "en_US",
   children
 }) => {
-  const siteName = "SeaYou Madeira";
+  const siteName = "SeaYou Madeira - Boat Tours in Madeira";
   // Use the current URL as canonical if not provided
   const canonical = canonicalUrl || typeof window !== "undefined" ? window.location.href : "";
   

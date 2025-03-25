@@ -71,7 +71,7 @@ const PrivateCruise = () => {
       <PageHead 
         title="Private Yacht Cruises in Madeira Island | SeaYou"
         description="Explore Madeira's stunning coastline with a private luxury yacht cruise. Choose between north and south coast routes for an unforgettable experience."
-        keywords="private cruise Madeira, yacht charter Madeira, luxury boat tour, private boat Madeira, exclusive sailing Madeira"
+        keywords="private cruise Madeira, yacht charter Madeira, luxury boat tour, private boat Madeira, exclusive sailing Madeira, boat tours madeira, 1 day experience"
         canonicalUrl="https://seayou.pt/private-cruise"
         ogImage="https://extranet.seayou.pt/photos/pta-s-lourenco.jpg"
       >
@@ -81,7 +81,7 @@ const PrivateCruise = () => {
       
       <TourSchema 
         name="Private Luxury Catamaran Experience"
-        description="Custom private cruises along Madeira's beautiful coastline with your own dedicated crew."
+        description="Custom private boat tours along Madeira's beautiful coastline with your own dedicated crew."
         image="https://extranet.seayou.pt/photos/pta-s-lourenco.jpg"
         price="450.00"
         duration="PT2H30M"

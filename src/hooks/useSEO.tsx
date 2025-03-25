@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 interface UseSEOProps {
   title?: string;
   description?: string;
+  keywords?: string;
   jsonLd?: Record<string, any>;
 }
 
-export const useSEO = ({ title, description, jsonLd }: UseSEOProps) => {
+export const useSEO = ({ title, description, keywords, jsonLd }: UseSEOProps) => {
   useEffect(() => {
     // Update document title if provided
     if (title) {
@@ -24,6 +25,19 @@ export const useSEO = ({ title, description, jsonLd }: UseSEOProps) => {
         newMetaDescription.name = 'description';
         newMetaDescription.content = description;
         document.head.appendChild(newMetaDescription);
+      }
+    }
+    
+    // Update meta keywords if provided
+    if (keywords) {
+      const metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (metaKeywords) {
+        metaKeywords.setAttribute('content', keywords);
+      } else {
+        const newMetaKeywords = document.createElement('meta');
+        newMetaKeywords.name = 'keywords';
+        newMetaKeywords.content = keywords;
+        document.head.appendChild(newMetaKeywords);
       }
     }
 
@@ -49,5 +63,5 @@ export const useSEO = ({ title, description, jsonLd }: UseSEOProps) => {
         }
       }
     };
-  }, [title, description, jsonLd]);
+  }, [title, description, keywords, jsonLd]);
 };

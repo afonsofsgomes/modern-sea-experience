@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -65,9 +66,9 @@ const Index = () => {
   return (
     <div className="relative">
       <PageHead 
-        title="SeaYou Madeira - Maritime Tourism & Sea Transport Services"
-        description="Discover Madeira's coastline with SeaYou's premium maritime experiences. Fast SeaBus connections, private cruises, and Porto Santo tours. Book your sea adventure today!"
-        keywords="Madeira sea transportation, maritime tourism Madeira, SeaBus Madeira, private cruises Madeira, Porto Santo ferry, boat tours Madeira"
+        title="SeaYou Madeira - Boat Tours in Madeira"
+        description="Discover Madeira's coastline with SeaYou's premium maritime experiences. Exclusive boat tours, private cruises, and unforgettable day trips to Porto Santo and Desertas."
+        keywords="boat tours madeira, seayou, seabus, desertas tours, porto santo tours, private cruises, luxury boat tours, 1 day experience, madeira island boat tours, maritime tourism"
         canonicalUrl="https://seayou.pt/"
       >
         <meta name="robots" content="index, follow" />

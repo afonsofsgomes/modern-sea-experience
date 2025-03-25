@@ -13,7 +13,7 @@ interface MetaTagsProps {
 export const MetaTags = ({
   title,
   description,
-  keywords = "",
+  keywords = "boat tours madeira, seayou, porto santo tours, desertas tours, private cruises, luxury boat tours, 1 day experience",
   ogImage = "/og-image.png",
   canonicalUrl,
   type = "website"

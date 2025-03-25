@@ -98,8 +98,14 @@ export const ExperienceCard = ({
             className="min-h-[300px]" 
           />
         ) : (
-          <div className="h-[300px] flex items-center justify-center bg-gray-100 rounded-lg">
-            <p className="text-gray-500">Coming soon - Join our waitlist</p>
+          <div className="h-[300px] flex flex-col items-center justify-center bg-gray-100 rounded-lg p-6">
+            <p className="text-gray-700 font-medium mb-4 text-center">Book your Porto Santo boat tour today!</p>
+            <a
+              href="mailto:info@seayou.pt?subject=Porto%20Santo%20Tour%20Booking"
+              className="inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none"
+            >
+              Contact Us to Book
+            </a>
           </div>
         )}
       </CardContent>

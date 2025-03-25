@@ -13,7 +13,7 @@ export const FooterBranding: React.FC = () => {
         SeaYou
       </Link>
       <p className="text-base text-muted-foreground mb-6 max-w-xs">
-        Seayou Madeira specializes in scenic seabus connections, exclusive private cruises, and unforgettable maritime tours. Explore Porto Santo on a one-day experience, discover the wild beauty of the Desertas Islands, or enjoy tailored adventures across Madeira's coastline.
+        Seayou Madeira specializes in scenic boat tours, exclusive private cruises, and unforgettable maritime adventures. Explore Porto Santo on a one-day experience, discover the wild beauty of the Desertas Islands, or enjoy tailored adventures across Madeira's coastline.
       </p>
       <FooterSocialLinks />
     </div>
