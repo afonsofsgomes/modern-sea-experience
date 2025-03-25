@@ -34,14 +34,17 @@ export const MetaTags = ({
       {/* Canonical URL */}
       {canonical && <link rel="canonical" href={canonical} />}
       
-      {/* Open Graph Tags */}
+      {/* Open Graph Tags - Enhanced for Facebook compatibility */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
       {canonical && <meta property="og:url" content={canonical} />}
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:url" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
       
       {/* Twitter Tags */}
       <meta name="twitter:card" content="summary_large_image" />

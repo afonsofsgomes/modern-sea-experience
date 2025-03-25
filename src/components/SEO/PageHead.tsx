@@ -33,7 +33,7 @@ export const PageHead: React.FC<PageHeadProps> = ({
   return (
     <Helmet>
       {/* Basic Meta Tags */}
-      <html lang="en" />
+      <html lang="en" prefix="og: https://ogp.me/ns#" />
       <title>{title}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
@@ -41,7 +41,7 @@ export const PageHead: React.FC<PageHeadProps> = ({
       {/* Canonical URL - always set to seayou.pt domain */}
       <link rel="canonical" href={canonical} />
       
-      {/* Open Graph Tags */}
+      {/* Open Graph Tags - Enhanced for Facebook compatibility */}
       <meta property="og:site_name" content={siteName} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -49,8 +49,11 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta property="og:locale" content={locale} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:url" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
       
       {/* Twitter Tags */}
       <meta name="twitter:card" content="summary_large_image" />
