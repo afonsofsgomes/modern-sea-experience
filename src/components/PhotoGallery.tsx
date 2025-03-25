@@ -38,7 +38,10 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
         
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {images.map((image, index) => (
-            <Dialog key={index}>
+            <Dialog key={index} open={selectedImage === index} onOpenChange={(open) => {
+              if (!open) setSelectedImage(null);
+              else setSelectedImage(index);
+            }}>
               <DialogTrigger asChild>
                 <div 
                   className="cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
@@ -56,10 +59,13 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
               </DialogTrigger>
               
               {selectedImage === index && (
-                <DialogContent className="sm:max-w-3xl max-h-[90vh] p-0 bg-black/95">
+                <DialogContent className="sm:max-w-3xl max-h-[90vh] p-0 bg-black/95" onPointerDownOutside={(e) => e.preventDefault()}>
                   <div className="relative w-full h-full flex items-center justify-center">
                     <button 
-                      onClick={closeModal}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        closeModal();
+                      }}
                       className="absolute top-2 right-2 z-50 text-white bg-black/50 rounded-full p-1 hover:bg-black/70 transition-colors"
                     >
                       <X className="h-6 w-6" />
@@ -68,11 +74,12 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
                     <button 
                       onClick={handlePrevious}
                       className="absolute left-2 z-40 text-white bg-black/50 rounded-full p-1 hover:bg-black/70 transition-colors"
+                      onPointerDown={(e) => e.stopPropagation()}
                     >
                       <ChevronLeft className="h-6 w-6" />
                     </button>
                     
-                    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                    <div className="w-full h-full flex items-center justify-center overflow-hidden" onClick={(e) => e.stopPropagation()}>
                       <img
                         src={images[selectedImage]}
                         alt={`${altPrefix} - Photo ${selectedImage + 1}`}
@@ -84,6 +91,7 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
                     <button 
                       onClick={handleNext}
                       className="absolute right-2 z-40 text-white bg-black/50 rounded-full p-1 hover:bg-black/70 transition-colors"
+                      onPointerDown={(e) => e.stopPropagation()}
                     >
                       <ChevronRight className="h-6 w-6" />
                     </button>
