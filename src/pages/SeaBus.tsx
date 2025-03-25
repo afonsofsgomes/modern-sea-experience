@@ -11,18 +11,8 @@ import {
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
-import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const SeaBus = () => {
-  // SeaBus images with exact URLs
-  const seaBusImages = [
-    "https://extranet.seayou.pt/photos/products/seabus/1.webp",
-    "https://extranet.seayou.pt/photos/products/seabus/2.webp",
-    "https://extranet.seayou.pt/photos/products/seabus/3.jpg",
-    "https://extranet.seayou.pt/photos/products/seabus/4.jpg",
-    "https://extranet.seayou.pt/photos/products/seabus/5.jpg",
-  ];
-
   const faqQuestions = [
     {
       question: "What is the SeaBus service in Madeira?",
@@ -101,24 +91,6 @@ const SeaBus = () => {
       
       <main className="flex-grow">
         <SeaBusHero />
-        
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-display font-medium mb-8 text-center text-blue-900">
-                SeaBus Experience
-              </h2>
-              <AutoImageCarousel 
-                images={seaBusImages} 
-                altPrefix="SeaBus Service"
-                className="mx-auto shadow-lg rounded-lg overflow-hidden"
-                aspectRatio="wide"
-                objectFit="contain"
-              />
-            </div>
-          </div>
-        </section>
-        
         <SeaBusMapImage />
         
         <div className="w-full bg-white py-4">
@@ -131,6 +103,7 @@ const SeaBus = () => {
         <SeaBusFeatures />
         <SeaBusBooking />
         
+        {/* FAQ Section */}
         <FAQSection 
           title="SeaBus Service FAQs"
           description="Find answers to common questions about our SeaBus connections."

@@ -7,18 +7,8 @@ import { DesertasBooking } from "@/components/sections/DesertasBooking";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
-import { AutoImageCarousel } from "@/components/AutoImageCarousel";
 
 const Desertas = () => {
-  // Carousel images for Desertas - updated with exact URLs
-  const desertasImages = [
-    "https://extranet.seayou.pt/photos/products/desertas/1.jpg",
-    "https://extranet.seayou.pt/photos/products/desertas/2.jpg",
-    "https://extranet.seayou.pt/photos/products/desertas/3.jpg",
-    "https://extranet.seayou.pt/photos/products/desertas/4.jpg",
-    "https://extranet.seayou.pt/photos/products/desertas/5.webp",
-  ];
-
   // Breadcrumb data
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -92,24 +82,6 @@ const Desertas = () => {
       
       <main className="flex-grow">
         <DesertasHero />
-        
-        {/* Image Carousel Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-display font-medium mb-8 text-center text-blue-900">
-                Discover the Desertas Islands
-              </h2>
-              <AutoImageCarousel 
-                images={desertasImages} 
-                altPrefix="Desertas Islands"
-                className="mx-auto shadow-lg rounded-lg overflow-hidden"
-                aspectRatio="wide"
-                objectFit="contain"
-              />
-            </div>
-          </div>
-        </section>
         
         {/* Alert banner placed in a white background section */}
         <div className="w-full bg-white py-4">
