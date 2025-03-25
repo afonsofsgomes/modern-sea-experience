@@ -39,6 +39,10 @@ export * from './DesertasHero';
 export * from './DesertasAbout';
 export * from './DesertasBooking';
 export * from './DesertasGallery';
+export * from './DesertasItinerary';
+export * from './DesertasWildlife';
+export * from './DesertasScheduleInfo';
+export * from './DesertasPreparation';
 
 // Schedule sections
 export * from './schedule/ScheduleDisplay';

@@ -3,6 +3,10 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DesertasHero } from "@/components/sections/DesertasHero";
 import { DesertasAbout } from "@/components/sections/DesertasAbout";
+import { DesertasItinerary } from "@/components/sections/DesertasItinerary";
+import { DesertasWildlife } from "@/components/sections/DesertasWildlife";
+import { DesertasScheduleInfo } from "@/components/sections/DesertasScheduleInfo";
+import { DesertasPreparation } from "@/components/sections/DesertasPreparation";
 import { DesertasBooking } from "@/components/sections/DesertasBooking";
 import { DesertasGallery } from "@/components/sections/DesertasGallery";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -46,7 +50,7 @@ const Desertas = () => {
     },
     {
       question: "Are meals included in the Desertas Islands tour?",
-      answer: "Yes, a light lunch is included in your Desertas Islands adventure. We typically serve local specialties that showcase Madeiran cuisine. Please inform us of any dietary restrictions when booking."
+      answer: "No, meals are not included in the standard tour package. We recommend bringing your own snacks or you can purchase refreshments and snacks onboard. Water is provided."
     },
     {
       question: "What should I bring for the Desertas Islands tour?",
@@ -95,7 +99,11 @@ const Desertas = () => {
         </div>
         
         <DesertasAbout />
+        <DesertasItinerary />
+        <DesertasWildlife />
         <DesertasGallery />
+        <DesertasScheduleInfo />
+        <DesertasPreparation />
         <DesertasBooking />
         
         {/* FAQ Section */}
