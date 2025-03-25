@@ -15,7 +15,7 @@ export const SeaBusGallery = () => {
     <PhotoGallery 
       images={SEABUS_IMAGES} 
       altPrefix="SeaBus" 
-      className="bg-gray-50"
+      className="bg-gray-50 pb-0 pt-4"
     />
   );
 };

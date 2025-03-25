@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { AspectRatio } from './ui/aspect-ratio';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -17,7 +16,6 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const isMobile = useIsMobile();
   
-  // Reset touch states when dialog closes
   useEffect(() => {
     if (selectedImage === null) {
       setTouchStart(null);
@@ -43,7 +41,6 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
     setSelectedImage(null);
   };
 
-  // Mobile touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
     setTouchEnd(null);
@@ -56,34 +53,29 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!touchStart || !touchEnd) return;
     
-    // Minimum swipe distance (in pixels)
     const minSwipeDistance = 50;
     const distance = touchStart - touchEnd;
     
-    // If the swipe distance is greater than the minimum, navigate
     if (Math.abs(distance) > minSwipeDistance) {
       if (distance > 0) {
-        // Swiped left, go to next image
         if (selectedImage !== null) {
           setSelectedImage(selectedImage === images.length - 1 ? 0 : selectedImage + 1);
         }
       } else {
-        // Swiped right, go to previous image
         if (selectedImage !== null) {
           setSelectedImage(selectedImage === 0 ? images.length - 1 : selectedImage - 1);
         }
       }
     }
     
-    // Prevent any default behavior
     e.preventDefault();
     e.stopPropagation();
   };
 
   return (
-    <section className={`py-8 md:py-12 bg-white ${className}`}>
+    <section className={`py-4 md:py-8 bg-white ${className}`}>
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-display font-medium text-center mb-8">Photo Gallery</h2>
+        <h2 className="text-2xl md:text-3xl font-display font-medium text-center mb-6">Photo Gallery</h2>
         
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {images.map((image, index) => (
@@ -123,7 +115,6 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
                       <X className="h-6 w-6" />
                     </button>
                     
-                    {/* Only show buttons on desktop */}
                     {!isMobile && (
                       <>
                         <button 

@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 
 export const SeaBusBooking = () => {
   return (
-    <section id="booking" className="py-20 bg-white">
+    <section id="booking" className="py-12 bg-white">
       <div className="container mx-auto px-4">
         <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 max-w-5xl mx-auto">
           <div className="mb-6 flex flex-col items-center justify-center">
