@@ -14,6 +14,7 @@ interface OptimizedImageProps {
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   onLoad?: () => void;
   fallbackSrc?: string;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 }
 
 export const OptimizedImage = ({
@@ -28,6 +29,7 @@ export const OptimizedImage = ({
   onError,
   onLoad,
   fallbackSrc = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
+  objectFit = 'cover',
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imgSrc, setImgSrc] = useState(src);
@@ -36,7 +38,9 @@ export const OptimizedImage = ({
   
   // Generate webp URL if the image is a JPEG or PNG and not already a WebP
   const webpSrc = 
-    hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') && imageType !== 'webp'
+    hasExtension && 
+    (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') && 
+    imageType !== 'webp'
       ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
       : null;
 
@@ -95,7 +99,7 @@ export const OptimizedImage = ({
           alt={alt}
           width={typeof width === 'number' ? width : undefined}
           height={typeof height === 'number' ? height : undefined}
-          className={cn("w-full h-full object-cover transition-opacity duration-300", 
+          className={cn(`w-full h-full object-${objectFit} transition-opacity duration-300`, 
             isLoaded ? "opacity-100" : "opacity-0")}
           onLoad={handleImageLoad}
           onError={handleImageError}
@@ -112,7 +116,7 @@ export const OptimizedImage = ({
             height={typeof height === 'number' ? height : undefined}
             loading={loading}
             sizes={sizes}
-            className={cn("w-full h-full object-cover transition-opacity duration-300", 
+            className={cn(`w-full h-full object-${objectFit} transition-opacity duration-300`, 
               isLoaded ? "opacity-100" : "opacity-0")}
             onLoad={handleImageLoad}
             onError={handleImageError}

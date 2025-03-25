@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { cn } from "@/lib/utils";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface AutoImageCarouselProps {
   images: string[];
@@ -35,11 +36,11 @@ export const AutoImageCarousel = ({
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(images.length).fill(false));
   
-  // Calculate aspect ratio class
-  const aspectRatioClass = {
-    square: "aspect-square",
-    video: "aspect-video",
-    wide: "aspect-[16/7]",
+  // Calculate aspect ratio value
+  const aspectRatioValue = {
+    square: 1,
+    video: 16 / 9,
+    wide: 16 / 7,
   }[aspectRatio];
 
   // Filter out failed images
@@ -102,7 +103,7 @@ export const AutoImageCarousel = ({
   // If no valid images, show a message
   if (validImages.length === 0) {
     return (
-      <div className={cn("w-full flex items-center justify-center p-8 bg-gray-100 rounded-lg", aspectRatioClass, className)}>
+      <div className={cn("w-full flex items-center justify-center p-8 bg-gray-100 rounded-lg", className)}>
         <p className="text-gray-500 text-center">No images available</p>
       </div>
     );
@@ -114,7 +115,7 @@ export const AutoImageCarousel = ({
   return (
     <div className={cn("w-full relative", className)}>
       {!allImagesLoaded && (
-        <div className={cn("absolute inset-0 flex items-center justify-center bg-gray-100", aspectRatioClass)}>
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
           <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
@@ -130,17 +131,18 @@ export const AutoImageCarousel = ({
         <CarouselContent>
           {validImages.map((image, index) => (
             <CarouselItem key={index}>
-              <div className={cn("overflow-hidden rounded-lg", aspectRatioClass)}>
+              <AspectRatio ratio={aspectRatioValue} className="bg-white overflow-hidden rounded-lg">
                 <OptimizedImage
                   src={image}
                   alt={`${altPrefix} - Image ${index + 1}`}
-                  className={`w-full h-full object-${objectFit} transition-transform duration-500 hover:scale-105`}
+                  className="w-full h-full"
                   priority={index === 0}
                   onError={() => handleImageError(index)}
                   onLoad={() => handleImageLoad(index)}
                   fallbackSrc="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+                  objectFit={objectFit}
                 />
-              </div>
+              </AspectRatio>
             </CarouselItem>
           ))}
         </CarouselContent>
