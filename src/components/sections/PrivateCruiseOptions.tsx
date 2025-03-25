@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Ship, Clock, MapPin, Sun, ArrowRight, Users, Compass } from "lucide-react";
 import { Link } from "react-router-dom";
+import GroupBookingDialog from "@/components/GroupBookingDialog";
 
 export const PrivateCruiseOptions = () => {
   const [activeRoute, setActiveRoute] = useState<'north' | 'south' | 'custom'>('north');
@@ -206,11 +207,14 @@ export const PrivateCruiseOptions = () => {
                     <div className="text-2xl font-bold text-gray-900">Contact Us</div>
                     <div className="text-sm text-gray-500">for pricing</div>
                   </div>
-                  <Link to="#booking">
-                    <Button variant="outline" className="flex gap-1 items-center">
-                      Inquire Now <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  <GroupBookingDialog 
+                    buttonProps={{
+                      variant: "outline",
+                      className: "flex gap-1 items-center"
+                    }}
+                  >
+                    Inquire Now <ArrowRight className="h-4 w-4" />
+                  </GroupBookingDialog>
                 </div>
               </div>
             </motion.div>
