@@ -24,10 +24,10 @@ const Terms = lazy(() => import("./pages/Terms"));
 
 // Loading fallback while pages load
 const PageLoader = () => (
-  <div className="h-screen w-full flex items-center justify-center bg-blue-900 text-white">
+  <div className="h-screen w-full flex items-center justify-center bg-blue-50 text-blue-900">
     <div className="text-center">
-      <div className="w-12 h-12 border-4 border-t-white border-r-white/40 border-b-white/20 border-l-white/10 rounded-full animate-spin mx-auto mb-4"></div>
-      <div>Loading...</div>
+      <div className="w-12 h-12 border-4 border-t-blue-900 border-r-blue-700 border-b-blue-500 border-l-blue-300 rounded-full animate-spin mx-auto mb-4"></div>
+      <div>Loading page...</div>
     </div>
   </div>
 );
@@ -50,9 +50,11 @@ const GTM_ID = "GTM-MBXFXGKX";
 const DESERTAS_ENABLED = false;
 
 const App = () => {
-  // Fix iOS scroll issues and ensure proper heading hierarchy
+  // Debug mount to confirm App is rendering
   useEffect(() => {
-    // Add accessibility attributes to iframes when they load
+    console.log('App component mounted');
+    
+    // Fix iOS scroll issues and ensure proper heading hierarchy
     const addAccessibilityToIframes = () => {
       requestIdleCallback(() => {
         const iframes = document.querySelectorAll('iframe');

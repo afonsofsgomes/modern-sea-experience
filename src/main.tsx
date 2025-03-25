@@ -29,8 +29,16 @@ const reportWebVitals = () => {
   });
 };
 
-// Render the app immediately without waiting for loader
-root.render(<App />);
+// Render the app - use StrictMode in development for better debugging
+if (process.env.NODE_ENV === 'development') {
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} else {
+  root.render(<App />);
+}
 
 // Perform non-critical operations after initial render
 window.addEventListener('load', () => {

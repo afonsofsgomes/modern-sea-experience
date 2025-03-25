@@ -93,7 +93,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
   return (
     <div
       ref={carouselRef}
-      className="max-w-6xl mx-auto px-1 sm:px-4 relative opacity-0 animate-fade-in"
+      className="max-w-6xl mx-auto px-1 sm:px-4 relative animate-fade-in"
       style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
       onClick={handleUserInteraction}
       onMouseEnter={handleUserInteraction}
