@@ -23,6 +23,11 @@ export const SmartlookScript = () => {
     
     scriptLoaded.current = true;
     
+    // Don't load Smartlook in development to avoid console warnings
+    if (process.env.NODE_ENV === 'development') {
+      return;
+    }
+    
     // Initialize Smartlook only if not already initialized
     if (!window.smartlook || !initialized.current) {
       // Create the smartlook function with proper typing if it doesn't exist
@@ -48,12 +53,14 @@ export const SmartlookScript = () => {
         head.appendChild(script);
       }
       
-      // Only initialize once
+      // Only initialize once with a setTimeout to ensure it doesn't compete with other resources
       if (!initialized.current) {
-        // Initialize with project key
-        window.smartlook('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
-        initialized.current = true;
-        console.log('Smartlook analytics initialized');
+        setTimeout(() => {
+          // Initialize with project key
+          window.smartlook && window.smartlook('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
+          initialized.current = true;
+          console.log('Smartlook analytics initialized');
+        }, 2000);
       }
     }
     

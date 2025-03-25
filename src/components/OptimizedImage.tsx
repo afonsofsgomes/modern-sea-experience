@@ -34,14 +34,32 @@ export const OptimizedImage = ({
     hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') 
       ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
       : null;
-
+      
+  // Calculate approx dimensions for responsive images with percentage width/height
+  const [calculatedDimensions, setCalculatedDimensions] = useState({
+    width: typeof width === 'number' ? width : 400,
+    height: typeof height === 'number' ? height : 300
+  });
+  
   useEffect(() => {
     if (priority) {
       // Preload priority images
       const img = new Image();
       img.src = src;
     }
-  }, [priority, src]);
+    
+    // Try to determine actual image dimensions for percentage-based images
+    if (typeof width === 'string' && width.includes('%') || typeof height === 'string' && height.includes('%')) {
+      const img = new Image();
+      img.onload = () => {
+        setCalculatedDimensions({
+          width: img.width || 400,
+          height: img.height || 300
+        });
+      };
+      img.src = src;
+    }
+  }, [priority, src, width, height]);
 
   // Fallback logic for when original image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -62,16 +80,29 @@ export const OptimizedImage = ({
     objectFit === 'none' ? 'object-none' :
     objectFit === 'scale-down' ? 'object-scale-down' :
     'object-cover';
+    
+  // Determine final width and height attributes for the img tag
+  const finalWidth = typeof width === 'number' ? width : calculatedDimensions.width;
+  const finalHeight = typeof height === 'number' ? height : calculatedDimensions.height;
 
   return (
-    <div className={cn("overflow-hidden", className)} style={{ width, height }}>
+    <div className={cn("overflow-hidden relative", className)} style={{ width, height }}>
+      {/* Placeholder div with same dimensions while image loads */}
+      {!isLoaded && (
+        <div 
+          className="absolute inset-0 bg-gray-200 animate-pulse" 
+          style={{ width: '100%', height: '100%' }}
+          aria-hidden="true"
+        />
+      )}
+      
       {priority ? (
         // For priority images, don't use picture element to avoid delays
         <img
           src={src}
           alt={alt}
-          width={typeof width === 'number' ? width : undefined}
-          height={typeof height === 'number' ? height : undefined}
+          width={finalWidth}
+          height={finalHeight}
           className={cn(`w-full h-full ${objectFitClass} transition-opacity duration-300`, 
             isLoaded ? "opacity-100" : "opacity-0")}
           onLoad={() => setIsLoaded(true)}
@@ -85,8 +116,8 @@ export const OptimizedImage = ({
           <img
             src={src}
             alt={alt}
-            width={typeof width === 'number' ? width : undefined}
-            height={typeof height === 'number' ? height : undefined}
+            width={finalWidth}
+            height={finalHeight}
             loading={loading}
             sizes={sizes}
             className={cn(`w-full h-full ${objectFitClass} transition-opacity duration-300`, 

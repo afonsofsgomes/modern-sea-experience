@@ -24,8 +24,8 @@ export const PageHead: React.FC<PageHeadProps> = ({
   children
 }) => {
   const siteName = "SeaYou Madeira - Boat Tours in Madeira";
-  // Use the current URL as canonical if not provided
-  const canonical = canonicalUrl || typeof window !== "undefined" ? window.location.href : "";
+  // Always use the domain canonical URL as default
+  const canonical = canonicalUrl || "https://seayou.pt" + (typeof window !== "undefined" ? window.location.pathname : "");
   
   return (
     <Helmet>
@@ -35,8 +35,8 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
       
-      {/* Canonical URL */}
-      {canonical && <link rel="canonical" href={canonical} />}
+      {/* Canonical URL - always set to seayou.pt domain */}
+      <link rel="canonical" href={canonical} />
       
       {/* Open Graph Tags */}
       <meta property="og:site_name" content={siteName} />
@@ -44,7 +44,7 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
       <meta property="og:locale" content={locale} />
-      {canonical && <meta property="og:url" content={canonical} />}
+      <meta property="og:url" content={canonical} />
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />

@@ -11,8 +11,8 @@ export const ImageWithFallback = ({
   fallbackSrc,
   alt,
   className,
-  width,
-  height,
+  width = 400,
+  height = 300,
   ...props
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState(src);
@@ -32,10 +32,14 @@ export const ImageWithFallback = ({
     setImgSrc(src);
   }
   
+  // Calculate numeric dimensions
+  const numericWidth = typeof width === 'string' ? parseInt(width, 10) || 400 : width;
+  const numericHeight = typeof height === 'string' ? parseInt(height, 10) || 300 : height;
+  
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" aria-hidden="true" />
       )}
       <picture>
         {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
@@ -48,8 +52,8 @@ export const ImageWithFallback = ({
             console.log(`Image failed to load: ${imgSrc}, using fallback`);
             setImgSrc(fallbackSrc);
           }}
-          width={width || "400"}
-          height={height || "300"}
+          width={numericWidth}
+          height={numericHeight}
           decoding="async"
           loading="lazy"
           {...props}

@@ -19,6 +19,7 @@ export const LazyImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Generate webp URL if the image is a JPEG or PNG
   const hasExtension = src.includes('.');
@@ -43,8 +44,8 @@ export const LazyImage = ({
       }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
 
     return () => {
@@ -56,11 +57,16 @@ export const LazyImage = ({
     setIsLoaded(true);
   };
 
+  // Calculate numeric dimensions
+  const numericWidth = typeof width === 'string' ? parseInt(width, 10) || 400 : width;
+  const numericHeight = typeof height === 'string' ? parseInt(height, 10) || 300 : height;
+
   return (
     <div 
       className="relative overflow-hidden" 
       style={{ background: '#f5f5f5', width, height }} 
-      ref={imgRef}
+      ref={containerRef}
+      aria-busy={!isLoaded}
     >
       {/* Placeholder image shown until the main image loads */}
       {!isLoaded && (
@@ -69,8 +75,9 @@ export const LazyImage = ({
           alt=""
           className={className}
           style={{ filter: 'blur(5px)' }}
-          width={width}
-          height={height}
+          width={numericWidth}
+          height={numericHeight}
+          aria-hidden="true"
           {...props}
         />
       )}
@@ -80,10 +87,11 @@ export const LazyImage = ({
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
+            ref={imgRef}
             src={src}
             alt={alt}
-            width={width}
-            height={height}
+            width={numericWidth}
+            height={numericHeight}
             loading="lazy"
             className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={handleLoad}
