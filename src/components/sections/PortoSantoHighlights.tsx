@@ -42,15 +42,16 @@ export const PortoSantoHighlights = () => {
                 alt="Water Sports" 
                 className="w-full h-full object-cover"
               />
-              {/* Photo Credit Icon with Tooltip */}
+              {/* Photo Credit Icon with Tooltip - Fixed for mobile */}
               <div className="absolute bottom-2 right-2 z-10">
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <button 
-                        className="p-1.5 bg-black/50 rounded-full hover:bg-black/60 transition-colors touch-manipulation"
+                        className="p-1.5 bg-black/50 rounded-full hover:bg-black/60 transition-colors"
                         type="button"
                         aria-label="Photo credits"
+                        onClick={() => {}} // Empty handler to make it tappable on mobile
                       >
                         <Info className="h-3.5 w-3.5 text-white/90" />
                       </button>

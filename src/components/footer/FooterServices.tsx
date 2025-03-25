@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 
 export const FooterServices: React.FC = () => {
   return (
@@ -30,6 +31,12 @@ export const FooterServices: React.FC = () => {
           >
             Porto Santo Tours
           </Link>
+        </li>
+        <li>
+          <div className="flex items-center">
+            <span className="text-muted-foreground opacity-70">Desertas Island Tours</span>
+            <Badge className="ml-2 bg-amber-500 text-white text-[10px] px-1.5 py-0">Soon</Badge>
+          </div>
         </li>
         <li>
           <Link

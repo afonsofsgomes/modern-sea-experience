@@ -2,6 +2,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
+import { Badge } from "@/components/ui/badge";
 
 interface NavbarDesktopLinksProps {
   onScrollToSection: (sectionId: string) => void;
@@ -31,7 +32,8 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruise", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
-    { label: "Desertas Islands", path: "/desertas" }
+    // Desertas is still in the menu but marked as "Soon" and disabled
+    { label: "Desertas Islands", path: "#", isSoon: true }
   ];
 
   // Check if current section is active
@@ -63,17 +65,29 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({
       
       {/* Page links that navigate to different pages */}
       {pageLinks.map((link) => (
-        <Link
-          key={link.path}
-          to={link.path}
-          className={`text-sm font-medium hover-border-effect transition-colors ${
-            location.pathname === link.path 
-              ? 'text-secondary font-semibold' 
-              : scrolled ? 'text-foreground' : 'text-white'
-          }`}
-        >
-          {link.label}
-        </Link>
+        <div key={link.path} className="relative">
+          {link.isSoon ? (
+            <span 
+              className={`text-sm font-medium cursor-not-allowed flex items-center opacity-70 ${
+                scrolled ? 'text-foreground' : 'text-white'
+              }`}
+            >
+              {link.label}
+              <Badge className="ml-2 bg-amber-500 text-white text-[10px] px-1.5 py-0">Soon</Badge>
+            </span>
+          ) : (
+            <Link
+              to={link.path}
+              className={`text-sm font-medium hover-border-effect transition-colors ${
+                location.pathname === link.path 
+                  ? 'text-secondary font-semibold' 
+                  : scrolled ? 'text-foreground' : 'text-white'
+              }`}
+            >
+              {link.label}
+            </Link>
+          )}
+        </div>
       ))}
     </nav>
   );

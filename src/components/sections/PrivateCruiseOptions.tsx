@@ -1,206 +1,157 @@
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { 
-  Calendar, 
-  MapPin, 
-  Clock, 
-  ChevronRight,
-  Users
-} from "lucide-react";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
-import { useState } from "react";
-import GroupBookingDialog from "@/components/GroupBookingDialog";
+import { Ship, Clock, MapPin, Sun, ArrowRight, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const PrivateCruiseOptions = () => {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [activeRoute, setActiveRoute] = useState<'north' | 'south'>('north');
   
-  const scrollToBooking = () => {
-    const bookingSection = document.getElementById("booking");
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const cruiseOptions = [
-    {
-      id: 1,
-      title: "North Coast Cruise",
-      description: "Discover the raw beauty of the North Coast from the comfort and privacy of our catamaran",
-      days: "WEDNESDAY, THURSDAY, FRIDAY",
-      time: "13:00 - 15:30",
-      location: "Departing from Caniçal",
-      price: "60€ per person",
-      minPeople: "Minimum 4 passengers",
-      image: "https://extranet.seayou.pt/photos/pta-s-lourenco2.jpg",
-      buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
-      useContactForm: false
-    },
-    {
-      id: 2,
-      title: "South Coast Cruise",
-      description: "Sail to the sunniest part of Madeira and experience the island's southern charm",
-      days: "TUESDAY, SATURDAY, SUNDAY",
-      time: "13:00 - 15:30",
-      location: "Departing from Calheta",
-      price: "60€ per person",
-      minPeople: "Minimum 4 passengers",
-      image: "https://extranet.seayou.pt/photos/south.jpg",
-      buttonAction: () => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }),
-      useContactForm: false
-    },
-    {
-      id: 3,
-      title: "Coastal Exploration",
-      description: "Discover hidden caves, majestic cliffs and pristine beaches along Madeira's coastline",
-      custom: true,
-      image: "https://extranet.seayou.pt/photos/coastal.jpg",
-      useContactForm: true
-    },
-    {
-      id: 4,
-      title: "Custom Charter",
-      description: "Nothing seems to fit your needs? Let's discuss and find a tailor-made cruise experience just for you.",
-      custom: true,
-      image: "https://extranet.seayou.pt/photos/custom.jpg",
-      useContactForm: true
-    }
-  ];
-
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-[#253D7F]">
-            Private Cruise Options
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 text-primary rounded-full mb-4">
+            Customizable Tours
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+            Your Perfect Private Cruise
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Choose from our selection of exclusive private cruises, each offering a unique way to experience Madeira's stunning coastlines
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Choose between our North and South coast routes or create your own custom itinerary. Our private cruises offer the ultimate in flexible, personalized touring.
           </p>
-          <div className="mt-4 inline-block bg-[#E95543]/10 text-[#E95543] px-4 py-2 rounded-lg font-medium">
-            <span className="flex items-center justify-center">
-              <Users className="h-4 w-4 mr-2" />
-              60€ per person • Minimum 4 passengers required
-            </span>
-          </div>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {cruiseOptions.map((option, index) => (
-            <motion.div
-              key={option.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              onMouseEnter={() => setHoveredCard(option.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-              className="relative group"
-            >
-              <div className="absolute inset-0 rounded-xl overflow-hidden">
-                <div 
-                  className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${option.image})` }}
-                />
-                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              
-              <Card className="relative h-full bg-transparent border-0 overflow-hidden shadow-xl backdrop-blur-sm text-white">
-                <div className="absolute inset-0 bg-black/30 rounded-xl"></div>
-                <CardHeader className="relative">
-                  <CardTitle className="text-2xl md:text-3xl font-display">{option.title}</CardTitle>
-                  <CardDescription className="text-white/90 text-base mt-2">{option.description}</CardDescription>
-                </CardHeader>
-                
-                <CardContent className="relative">
-                  {!option.custom && (
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-2">
-                        <Calendar className="h-5 w-5 opacity-75" />
-                        <span>{option.days}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-5 w-5 opacity-75" />
-                        <span>{option.time}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="h-5 w-5 opacity-75" />
-                        <span>{option.location}</span>
-                      </div>
-                      <div className="mt-4">
-                        <div className="text-xl font-bold">{option.price}</div>
-                        <div className="text-sm font-medium text-white/90 flex items-center">
-                          <Users className="h-4 w-4 mr-1 opacity-75" />
-                          {option.minPeople}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-                
-                <CardFooter className="relative pt-3">
-                  {option.useContactForm ? (
-                    <GroupBookingDialog 
-                      buttonProps={{
-                        className: `relative overflow-hidden group transition-all duration-200 ease-in-out ${
-                          hoveredCard === option.id 
-                            ? 'bg-white text-[#253D7F]' 
-                            : 'bg-[#E95543] hover:bg-[#E95543]/90 text-white'
-                        }`
-                      }}
-                    >
-                      <span className="relative z-10 flex items-center">
-                        Contact Us
-                        <ChevronRight className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-                          hoveredCard === option.id ? 'translate-x-1' : ''
-                        }`} />
-                      </span>
-                    </GroupBookingDialog>
-                  ) : (
-                    <Button
-                      className={`relative overflow-hidden group transition-all duration-200 ease-in-out ${
-                        hoveredCard === option.id 
-                          ? 'bg-white text-[#253D7F]' 
-                          : 'bg-[#E95543] hover:bg-[#E95543]/90 text-white'
-                      }`}
-                      onClick={option.buttonAction}
-                    >
-                      <span className="relative z-10 flex items-center">
-                        Book Now
-                        <ChevronRight className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-                          hoveredCard === option.id ? 'translate-x-1' : ''
-                        }`} />
-                      </span>
-                    </Button>
-                  )}
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
         </div>
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center text-gray-600 p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm"
-        >
-          <p>All scheduled private cruises depart at 13:00 and return at 15:30. Custom timing available upon request.</p>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
+          {/* North Route */}
+          <div>
+            <motion.div 
+              className={`bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 ${activeRoute === 'north' ? 'ring-2 ring-primary' : ''}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative h-60 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                  alt="North Coast Route" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <h3 className="text-xl font-bold text-white mb-1">North Coast Experience</h3>
+                  <p className="text-white/90 text-sm">Explore caves, waterfalls & dramatic cliffs</p>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <p className="text-muted-foreground mb-4">
+                  Discover the wild beauty of Madeira's north coast with our exclusive private cruise. Sail past impressive cliffs, explore hidden caves, and spot dolphins in their natural habitat.
+                </p>
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-2 mb-6">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Ship className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Exclusive Boat</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Clock className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">2.5-8 Hours</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Porto Moniz</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Users className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Up to 18 Pax</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Sun className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Swimming Stops</span>
+                  </div>
+                </div>
+                
+                <div className="flex justify-between items-center border-t border-gray-100 pt-4">
+                  <div>
+                    <div className="text-2xl font-bold text-gray-900">€60</div>
+                    <div className="text-sm text-gray-500">per passenger</div>
+                  </div>
+                  <Link to="#booking">
+                    <Button variant="outline" className="flex gap-1 items-center">
+                      Book This Route <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* South Route */}
+          <div>
+            <motion.div 
+              className={`bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 ${activeRoute === 'south' ? 'ring-2 ring-primary' : ''}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative h-60 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1591971737242-fea16a4f3bad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
+                  alt="South Coast Route" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <h3 className="text-xl font-bold text-white mb-1">South Coast Experience</h3>
+                  <p className="text-white/90 text-sm">Sunshine, calm waters & scenic beaches</p>
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <p className="text-muted-foreground mb-4">
+                  Cruise along Madeira's sunny south coast in complete privacy. Enjoy calm seas, beautiful towns, and secluded swimming spots with your friends and family.
+                </p>
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-2 mb-6">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Ship className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Exclusive Boat</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Clock className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">2.5-8 Hours</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Funchal</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Users className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Up to 18 Pax</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Sun className="h-4 w-4 text-blue-600" />
+                    <span className="text-gray-600">Swimming Stops</span>
+                  </div>
+                </div>
+                
+                <div className="flex justify-between items-center border-t border-gray-100 pt-4">
+                  <div>
+                    <div className="text-2xl font-bold text-gray-900">€60</div>
+                    <div className="text-sm text-gray-500">per passenger</div>
+                  </div>
+                  <Link to="#booking">
+                    <Button variant="outline" className="flex gap-1 items-center">
+                      Book This Route <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

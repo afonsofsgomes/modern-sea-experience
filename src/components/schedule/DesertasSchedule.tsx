@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, CalendarDays } from "lucide-react";
 import { 
   Table,
   TableBody,
@@ -10,15 +10,19 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 export const DesertasSchedule = () => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-semibold mb-6">Desertas Islands Tour</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold">Desertas Islands Tour</h2>
+        <Badge className="bg-amber-500 text-white">Coming Soon</Badge>
+      </div>
       
       <div className="grid gap-8">
         <div>
-          <h3 className="text-lg font-medium mb-3">Departure Schedule</h3>
+          <h3 className="text-lg font-medium mb-3">Planned Schedule</h3>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
@@ -38,17 +42,16 @@ export const DesertasSchedule = () => {
             </Table>
           </div>
           <p className="mt-4 text-sm text-gray-600">
-            Note: All Desertas Islands tours depart from Caniçal Harbor. Please arrive 30 minutes before departure time.
+            Note: All Desertas Islands tours will depart from Caniçal Harbor. Please arrive 30 minutes before departure time.
           </p>
         </div>
       </div>
       
       <div className="mt-8 text-center">
-        <Button className="bg-green-600 hover:bg-green-700">
-          <Link to="/desertas" className="flex items-center">
-            Discover Desertas Islands <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+        <div className="bg-gray-100 py-3 px-4 rounded-md inline-flex items-center gap-3">
+          <Clock className="h-5 w-5 text-amber-600" />
+          <span className="text-gray-700">Stay tuned for our upcoming Desertas tours</span>
+        </div>
       </div>
     </div>
   );

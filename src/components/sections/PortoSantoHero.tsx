@@ -28,15 +28,16 @@ export const PortoSantoHero = () => {
         <div className="absolute inset-0 bg-black/40" />
       </div>
       
-      {/* Photo Credits */}
+      {/* Photo Credits - Fixed for mobile */}
       <div className="absolute bottom-3 right-3 z-20">
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
               <button 
-                className="p-2 bg-black/50 rounded-full hover:bg-black/60 transition-colors touch-manipulation"
+                className="p-2 bg-black/50 rounded-full hover:bg-black/60 transition-colors"
                 type="button"
                 aria-label="Photo credits"
+                onClick={() => {}} // Empty handler to make it tappable on mobile
               >
                 <Info className="h-4 w-4 text-white/90" />
               </button>

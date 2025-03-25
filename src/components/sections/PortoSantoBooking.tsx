@@ -1,3 +1,4 @@
+
 import { 
   Compass, 
   Car, 
@@ -5,7 +6,9 @@ import {
   Ship,
   Utensils,
   Fish,
-  Map
+  Map,
+  Binoculars,
+  PalmTree
 } from "lucide-react";
 import { 
   BookingHeader, 
@@ -48,7 +51,7 @@ export const PortoSantoBooking = () => {
                   <span className="text-xs text-gray-700">Self-guided exploration</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Umbrella className="h-4 w-4 text-blue-700" />
+                  <PalmTree className="h-4 w-4 text-blue-700" />
                   <span className="text-xs text-gray-700">Full day on the golden beach</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -93,7 +96,7 @@ export const PortoSantoBooking = () => {
                   <span className="text-xs text-gray-700">Guided island tour with history</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Umbrella className="h-4 w-4 text-green-700" />
+                  <Binoculars className="h-4 w-4 text-green-700" />
                   <span className="text-xs text-gray-700">Free time for beach & exploration</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -170,7 +173,7 @@ export const PortoSantoBooking = () => {
               icon={Ship}
               features={[
                 { icon: Compass, text: "Self-guided exploration of Porto Santo" },
-                { icon: Umbrella, text: "Full day on the golden beach" },
+                { icon: PalmTree, text: "Full day on the golden beach" },
                 { icon: Ship, text: "Round-trip boat tour" }
               ]}
               productId="982788"
@@ -187,7 +190,7 @@ export const PortoSantoBooking = () => {
               icon={Map}
               features={[
                 { icon: Car, text: "Guided island tour with local history" },
-                { icon: Umbrella, text: "Free afternoon for beach & exploration" },
+                { icon: Binoculars, text: "Free afternoon for beach & exploration" },
                 { icon: Ship, text: "Round-trip boat tour" }
               ]}
               productId="985324"

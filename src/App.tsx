@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Booking from "./pages/Booking";
@@ -24,6 +24,9 @@ import GoogleTagManager from "@/components/GoogleTagManager";
 const queryClient = new QueryClient();
 const GTM_ID = "GTM-MBXFXGKX";
 
+// Flag to check if the Desertas page is accessible
+const DESERTAS_ENABLED = false;
+
 const App = () => (
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -42,11 +45,17 @@ const App = () => (
                 <Route path="/seabus" element={<SeaBus />} />
                 <Route path="/private-cruise" element={<PrivateCruise />} />
                 <Route path="/porto-santo" element={<PortoSanto />} />
-                <Route path="/desertas" element={<Desertas />} />
                 <Route path="/group-bookings" element={<GroupBookings />} />
                 <Route path="/schedule" element={<Schedule />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<Terms />} />
+                
+                {/* Desertas page - redirects to home if not enabled */}
+                <Route 
+                  path="/desertas" 
+                  element={DESERTAS_ENABLED ? <Desertas /> : <Navigate to="/" replace />} 
+                />
+                
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

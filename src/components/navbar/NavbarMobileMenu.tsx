@@ -3,6 +3,7 @@ import React from "react";
 import { X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
+import { Badge } from "@/components/ui/badge";
 
 interface NavbarMobileMenuProps {
   isOpen: boolean;
@@ -34,7 +35,8 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruise", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
-    { label: "Desertas Islands", path: "/desertas" }
+    // Desertas is still in the menu but marked as "Soon" and disabled
+    { label: "Desertas Islands", path: "#", isSoon: true }
   ];
 
   if (!isOpen) return null;
@@ -89,16 +91,24 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
           {/* Page links that navigate to different pages */}
           <div className="flex flex-col space-y-1 mb-6">
             {pageLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-lg font-medium py-3 border-b border-gray-100 block ${
-                  location.pathname === link.path ? 'text-primary font-semibold' : ''
-                }`}
-                onClick={onClose}
-              >
-                {link.label}
-              </Link>
+              <div key={link.path} className="py-3 border-b border-gray-100">
+                {link.isSoon ? (
+                  <span className="text-lg font-medium text-gray-400 flex items-center">
+                    {link.label}
+                    <Badge className="ml-2 bg-amber-500 text-white text-[10px] px-1.5 py-0">Soon</Badge>
+                  </span>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className={`text-lg font-medium block ${
+                      location.pathname === link.path ? 'text-primary font-semibold' : ''
+                    }`}
+                    onClick={onClose}
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
           
