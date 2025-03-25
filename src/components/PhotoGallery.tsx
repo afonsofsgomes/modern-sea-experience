@@ -46,11 +46,11 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
                   onClick={() => setSelectedImage(index)}
                 >
                   <AspectRatio ratio={4/3}>
-                    <OptimizedImage
+                    <img
                       src={image}
                       alt={`${altPrefix} - Photo ${index + 1}`}
-                      className="w-full h-full"
-                      objectFit="cover"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </AspectRatio>
                 </div>
@@ -74,12 +74,11 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
                     </button>
                     
                     <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                      <OptimizedImage
-                        src={image}
-                        alt={`${altPrefix} - Photo ${index + 1}`}
+                      <img
+                        src={images[selectedImage]}
+                        alt={`${altPrefix} - Photo ${selectedImage + 1}`}
                         className="max-h-[80vh] w-auto"
-                        objectFit="contain"
-                        priority={true}
+                        loading="eager"
                       />
                     </div>
                     
