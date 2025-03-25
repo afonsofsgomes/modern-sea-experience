@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { LockKeyhole, Clock, Trophy, TicketCheck } from "lucide-react";
+import { LockKeyhole, Clock, MapPin, TicketCheck } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export const HeroContent = () => {
@@ -35,8 +35,8 @@ export const HeroContent = () => {
       >
         <TrustIndicator icon={<LockKeyhole className="h-4 w-4 sm:h-5 sm:w-5" />} text="Secure Booking" />
         <TrustIndicator icon={<Clock className="h-4 w-4 sm:h-5 sm:w-5" />} text="24/7 Support" />
-        <TrustIndicator icon={<Trophy className="h-4 w-4 sm:h-5 sm:w-5" />} text="Trusted on TripAdvisor" />
-        <TrustIndicator icon={<TicketCheck className="h-4 w-4 sm:h-5 sm:w-5" />} text="Flexible Reschedule" />
+        <TrustIndicator icon={<MapPin className="h-4 w-4 sm:h-5 sm:w-5" />} text="Trusted on TripAdvisor" />
+        <TrustIndicator icon={<TicketCheck className="h-4 w-4 sm:h-5 sm:w-5" />} text="Flexible Cancellation" />
       </motion.div>
     </div>
   );

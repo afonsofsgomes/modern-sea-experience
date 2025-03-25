@@ -2,7 +2,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
-import { Badge } from "@/components/ui/badge";
 
 interface NavbarDesktopLinksProps {
   onScrollToSection: (sectionId: string) => void;
@@ -32,11 +31,7 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruise", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
-    { 
-      label: "Desertas Islands", 
-      path: "#", // Changed from "/desertas" to "#" to prevent navigation
-      soon: true 
-    }
+    { label: "Desertas Islands", path: "/desertas" }
   ];
 
   // Check if current section is active
@@ -68,27 +63,17 @@ export const NavbarDesktopLinks: React.FC<NavbarDesktopLinksProps> = ({
       
       {/* Page links that navigate to different pages */}
       {pageLinks.map((link) => (
-        <div key={link.path} className="relative flex items-center">
-          <Link
-            to={link.path}
-            className={`text-sm font-medium hover-border-effect transition-colors ${
-              location.pathname === link.path 
-                ? 'text-secondary font-semibold' 
-                : scrolled ? 'text-foreground' : 'text-white'
-            }`}
-            onClick={link.soon ? (e) => e.preventDefault() : undefined}
-          >
-            {link.label}
-          </Link>
-          {link.soon && (
-            <Badge 
-              variant="outline" 
-              className="ml-2 text-xs py-0 px-1.5 h-5 bg-amber-100 text-amber-800 border-amber-200"
-            >
-              Soon
-            </Badge>
-          )}
-        </div>
+        <Link
+          key={link.path}
+          to={link.path}
+          className={`text-sm font-medium hover-border-effect transition-colors ${
+            location.pathname === link.path 
+              ? 'text-secondary font-semibold' 
+              : scrolled ? 'text-foreground' : 'text-white'
+          }`}
+        >
+          {link.label}
+        </Link>
       ))}
     </nav>
   );

@@ -1,96 +1,77 @@
 
-import React from "react";
-import { Link } from "react-router-dom";
-import { Ship, PalmtreeIcon, Anchor } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { DestinationCard, MultiDestinationCard, destinationData } from "@/components/destinations";
 
-interface DestinationCardProps {
-  title: string;
-  description: string;
-  image: string;
-  link: string;
-  icon: React.ComponentType<any>;
-  gradient: string;
-}
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3
+    }
+  }
+};
 
-const DestinationCard: React.FC<DestinationCardProps> = ({
-  title,
-  description,
-  image,
-  link,
-  icon: Icon,
-  gradient
-}) => {
-  return (
-    <Link to={link} className="relative block rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-      <div className="absolute inset-0">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover object-center opacity-80"
-          loading="lazy"
-        />
-        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-75`}></div>
-      </div>
-      <div className="relative p-6 flex flex-col items-start justify-end h-64">
-        <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 mb-3">
-          <Icon className="h-6 w-6 text-white" />
-        </div>
-        <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-        <p className="text-sm text-white opacity-90">{description}</p>
-      </div>
-    </Link>
-  );
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5 }
+  }
 };
 
 export const Destinations = () => {
+  const destinationsRef = useRef(null);
+  const destinationsInView = useInView(destinationsRef, { once: true, amount: 0.1 });
+
   return (
-    <section id="destinations" className="py-16 md:py-20 bg-white">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-display font-medium mb-4">
-            Explore Our Destinations
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Discover the beauty of Madeira with our exclusive boat tours
-          </p>
-        </div>
+    <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden" ref={destinationsRef}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
+        <motion.div 
+          className="max-w-3xl mx-auto text-center mb-10 md:mb-16"
+          initial="hidden"
+          animate={destinationsInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <motion.span variants={itemVariants} className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-3 md:mb-4">
+            Discover Madeira by Sea
+          </motion.span>
+          <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl font-display font-medium mb-4 md:mb-6">
+            Explore Our Destinations & Experiences
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+            Choose from our carefully crafted sea experiences to make your visit to Madeira unforgettable, each location offers unique experiences and scenery.
+          </motion.p>
+        </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-          {/* SeaBus Card */}
-          <DestinationCard
-            title="SeaBus Catamaran"
-            description="Experience the thrill of coastal exploration on our SeaBus Catamaran, offering daily routes."
-            image="/lovable-uploads/4916a25d-a9c9-4401-855f-3959288a908b.jpg"
-            link="/seabus"
-            icon={Ship}
-            gradient="from-blue-500/90 to-blue-700/90"
-          />
-          
-          {/* Porto Santo Card */}
-          <DestinationCard
-            title="Porto Santo Island"
-            description="Embark on a day trip to Porto Santo, known for its golden beaches and tranquil atmosphere."
-            image="/lovable-uploads/990a9965-8959-4196-852a-481849549943.jpg"
-            link="/porto-santo"
-            icon={PalmtreeIcon}
-            gradient="from-yellow-500/90 to-yellow-700/90"
-          />
-          
-          {/* Private Cruise Card - replace Desertas with this */}
-          <DestinationCard
-            title="Private Cruises"
-            description="Charter our vessels for exclusive private experiences along Madeira's stunning coastline."
-            image="/lovable-uploads/55bd04ea-d807-46c1-ba3e-b6e118ffc695.jpg"
-            link="/private-cruise"
-            icon={Anchor}
-            gradient="from-green-500/90 to-green-700/90"
-          />
-        </div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground">
-            Explore the best of Madeira's coast with SeaYou - Book your adventure today!
-          </p>
+        <div className="space-y-12 md:space-y-24">
+          {destinationData.map((destination, index) => (
+            <motion.div
+              key={destination.experience || destination.name}
+              initial={{ opacity: 0, y: 100 }}
+              animate={destinationsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+              transition={{ duration: 0.7, delay: index * 0.2 }}
+              className="rounded-2xl overflow-hidden shadow-xl bg-white"
+            >
+              {destination.multipleDestinations && destination.destinations ? (
+                <MultiDestinationCard 
+                  {...destination} 
+                />
+              ) : (
+                <DestinationCard 
+                  {...destination} 
+                  image={destination.image || ''}
+                  description={destination.description || ''}
+                  features={destination.features || []}
+                  isOdd={index % 2 !== 0}
+                />
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

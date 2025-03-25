@@ -39,6 +39,7 @@ export const PrivateCruiseInfo = () => {
               <Users className="h-10 w-10 text-[#E95543] mb-2" />
               <p className="font-medium">Capacity</p>
               <p>Up to 18 passengers</p>
+              <p className="text-sm text-gray-600">Minimum 4 passengers</p>
             </motion.div>
             <motion.div 
               className="flex flex-col items-center"
@@ -49,7 +50,7 @@ export const PrivateCruiseInfo = () => {
             >
               <Euro className="h-10 w-10 text-[#E95543] mb-2" />
               <p className="font-medium">Price</p>
-              <p>60€ per passenger</p>
+              <p>60€ per person</p>
             </motion.div>
           </div>
           

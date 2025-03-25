@@ -3,7 +3,6 @@ import React from "react";
 import { X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarLink } from "./NavbarLink";
-import { Badge } from "@/components/ui/badge";
 
 interface NavbarMobileMenuProps {
   isOpen: boolean;
@@ -35,11 +34,7 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
     { label: "SeaBus", path: "/seabus" },
     { label: "Private Cruise", path: "/private-cruise" },
     { label: "Porto Santo", path: "/porto-santo" },
-    { 
-      label: "Desertas Islands", 
-      path: "#", // Changed from "/desertas" to "#" to prevent navigation
-      soon: true 
-    }
+    { label: "Desertas Islands", path: "/desertas" }
   ];
 
   if (!isOpen) return null;
@@ -94,31 +89,16 @@ export const NavbarMobileMenu: React.FC<NavbarMobileMenuProps> = ({
           {/* Page links that navigate to different pages */}
           <div className="flex flex-col space-y-1 mb-6">
             {pageLinks.map((link) => (
-              <div key={link.path} className="flex items-center">
-                <Link
-                  to={link.path}
-                  className={`text-lg font-medium py-3 border-b border-gray-100 block ${
-                    location.pathname === link.path ? 'text-primary font-semibold' : ''
-                  } ${link.soon ? 'text-gray-400 cursor-not-allowed' : ''}`}
-                  onClick={(e) => {
-                    if (link.soon) {
-                      e.preventDefault();
-                    } else {
-                      onClose();
-                    }
-                  }}
-                >
-                  {link.label}
-                </Link>
-                {link.soon && (
-                  <Badge 
-                    variant="outline" 
-                    className="ml-2 text-xs py-0 px-1.5 h-5 bg-amber-100 text-amber-800 border-amber-200"
-                  >
-                    Soon
-                  </Badge>
-                )}
-              </div>
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`text-lg font-medium py-3 border-b border-gray-100 block ${
+                  location.pathname === link.path ? 'text-primary font-semibold' : ''
+                }`}
+                onClick={onClose}
+              >
+                {link.label}
+              </Link>
             ))}
           </div>
           
