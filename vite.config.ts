@@ -22,8 +22,7 @@ export default defineConfig(({ mode }) => ({
       plugins: [],
       // Optimize component memoization
       jsxImportSource: undefined,
-      // Enable React Fast Refresh for faster updates
-      fastRefresh: true
+      // Remove fastRefresh as it's not in the Options type
     }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
