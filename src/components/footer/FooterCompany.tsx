@@ -1,8 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { CareersModal } from "@/components/CareersModal";
 
 export const FooterCompany: React.FC = () => {
+  const [showCareersModal, setShowCareersModal] = useState(false);
+
   return (
     <div>
       <h3 className="font-medium text-lg mb-4">Company</h3>
@@ -24,12 +27,12 @@ export const FooterCompany: React.FC = () => {
           </Link>
         </li>
         <li>
-          <Link
-            to="/careers"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+          <button
+            onClick={() => setShowCareersModal(true)}
+            className="text-muted-foreground hover:text-foreground transition-colors text-left"
           >
             Careers
-          </Link>
+          </button>
         </li>
         <li>
           <Link
@@ -48,6 +51,12 @@ export const FooterCompany: React.FC = () => {
           </Link>
         </li>
       </ul>
+      
+      {/* Careers Modal */}
+      <CareersModal 
+        isOpen={showCareersModal} 
+        onOpenChange={setShowCareersModal} 
+      />
     </div>
   );
 };
