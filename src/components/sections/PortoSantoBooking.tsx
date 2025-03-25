@@ -2,7 +2,6 @@
 import { 
   Compass, 
   Car, 
-  Umbrella, 
   Ship,
   Utensils,
   Fish,
@@ -17,6 +16,9 @@ import {
 } from "@/components/porto-santo";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { BokunWidget } from "@/components/BokunWidget";
+import { MobileExperienceCard } from "@/components/porto-santo/MobileExperienceCard";
+import { MobileBookingSection } from "@/components/porto-santo/MobileBookingSection";
+import { ComingSoonContent } from "@/components/porto-santo/ComingSoonContent";
 
 export const PortoSantoBooking = () => {
   const isMobile = useIsMobile();
@@ -30,36 +32,20 @@ export const PortoSantoBooking = () => {
         {isMobile ? (
           <div className="space-y-6 mb-8">
             {/* Basic Experience - Mobile */}
-            <div className="bg-white border border-blue-100 rounded-lg shadow-sm overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-100 to-blue-200 p-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-blue-800">Basic Experience</h3>
-                    <p className="text-sm text-blue-600">Self-guided exploration</p>
-                  </div>
-                  <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full">
-                    Standard
-                  </span>
-                </div>
-              </div>
-              <div className="px-4 py-3 border-b border-gray-100">
-                <p className="text-sm text-gray-600">Round-trip boat tour to Porto Santo's golden beaches. Explore at your own leisure.</p>
-              </div>
-              <div className="p-4 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Compass className="h-4 w-4 text-blue-700" />
-                  <span className="text-xs text-gray-700">Self-guided exploration</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Palmtree className="h-4 w-4 text-blue-700" />
-                  <span className="text-xs text-gray-700">Full day on the golden beach</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Ship className="h-4 w-4 text-blue-700" />
-                  <span className="text-xs text-gray-700">Round-trip boat tour</span>
-                </div>
-              </div>
-              <div className="bg-gray-50 p-3">
+            <MobileExperienceCard
+              title="Basic Experience"
+              subtitle="Self-guided exploration"
+              description="Round-trip boat tour to Porto Santo's golden beaches. Explore at your own leisure."
+              badgeText="Standard"
+              badgeColor="blue"
+              gradientFrom="blue"
+              gradientTo="blue"
+              features={[
+                { icon: Compass, text: "Self-guided exploration" },
+                { icon: Palmtree, text: "Full day on the golden beach" },
+                { icon: Ship, text: "Round-trip boat tour" }
+              ]}
+              footer={
                 <button
                   onClick={() => {
                     const bookingSection = document.getElementById('basic-booking');
@@ -71,40 +57,24 @@ export const PortoSantoBooking = () => {
                 >
                   See availability
                 </button>
-              </div>
-            </div>
+              }
+            />
             
             {/* Half-Day Tour - Mobile */}
-            <div className="bg-white border border-green-100 rounded-lg shadow-sm overflow-hidden">
-              <div className="bg-gradient-to-r from-green-100 to-green-200 p-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-green-800">Half-Day Tour</h3>
-                    <p className="text-sm text-green-600">Morning tour + leisure</p>
-                  </div>
-                  <span className="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
-                    Popular
-                  </span>
-                </div>
-              </div>
-              <div className="px-4 py-3 border-b border-gray-100">
-                <p className="text-sm text-gray-600">Guided boat tour with local history, followed by free beach time.</p>
-              </div>
-              <div className="p-4 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Car className="h-4 w-4 text-green-700" />
-                  <span className="text-xs text-gray-700">Guided island tour with history</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Binoculars className="h-4 w-4 text-green-700" />
-                  <span className="text-xs text-gray-700">Free time for beach & exploration</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Ship className="h-4 w-4 text-green-700" />
-                  <span className="text-xs text-gray-700">Round-trip boat tour</span>
-                </div>
-              </div>
-              <div className="bg-gray-50 p-3">
+            <MobileExperienceCard
+              title="Half-Day Tour"
+              subtitle="Morning tour + leisure"
+              description="Guided boat tour with local history, followed by free beach time."
+              badgeText="Popular"
+              badgeColor="green"
+              gradientFrom="green"
+              gradientTo="green"
+              features={[
+                { icon: Car, text: "Guided island tour with history" },
+                { icon: Binoculars, text: "Free time for beach & exploration" },
+                { icon: Ship, text: "Round-trip boat tour" }
+              ]}
+              footer={
                 <button 
                   onClick={() => {
                     const bookingSection = document.getElementById('half-day-booking');
@@ -116,52 +86,33 @@ export const PortoSantoBooking = () => {
                 >
                   See availability
                 </button>
-              </div>
-            </div>
+              }
+            />
             
-            {/* Full-Day Tour - Mobile - Updated to show Coming Soon instead of Join Waitlist */}
-            <div className="bg-white border border-purple-100 rounded-lg shadow-sm overflow-hidden relative">
-              <div className="bg-gradient-to-r from-purple-100 to-purple-200 p-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-purple-800">Full-Day Tour</h3>
-                    <p className="text-sm text-purple-600">Complete experience</p>
-                  </div>
-                  <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded-full">
-                    Premium
-                  </span>
-                </div>
-              </div>
-              <div className="px-4 py-3 border-b border-gray-100">
-                <p className="text-sm text-gray-600">Complete island experience with guided tour, lunch, and activities.</p>
-              </div>
-              <div className="p-4 space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <Car className="h-4 w-4 text-purple-700" />
-                  <span className="text-xs text-gray-700">Guided island tour</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Utensils className="h-4 w-4 text-purple-700" />
-                  <span className="text-xs text-gray-700">Traditional lunch included</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Fish className="h-4 w-4 text-purple-700" />
-                  <span className="text-xs text-gray-700">Afternoon kayaking</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Ship className="h-4 w-4 text-purple-700" />
-                  <span className="text-xs text-gray-700">Round-trip boat tour</span>
-                </div>
-              </div>
-              <div className="bg-gray-50 p-3">
+            {/* Full-Day Tour - Mobile - Coming Soon */}
+            <MobileExperienceCard
+              title="Full-Day Tour"
+              subtitle="Complete experience"
+              description="Complete island experience with guided tour, lunch, and activities."
+              badgeText="Premium"
+              badgeColor="purple"
+              gradientFrom="purple"
+              gradientTo="purple"
+              features={[
+                { icon: Car, text: "Guided island tour" },
+                { icon: Utensils, text: "Traditional lunch included" },
+                { icon: Fish, text: "Afternoon kayaking" },
+                { icon: Ship, text: "Round-trip boat tour" }
+              ]}
+              footer={
                 <div className="w-full bg-purple-200 text-purple-800 text-sm font-medium py-2 px-4 rounded-md text-center">
                   Coming Soon
                 </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         ) : (
-          // Desktop version - keep the original layout but update the Full-Day Tour
+          // Desktop version
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             {/* Basic Experience */}
             <ExperienceCard 
@@ -197,7 +148,7 @@ export const PortoSantoBooking = () => {
               bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
             />
             
-            {/* Full-Day Tour - Updated to show Coming Soon message */}
+            {/* Full-Day Tour - Coming Soon */}
             <div className="bg-white border-0 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl relative">
               <div className="h-36 sm:h-48 bg-gradient-to-r from-purple-100 to-purple-300 relative overflow-hidden">
                 <Fish className="absolute right-6 bottom-6 h-20 w-20 text-white/30" />
@@ -239,14 +190,7 @@ export const PortoSantoBooking = () => {
                   </div>
                 </div>
                 
-                <div className="flex justify-center items-center h-[300px] bg-purple-50 rounded-lg">
-                  <div className="text-center px-6">
-                    <h3 className="text-xl font-semibold text-purple-800 mb-2">Coming Soon</h3>
-                    <p className="text-sm text-purple-600">
-                      We're preparing an unforgettable full-day experience for you. Stay tuned!
-                    </p>
-                  </div>
-                </div>
+                <ComingSoonContent />
               </div>
             </div>
           </div>
@@ -255,25 +199,21 @@ export const PortoSantoBooking = () => {
         {/* Booking Widgets - For mobile view these are linked from the card buttons */}
         {isMobile && (
           <div className="space-y-8">
-            <div id="basic-booking" className="scroll-mt-4">
-              <h3 className="text-lg font-semibold mb-3 text-blue-800">Basic Experience - Book Now</h3>
-              <BokunWidget 
-                isCalendarWidget={true}
-                productId="982788"
-                bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
-                className="min-h-[350px]" 
-              />
-            </div>
+            <MobileBookingSection
+              id="basic-booking"
+              title="Basic Experience - Book Now"
+              color="blue"
+              productId="982788"
+              bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
+            />
             
-            <div id="half-day-booking" className="scroll-mt-4">
-              <h3 className="text-lg font-semibold mb-3 text-green-800">Half-Day Tour - Book Now</h3>
-              <BokunWidget 
-                isCalendarWidget={true}
-                productId="985324"
-                bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
-                className="min-h-[350px]" 
-              />
-            </div>
+            <MobileBookingSection
+              id="half-day-booking"
+              title="Half-Day Tour - Book Now"
+              color="green"
+              productId="985324"
+              bookingChannelUUID="51f490fc-f867-4e8b-a0d8-cf7730297dde"
+            />
           </div>
         )}
         
