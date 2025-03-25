@@ -1,4 +1,3 @@
-
 #root {
   max-width: 100%;
   margin: 0 auto;
@@ -19,14 +18,37 @@ body, html {
 
 /* Remove any bottom margin/padding that might be causing the whitespace */
 footer {
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Ensure the footer sticks to the bottom of its container */
 .container:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Fix for the whitespace after footer */
+html, body, #root {
+  min-height: 100%;
+  height: 100%;
+}
+
+#root > div:last-child {
+  min-height: 100%;
+}
+
+/* Force the body to end at the last element */
+body::after {
+  display: none !important;
+}
+
+/* Ensure all bottom elements have no margins */
+footer > *:last-child,
+footer > * > *:last-child,
+footer > * > * > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Section scroll offset - this helps with section title visibility when scrolling */
