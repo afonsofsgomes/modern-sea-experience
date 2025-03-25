@@ -19,8 +19,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import { SitemapGenerator } from "@/components/SEO";
 import SmartlookScript from "@/components/SmartlookScript";
+import GoogleTagManager from "@/components/GoogleTagManager";
 
 const queryClient = new QueryClient();
+const GTM_ID = "GTM-MBXFXGKX";
 
 const App = () => (
   <React.StrictMode>
@@ -28,6 +30,7 @@ const App = () => (
       <ThemeProvider attribute="class" defaultTheme="light">
         <TooltipProvider>
           <div className="overflow-x-hidden w-full">
+            <GoogleTagManager id={GTM_ID} />
             <Toaster />
             <Sonner />
             <SmartlookScript />
