@@ -55,5 +55,4 @@ export default defineConfig(({ mode }) => ({
       scopeBehaviour: 'local',
     },
   },
-  base: './', // Add this for proper relative paths in production
 }));

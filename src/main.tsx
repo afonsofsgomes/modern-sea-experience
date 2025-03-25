@@ -12,19 +12,6 @@ if (!container) {
   throw new Error('Root element not found');
 }
 
-// Production error handling
-if (process.env.NODE_ENV === 'production') {
-  // Disable console.log in production
-  console.log = () => {};
-  console.warn = () => {};
-  console.error = (message) => {
-    // You could send this to an error tracking service
-    if (message && message.toString().includes('Fatal')) {
-      // Critical errors could still be logged or sent to a service
-    }
-  };
-}
-
 // Create a root using createRoot API
 const root = ReactDOM.createRoot(container);
 
