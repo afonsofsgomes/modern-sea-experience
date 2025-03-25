@@ -84,7 +84,7 @@ export const OptimizedImage = ({
           height={typeof height === 'number' ? height : undefined}
           className={cn("w-full h-full object-cover transition-opacity duration-300", 
             isLoaded ? "opacity-100" : "opacity-0")}
-          onLoad={() => setImgSrc === fallbackSrc ? null : setIsLoaded(true)}
+          onLoad={() => setIsLoaded(true)}
           onError={handleError}
           fetchPriority="high"
           decoding="async"
@@ -101,7 +101,7 @@ export const OptimizedImage = ({
             sizes={sizes}
             className={cn("w-full h-full object-cover transition-opacity duration-300", 
               isLoaded ? "opacity-100" : "opacity-0")}
-            onLoad={() => imgSrc === fallbackSrc ? null : setIsLoaded(true)}
+            onLoad={() => setIsLoaded(true)}
             onError={handleError}
             decoding="async"
           />
