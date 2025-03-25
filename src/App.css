@@ -228,3 +228,45 @@ body.menu-open {
 .read-the-docs {
   color: #888;
 }
+
+/* Ensure iframe containers (like Bokun) are responsive */
+.bokunWidget,
+iframe {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make tables more responsive */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Improve spacing on mobile */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Stack any grid columns on mobile */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Better spacing between stacked sections */
+  section {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  /* Ensure text is readable */
+  h1, h2, h3 {
+    word-break: break-word;
+  }
+}
+
+/* Fix Bokun widget display issues */
+.bokunWidget {
+  min-height: 500px;
+  width: 100%;
+}

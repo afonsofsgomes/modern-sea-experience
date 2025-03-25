@@ -24,6 +24,13 @@ export const BokunWidget = ({
     script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bookingChannelUUID}`;
     script.async = true;
     script.type = "text/javascript";
+    
+    // Cleanup previous script if it exists
+    const existingScript = document.querySelector(`script[src*="BokunWidgetsLoader.js"]`);
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
     document.body.appendChild(script);
 
     // Cleanup function to remove the script when component unmounts
@@ -32,7 +39,7 @@ export const BokunWidget = ({
         document.body.removeChild(script);
       }
     };
-  }, [bookingChannelUUID]);
+  }, [bookingChannelUUID, productId, isCalendarWidget, isProductPage]);
 
   // Generate the correct data-src URL based on widget type
   let dataSrc = "";

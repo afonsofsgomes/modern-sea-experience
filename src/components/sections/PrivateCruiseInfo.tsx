@@ -27,7 +27,7 @@ export const PrivateCruiseInfo = () => {
             >
               <Clock className="h-10 w-10 text-[#E95543] mb-2" />
               <p className="font-medium">Duration</p>
-              <p>2.5 hours</p>
+              <p>2.30 hours</p>
             </motion.div>
             <motion.div 
               className="flex flex-col items-center"

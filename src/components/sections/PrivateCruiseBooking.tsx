@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Check, X } from "lucide-react";
+import { BokunWidget } from "@/components/BokunWidget";
 
 export const PrivateCruiseBooking = () => {
   const isMobile = useIsMobile();
@@ -65,11 +66,11 @@ export const PrivateCruiseBooking = () => {
         </div>
         
         <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-4">
-          <div 
-            className="bokunWidget w-full min-h-[600px]" 
-            data-src="https://widgets.bokun.io/online-sales/51f490fc-f867-4e8b-a0d8-cf7730297dde/experience-calendar/936700"
-          ></div>
-          <noscript>Please enable javascript in your browser to book</noscript>
+          <BokunWidget 
+            productId="936700"
+            isCalendarWidget={true}
+            className="min-h-[600px]"
+          />
         </div>
       </div>
     </section>
