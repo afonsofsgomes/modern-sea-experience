@@ -60,3 +60,6 @@ export const PageHead: React.FC<PageHeadProps> = ({
     </Helmet>
   );
 };
+
+// Also export as default to ensure compatibility
+export default PageHead;
