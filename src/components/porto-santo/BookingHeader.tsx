@@ -27,7 +27,7 @@ export const BookingHeader: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-10">
         <div className="flex items-center gap-2">
           <Ship className="h-5 w-5 text-primary" />
-          <span className="text-sm text-gray-600">2:30 hours sailing time</span>
+          <span className="text-sm text-gray-600">1 hour connection time*</span>
         </div>
         <Separator orientation="vertical" className="h-6 hidden sm:block" />
         <div className="flex items-center gap-2">
@@ -35,6 +35,7 @@ export const BookingHeader: React.FC = () => {
           <span className="text-sm text-gray-600">Departs from Caniçal</span>
         </div>
       </div>
+      <p className="text-xs text-gray-500 mt-2">*Depends on weather, sea conditions, and operational factors</p>
     </div>
   );
 };
