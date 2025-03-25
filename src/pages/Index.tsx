@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
-import { 
-  Routes, 
-  Destinations,
-  Testimonials, 
-  Newsletter 
-} from "@/components/sections";
 import { PageHead, LocalBusinessSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
+
+// Lazy load non-critical components
+const Routes = lazy(() => import("@/components/sections").then(module => ({ default: module.Routes })));
+const Destinations = lazy(() => import("@/components/sections").then(module => ({ default: module.Destinations })));
+const Testimonials = lazy(() => import("@/components/sections").then(module => ({ default: module.Testimonials })));
+const Newsletter = lazy(() => import("@/components/sections").then(module => ({ default: module.Newsletter })));
 
 // Correct image URL that works - preload this in head
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
@@ -103,20 +104,22 @@ const Index = () => {
         </div>
       </section>
       
-      <div id="routes">
-        <Routes />
-      </div>
-      
-      <div id="destinations">
-        <Destinations />
-      </div>
-      
-      <div id="about">
-        <Testimonials />
-      </div>
-      <div id="contact">
-        <Newsletter />
-      </div>
+      <Suspense fallback={<div className="py-20 text-center">Loading...</div>}>
+        <div id="routes">
+          <Routes />
+        </div>
+        
+        <div id="destinations">
+          <Destinations />
+        </div>
+        
+        <div id="about">
+          <Testimonials />
+        </div>
+        <div id="contact">
+          <Newsletter />
+        </div>
+      </Suspense>
 
       <Footer />
     </div>

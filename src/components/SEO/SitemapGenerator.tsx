@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface SitemapGeneratorProps {
@@ -16,8 +16,12 @@ interface SitemapGeneratorProps {
  */
 const SitemapGenerator: React.FC<SitemapGeneratorProps> = ({ domain }) => {
   const location = useLocation();
+  const previousPath = useRef<string>('');
 
   useEffect(() => {
+    // Only run in production to avoid filling localStorage in development
+    if (process.env.NODE_ENV !== 'production') return;
+    
     // Don't track certain paths
     const excludePaths = [
       '/404',
@@ -25,28 +29,41 @@ const SitemapGenerator: React.FC<SitemapGeneratorProps> = ({ domain }) => {
       '/api/'
     ];
     
-    if (excludePaths.some(path => location.pathname.startsWith(path))) {
+    const currentPath = location.pathname;
+    
+    // Skip if path hasn't changed or is excluded
+    if (previousPath.current === currentPath || excludePaths.some(path => currentPath.startsWith(path))) {
       return;
     }
+    
+    // Update ref to current path
+    previousPath.current = currentPath;
 
-    try {
-      // Get the current list of pages
-      const visitedPages = JSON.parse(localStorage.getItem('sitemap-pages') || '[]');
-      const currentPath = location.pathname;
-      
-      // Add the current path if it's not already in the list
-      if (!visitedPages.includes(currentPath)) {
-        visitedPages.push(currentPath);
-        localStorage.setItem('sitemap-pages', JSON.stringify(visitedPages));
+    // Use requestIdleCallback to defer non-critical work
+    const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+    
+    idleCallback(() => {
+      try {
+        // Get the current list of pages
+        const visitedPages = JSON.parse(localStorage.getItem('sitemap-pages') || '[]');
         
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`[SitemapGenerator] Added page to sitemap: ${currentPath}`);
-          console.log(`[SitemapGenerator] Current sitemap pages: ${visitedPages.join(', ')}`);
+        // Add the current path if it's not already in the list
+        if (!visitedPages.includes(currentPath)) {
+          // Limit the number of pages to prevent localStorage overflow
+          if (visitedPages.length >= 100) {
+            visitedPages.pop(); // Remove oldest entry
+          }
+          
+          visitedPages.push(currentPath);
+          localStorage.setItem('sitemap-pages', JSON.stringify(visitedPages));
+        }
+      } catch (error) {
+        // Silent fail in production
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('[SitemapGenerator] Error tracking page visit:', error);
         }
       }
-    } catch (error) {
-      console.error('[SitemapGenerator] Error tracking page visit:', error);
-    }
+    });
   }, [location.pathname, domain]);
 
   // This component doesn't render anything visible

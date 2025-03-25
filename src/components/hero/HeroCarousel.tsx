@@ -9,49 +9,58 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 
 interface HeroCarouselProps {
   destinations: Array<any>;
   fallbackImage: string;
 }
 
-export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps) => {
+// Memoize the component to prevent unnecessary re-renders
+export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselProps) => {
   const isMobile = useIsMobile();
   const apiRef = useRef<any>(null);
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
+  const isVisibleRef = useRef(true);
   
-  // Auto-scroll functionality - Optimized to pause when not in viewport
+  // Optimize auto-scroll functionality with IntersectionObserver
   useEffect(() => {
     // If auto-scroll is paused, don't set up the interval
     if (autoScrollPaused) return;
     
-    // Use requestIdleCallback (or fallback to setTimeout) to schedule work when the main thread is idle
-    const idleCallback = 'requestIdleCallback' in window ? 
-      window.requestIdleCallback : 
-      (callback: () => void) => setTimeout(callback, 1);
+    // Create intersection observer to detect when carousel is visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
     
-    const scrollNext = () => {
-      idleCallback(() => {
-        if (apiRef.current && !userInteracted) {
-          apiRef.current.scrollNext();
-        }
-      });
-    };
+    // Observe the carousel container
+    const carouselElement = document.querySelector('.carousel-container');
+    if (carouselElement) {
+      observer.observe(carouselElement);
+    }
     
-    const interval = setInterval(scrollNext, 6000); // Auto-scroll every 6 seconds
+    // Only scroll when visible and user hasn't interacted
+    const interval = setInterval(() => {
+      if (isVisibleRef.current && !userInteracted && apiRef.current) {
+        apiRef.current.scrollNext();
+      }
+    }, 6000);
     
     return () => {
       clearInterval(interval);
-      if ('cancelIdleCallback' in window) {
-        (window as any).cancelIdleCallback(idleCallback);
-      }
+      observer.disconnect();
     };
   }, [autoScrollPaused, userInteracted]);
   
-  // Optimize animations to reduce main thread work
+  // Optimize user interaction handler
   const handleUserInteraction = () => {
+    if (userInteracted) return; // Prevent unnecessary state updates
+    
     setUserInteracted(true);
     setAutoScrollPaused(true);
     
@@ -64,7 +73,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
     return () => clearTimeout(timer);
   };
 
-  // Fixed animation variants with properly typed repeatType
+  // Simplified animation with better performance
   const buttonAnimation = {
     animate: { 
       opacity: [0.7, 1, 0.7],
@@ -72,7 +81,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
         duration: 3,
         times: [0, 0.5, 1],
         repeat: Infinity,
-        repeatType: "loop" as const // Explicitly typed as "loop"
+        repeatType: "loop" as const
       }
     }
   };
@@ -82,7 +91,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="max-w-6xl mx-auto px-1 sm:px-4 relative"
+      className="max-w-6xl mx-auto px-1 sm:px-4 relative carousel-container"
       onClick={handleUserInteraction}
       onMouseEnter={handleUserInteraction}
       onTouchStart={handleUserInteraction}
@@ -109,7 +118,7 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
           ))}
         </CarouselContent>
         
-        {/* Simplified animation for navigation buttons with fixed type */}
+        {/* Simplified navigation buttons with fixed type */}
         <motion.div
           variants={buttonAnimation}
           animate="animate"
@@ -140,4 +149,6 @@ export const HeroCarousel = ({ destinations, fallbackImage }: HeroCarouselProps)
       )}
     </motion.div>
   );
-};
+});
+
+HeroCarousel.displayName = 'HeroCarousel';
