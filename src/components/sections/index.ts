@@ -1,4 +1,5 @@
 
+
 export * from './Destinations';
 export * from './Newsletter';
 export * from './PrivateCruises';
@@ -25,6 +26,7 @@ export * from './PortoSantoHighlights';
 export * from './PortoSantoBooking';
 export * from './PortoSantoTours';
 export * from './PortoSantoGallery';
+export * from './PortoSantoPreparation';
 
 // Private Cruise sections
 export * from './PrivateCruiseHero';
@@ -48,3 +50,4 @@ export * from './DesertasPreparation';
 export * from './schedule/ScheduleDisplay';
 export * from './schedule/ScheduleHeader';
 export * from './schedule/BookingButton';
+

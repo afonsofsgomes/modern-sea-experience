@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -6,7 +5,8 @@ import {
   PortoSantoAbout,
   PortoSantoHighlights,
   PortoSantoBooking,
-  PortoSantoGallery
+  PortoSantoGallery,
+  PortoSantoPreparation
 } from "@/components/sections";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
@@ -117,6 +117,7 @@ const PortoSanto = () => {
         
         <PortoSantoHighlights />
         <PortoSantoGallery />
+        <PortoSantoPreparation />
         <PortoSantoBooking />
         
         {/* FAQ Section */}
