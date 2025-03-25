@@ -27,11 +27,9 @@ export const DesertasAbout = () => {
             <h3 className="mt-8 mb-4 text-xl font-medium">What to Expect</h3>
             
             <ul className="space-y-2">
-              <li>Professional nature guides with expert knowledge of local fauna and flora</li>
               <li>Opportunities to spot rare wildlife including seabirds, marine life, and endemic species</li>
-              <li>Guided walks on designated paths (weather permitting)</li>
-              <li>Snorkeling in crystal clear waters (equipment provided)</li>
-              <li>Delicious lunch and refreshments included</li>
+              <li>Snorkeling in crystal clear waters</li>
+              <li>Delicious lunch and refreshments available for purchase</li>
               <li>Environmental conservation briefing</li>
             </ul>
             
