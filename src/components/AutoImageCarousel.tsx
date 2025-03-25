@@ -59,7 +59,9 @@ export const AutoImageCarousel = ({
           startIndex: currentIndex
         }}
         onSelect={(api) => {
+          // Check if api exists and then set the current index
           if (api) {
+            // The api is the Embla API instance, not an event
             setCurrentIndex(api.selectedScrollSnap());
           }
         }}
