@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
@@ -26,7 +26,6 @@ export const OptimizedImage = ({
   objectFit = 'cover',
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const imageRef = useRef<HTMLImageElement>(null);
   const hasExtension = typeof src === 'string' && src.includes('.');
   const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
   
@@ -43,37 +42,24 @@ export const OptimizedImage = ({
   });
   
   useEffect(() => {
-    // Use IntersectionObserver to only process visible images
-    if (typeof IntersectionObserver === 'undefined' || priority) {
-      return;
+    if (priority) {
+      // Preload priority images
+      const img = new Image();
+      img.src = src;
     }
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && imageRef.current) {
-          // Only set src attribute when the image is in view
-          if (imageRef.current.getAttribute('data-src')) {
-            imageRef.current.src = imageRef.current.getAttribute('data-src') || '';
-            imageRef.current.removeAttribute('data-src');
-          }
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      rootMargin: '200px', // Load images 200px before they come into viewport
-      threshold: 0.01
-    });
-    
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
+    // Try to determine actual image dimensions for percentage-based images
+    if (typeof width === 'string' && width.includes('%') || typeof height === 'string' && height.includes('%')) {
+      const img = new Image();
+      img.onload = () => {
+        setCalculatedDimensions({
+          width: img.width || 400,
+          height: img.height || 300
+        });
+      };
+      img.src = src;
     }
-    
-    return () => {
-      if (imageRef.current) {
-        observer.unobserve(imageRef.current);
-      }
-    };
-  }, [priority]);
+  }, [priority, src, width, height]);
 
   // Fallback logic for when original image fails to load
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -81,7 +67,10 @@ export const OptimizedImage = ({
     
     // If this is the webp version that failed, switch to original
     if (imgElement.src.endsWith('.webp') && src) {
+      console.warn(`WebP image failed to load: ${imgElement.src}, falling back to original`);
       imgElement.src = src;
+    } else {
+      console.warn(`Image failed to load: ${src}`);
     }
   };
 
@@ -101,7 +90,7 @@ export const OptimizedImage = ({
       {/* Placeholder div with same dimensions while image loads */}
       {!isLoaded && (
         <div 
-          className="absolute inset-0 bg-gray-200" 
+          className="absolute inset-0 bg-gray-200 animate-pulse" 
           style={{ width: '100%', height: '100%' }}
           aria-hidden="true"
         />
@@ -110,7 +99,6 @@ export const OptimizedImage = ({
       {priority ? (
         // For priority images, don't use picture element to avoid delays
         <img
-          ref={imageRef}
           src={src}
           alt={alt}
           width={finalWidth}
@@ -126,9 +114,7 @@ export const OptimizedImage = ({
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            ref={imageRef}
-            src={loading === 'lazy' ? undefined : src}
-            data-src={loading === 'lazy' ? src : undefined}
+            src={src}
             alt={alt}
             width={finalWidth}
             height={finalHeight}
