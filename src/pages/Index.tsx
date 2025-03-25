@@ -70,6 +70,7 @@ const Index = () => {
         description="Discover Madeira's coastline with SeaYou's premium maritime experiences. Exclusive boat tours, private cruises, and unforgettable day trips to Porto Santo and Desertas."
         keywords="boat tours madeira, seayou, seabus, desertas tours, porto santo tours, private cruises, luxury boat tours, 1 day experience, madeira island boat tours, maritime tourism"
         canonicalUrl="https://seayou.pt/"
+        ogImage="https://extranet.seayou.pt/photos/og.png"
       >
         <meta name="robots" content="index, follow" />
         <link rel="preload" href={HERO_IMAGE_URL} as="image" />

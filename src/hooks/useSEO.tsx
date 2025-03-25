@@ -6,9 +6,10 @@ interface UseSEOProps {
   description?: string;
   keywords?: string;
   jsonLd?: Record<string, any>;
+  ogImage?: string;
 }
 
-export const useSEO = ({ title, description, keywords, jsonLd }: UseSEOProps) => {
+export const useSEO = ({ title, description, keywords, jsonLd, ogImage = "https://extranet.seayou.pt/photos/og.png" }: UseSEOProps) => {
   useEffect(() => {
     // Update document title if provided
     if (title) {
@@ -41,6 +42,30 @@ export const useSEO = ({ title, description, keywords, jsonLd }: UseSEOProps) =>
       }
     }
 
+    // Update OG image if provided
+    if (ogImage) {
+      const ogImageMeta = document.querySelector('meta[property="og:image"]');
+      if (ogImageMeta) {
+        ogImageMeta.setAttribute('content', ogImage);
+      } else {
+        const newOgImage = document.createElement('meta');
+        newOgImage.setAttribute('property', 'og:image');
+        newOgImage.content = ogImage;
+        document.head.appendChild(newOgImage);
+      }
+      
+      // Also update Twitter image
+      const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
+      if (twitterImageMeta) {
+        twitterImageMeta.setAttribute('content', ogImage);
+      } else {
+        const newTwitterImage = document.createElement('meta');
+        newTwitterImage.name = 'twitter:image';
+        newTwitterImage.content = ogImage;
+        document.head.appendChild(newTwitterImage);
+      }
+    }
+
     // Add JSON-LD structured data if provided
     if (jsonLd) {
       let script = document.querySelector('#dynamic-jsonld') as HTMLScriptElement | null;
@@ -63,5 +88,5 @@ export const useSEO = ({ title, description, keywords, jsonLd }: UseSEOProps) =>
         }
       }
     };
-  }, [title, description, keywords, jsonLd]);
+  }, [title, description, keywords, jsonLd, ogImage]);
 };

@@ -14,7 +14,7 @@ export const MetaTags = ({
   title,
   description,
   keywords = "boat tours madeira, seayou, porto santo tours, desertas tours, private cruises, luxury boat tours, 1 day experience",
-  ogImage = "/og-image.png",
+  ogImage = "https://extranet.seayou.pt/photos/og.png",
   canonicalUrl,
   type = "website"
 }: MetaTagsProps) => {

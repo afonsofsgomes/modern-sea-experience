@@ -1,15 +1,17 @@
 
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { Helmet } from "react-helmet";
+import { PageHead } from "@/components/SEO";
 
 const PortTerminal = () => {
   return (
     <>
-      <Helmet>
-        <title>Port Terminal | SeaYou Maritime Services</title>
-        <meta name="description" content="Information about our port terminal facilities and services in Madeira." />
-      </Helmet>
+      <PageHead
+        title="Port Terminal | SeaYou Madeira - Boat Tours in Madeira"
+        description="Information about our port terminal facilities and services in Madeira for boat tours and maritime experiences."
+        keywords="boat tours madeira, seayou terminal, maritime services madeira, port terminal funchal"
+        ogImage="https://extranet.seayou.pt/photos/og.png"
+      />
       <Navbar />
       <main className="pt-16">
         <section className="py-16 md:py-24 bg-gray-50">
