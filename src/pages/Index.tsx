@@ -8,7 +8,7 @@ import {
   Testimonials, 
   Newsletter 
 } from "@/components/sections";
-import { PageHead, LocalBusinessSchema, StructuredData } from "@/components/SEO";
+import { PageHead, LocalBusinessSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
@@ -83,6 +83,13 @@ const Index = () => {
       
       <div id="home">
         <Hero />
+      </div>
+      
+      {/* Home page doesn't need visible breadcrumbs, but we'll keep the structured data for SEO */}
+      <div className="hidden">
+        <BreadcrumbNav 
+          items={[]}
+        />
       </div>
       
       {/* Dedicated Alert Section - Prominently displayed after hero */}

@@ -10,7 +10,7 @@ import {
   PrivateCruiseGallery
 } from "@/components/sections";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
+import { PageHead, TourSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const PrivateCruise = () => {
@@ -92,6 +92,18 @@ const PrivateCruise = () => {
       
       <main className="flex-grow">
         <PrivateCruiseHero />
+        
+        {/* Add breadcrumbs below hero */}
+        <div className="bg-white py-4">
+          <div className="container mx-auto px-4">
+            <BreadcrumbNav 
+              items={[
+                { label: 'Private Cruise', path: '/private-cruise', isCurrentPage: true }
+              ]}
+            />
+          </div>
+        </div>
+        
         <PrivateCruiseOptions />
         
         {/* Alert banner placed in a white background section */}

@@ -10,7 +10,7 @@ import {
   SeaBusGallery
 } from "@/components/sections";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { PageHead, TourSchema, FAQSchema, StructuredData } from "@/components/SEO";
+import { PageHead, TourSchema, FAQSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const SeaBus = () => {
@@ -94,6 +94,18 @@ const SeaBus = () => {
       
       <main className="flex-grow">
         <SeaBusHero />
+        
+        {/* Add breadcrumbs below hero */}
+        <div className="bg-white py-4">
+          <div className="container mx-auto px-4">
+            <BreadcrumbNav 
+              items={[
+                { label: 'SeaBus', path: '/seabus', isCurrentPage: true }
+              ]}
+            />
+          </div>
+        </div>
+        
         <SeaBusMapImage />
         
         <div className="w-full bg-white py-4">

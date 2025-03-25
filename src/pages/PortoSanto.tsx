@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { 
@@ -9,7 +10,7 @@ import {
   PortoSantoPreparation
 } from "@/components/sections";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
+import { PageHead, TourSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const PortoSanto = () => {
@@ -103,6 +104,18 @@ const PortoSanto = () => {
       
       <main className="flex-grow">
         <PortoSantoHero />
+        
+        {/* Add breadcrumbs below hero */}
+        <div className="bg-white py-4">
+          <div className="container mx-auto px-4">
+            <BreadcrumbNav 
+              items={[
+                { label: 'Porto Santo', path: '/porto-santo', isCurrentPage: true }
+              ]}
+            />
+          </div>
+        </div>
+        
         <PortoSantoAbout />
         
         {/* Alert banner placed in a white background section */}

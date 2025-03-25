@@ -12,7 +12,7 @@ import { DesertasGallery } from "@/components/sections/DesertasGallery";
 import { DesertasGroupBooking } from "@/components/sections/DesertasGroupBooking";
 import { DesertasFloatingCTA } from "@/components/sections/DesertasFloatingCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
+import { PageHead, TourSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
 const Desertas = () => {
@@ -89,6 +89,17 @@ const Desertas = () => {
       
       <main className="flex-grow">
         <DesertasHero />
+        
+        {/* Add breadcrumbs below hero */}
+        <div className="bg-white py-4">
+          <div className="container mx-auto px-4">
+            <BreadcrumbNav 
+              items={[
+                { label: 'Desertas Islands', path: '/desertas', isCurrentPage: true }
+              ]}
+            />
+          </div>
+        </div>
         
         {/* Alert banner placed in a white background section */}
         <div className="w-full bg-white py-4">
