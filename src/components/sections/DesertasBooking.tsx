@@ -1,5 +1,5 @@
 
-import { Button } from "@/components/ui/button";
+import { BokunWidget } from "@/components/BokunWidget";
 
 export const DesertasBooking = () => {
   return (
@@ -12,19 +12,17 @@ export const DesertasBooking = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
             Experience the natural beauty and wildlife of the Desertas Islands with our guided expedition
           </p>
+          
+          {/* Bokun Widget Calendar */}
           <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8">
-            <div className="flex flex-col items-center justify-center space-y-6">
-              <p className="text-lg font-medium">Ready to explore the pristine Desertas Islands?</p>
-              <p className="text-center text-muted-foreground">
-                Due to conservation measures and limited capacity, we recommend booking this experience well in advance.
-              </p>
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg w-full sm:w-auto">
-                Contact Us for Availability
-              </Button>
-              <p className="text-sm text-muted-foreground mt-4">
-                * This expedition operates seasonally and is weather dependent.
-              </p>
-            </div>
+            <BokunWidget 
+              productId="999795"
+              isCalendarWidget={true}
+              className="mt-4"
+            />
+            <p className="text-sm text-muted-foreground mt-6">
+              * This expedition operates seasonally and is weather dependent.
+            </p>
           </div>
         </div>
       </div>
