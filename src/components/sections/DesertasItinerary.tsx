@@ -1,8 +1,18 @@
 
 import { MapPin, Clock, LocateFixed, Info, CheckCircle2, XCircle, Binoculars } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export const DesertasItinerary = () => {
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -147,6 +157,17 @@ export const DesertasItinerary = () => {
                   </ul>
                 </CardContent>
               </Card>
+            </div>
+            
+            {/* Added CTA Button */}
+            <div className="text-center mt-10">
+              <Button 
+                size="lg" 
+                className="bg-green-600 hover:bg-green-700 text-white"
+                onClick={scrollToBooking}
+              >
+                Secure Your Expedition
+              </Button>
             </div>
           </div>
         </div>

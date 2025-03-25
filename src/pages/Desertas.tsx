@@ -9,6 +9,8 @@ import { DesertasScheduleInfo } from "@/components/sections/DesertasScheduleInfo
 import { DesertasPreparation } from "@/components/sections/DesertasPreparation";
 import { DesertasBooking } from "@/components/sections/DesertasBooking";
 import { DesertasGallery } from "@/components/sections/DesertasGallery";
+import { DesertasGroupBooking } from "@/components/sections/DesertasGroupBooking";
+import { DesertasFloatingCTA } from "@/components/sections/DesertasFloatingCTA";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { PageHead, TourSchema, StructuredData } from "@/components/SEO";
 import { AlertEmbed } from "@/components/AlertEmbed";
@@ -100,6 +102,7 @@ const Desertas = () => {
         
         <DesertasAbout />
         <DesertasItinerary />
+        <DesertasGroupBooking />
         <DesertasWildlife />
         <DesertasGallery />
         <DesertasScheduleInfo />
@@ -112,6 +115,9 @@ const Desertas = () => {
           description="Essential information about our wildlife and nature adventures to the Desertas Islands."
           questions={desertasFAQs}
         />
+        
+        {/* Floating CTA Button */}
+        <DesertasFloatingCTA />
       </main>
       <Footer />
     </div>

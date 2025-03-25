@@ -1,5 +1,3 @@
-
-
 export * from './Destinations';
 export * from './Newsletter';
 export * from './PrivateCruises';
@@ -45,9 +43,10 @@ export * from './DesertasItinerary';
 export * from './DesertasWildlife';
 export * from './DesertasScheduleInfo';
 export * from './DesertasPreparation';
+export * from './DesertasGroupBooking';
+export * from './DesertasFloatingCTA';
 
 // Schedule sections
 export * from './schedule/ScheduleDisplay';
 export * from './schedule/ScheduleHeader';
 export * from './schedule/BookingButton';
-

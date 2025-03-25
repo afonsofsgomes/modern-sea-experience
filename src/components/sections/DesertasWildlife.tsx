@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Binoculars, Fish, Bird, Shell } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const DesertasWildlife = () => {
   const wildlifeItems = [
@@ -25,6 +26,15 @@ export const DesertasWildlife = () => {
       description: "This critically endangered endemic species is found nowhere else in the world except on the Desertas Islands."
     }
   ];
+
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-blue-50 to-white">
@@ -65,11 +75,19 @@ export const DesertasWildlife = () => {
         </div>
         
         <div className="mt-16 max-w-3xl mx-auto text-center">
-          <p className="text-sm bg-blue-50 rounded-lg p-4 text-blue-800">
+          <p className="text-sm bg-blue-50 rounded-lg p-4 text-blue-800 mb-6">
             <strong>Conservation Note:</strong> The Desertas Islands are a protected nature reserve. 
             Our visits follow strict guidelines to ensure minimal disturbance to wildlife. 
             Sightings are not guaranteed and depend on natural wildlife behavior.
           </p>
+          
+          <Button 
+            size="lg" 
+            className="bg-blue-600 hover:bg-blue-700 text-white mt-4"
+            onClick={scrollToBooking}
+          >
+            Book Your Wildlife Experience
+          </Button>
         </div>
       </div>
     </section>

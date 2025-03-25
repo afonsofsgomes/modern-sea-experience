@@ -1,7 +1,17 @@
 
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export const DesertasAbout = () => {
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  };
+  
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -36,6 +46,16 @@ export const DesertasAbout = () => {
             <p className="mt-8 italic">
               Note: As a protected nature reserve, our visits follow strict guidelines to minimize environmental impact. Group sizes are limited and certain areas may be restricted depending on conservation needs and weather conditions.
             </p>
+            
+            <div className="text-center mt-10">
+              <Button 
+                size="lg" 
+                className="bg-green-600 hover:bg-green-700 text-white"
+                onClick={scrollToBooking}
+              >
+                Reserve Your Spot
+              </Button>
+            </div>
           </div>
         </div>
       </div>
