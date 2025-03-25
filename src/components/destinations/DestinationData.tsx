@@ -1,3 +1,4 @@
+
 import { Coffee, ShoppingBag, Wine, Camera, MapPin, Fish, Sun, Mountain, Utensils, Anchor, Palmtree, Bird, Trees, Route, Sunset, Waves, Ship, Flag, Clock, Users, Calendar, CableCar, Eye } from "lucide-react";
 
 export type FeatureType = {
@@ -93,7 +94,7 @@ export const destinationData: DestinationType[] = [
     link: "/private-cruise",
     buttonText: "Book Private Cruise",
     stats: [
-      { value: "2.5h", label: "Duration" },
+      { value: "2.30h", label: "Duration" },
       { value: "18", label: "Max Guests" },
       { value: "13:00", label: "Departure Time" }
     ],
@@ -114,7 +115,7 @@ export const destinationData: DestinationType[] = [
     link: "/private-cruise",
     buttonText: "Book Private Cruise",
     stats: [
-      { value: "2.5h", label: "Duration" },
+      { value: "2.30h", label: "Duration" },
       { value: "18", label: "Max Guests" },
       { value: "13:00", label: "Departure Time" }
     ],
@@ -135,7 +136,7 @@ export const destinationData: DestinationType[] = [
     link: "/desertas",
     buttonText: "Book Desertas Adventure",
     stats: [
-      { value: "3.5h", label: "Duration" },
+      { value: "3.30h", label: "Duration" },
       { value: "18", label: "Max Guests" },
       { value: "12:30", label: "Departure Time" }
     ],
