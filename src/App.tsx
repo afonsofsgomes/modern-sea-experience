@@ -16,7 +16,6 @@ import PortTerminal from "./pages/PortTerminal";
 import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
-import Partners from "./pages/Partners";
 import { SitemapGenerator } from "@/components/SEO";
 import SmartlookScript from "@/components/SmartlookScript";
 
@@ -43,7 +42,6 @@ const App = () => (
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/partners" element={<Partners />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

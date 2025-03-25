@@ -19,14 +19,6 @@ export const FooterCompany: React.FC = () => {
           </Link>
         </li>
         <li>
-          <Link
-            to="/partners"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Partners
-          </Link>
-        </li>
-        <li>
           <button
             onClick={() => setShowCareersModal(true)}
             className="text-muted-foreground hover:text-foreground transition-colors text-left"
