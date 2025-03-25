@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { OptimizedImage } from './OptimizedImage';
 import { AspectRatio } from './ui/aspect-ratio';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
@@ -37,7 +36,7 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
       <div className="container mx-auto px-4">
         <h2 className="text-2xl md:text-3xl font-display font-medium text-center mb-8">Photo Gallery</h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {images.map((image, index) => (
             <Dialog key={index}>
               <DialogTrigger asChild>
@@ -45,7 +44,7 @@ export const PhotoGallery = ({ images, altPrefix, className }: PhotoGalleryProps
                   className="cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
                   onClick={() => setSelectedImage(index)}
                 >
-                  <AspectRatio ratio={4/3}>
+                  <AspectRatio ratio={3/4}>
                     <img
                       src={image}
                       alt={`${altPrefix} - Photo ${index + 1}`}
