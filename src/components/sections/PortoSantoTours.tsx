@@ -1,95 +1,71 @@
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Clock, Ship, Award, Beach, Binoculars } from "lucide-react";
+import { ExperienceCard } from "@/components/porto-santo/ExperienceCard";
 
 export const PortoSantoTours = () => {
-  const toursRef = useRef(null);
-  const toursInView = useInView(toursRef, { once: true, amount: 0.2 });
-
   return (
-    <section id="tours" className="py-24 bg-gray-50" ref={toursRef}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={toursInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="inline-block py-1 px-3 text-xs font-medium bg-primary/10 rounded-full mb-4">
-              Island Hopping
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium mb-6">
-              Porto Santo Golden Island
-            </h2>
-            <p className="text-base text-muted-foreground mb-6">
-              Experience the therapeutic golden sands of Porto Santo with our 1-Day Experience. Our comfortable vessels make the journey part of your adventure.
-            </p>
-            <p className="text-base text-muted-foreground mb-8">
-              Choose from day trips with guided tours or self-guided options for those who prefer to explore independently. Enjoy a full day of relaxation and exploration.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <motion.div 
-                className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <h3 className="text-3xl font-medium mb-2">9km</h3>
-                <p className="text-muted-foreground">Golden Beach</p>
-              </motion.div>
-              <motion.div 
-                className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <h3 className="text-3xl font-medium mb-2">1h</h3>
-                <p className="text-muted-foreground">Connection Time</p>
-              </motion.div>
-              <motion.div 
-                className="bg-white rounded-md p-6 flex-1 min-w-[160px] hover:shadow-md transition-shadow duration-300"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <h3 className="text-3xl font-medium mb-2">Wed-Fri</h3>
-                <p className="text-muted-foreground">Departures</p>
-              </motion.div>
-            </div>
-            <div className="mt-8">
-              <Link to="/porto-santo">
-                <Button className="relative overflow-hidden group">
-                  <span className="relative z-10">Explore Porto Santo Options</span>
-                  <div className="absolute -inset-0.5 bg-primary/30 rounded-md blur opacity-0 group-hover:opacity-70 transition duration-300 group-hover:animate-soft-pulse"></div>
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, x: 30 }}
-            animate={toursInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="aspect-square rounded-md overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1586276393635-5ecd8a851acc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-                alt="Porto Santo Golden Beach" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-              />
-            </div>
-            <motion.div 
-              className="absolute -bottom-8 -left-8 w-2/3 aspect-video glass-card p-6 rounded-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={toursInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ y: -5 }}
-            >
-              <h3 className="font-display text-lg mb-2">Health & Wellness</h3>
-              <p className="text-sm text-muted-foreground">
-                Porto Santo's sands are known for their therapeutic properties, perfect for natural spa treatments.
-              </p>
-            </motion.div>
-          </motion.div>
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <span className="inline-block py-1 px-3 text-xs font-medium bg-blue-100 text-blue-900 rounded-full mb-4">
+            Experiences
+          </span>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-blue-900">
+            Porto Santo Day Trips
+          </h2>
+          <p className="text-base text-muted-foreground">
+            All experiences include round-trip boat tour from Marina da Quinta do Lorde (Caniçal) to Porto Santo.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Full-day Experience */}
+          <ExperienceCard
+            title="Full Day on Golden Beach"
+            subtitle="Relaxation & Leisure"
+            description="Enjoy a full day at Porto Santo's famous 9km golden beach. Swim in crystal clear waters and experience the therapeutic properties of the sand."
+            features={[
+              { icon: Clock, text: "8:00 AM - 6:30 PM" },
+              { icon: Ship, text: "1 hour boat ride each way" },
+              { icon: Beach, text: "Full day on the beach" },
+              { icon: Award, text: "Includes audio guide" }
+            ]}
+            badge={{
+              text: "Most Popular",
+              color: "blue"
+            }}
+            gradient={{
+              from: "blue",
+              to: "blue"
+            }}
+            icon={Beach}
+            productId="14f7e6e4-cff0-4ee4-aaba-2b8a8f48ad82"
+            bookingChannelUUID="d9265611-23d5-4c75-997d-0cb5c76a70fe"
+          />
+          
+          {/* Free Afternoon Experience */}
+          <ExperienceCard
+            title="Free Afternoon for Beach & Exploration"
+            subtitle="Self-Guided Experience"
+            description="Arrive at Porto Santo at 11:30 AM and have the afternoon free to explore the island at your own pace before returning at 4:30 PM."
+            features={[
+              { icon: Clock, text: "11:30 AM - 4:30 PM" },
+              { icon: Ship, text: "1 hour boat ride each way" },
+              { icon: Binoculars, text: "Free time for exploration" },
+              { icon: Award, text: "Beach & town nearby" }
+            ]}
+            badge={{
+              text: "Flexible",
+              color: "green"
+            }}
+            gradient={{
+              from: "green",
+              to: "green"
+            }}
+            icon={Binoculars}
+            isComingSoon={true}
+          />
         </div>
       </div>
     </section>
