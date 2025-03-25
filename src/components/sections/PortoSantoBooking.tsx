@@ -51,7 +51,7 @@ export const PortoSantoBooking = () => {
                   <span className="text-xs text-gray-700">Self-guided exploration</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <PalmTree className="h-4 w-4 text-blue-700" />
+                  <Palmtree className="h-4 w-4 text-blue-700" />
                   <span className="text-xs text-gray-700">Full day on the golden beach</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -173,7 +173,7 @@ export const PortoSantoBooking = () => {
               icon={Ship}
               features={[
                 { icon: Compass, text: "Self-guided exploration of Porto Santo" },
-                { icon: PalmTree, text: "Full day on the golden beach" },
+                { icon: Palmtree, text: "Full day on the golden beach" },
                 { icon: Ship, text: "Round-trip boat tour" }
               ]}
               productId="982788"
