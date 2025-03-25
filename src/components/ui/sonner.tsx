@@ -7,7 +7,8 @@ type ToasterProps = React.ComponentProps<typeof Sonner>;
 
 const Toaster = ({ ...props }: ToasterProps) => {
   // Set a default theme to prevent the null reference error
-  const { theme = "system" } = useTheme() || { theme: "system" };
+  const themeContext = useTheme();
+  const theme = themeContext?.theme || "system";
 
   return (
     <Sonner

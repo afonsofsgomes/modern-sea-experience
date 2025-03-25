@@ -15,9 +15,7 @@ if (!container) {
 // Create a root using createRoot API
 const root = ReactDOM.createRoot(container);
 
-// Render the app with StrictMode for better development experience
+// Render the app
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );

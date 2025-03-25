@@ -23,10 +23,10 @@ import SmartlookScript from "@/components/SmartlookScript";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="light">
-        <TooltipProvider>
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider attribute="class" defaultTheme="light">
+      <TooltipProvider>
+        <React.StrictMode>
           <div className="overflow-x-hidden w-full">
             <Toaster />
             <Sonner />
@@ -49,10 +49,10 @@ const App = () => (
               </Routes>
             </BrowserRouter>
           </div>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+        </React.StrictMode>
+      </TooltipProvider>
+    </ThemeProvider>
+  </QueryClientProvider>
 );
 
 export default App;
