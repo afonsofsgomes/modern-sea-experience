@@ -24,6 +24,19 @@ if (!container) {
   throw new Error('Root element not found');
 }
 
+// Remove the initial loader immediately after React hydration
+const removeLoader = () => {
+  const loader = document.querySelector('.initial-loader');
+  if (loader) {
+    // Use opacity transition before removing for smooth UX
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
+      loader.remove();
+    }, 300);
+  }
+};
+
 // Create a root using createRoot API - remove StrictMode for production
 const root = ReactDOM.createRoot(container);
 
@@ -31,5 +44,18 @@ const root = ReactDOM.createRoot(container);
 // to avoid double rendering which impacts performance 
 root.render(<App />);
 
+// Remove loader after React has hydrated the app
+requestAnimationFrame(removeLoader);
+
 // Log web vitals
 setTimeout(reportWebVitals, 3000);
+
+// Disable Vite HMR websocket in production to avoid failed connection errors
+if (import.meta.env.PROD) {
+  // This will prevent Vite from trying to establish WebSocket connections in production
+  // @ts-ignore - Ignore type error since we're deliberately disabling a Vite internal feature
+  if (typeof import.meta.hot !== 'undefined') {
+    // @ts-ignore
+    import.meta.hot.decline();
+  }
+}

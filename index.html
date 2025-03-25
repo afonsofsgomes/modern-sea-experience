@@ -22,12 +22,42 @@
     <style>
       /* Critical path CSS to prevent render blocking */
       body, html { margin: 0; padding: 0; font-family: Inter, sans-serif; overflow-x: hidden; width: 100%; }
-      .initial-loader { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f5f7fa; }
+      .initial-loader { 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        background-color: #253D7F;
+        color: white;
+        font-family: 'Inter', sans-serif;
+      }
+      .initial-loader img {
+        max-width: 180px;
+        margin-bottom: 20px;
+      }
+      .initial-loader .loading-text {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+      .initial-loader .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 16px auto;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
     </style>
     
     <!-- Preload critical assets -->
     <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpg" as="image" />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="preload" href="https://extranet.seayou.pt/logos/logowhite.png" as="image" />
     
     <!-- Preconnect to essential domains -->
     <link rel="preconnect" href="https://extranet.seayou.pt" />
@@ -53,8 +83,12 @@
 
   <body>
     <div id="root">
-      <!-- Initial loading state that will be replaced by React -->
-      <div class="initial-loader">Loading SeaYou experience...</div>
+      <!-- Enhanced initial loading state that will be replaced by React -->
+      <div class="initial-loader">
+        <img src="https://extranet.seayou.pt/logos/logowhite.png" alt="SeaYou Madeira Logo" />
+        <div class="spinner"></div>
+        <div class="loading-text">Loading SeaYou experience...</div>
+      </div>
     </div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>

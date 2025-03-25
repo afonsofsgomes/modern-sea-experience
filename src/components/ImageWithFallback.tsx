@@ -13,6 +13,7 @@ export const ImageWithFallback = ({
   className,
   width = 400,
   height = 300,
+  fetchPriority, // We'll handle this properly
   ...props
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState(src);
@@ -36,6 +37,9 @@ export const ImageWithFallback = ({
   const numericWidth = typeof width === 'string' ? parseInt(width, 10) || 400 : width;
   const numericHeight = typeof height === 'string' ? parseInt(height, 10) || 300 : height;
   
+  // Convert fetchPriority to lowercase to avoid React warnings
+  const fetchpriorityAttr = fetchPriority ? { fetchpriority: fetchPriority.toLowerCase() } : {};
+  
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {!isLoaded && (
@@ -56,6 +60,7 @@ export const ImageWithFallback = ({
           height={numericHeight}
           decoding="async"
           loading="lazy"
+          {...fetchpriorityAttr}
           {...props}
         />
       </picture>

@@ -28,6 +28,12 @@ export const SmartlookScript = () => {
       return;
     }
     
+    // Set a flag in localStorage to prevent multiple initializations
+    const smartlookInitialized = localStorage.getItem('smartlook_initialized');
+    if (smartlookInitialized === 'true') {
+      return;
+    }
+    
     // Initialize Smartlook only if not already initialized
     if (!window.smartlook || !initialized.current) {
       // Create the smartlook function with proper typing if it doesn't exist
@@ -56,10 +62,15 @@ export const SmartlookScript = () => {
       // Only initialize once with a setTimeout to ensure it doesn't compete with other resources
       if (!initialized.current) {
         setTimeout(() => {
-          // Initialize with project key
-          window.smartlook && window.smartlook('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
-          initialized.current = true;
-          console.log('Smartlook analytics initialized');
+          try {
+            // Initialize with project key
+            window.smartlook && window.smartlook('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
+            initialized.current = true;
+            localStorage.setItem('smartlook_initialized', 'true');
+            console.log('Smartlook analytics initialized');
+          } catch (error) {
+            console.error('Error initializing Smartlook:', error);
+          }
         }, 2000);
       }
     }

@@ -8,10 +8,19 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 8081, // Updated to 8081 to match production environment
+    hmr: {
+      // HMR configurations to fix WebSocket connection issues
+      clientPort: 8081, // Match client port
+      // For production environment, disable HMR (optional)
+      ...(mode === 'production' && { enabled: false }),
+    },
   },
   plugins: [
-    react(),
+    react({
+      // Suppress React prop warnings in production
+      devOptions: { suppressReactErrorOverlay: mode === 'production' },
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
