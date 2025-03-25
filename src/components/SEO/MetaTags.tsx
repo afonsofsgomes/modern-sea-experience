@@ -45,10 +45,13 @@ export const MetaTags = ({
       <meta property="og:image" content={absoluteOgImage} />
       <meta property="og:image:url" content={absoluteOgImage} />
       <meta property="og:image:secure_url" content={absoluteOgImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="420" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:alt" content={`SeaYou Madeira - ${title}`} />
+      
+      {/* Facebook specific tags */}
+      <meta property="fb:app_id" content="1324423168329224" />
       
       {/* Twitter Tags */}
       <meta name="twitter:card" content="summary_large_image" />

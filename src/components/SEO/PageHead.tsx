@@ -54,8 +54,8 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta property="og:image" content={absoluteOgImage} />
       <meta property="og:image:url" content={absoluteOgImage} />
       <meta property="og:image:secure_url" content={absoluteOgImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="420" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:alt" content={`SeaYou Madeira - ${title}`} />
       

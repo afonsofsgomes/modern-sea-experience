@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 // Default OG image URL
@@ -83,6 +82,35 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
         document.head.appendChild(newOgImageSecureUrl);
       }
       
+      // Update image dimensions
+      const widthMeta = document.querySelector('meta[property="og:image:width"]');
+      if (widthMeta) {
+        widthMeta.setAttribute('content', '800');
+      } else {
+        const newWidthMeta = document.createElement('meta');
+        newWidthMeta.setAttribute('property', 'og:image:width');
+        newWidthMeta.content = '800';
+        document.head.appendChild(newWidthMeta);
+      }
+      
+      const heightMeta = document.querySelector('meta[property="og:image:height"]');
+      if (heightMeta) {
+        heightMeta.setAttribute('content', '420');
+      } else {
+        const newHeightMeta = document.createElement('meta');
+        newHeightMeta.setAttribute('property', 'og:image:height');
+        newHeightMeta.content = '420';
+        document.head.appendChild(newHeightMeta);
+      }
+      
+      // Ensure Facebook-specific tags
+      if (!document.querySelector('meta[property="fb:app_id"]')) {
+        const appIdMeta = document.createElement('meta');
+        appIdMeta.setAttribute('property', 'fb:app_id');
+        appIdMeta.content = '1324423168329224';
+        document.head.appendChild(appIdMeta);
+      }
+      
       // Also update Twitter image
       const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
       if (twitterImageMeta) {
@@ -94,21 +122,7 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
         document.head.appendChild(newTwitterImage);
       }
       
-      // Add image dimensions and type for Facebook
-      if (!document.querySelector('meta[property="og:image:width"]')) {
-        const widthMeta = document.createElement('meta');
-        widthMeta.setAttribute('property', 'og:image:width');
-        widthMeta.content = '1200';
-        document.head.appendChild(widthMeta);
-      }
-      
-      if (!document.querySelector('meta[property="og:image:height"]')) {
-        const heightMeta = document.createElement('meta');
-        heightMeta.setAttribute('property', 'og:image:height');
-        heightMeta.content = '630';
-        document.head.appendChild(heightMeta);
-      }
-      
+      // Add image type and alt for Facebook
       if (!document.querySelector('meta[property="og:image:type"]')) {
         const typeMeta = document.createElement('meta');
         typeMeta.setAttribute('property', 'og:image:type');
@@ -130,7 +144,6 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
       if (!script) {
         script = document.createElement('script');
         script.id = 'dynamic-jsonld';
-        // Use setAttribute method instead of directly setting the type property
         script.setAttribute('type', 'application/ld+json');
         document.head.appendChild(script);
       }
@@ -138,7 +151,6 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
     }
 
     return () => {
-      // Clean up JSON-LD when component unmounts
       if (jsonLd) {
         const script = document.querySelector('#dynamic-jsonld');
         if (script) {
