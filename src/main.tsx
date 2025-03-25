@@ -27,18 +27,13 @@ if (!container) {
 // Remove the initial loader immediately after React hydration
 const removeLoader = () => {
   const loader = document.querySelector('.initial-loader');
-  if (loader) {
-    // Safe type check before accessing style property
-    if (loader instanceof HTMLElement) {
-      loader.style.opacity = '0';
-      loader.style.transition = 'opacity 0.3s ease';
-      setTimeout(() => {
-        loader.remove();
-      }, 300);
-    } else {
-      // Fallback if not an HTMLElement
+  if (loader && loader instanceof HTMLElement) {
+    // Type assertion to HTMLElement to safely access style property
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
       loader.remove();
-    }
+    }, 300);
   }
 };
 
