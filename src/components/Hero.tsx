@@ -24,7 +24,7 @@ const orderedDestinationData = [
 // Direct image URL that works
 const HERO_BACKGROUND_IMAGE = "https://extranet.seayou.pt/photos/bc.jpg";
 // Default image
-const DEFAULT_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
+const DEFAULT_IMAGE = "https://extranet.seayou.pt/photos/og.png";
 
 export const Hero = () => {
   return (

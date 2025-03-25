@@ -14,7 +14,7 @@ interface PageHeadProps {
 }
 
 // Original OG image URL - always use this as default
-const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/logos/logowhite.png";
+const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/og.png";
 
 export const PageHead: React.FC<PageHeadProps> = ({
   title,

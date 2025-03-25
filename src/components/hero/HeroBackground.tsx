@@ -8,7 +8,7 @@ interface HeroBackgroundProps {
 
 export const HeroBackground: React.FC<HeroBackgroundProps> = ({ 
   imageUrl,
-  fallbackUrl = "https://extranet.seayou.pt/logos/logowhite.png"
+  fallbackUrl = "https://extranet.seayou.pt/photos/og.png"
 }) => {
   return (
     <>
