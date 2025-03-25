@@ -8,7 +8,7 @@ import {
   Fish,
   Map,
   Binoculars,
-  PalmTree
+  Palmtree
 } from "lucide-react";
 import { 
   BookingHeader, 
