@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import TallyScript from "./TallyScript";
 import { Button, ButtonProps } from "./ui/button";
+import { toast } from "@/hooks/use-toast";
 
 interface GroupBookingDialogProps {
   children: ReactNode;
@@ -30,8 +31,17 @@ export const GroupBookingDialog = ({
         try {
           console.log('Attempting to load Tally embeds');
           (window as any).Tally.loadEmbeds();
+          toast({
+            title: "Form loaded",
+            description: "Please fill out the group booking form",
+          });
         } catch (e) {
           console.error('Error loading Tally embeds:', e);
+          toast({
+            title: "Error loading form",
+            description: "Please try again later",
+            variant: "destructive",
+          });
         }
       }, 300); // Short delay to ensure content is rendered
     }

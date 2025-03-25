@@ -1,7 +1,8 @@
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronUp } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 export const DesertasFloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,6 +20,10 @@ export const DesertasFloatingCTA = () => {
     if (bookingSection) {
       bookingSection.scrollIntoView({
         behavior: "smooth"
+      });
+      toast({
+        title: "Scrolled to booking section",
+        description: "You can now book your Desertas Islands adventure",
       });
     }
   };
