@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DesertasHero } from "@/components/sections/DesertasHero";
@@ -105,6 +104,7 @@ const Desertas = () => {
                 altPrefix="Desertas Islands"
                 className="mx-auto shadow-lg rounded-lg overflow-hidden"
                 aspectRatio="wide"
+                objectFit="contain"
               />
             </div>
           </div>

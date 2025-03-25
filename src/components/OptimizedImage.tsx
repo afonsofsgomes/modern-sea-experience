@@ -11,6 +11,7 @@ interface OptimizedImageProps {
   loading?: 'lazy' | 'eager';
   sizes?: string;
   priority?: boolean;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
 export const OptimizedImage = ({
@@ -22,6 +23,7 @@ export const OptimizedImage = ({
   loading = 'lazy',
   sizes = '100vw',
   priority = false,
+  onError,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const hasExtension = src.includes('.');
@@ -49,6 +51,11 @@ export const OptimizedImage = ({
     // If this is the webp version that failed, switch to original
     if (imgElement.src.endsWith('.webp') && webpSrc) {
       imgElement.src = src;
+    }
+
+    // Call the provided onError handler if it exists
+    if (onError) {
+      onError(e);
     }
   };
 
