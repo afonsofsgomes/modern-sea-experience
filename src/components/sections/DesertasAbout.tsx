@@ -29,7 +29,7 @@ export const DesertasAbout = () => {
             <ul className="space-y-2">
               <li>Opportunities to spot rare wildlife including seabirds, marine life, and endemic species</li>
               <li>Snorkeling in crystal clear waters</li>
-              <li>Delicious lunch and refreshments available for purchase</li>
+              <li>Snacks and refreshments available for purchase</li>
               <li>Environmental conservation briefing</li>
             </ul>
             
