@@ -134,15 +134,15 @@ export const ProductGrid = () => {
 
   if (isLoading) {
     return (
-      <section className="py-24 bg-white flex items-center justify-center min-h-[500px]">
+      <section className="py-24 bg-[#253D7F] flex items-center justify-center min-h-[500px]">
         <div className="flex flex-col items-center">
           <img 
             src="https://extranet.seayou.pt/logos/logowhite.png" 
             alt="SeaYou Madeira Logo" 
-            className="max-w-[180px] mb-5 bg-[#253D7F] p-4 rounded"
+            className="max-w-[180px] mb-5"
           />
-          <LoadingSpinner size="lg" color="blue" />
-          <div className="text-[#253D7F] text-opacity-90 mt-4">
+          <LoadingSpinner size="lg" color="white" />
+          <div className="text-white text-opacity-90 mt-4">
             Loading SeaYou experience...
           </div>
         </div>

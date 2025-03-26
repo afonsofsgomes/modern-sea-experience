@@ -12,23 +12,21 @@ export const LoadingFallback = ({
   message = "Loading SeaYou experience..."
 }: LoadingFallbackProps) => {
   const containerClasses = fullScreen 
-    ? "min-h-screen flex items-center justify-center bg-white" 
-    : "min-h-[400px] flex items-center justify-center bg-white";
+    ? "min-h-screen flex items-center justify-center bg-[#253D7F]" 
+    : "min-h-[400px] flex items-center justify-center bg-[#253D7F]";
 
   return (
     <div className={containerClasses}>
       <div className="flex flex-col items-center">
-        <div className="bg-[#253D7F] p-4 rounded mb-5">
-          <img 
-            src="https://extranet.seayou.pt/logos/logowhite.png" 
-            alt="SeaYou Madeira Logo" 
-            className="max-w-[180px]"
-          />
-        </div>
+        <img 
+          src="https://extranet.seayou.pt/logos/logowhite.png" 
+          alt="SeaYou Madeira Logo" 
+          className="max-w-[180px] mb-5"
+        />
         <div className="spinner">
-          <LoadingSpinner size="lg" color="blue" />
+          <LoadingSpinner size="lg" color="white" />
         </div>
-        <div className="loading-text text-[#253D7F] text-opacity-90 mt-4">
+        <div className="loading-text text-white text-opacity-90 mt-4">
           {message}
         </div>
       </div>

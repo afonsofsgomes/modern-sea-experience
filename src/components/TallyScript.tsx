@@ -1,71 +1,88 @@
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
-export const TallyScript = () => {
-  const scriptLoaded = useRef(false);
-  const loadTimeoutRef = useRef<number | null>(null);
+interface TallyScriptProps {
+  formId?: string;
+}
 
+const TallyScript: React.FC<TallyScriptProps> = ({ formId = 'wLYLZ2' }) => {
   useEffect(() => {
-    // Only load the script once and after main content
-    if (scriptLoaded.current || document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) {
+    // Check if Tally is already loaded
+    if (window.Tally) {
       return;
     }
 
-    // Defer Tally loading until after critical content
-    const loadTally = () => {
-      scriptLoaded.current = true;
-
-      // Create and inject the Tally script
-      const script = document.createElement('script');
-      script.src = 'https://tally.so/widgets/embed.js';
-      script.async = true;
-      script.defer = true;
-      
-      // Function to load embeds once Tally is available
-      const loadEmbeds = () => {
-        // Find all Tally iframes
-        const tallyFrames = document.querySelectorAll('iframe[data-tally-src]:not([src])');
-        
-        if (typeof (window as any).Tally !== 'undefined') {
-          (window as any).Tally.loadEmbeds();
-        } else if (tallyFrames.length > 0) {
-          // If Tally object is not available, manually set src on iframes
-          tallyFrames.forEach((iframe: HTMLIFrameElement) => {
-            if (iframe.dataset.tallySrc) {
-              iframe.src = iframe.dataset.tallySrc;
-            }
-          });
-        }
-      };
-      
-      // Set up callbacks
-      script.onload = loadEmbeds;
-      script.onerror = loadEmbeds; // Still try to load iframes directly if script fails
-      
-      // Add the script to the document
-      document.body.appendChild(script);
-      
-      // Fallback timeout to ensure iframes load
-      loadTimeoutRef.current = window.setTimeout(loadEmbeds, 2000);
+    // Create script element
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://tally.so/widgets/embed.js';
+    
+    // Add script to document
+    document.body.appendChild(script);
+    
+    // Load Tally when script is ready
+    script.onload = () => {
+      if (window.Tally) {
+        window.Tally.loadEmbeds();
+      }
     };
     
-    // Defer loading until main content is interactive
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(loadTally, { timeout: 3000 });
-    } else {
-      // Fallback for browsers that don't support requestIdleCallback
-      loadTimeoutRef.current = window.setTimeout(loadTally, 2000);
-    }
-    
-    // Cleanup on component unmount
+    // Clean up on unmount
     return () => {
-      if (loadTimeoutRef.current !== null) {
-        window.clearTimeout(loadTimeoutRef.current);
+      // Only remove if it's the script we added
+      const tallyscript = document.querySelector('script[src="https://tally.so/widgets/embed.js"]');
+      if (tallyscript) {
+        document.body.removeChild(tallyscript);
+      }
+      
+      // Remove Tally from window
+      if (window.Tally) {
+        delete window.Tally;
       }
     };
   }, []);
-
-  return null; // This component doesn't render anything
+  
+  // Add interactive popup form when button with data-tally-open attribute is clicked
+  useEffect(() => {
+    // Function to handle button clicks for Tally popup
+    const handleTallyPopup = () => {
+      const buttons = document.querySelectorAll('[data-tally-open]');
+      
+      buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Delay to ensure Tally is loaded
+          window.setTimeout(() => {
+            if (window.Tally && window.Tally.open) {
+              const formId = button.getAttribute('data-tally-open') || 'wLYLZ2';
+              window.Tally.open(formId);
+            }
+          }, 300);
+        });
+      });
+    };
+    
+    // Wait for DOM to be fully loaded
+    if (document.readyState === 'complete') {
+      handleTallyPopup();
+    } else {
+      window.addEventListener('load', handleTallyPopup);
+    }
+    
+    return () => {
+      window.removeEventListener('load', handleTallyPopup);
+    };
+  }, []);
+  
+  return null;
 };
+
+// Add Tally to the window object for TypeScript
+declare global {
+  interface Window {
+    Tally: any;
+  }
+}
 
 export default TallyScript;
