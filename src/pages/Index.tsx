@@ -61,7 +61,7 @@ const Index = () => {
     };
     
     // Use smaller timeout to ensure tasks run
-    setTimeout(runIdleTask, 100);
+    window.setTimeout(runIdleTask, 100);
     
     // Cleanup function
     return () => {
