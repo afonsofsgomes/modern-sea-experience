@@ -7,7 +7,7 @@ import './index.css';
 // Performance metric logging in a non-blocking way
 const reportWebVitals = () => {
   if ('performance' in window && 'getEntriesByType' in performance && 'requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(() => {
+    window.requestIdleCallback(() => {
       try {
         const paintMetrics = performance.getEntriesByType('paint');
         if (paintMetrics.length > 0) {
@@ -34,7 +34,6 @@ if (!container) {
 const removeLoader = () => {
   const loader = document.querySelector('.initial-loader');
   if (loader && loader instanceof HTMLElement) {
-    // Type assertion to HTMLElement to safely access style property
     loader.style.opacity = '0';
     loader.style.transition = 'opacity 0.3s ease';
     setTimeout(() => {
@@ -43,11 +42,10 @@ const removeLoader = () => {
   }
 };
 
-// Create a root using createRoot API - remove StrictMode for production
+// Create a root using createRoot API - no StrictMode in production
 const root = ReactDOM.createRoot(container);
 
-// Render the app with explicit React import - not using StrictMode in production
-// to avoid double rendering which impacts performance 
+// Render the app with explicit React import
 root.render(<App />);
 
 // Remove loader after React has hydrated the app

@@ -5,12 +5,23 @@ import { LoadingSpinner } from './LoadingSpinner';
 interface LoadingFallbackProps {
   fullScreen?: boolean;
   message?: string;
+  minimal?: boolean;
 }
 
 export const LoadingFallback = ({ 
   fullScreen = true,
-  message = "Loading SeaYou experience..."
+  message = "Loading...",
+  minimal = false
 }: LoadingFallbackProps) => {
+  // For minimal mode, just return a spinner without the full screen effect
+  if (minimal) {
+    return (
+      <div className="flex items-center justify-center py-10">
+        <LoadingSpinner size="md" color="blue" />
+      </div>
+    );
+  }
+  
   const containerClasses = fullScreen 
     ? "min-h-screen flex items-center justify-center bg-[#253D7F]" 
     : "min-h-[400px] flex items-center justify-center bg-[#253D7F]";

@@ -8,11 +8,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { LoadingFallback } from "@/components/LoadingFallback";
-// Import SeaBus directly instead of lazy loading it
+// Import SeaBus directly
 import SeaBus from "./pages/SeaBus";
 
-// Lazy load non-critical pages
+// Lazy load non-critical pages without showing a loading screen
 const Booking = lazy(() => import("./pages/Booking"));
 const PrivateCruise = lazy(() => import("./pages/PrivateCruise"));
 const PortoSanto = lazy(() => import("./pages/PortoSanto"));
@@ -68,14 +67,14 @@ const App = () => {
                 {/* Eagerly load the index route for fast initial render */}
                 <Route path="/" element={<Index />} />
                 
-                {/* Eagerly load the SeaBus route to fix the loading issue */}
+                {/* Eagerly load the SeaBus route */}
                 <Route path="/seabus" element={<SeaBus />} />
                 
-                {/* Lazy load all other routes */}
+                {/* Lazy load all other routes - no loading fallback */}
                 <Route 
                   path="/booking" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <Booking />
                     </Suspense>
                   } 
@@ -83,7 +82,7 @@ const App = () => {
                 <Route 
                   path="/private-cruise" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <PrivateCruise />
                     </Suspense>
                   } 
@@ -91,7 +90,7 @@ const App = () => {
                 <Route 
                   path="/porto-santo" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <PortoSanto />
                     </Suspense>
                   } 
@@ -99,7 +98,7 @@ const App = () => {
                 <Route 
                   path="/group-bookings" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <GroupBookings />
                     </Suspense>
                   } 
@@ -107,7 +106,7 @@ const App = () => {
                 <Route 
                   path="/schedule" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <Schedule />
                     </Suspense>
                   } 
@@ -115,7 +114,7 @@ const App = () => {
                 <Route 
                   path="/privacy-policy" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <PrivacyPolicy />
                     </Suspense>
                   } 
@@ -123,7 +122,7 @@ const App = () => {
                 <Route 
                   path="/terms" 
                   element={
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={null}>
                       <Terms />
                     </Suspense>
                   } 
@@ -134,7 +133,7 @@ const App = () => {
                   path="/desertas" 
                   element={
                     DESERTAS_ENABLED ? (
-                      <Suspense fallback={<LoadingFallback />}>
+                      <Suspense fallback={null}>
                         <Desertas />
                       </Suspense>
                     ) : <Navigate to="/" replace />

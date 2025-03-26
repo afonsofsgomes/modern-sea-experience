@@ -48,7 +48,7 @@ const Index = () => {
     // Use requestIdleCallback for non-critical work
     const runIdleTask = () => {
       if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(() => {
+        window.requestIdleCallback(() => {
           updateTextElements();
           setIsLoaded(true);
         }, { timeout: 2000 });
