@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -61,11 +62,12 @@ const Index = () => {
     };
     
     // Use smaller timeout to ensure tasks run
-    window.setTimeout(runIdleTask, 100);
+    const initialTimeout = window.setTimeout(runIdleTask, 100);
     
     // Cleanup function
     return () => {
       if (updateTimeout) window.clearTimeout(updateTimeout);
+      window.clearTimeout(initialTimeout);
     };
   }, []);
 

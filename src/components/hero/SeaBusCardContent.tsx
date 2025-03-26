@@ -59,7 +59,6 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
     };
     img.onerror = () => {
       if (imgRef.current) {
-        console.log(`Failed to load image: ${imageSrc}, using fallback`);
         setImgSrc(fallbackSrc);
       }
     };
@@ -86,7 +85,6 @@ const LocationImage = ({ imageSrc, fallbackSrc, cityName, hasBorder }: LocationI
         decoding="async"
         onLoad={() => setIsLoaded(true)}
         onError={() => {
-          console.log(`Failed to load image: ${imgSrc}, using fallback`);
           setImgSrc(fallbackSrc);
         }}
       />

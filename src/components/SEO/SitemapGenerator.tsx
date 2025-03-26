@@ -59,9 +59,6 @@ const SitemapGenerator: React.FC<SitemapGeneratorProps> = ({ domain }) => {
         }
       } catch (error) {
         // Silent fail in production
-        if (process.env.NODE_ENV !== 'production') {
-          console.error('[SitemapGenerator] Error tracking page visit:', error);
-        }
       }
     });
   }, [location.pathname, domain]);

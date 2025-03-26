@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-// Performance metric logging in a non-blocking way
+// Performance metric logging in a non-blocking way - only in development
 const reportWebVitals = () => {
-  if ('performance' in window && 'getEntriesByType' in performance && 'requestIdleCallback' in window) {
+  if (import.meta.env.DEV && 'performance' in window && 'getEntriesByType' in performance && 'requestIdleCallback' in window) {
     window.requestIdleCallback(() => {
       try {
         const paintMetrics = performance.getEntriesByType('paint');
@@ -52,7 +52,10 @@ root.render(<App />);
 requestAnimationFrame(removeLoader);
 
 // Log web vitals with a delay to avoid competing with critical rendering
-setTimeout(reportWebVitals, 5000);
+// Only enable in development
+if (import.meta.env.DEV) {
+  setTimeout(reportWebVitals, 5000);
+}
 
 // Set up clean IndexedDB to fix the "stored data affecting performance" warning
 const cleanupStoredData = () => {

@@ -27,6 +27,16 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: ['seayou.pt', 'extranet.seayou.pt'],
     // Prevent CORS issues with development server
     cors: true,
+    // Suppress noisy WebSocket connection errors in client console
+    strictPort: false,
+    // Suppress some Vite-specific warnings
+    logger: {
+      transports: [
+        {
+          level: mode === 'production' ? 'error' : 'info',
+        },
+      ],
+    },
   },
   plugins: [
     react(),
@@ -86,4 +96,6 @@ export default defineConfig(({ mode }) => ({
     strictPort: true,
     cors: true,
   },
+  // Suppress noisy console warnings
+  logLevel: mode === 'production' ? 'error' : 'info',
 }));
