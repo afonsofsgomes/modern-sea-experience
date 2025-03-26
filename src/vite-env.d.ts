@@ -23,7 +23,7 @@ declare module '*.svg' {
 declare namespace bkn {
   function init(options: any): void;
   function load(options: any): void;
-  function ui: {
+  const ui: {
     Widget: any;
   };
 }
