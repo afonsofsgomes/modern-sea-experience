@@ -50,7 +50,7 @@ const Index = () => {
         }, { timeout: 2000 });
       } else {
         // Fallback for browsers without requestIdleCallback
-        window.setTimeout(() => {
+        setTimeout(() => {
           updateTextElements();
           setIsLoaded(true);
         }, 1000);
@@ -58,11 +58,11 @@ const Index = () => {
     };
     
     // Use smaller timeout to ensure tasks run
-    const initialTimeout = window.setTimeout(runIdleTask, 100);
+    const initialTimeout = setTimeout(runIdleTask, 100);
     
     // Cleanup function
     return () => {
-      window.clearTimeout(initialTimeout);
+      clearTimeout(initialTimeout);
     };
   }, []);
 
@@ -94,6 +94,7 @@ const Index = () => {
         {/* Add preload directive for critical resources */}
         <link rel="preload" href={HERO_IMAGE_URL} as="image" fetchPriority="high" />
       </PageHead>
+      
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
       

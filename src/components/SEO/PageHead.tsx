@@ -42,8 +42,8 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <link rel="canonical" href={canonical} />
       
       {/* Preload critical assets */}
-      <link rel="preload" href="https://extranet.seayou.pt/logos/logowhite.png" as="image" fetchpriority="high" />
-      <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpg" as="image" fetchpriority="high" />
+      <link rel="preload" href="https://extranet.seayou.pt/logos/logowhite.png" as="image" fetchPriority="high" />
+      <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpg" as="image" fetchPriority="high" />
       
       {/* DNS Prefetch and Preconnect for external domains */}
       <link rel="preconnect" href="https://extranet.seayou.pt" crossOrigin="" />

@@ -22,7 +22,7 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
       // Create image object for preloading
       const img = new Image();
       img.src = imageUrl;
-      img.fetchPriority = 'high';
+      (img as any).fetchPriority = 'high';
       
       // For fast connections, don't wait for onload
       if (isFastConnection && imageRef.current) {
