@@ -9,10 +9,11 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { LoadingFallback } from "@/components/LoadingFallback";
+// Import SeaBus directly instead of lazy loading it
+import SeaBus from "./pages/SeaBus";
 
 // Lazy load non-critical pages
 const Booking = lazy(() => import("./pages/Booking"));
-const SeaBus = lazy(() => import("./pages/SeaBus"));
 const PrivateCruise = lazy(() => import("./pages/PrivateCruise"));
 const PortoSanto = lazy(() => import("./pages/PortoSanto"));
 const Desertas = lazy(() => import("./pages/Desertas"));
@@ -67,20 +68,15 @@ const App = () => {
                 {/* Eagerly load the index route for fast initial render */}
                 <Route path="/" element={<Index />} />
                 
+                {/* Eagerly load the SeaBus route to fix the loading issue */}
+                <Route path="/seabus" element={<SeaBus />} />
+                
                 {/* Lazy load all other routes */}
                 <Route 
                   path="/booking" 
                   element={
                     <Suspense fallback={<LoadingFallback />}>
                       <Booking />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/seabus" 
-                  element={
-                    <Suspense fallback={<LoadingFallback />}>
-                      <SeaBus />
                     </Suspense>
                   } 
                 />
