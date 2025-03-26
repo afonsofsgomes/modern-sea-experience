@@ -7,16 +7,27 @@ import { PageHead, LocalBusinessSchema, StructuredData, BreadcrumbNav } from "@/
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
 
-// Lazy load non-critical components
-const Routes = lazy(() => import("@/components/sections").then(module => ({ default: module.Routes })));
-const Destinations = lazy(() => import("@/components/sections").then(module => ({ default: module.Destinations })));
-const Testimonials = lazy(() => import("@/components/sections").then(module => ({ default: module.Testimonials })));
-const Newsletter = lazy(() => import("@/components/sections").then(module => ({ default: module.Newsletter })));
-
-// Correct image URL that works - preload this in head
+// Preload critical images right away
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
-// Default OG image
 const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
+
+// Create image preloader
+(() => {
+  if (typeof window !== 'undefined') {
+    const preloadImages = [HERO_IMAGE_URL, DEFAULT_OG_IMAGE];
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.fetchPriority = 'high';
+    });
+  }
+})();
+
+// Lazy load non-critical components with better chunking
+const Routes = lazy(() => import("@/components/sections/Routes").then(module => ({ default: module })));
+const Destinations = lazy(() => import("@/components/sections/Destinations").then(module => ({ default: module })));
+const Testimonials = lazy(() => import("@/components/sections/Testimonials").then(module => ({ default: module })));
+const Newsletter = lazy(() => import("@/components/sections/Newsletter").then(module => ({ default: module })));
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,14 +36,8 @@ const Index = () => {
     // Scroll to top on mount
     window.scrollTo(0, 0);
     
-    // Preload the hero image for better LCP
-    const preloadImage = new Image();
-    preloadImage.onload = () => {
-      setIsLoaded(true);
-    };
-    preloadImage.src = HERO_IMAGE_URL;
-    
-    // Text updates
+    // Implement text updates only after initial render for better FCP
+    let updateTimeout: number;
     const updateTextElements = () => {
       const elements = document.querySelectorAll('.text-to-update');
       elements.forEach(el => {
@@ -42,12 +47,28 @@ const Index = () => {
       });
     };
     
-    // Run text updates after component mounts
-    updateTextElements();
+    // Use requestIdleCallback for non-critical work
+    const runIdleTask = () => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(() => {
+          updateTextElements();
+          setIsLoaded(true);
+        }, { timeout: 2000 });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        updateTimeout = window.setTimeout(() => {
+          updateTextElements();
+          setIsLoaded(true);
+        }, 1000);
+      }
+    };
+    
+    // Use smaller timeout to ensure tasks run
+    setTimeout(runIdleTask, 100);
     
     // Cleanup function
     return () => {
-      preloadImage.onload = null;
+      if (updateTimeout) clearTimeout(updateTimeout);
     };
   }, []);
 
@@ -75,10 +96,15 @@ const Index = () => {
         ogImage={DEFAULT_OG_IMAGE}
       >
         <meta name="robots" content="index, follow" />
+        
+        {/* Add preload directive for critical resources */}
+        <link rel="preload" href={HERO_IMAGE_URL} as="image" fetchPriority="high" />
       </PageHead>
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
-      <TallyScript />
+      
+      {/* Defer non-critical scripts for faster LCP */}
+      {isLoaded && <TallyScript />}
       
       <Navbar />
       

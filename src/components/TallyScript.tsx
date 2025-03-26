@@ -3,90 +3,65 @@ import { useEffect, useRef } from 'react';
 
 export const TallyScript = () => {
   const scriptLoaded = useRef(false);
+  const loadTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Only load the script once
+    // Only load the script once and after main content
     if (scriptLoaded.current || document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) {
       return;
     }
 
-    scriptLoaded.current = true;
+    // Defer Tally loading until after critical content
+    const loadTally = () => {
+      scriptLoaded.current = true;
 
-    // Create and inject the Tally script
-    const script = document.createElement('script');
-    script.src = 'https://tally.so/widgets/embed.js';
-    script.async = true;
-    script.defer = true;
-    
-    // Function to load embeds once Tally is available
-    const loadEmbeds = () => {
-      if (typeof (window as any).Tally !== 'undefined') {
-        console.log('Tally object found, loading embeds');
-        (window as any).Tally.loadEmbeds();
-      } else {
-        // If Tally object is not available, manually set src on iframes
-        document.querySelectorAll('iframe[data-tally-src]:not([src])').forEach((iframe: HTMLIFrameElement) => {
-          if (iframe.dataset.tallySrc) {
-            iframe.src = iframe.dataset.tallySrc;
-          }
-        });
-      }
-    };
-    
-    // Set up callbacks
-    script.onload = () => {
-      // Immediately trigger load instead of waiting
-      loadEmbeds();
-    };
-    
-    script.onerror = () => {
-      loadEmbeds(); // Still try to load iframes directly if script fails
-    };
-    
-    // Add the script to the document
-    document.body.appendChild(script);
-    
-    // Inject a style tag to ensure Tally forms are visible while loading
-    const styleTag = document.createElement('style');
-    styleTag.textContent = `
-      /* Set initial dimensions for iframe placeholders */
-      iframe[data-tally-src]:not([src]) {
-        min-height: 500px;
-        background: rgba(255, 255, 255, 0.1);
-        width: 100%;
-        display: block;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-      }
+      // Create and inject the Tally script
+      const script = document.createElement('script');
+      script.src = 'https://tally.so/widgets/embed.js';
+      script.async = true;
+      script.defer = true;
       
-      /* Improve placeholder visibility in iframes */
-      iframe[data-tally-src] {
-        background: rgba(255, 255, 255, 0.05) !important;
-      }
-      
-      /* This targets the iframe content when possible */
-      @media (prefers-color-scheme: dark) {
-        input::placeholder, textarea::placeholder {
-          color: rgba(255, 255, 255, 0.6) !important;
-          opacity: 1 !important;
+      // Function to load embeds once Tally is available
+      const loadEmbeds = () => {
+        // Find all Tally iframes
+        const tallyFrames = document.querySelectorAll('iframe[data-tally-src]:not([src])');
+        
+        if (typeof (window as any).Tally !== 'undefined') {
+          (window as any).Tally.loadEmbeds();
+        } else if (tallyFrames.length > 0) {
+          // If Tally object is not available, manually set src on iframes
+          tallyFrames.forEach((iframe: HTMLIFrameElement) => {
+            if (iframe.dataset.tallySrc) {
+              iframe.src = iframe.dataset.tallySrc;
+            }
+          });
         }
-      }
-    `;
-    document.head.appendChild(styleTag);
+      };
+      
+      // Set up callbacks
+      script.onload = loadEmbeds;
+      script.onerror = loadEmbeds; // Still try to load iframes directly if script fails
+      
+      // Add the script to the document
+      document.body.appendChild(script);
+      
+      // Fallback timeout to ensure iframes load
+      loadTimeoutRef.current = window.setTimeout(loadEmbeds, 2000);
+    };
     
-    // Run loadEmbeds immediately as a fallback
-    setTimeout(loadEmbeds, 100);
-    
-    // Additional fallback - try once more after a shorter delay
-    const finalTimeout = setTimeout(loadEmbeds, 500);
+    // Defer loading until main content is interactive
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(loadTally, { timeout: 3000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      loadTimeoutRef.current = window.setTimeout(loadTally, 2000);
+    }
     
     // Cleanup on component unmount
     return () => {
-      // We don't remove the script as it might be needed by other components
-      // But we can remove our custom style and clear timeouts
-      if (document.head.contains(styleTag)) {
-        document.head.removeChild(styleTag);
+      if (loadTimeoutRef.current !== null) {
+        clearTimeout(loadTimeoutRef.current);
       }
-      clearTimeout(finalTimeout);
     };
   }, []);
 
