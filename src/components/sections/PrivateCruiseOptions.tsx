@@ -9,6 +9,13 @@ import GroupBookingDialog from "@/components/GroupBookingDialog";
 export const PrivateCruiseOptions = () => {
   const [activeRoute, setActiveRoute] = useState<'north' | 'south' | 'custom'>('north');
   
+  const scrollToBookingSection = () => {
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -79,11 +86,13 @@ export const PrivateCruiseOptions = () => {
                     <div className="text-2xl font-bold text-gray-900">€60</div>
                     <div className="text-sm text-gray-500">per passenger</div>
                   </div>
-                  <Link to="#booking">
-                    <Button variant="outline" className="flex gap-1 items-center">
-                      Book This Route <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  <Button 
+                    variant="outline" 
+                    className="flex gap-1 items-center"
+                    onClick={scrollToBookingSection}
+                  >
+                    Book This Route <ArrowRight className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </motion.div>
@@ -143,11 +152,13 @@ export const PrivateCruiseOptions = () => {
                     <div className="text-2xl font-bold text-gray-900">€60</div>
                     <div className="text-sm text-gray-500">per passenger</div>
                   </div>
-                  <Link to="#booking">
-                    <Button variant="outline" className="flex gap-1 items-center">
-                      Book This Route <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  <Button 
+                    variant="outline" 
+                    className="flex gap-1 items-center"
+                    onClick={scrollToBookingSection}
+                  >
+                    Book This Route <ArrowRight className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </motion.div>
