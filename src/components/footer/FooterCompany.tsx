@@ -19,6 +19,16 @@ export const FooterCompany: React.FC = () => {
           </button>
         </li>
         <li>
+          <a
+            href="https://blog.seayou.pt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Blog
+          </a>
+        </li>
+        <li>
           <Link
             to="/privacy-policy"
             className="text-muted-foreground hover:text-foreground transition-colors"
