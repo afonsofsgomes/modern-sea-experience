@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -6,6 +5,10 @@ import { Footer } from "@/components/Footer";
 import { PageHead, LocalBusinessSchema, StructuredData, BreadcrumbNav } from "@/components/SEO";
 import TallyScript from "@/components/TallyScript";
 import { AlertEmbed } from "@/components/AlertEmbed";
+import { Routes } from "@/components/sections/Routes";
+import { Destinations } from "@/components/sections/Destinations";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { Newsletter } from "@/components/sections/Newsletter";
 
 // Preload critical images right away
 const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
@@ -22,12 +25,6 @@ const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
     });
   }
 })();
-
-// Lazy load non-critical components with better chunking
-const Routes = lazy(() => import("@/components/sections/Routes").then(module => ({ default: module })));
-const Destinations = lazy(() => import("@/components/sections/Destinations").then(module => ({ default: module })));
-const Testimonials = lazy(() => import("@/components/sections/Testimonials").then(module => ({ default: module })));
-const Newsletter = lazy(() => import("@/components/sections/Newsletter").then(module => ({ default: module })));
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -130,22 +127,20 @@ const Index = () => {
         </div>
       </section>
       
-      <Suspense fallback={<div className="py-20 text-center">Loading...</div>}>
-        <div id="routes">
-          <Routes />
-        </div>
-        
-        <div id="destinations">
-          <Destinations />
-        </div>
-        
-        <div id="about">
-          <Testimonials />
-        </div>
-        <div id="contact">
-          <Newsletter />
-        </div>
-      </Suspense>
+      <div id="routes">
+        <Routes />
+      </div>
+      
+      <div id="destinations">
+        <Destinations />
+      </div>
+      
+      <div id="about">
+        <Testimonials />
+      </div>
+      <div id="contact">
+        <Newsletter />
+      </div>
 
       <Footer />
     </div>

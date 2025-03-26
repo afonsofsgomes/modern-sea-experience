@@ -60,7 +60,7 @@ export const SmartlookScript = () => {
         }
         
         // Initialize with project key after a delay
-        setTimeout(() => {
+        window.setTimeout(() => {
           try {
             window.smartlook && window.smartlook('init', 'bd86f1dec9a6395d911d80e9ca09fe64590b04c1', { region: 'eu' });
             initialized.current = true;
@@ -77,7 +77,7 @@ export const SmartlookScript = () => {
       (window as any).requestIdleCallback(initSmartlook, { timeout: 5000 });
     } else {
       // Fallback for browsers without requestIdleCallback
-      setTimeout(initSmartlook, 5000);
+      window.setTimeout(initSmartlook, 5000);
     }
     
     scriptLoaded.current = true;
