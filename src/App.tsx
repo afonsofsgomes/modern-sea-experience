@@ -24,7 +24,6 @@ const Terms = lazy(() => import("./pages/Terms"));
 const SitemapGenerator = lazy(() => import("@/components/SEO/SitemapGenerator"));
 const GoogleTagManager = lazy(() => import("@/components/GoogleTagManager"));
 const FacebookPixel = lazy(() => import("@/components/FacebookPixel"));
-const SmartlookScript = lazy(() => import("@/components/SmartlookScript"));
 
 // Create QueryClient with optimized settings
 const queryClient = new QueryClient({
@@ -61,7 +60,6 @@ const App = () => {
             <Suspense fallback={null}>
               <GoogleTagManager id={GTM_ID} />
               <FacebookPixel pixelId={FB_PIXEL_ID} />
-              <SmartlookScript />
             </Suspense>
             
             <Toaster />
