@@ -1,7 +1,7 @@
 
 import { Helmet } from "react-helmet";
 
-// Default OG image URL
+// Default OG image URL - this should be a company image, not a stock photo
 const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
 
 interface MetaTagsProps {

@@ -1,3 +1,4 @@
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -56,7 +57,7 @@ export const PrivateCruises = () => {
             transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
           >
             <img 
-              src="https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+              src="https://extranet.seayou.pt/photos/products/private/3.webp" 
               alt="South Coast Cruise" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -77,7 +78,7 @@ export const PrivateCruises = () => {
             transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
           >
             <img 
-              src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+              src="https://extranet.seayou.pt/photos/products/private/4.jpg" 
               alt="North Coast Cruise" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
