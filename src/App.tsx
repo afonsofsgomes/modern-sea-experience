@@ -16,6 +16,7 @@ import GroupBookings from "./pages/GroupBookings";
 import Schedule from "./pages/Schedule";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
+import Careers from "./pages/Careers";
 import { SitemapGenerator } from "@/components/SEO";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import FacebookPixel from "@/components/FacebookPixel";
@@ -100,6 +101,7 @@ const App = () => {
                 <Route path="/schedule" element={<Schedule />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/careers" element={<Careers />} />
                 
                 {/* Desertas page - redirects to home if not enabled */}
                 <Route 
