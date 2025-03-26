@@ -8,8 +8,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-// Import SeaBus directly
+// Import components directly instead of lazy loading
 import SeaBus from "./pages/SeaBus";
+import GoogleTagManager from "@/components/GoogleTagManager";
+import FacebookPixel from "@/components/FacebookPixel";
 
 // Lazy load non-critical pages without showing a loading screen
 const Booking = lazy(() => import("./pages/Booking"));
@@ -21,10 +23,8 @@ const Schedule = lazy(() => import("./pages/Schedule"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
 
-// Lazy load analytics components
+// Lazy load only the sitemap generator
 const SitemapGenerator = lazy(() => import("@/components/SEO/SitemapGenerator"));
-const GoogleTagManager = lazy(() => import("@/components/GoogleTagManager"));
-const FacebookPixel = lazy(() => import("@/components/FacebookPixel"));
 
 // Create QueryClient with optimized settings
 const queryClient = new QueryClient({
@@ -50,11 +50,9 @@ const App = () => {
       <ThemeProvider attribute="class" defaultTheme="light">
         <TooltipProvider>
           <div className="overflow-x-hidden w-full">
-            {/* Defer loading analytics until after main content */}
-            <Suspense fallback={null}>
-              <GoogleTagManager id={GTM_ID} />
-              <FacebookPixel pixelId={FB_PIXEL_ID} />
-            </Suspense>
+            {/* Load analytics directly instead of using Suspense */}
+            <GoogleTagManager id={GTM_ID} />
+            <FacebookPixel pixelId={FB_PIXEL_ID} />
             
             <Toaster />
             <Sonner />

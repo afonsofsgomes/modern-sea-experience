@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 
 interface FacebookPixelProps {
@@ -7,45 +7,10 @@ interface FacebookPixelProps {
 }
 
 const FacebookPixel: React.FC<FacebookPixelProps> = ({ pixelId }) => {
-  useEffect(() => {
-    // Initialize Facebook Pixel when component mounts
-    if (window.fbq) return;
-
-    // Create fbq function
-    window.fbq = function() {
-      // @ts-ignore
-      window.fbq.callMethod ? window.fbq.callMethod.apply(window.fbq, arguments) : window.fbq.queue.push(arguments);
-    };
-
-    // Initialize queue if not already initialized
-    if (!window._fbq) window._fbq = window.fbq;
-    window.fbq.push = window.fbq;
-    window.fbq.loaded = true;
-    window.fbq.version = '2.0';
-    window.fbq.queue = [];
-
-    // Track PageView event on first load
-    window.fbq('init', pixelId);
-    window.fbq('track', 'PageView');
-
-    // Track PageView on route change
-    const handleRouteChange = () => {
-      window.fbq('track', 'PageView');
-    };
-
-    // Add listener for route changes
-    window.addEventListener('popstate', handleRouteChange);
-
-    // Cleanup function
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, [pixelId]);
-
   return (
     <Helmet>
       {/* Facebook Pixel Code */}
-      <script>
+      <script type="text/javascript">
         {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
