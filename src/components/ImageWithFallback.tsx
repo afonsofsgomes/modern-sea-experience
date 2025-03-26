@@ -16,45 +16,38 @@ export const ImageWithFallback = memo(({
   fetchPriority,
   ...props
 }: ImageWithFallbackProps) => {
-  const [imgSrc, setImgSrc] = useState<string | undefined>(undefined);
+  const [imgSrc, setImgSrc] = useState(src);
   const [isLoaded, setIsLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   
   // Generate webp URL if the image is a JPEG or PNG
-  const hasExtension = typeof src === 'string' && src.includes('.');
-  const imageType = hasExtension ? src.split('.').pop()?.toLowerCase() : null;
+  const hasExtension = typeof imgSrc === 'string' && imgSrc.includes('.');
+  const imageType = hasExtension ? imgSrc.split('.').pop()?.toLowerCase() : null;
   const webpSrc = 
     hasExtension && (imageType === 'jpg' || imageType === 'jpeg' || imageType === 'png') 
-      ? src.substring(0, src.lastIndexOf('.')) + '.webp' 
+      ? imgSrc.substring(0, imgSrc.lastIndexOf('.')) + '.webp' 
       : null;
-  
-  // Initialize image source
-  useEffect(() => {
-    // For high priority images, set src immediately
-    if (fetchPriority === 'high') {
-      setImgSrc(src);
-    }
-  }, [src, fetchPriority]);
   
   // Use intersection observer for lazy loading
   useEffect(() => {
-    // Skip for priority images - they're loaded eagerly
-    if (fetchPriority === 'high' || isLoaded) return;
+    // Only set up observer if image isn't already loaded
+    if (isLoaded) return;
     
     // Clean up previous observer
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
     
-    // Create new observer with optimized settings
+    // Create new observer
     observerRef.current = new IntersectionObserver((entries) => {
       const entry = entries[0];
       if (entry.isIntersecting && imgRef.current) {
-        // Set the src only when the image comes into view
-        setImgSrc(src);
-        
-        // Stop observing once src is set
+        // Set the real src when the image comes into view
+        if (imgRef.current.src !== imgSrc && imgRef.current.dataset.src) {
+          imgRef.current.src = imgRef.current.dataset.src;
+        }
+        // Stop observing once loaded
         observerRef.current?.disconnect();
       }
     }, {
@@ -70,7 +63,14 @@ export const ImageWithFallback = memo(({
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [src, isLoaded, fetchPriority]);
+  }, [imgSrc, isLoaded]);
+  
+  // Force reload image if src prop changes
+  useEffect(() => {
+    if (src !== imgSrc && !isLoaded) {
+      setImgSrc(src);
+    }
+  }, [src, imgSrc, isLoaded]);
   
   // Calculate numeric dimensions
   const numericWidth = typeof width === 'string' ? parseInt(width, 10) || 400 : width;
@@ -80,15 +80,16 @@ export const ImageWithFallback = memo(({
   const fetchpriorityAttr = fetchPriority ? { fetchpriority: fetchPriority.toLowerCase() } : {};
   
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ width, height }}>
+    <div className={`relative overflow-hidden ${className}`}>
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" aria-hidden="true" />
       )}
       <picture>
         {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
         <img
           ref={imgRef}
-          src={imgSrc}
+          src={fetchPriority === 'high' ? imgSrc : undefined}
+          data-src={imgSrc} // Store the real src for lazy loading
           alt={alt}
           className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={() => setIsLoaded(true)}

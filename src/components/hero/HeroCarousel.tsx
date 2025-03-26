@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useState, memo, useCallback } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 
 interface HeroCarouselProps {
   destinations: Array<any>;
@@ -23,7 +23,6 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
   const isVisibleRef = useRef(true);
-  const timeoutRef = useRef<number | null>(null);
   
   // Optimize auto-scroll functionality with IntersectionObserver
   useEffect(() => {
@@ -45,65 +44,34 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
       observer.observe(carouselElement);
     }
     
-    // Use requestAnimationFrame to throttle checking visibility
-    let scrollTimerId: number;
-    let lastScrollTime = 0;
-    const SCROLL_INTERVAL = 6000; // 6 seconds
-    
-    const scrollLoop = (timestamp: number) => {
-      if (!lastScrollTime) lastScrollTime = timestamp;
-      
-      const elapsed = timestamp - lastScrollTime;
-      
-      if (elapsed > SCROLL_INTERVAL) {
-        lastScrollTime = timestamp;
-        // Only scroll when visible and user hasn't interacted
-        if (isVisibleRef.current && !userInteracted && apiRef.current) {
-          apiRef.current.scrollNext();
-        }
+    // Only scroll when visible and user hasn't interacted
+    const interval = setInterval(() => {
+      if (isVisibleRef.current && !userInteracted && apiRef.current) {
+        apiRef.current.scrollNext();
       }
-      
-      scrollTimerId = requestAnimationFrame(scrollLoop);
-    };
+    }, 6000);
     
-    // Start the animation loop
-    scrollTimerId = requestAnimationFrame(scrollLoop);
-    
-    // Cleanup
     return () => {
-      cancelAnimationFrame(scrollTimerId);
+      clearInterval(interval);
       observer.disconnect();
     };
   }, [autoScrollPaused, userInteracted]);
   
-  // Optimize user interaction handler with useCallback
-  const handleUserInteraction = useCallback(() => {
+  // Optimize user interaction handler
+  const handleUserInteraction = () => {
     if (userInteracted) return; // Prevent unnecessary state updates
     
     setUserInteracted(true);
     setAutoScrollPaused(true);
     
-    // Clear any existing timeout
-    if (timeoutRef.current !== null) {
-      clearTimeout(timeoutRef.current);
-    }
-    
     // Resume auto-scrolling after 15 seconds of inactivity
-    timeoutRef.current = window.setTimeout(() => {
+    const timer = setTimeout(() => {
       setAutoScrollPaused(false);
       setUserInteracted(false);
-      timeoutRef.current = null;
     }, 15000);
-  }, [userInteracted]);
-  
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current !== null) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
+    
+    return () => clearTimeout(timer);
+  };
 
   // Simplified animation with better performance
   const buttonAnimation = {

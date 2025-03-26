@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,24 +7,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-// Import components directly instead of lazy loading
+import Booking from "./pages/Booking";
 import SeaBus from "./pages/SeaBus";
+import PrivateCruise from "./pages/PrivateCruise";
+import PortoSanto from "./pages/PortoSanto";
+import Desertas from "./pages/Desertas";
+import GroupBookings from "./pages/GroupBookings";
+import Schedule from "./pages/Schedule";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+import { SitemapGenerator } from "@/components/SEO";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import FacebookPixel from "@/components/FacebookPixel";
-
-// Lazy load non-critical pages without showing a loading screen
-const Booking = lazy(() => import("./pages/Booking"));
-const PrivateCruise = lazy(() => import("./pages/PrivateCruise"));
-const PortoSanto = lazy(() => import("./pages/PortoSanto"));
-const Desertas = lazy(() => import("./pages/Desertas"));
-const GroupBookings = lazy(() => import("./pages/GroupBookings"));
-const Schedule = lazy(() => import("./pages/Schedule"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const Terms = lazy(() => import("./pages/Terms"));
-
-// Lazy load only the sitemap generator
-const SitemapGenerator = lazy(() => import("@/components/SEO/SitemapGenerator"));
 
 // Create QueryClient with optimized settings
 const queryClient = new QueryClient({
@@ -33,7 +27,6 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       retry: 1,
       staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes
     },
   },
 });
@@ -45,101 +38,77 @@ const FB_PIXEL_ID = "2645591515649546";
 const DESERTAS_ENABLED = false;
 
 const App = () => {
+  // Fix iOS scroll issues and ensure proper heading hierarchy
+  useEffect(() => {
+    // Add accessibility attributes to iframes when they load
+    const addAccessibilityToIframes = () => {
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach((iframe, index) => {
+        if (!iframe.hasAttribute('title')) {
+          iframe.setAttribute('title', `External content ${index + 1}`);
+        }
+      });
+    };
+    
+    // Fix heading hierarchy
+    const fixHeadingHierarchy = () => {
+      const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+      let lastLevel = 0;
+      
+      headings.forEach(heading => {
+        const level = parseInt(heading.tagName.charAt(1));
+        if (level > lastLevel + 1) {
+          console.warn(`Non-sequential heading found: ${heading.tagName} should come after h${lastLevel + 1}`);
+        }
+        lastLevel = level;
+      });
+    };
+    
+    // Execute fixes on first load and when route changes
+    const observer = new MutationObserver(() => {
+      addAccessibilityToIframes();
+      setTimeout(fixHeadingHierarchy, 1000);
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Initial run
+    addAccessibilityToIframes();
+    setTimeout(fixHeadingHierarchy, 1000);
+    
+    return () => observer.disconnect();
+  }, []);
+  
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="light">
         <TooltipProvider>
           <div className="overflow-x-hidden w-full">
-            {/* Load analytics directly instead of using Suspense */}
             <GoogleTagManager id={GTM_ID} />
             <FacebookPixel pixelId={FB_PIXEL_ID} />
-            
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <Suspense fallback={null}>
-                <SitemapGenerator domain="seayou.pt" />
-              </Suspense>
-              
+              <SitemapGenerator domain="seayou.pt" />
               <Routes>
-                {/* Eagerly load the index route for fast initial render */}
                 <Route path="/" element={<Index />} />
-                
-                {/* Eagerly load the SeaBus route */}
+                <Route path="/booking" element={<Booking />} />
                 <Route path="/seabus" element={<SeaBus />} />
-                
-                {/* Lazy load all other routes - no loading fallback */}
-                <Route 
-                  path="/booking" 
-                  element={
-                    <Suspense fallback={null}>
-                      <Booking />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/private-cruise" 
-                  element={
-                    <Suspense fallback={null}>
-                      <PrivateCruise />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/porto-santo" 
-                  element={
-                    <Suspense fallback={null}>
-                      <PortoSanto />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/group-bookings" 
-                  element={
-                    <Suspense fallback={null}>
-                      <GroupBookings />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/schedule" 
-                  element={
-                    <Suspense fallback={null}>
-                      <Schedule />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/privacy-policy" 
-                  element={
-                    <Suspense fallback={null}>
-                      <PrivacyPolicy />
-                    </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/terms" 
-                  element={
-                    <Suspense fallback={null}>
-                      <Terms />
-                    </Suspense>
-                  } 
-                />
+                <Route path="/private-cruise" element={<PrivateCruise />} />
+                <Route path="/porto-santo" element={<PortoSanto />} />
+                <Route path="/group-bookings" element={<GroupBookings />} />
+                <Route path="/schedule" element={<Schedule />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<Terms />} />
                 
                 {/* Desertas page - redirects to home if not enabled */}
                 <Route 
                   path="/desertas" 
-                  element={
-                    DESERTAS_ENABLED ? (
-                      <Suspense fallback={null}>
-                        <Desertas />
-                      </Suspense>
-                    ) : <Navigate to="/" replace />
-                  } 
+                  element={DESERTAS_ENABLED ? <Desertas /> : <Navigate to="/" replace />} 
                 />
                 
-                {/* 404 page for all other routes */}
-                <Route path="*" element={<NotFound />} />
+                {/* Redirect all other routes to the homepage */}
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </BrowserRouter>
           </div>

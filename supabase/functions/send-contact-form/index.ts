@@ -40,6 +40,13 @@ serve(async (req) => {
     const username = Deno.env.get("SMTP_USERNAME") || "";
     const password = Deno.env.get("SMTP_PASSWORD") || "";
     const fromEmail = Deno.env.get("SMTP_FROM") || "noreply@seayou.pt";
+    
+    console.log("SMTP Configuration:");
+    console.log(`Host: ${host}`);
+    console.log(`Port: ${port}`);
+    console.log(`Username: ${username ? "Provided" : "Missing"}`);
+    console.log(`Password: ${password ? "Provided" : "Missing"}`);
+    console.log(`From Email: ${fromEmail}`);
 
     // Check that required SMTP settings are provided
     if (!host) {
@@ -54,6 +61,8 @@ serve(async (req) => {
     const client = new SmtpClient();
     
     try {
+      console.log(`Connecting to SMTP server at ${host}:${port} with SSL`);
+      
       // For SSL on port 465, just use the simple connect method
       await client.connectTLS({
         hostname: host,
@@ -62,7 +71,10 @@ serve(async (req) => {
         password: password,
         // No secure flag - avoiding the issue with Deno.writeAll
       });
+      
+      console.log("SMTP connection established successfully");
     } catch (connError) {
+      console.error(`Error connecting to SMTP server at ${host}:${port}:`, connError);
       throw new Error(`Failed to connect to SMTP server: ${connError.message}`);
     }
 
@@ -77,6 +89,8 @@ serve(async (req) => {
 
     // Send email to support
     try {
+      console.log(`Sending contact form submission to support@seayou.pt from ${fromEmail}`);
+      
       await client.send({
         from: fromEmail,
         to: "support@seayou.pt",
@@ -84,7 +98,10 @@ serve(async (req) => {
         content: supportHtmlContent,
         html: supportHtmlContent,
       });
+      
+      console.log("Support email sent successfully");
     } catch (sendError) {
+      console.error("Error sending email to support:", sendError);
       throw new Error(`Failed to send email to support: ${sendError.message}`);
     }
 
@@ -101,6 +118,8 @@ serve(async (req) => {
 
     // Send confirmation email to user
     try {
+      console.log(`Sending confirmation email to user ${email} from ${fromEmail}`);
+      
       await client.send({
         from: fromEmail,
         to: email,
@@ -108,7 +127,10 @@ serve(async (req) => {
         content: confirmationHtmlContent,
         html: confirmationHtmlContent,
       });
+      
+      console.log("Confirmation email to user sent successfully");
     } catch (sendError) {
+      console.error("Error sending confirmation email to user:", sendError);
       throw new Error(`Failed to send confirmation email: ${sendError.message}`);
     }
 
@@ -126,6 +148,8 @@ serve(async (req) => {
       }
     );
   } catch (error) {
+    console.error('Error processing contact form:', error);
+    
     return new Response(
       JSON.stringify({ 
         success: false, 

@@ -67,5 +67,5 @@ export const PageHead: React.FC<PageHeadProps> = ({
   );
 };
 
-// Make PageHead the default export
+// Also export as default to ensure compatibility
 export default PageHead;

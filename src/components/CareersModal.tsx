@@ -23,12 +23,10 @@ export const CareersModal = ({ isOpen, onOpenChange }: CareersModalProps) => {
       if (typeof window !== 'undefined' && (window as any).Tally) {
         setTimeout(() => {
           try {
+            console.log('Attempting to load Tally embeds in Careers modal');
             (window as any).Tally.loadEmbeds();
           } catch (e) {
-            // Silent error handling in production
-            if (process.env.NODE_ENV !== 'production') {
-              console.error('Error loading Tally embeds:', e);
-            }
+            console.error('Error loading Tally embeds in Careers modal:', e);
           }
         }, 300);
       }

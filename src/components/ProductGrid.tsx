@@ -1,9 +1,8 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 // Sample product data
 const products = [
@@ -57,21 +56,9 @@ const products = [
   },
 ];
 
-// Preload all product images at once
-const preloadProductImages = () => {
-  products.forEach(product => {
-    const img = new Image();
-    img.src = product.image;
-  });
-};
-
-// Execute preloading immediately
-preloadProductImages();
-
 const ProductCard = ({ product, index }: { product: any; index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <motion.div
@@ -82,18 +69,11 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="image-container aspect-[3/4] bg-gray-100 rounded-md mb-4 overflow-hidden group-hover:shadow-md transition-shadow duration-300">
-        {!imageLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <LoadingSpinner size="sm" color="blue" />
-          </div>
-        )}
         <img
           src={product.image}
           alt={product.name}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className="w-full h-full object-cover"
           loading="lazy"
-          onLoad={() => setImageLoaded(true)}
-          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
           <Button
@@ -119,36 +99,6 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
 export const ProductGrid = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Use shorter loading time for better UX
-    const timer = window.setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-    
-    return () => {
-      window.clearTimeout(timer);
-    };
-  }, []);
-
-  if (isLoading) {
-    return (
-      <section className="py-24 bg-[#253D7F] flex items-center justify-center min-h-[500px]">
-        <div className="flex flex-col items-center">
-          <img 
-            src="https://extranet.seayou.pt/logos/logowhite.png" 
-            alt="SeaYou Madeira Logo" 
-            className="max-w-[180px] mb-5"
-          />
-          <LoadingSpinner size="lg" color="white" />
-          <div className="text-white text-opacity-90 mt-4">
-            Loading SeaYou experience...
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section
