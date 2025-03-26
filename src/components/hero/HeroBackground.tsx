@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface HeroBackgroundProps {
   imageUrl: string;
@@ -11,43 +11,23 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
   fallbackUrl = "https://extranet.seayou.pt/photos/9374361538.png"
 }) => {
   const imageRef = useRef<HTMLDivElement>(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
   
   useEffect(() => {
-    // Optimize image loading with connection awareness
-    const connectionType = (navigator as any).connection?.effectiveType || '4g';
-    const isFastConnection = !['slow-2g', '2g', '3g'].includes(connectionType);
-    
+    // Preload the image with high priority
     if (imageUrl) {
-      // Create image object for preloading
       const img = new Image();
       img.src = imageUrl;
-      (img as any).fetchPriority = 'high';
-      
-      // For fast connections, don't wait for onload
-      if (isFastConnection && imageRef.current) {
-        // Apply image immediately with a tiny delay
-        setTimeout(() => {
-          if (imageRef.current) {
-            imageRef.current.style.backgroundImage = `url(${imageUrl})`;
-            setImageLoaded(true);
-          }
-        }, 10);
-      }
-      
-      // For all connections, ensure image is loaded correctly
+      img.fetchPriority = 'high';
       img.onload = () => {
+        // Once loaded, apply it to the background div with no transition
         if (imageRef.current) {
           imageRef.current.style.backgroundImage = `url(${imageUrl})`;
-          setImageLoaded(true);
         }
       };
-      
       img.onerror = () => {
         // If error, use fallback
         if (imageRef.current && fallbackUrl) {
           imageRef.current.style.backgroundImage = `url(${fallbackUrl})`;
-          setImageLoaded(true);
         }
       };
     }
@@ -55,25 +35,15 @@ export const HeroBackground: React.FC<HeroBackgroundProps> = ({
 
   return (
     <>
-      {/* Optimized overlay that doesn't depend on image loading */}
+      {/* Overlay to soften the background with a light blue tint */}
       <div className="absolute inset-0 bg-blue-900/40 z-10"></div>
       
-      {/* Low quality image placeholder while loading */}
-      <div 
-        className="absolute inset-0 bg-blue-800 z-0"
-        style={{ 
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
-        }}
-        aria-hidden="true"
-      ></div>
-      
-      {/* Actual background image */}
+      {/* Background image - with inline style for faster initial render */}
       <div 
         ref={imageRef}
-        className={`absolute inset-0 z-1 transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className="absolute inset-0 z-0"
         style={{ 
-          backgroundImage: `url(${fallbackUrl})`, 
+          backgroundImage: `url(${imageUrl || fallbackUrl})`, 
           backgroundSize: 'cover',
           backgroundPosition: 'center 30%',
           filter: 'brightness(0.8)'

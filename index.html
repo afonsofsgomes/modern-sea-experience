@@ -26,18 +26,6 @@
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="boat tours madeira, seayou, seabus, desertas tours, porto santo tours, private cruises, luxury boat tours, 1 day experience, madeira island boat tours, maritime tourism" />
     
-    <!-- Performance Optimization Tags -->
-    <link rel="dns-prefetch" href="https://extranet.seayou.pt" />
-    <link rel="preconnect" href="https://extranet.seayou.pt" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Resource Hints -->
-    <link rel="modulepreload" href="/src/main.tsx" as="script" />
-    <link rel="modulepreload" href="/src/App.tsx" as="script" />
-    
     <!-- Mobile App Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -81,10 +69,16 @@
     </style>
     
     <!-- Preload critical assets -->
-    <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpg" as="image" fetchpriority="high" />
+    <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpg" as="image" />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
-    <link rel="preload" href="https://extranet.seayou.pt/logos/logowhite.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="https://extranet.seayou.pt/logos/logowhite.png" as="image" />
     <link rel="preload" href="https://extranet.seayou.pt/photos/9374361538.png" as="image" />
+    
+    <!-- Preconnect to essential domains -->
+    <link rel="preconnect" href="https://extranet.seayou.pt" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://connect.facebook.net" />
     
     <!-- Defer non-critical CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
@@ -101,24 +95,6 @@
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://seayou.pt/" />
-    
-    <!-- Page load optimization -->
-    <script type="text/javascript">
-      // Optimize font loading
-      if ("fonts" in document) {
-        if (sessionStorage.fontsLoaded) {
-          document.documentElement.classList.add("fonts-loaded");
-        } else {
-          Promise.all([
-            document.fonts.load("1em Inter"),
-            document.fonts.load("1em 'Playfair Display'")
-          ]).then(function () {
-            document.documentElement.classList.add("fonts-loaded");
-            sessionStorage.fontsLoaded = true;
-          });
-        }
-      }
-    </script>
   </head>
 
   <body>

@@ -4,64 +4,96 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-// Performance optimized loading
-const startApp = () => {
-  // Get the root element
-  const container = document.getElementById('root');
-
-  // Ensure the root element exists
-  if (!container) {
-    throw new Error('Root element not found');
+// Performance metric logging in a non-blocking way - only in development
+const reportWebVitals = () => {
+  if (import.meta.env.DEV && 'performance' in window && 'getEntriesByType' in performance && 'requestIdleCallback' in window) {
+    window.requestIdleCallback(() => {
+      try {
+        const paintMetrics = performance.getEntriesByType('paint');
+        if (paintMetrics.length > 0) {
+          paintMetrics.forEach(metric => {
+            console.info(`${metric.name}: ${Math.round(metric.startTime)}ms`);
+          });
+        }
+      } catch (err) {
+        // Silent fail for performance logging
+      }
+    });
   }
-
-  // Remove the initial loader
-  const removeLoader = () => {
-    const loader = document.querySelector('.initial-loader');
-    if (loader && loader instanceof HTMLElement) {
-      loader.style.opacity = '0';
-      loader.style.transition = 'opacity 0.3s ease';
-      setTimeout(() => {
-        loader.remove();
-      }, 300);
-    }
-  };
-
-  // Create root and render app
-  const root = ReactDOM.createRoot(container);
-  root.render(<App />);
-
-  // Remove loader after hydration, using requestAnimationFrame for better timing
-  requestAnimationFrame(removeLoader);
 };
 
-// Optimize startup sequence
-if (document.readyState === 'loading') {
-  // If the document is still loading, wait for it to be ready
-  document.addEventListener('DOMContentLoaded', startApp);
-} else {
-  // If DOMContentLoaded has already fired, start immediately
-  startApp();
+// Get the root element
+const container = document.getElementById('root');
+
+// Ensure the root element exists
+if (!container) {
+  throw new Error('Root element not found');
 }
 
-// Clean up IndexedDB to improve performance
-if ('indexedDB' in window && window.location.hostname !== 'localhost') {
+// Remove the initial loader immediately after React hydration
+const removeLoader = () => {
+  const loader = document.querySelector('.initial-loader');
+  if (loader && loader instanceof HTMLElement) {
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
+      loader.remove();
+    }, 300);
+  }
+};
+
+// Create a root using createRoot API - no StrictMode in production
+const root = ReactDOM.createRoot(container);
+
+// Render the app with explicit React import
+root.render(<App />);
+
+// Remove loader after React has hydrated the app
+requestAnimationFrame(removeLoader);
+
+// Log web vitals with a delay to avoid competing with critical rendering
+// Only enable in development
+if (import.meta.env.DEV) {
+  setTimeout(reportWebVitals, 5000);
+}
+
+// Set up clean IndexedDB to fix the "stored data affecting performance" warning
+const cleanupStoredData = () => {
   try {
-    const request = window.indexedDB.open('cleanup-db', 1);
-    request.onsuccess = () => {
-      const db = request.result;
-      db.close();
-      // Get all databases and delete unnecessary ones
-      if ('databases' in indexedDB) {
-        indexedDB.databases().then(dbs => {
-          dbs.forEach(db => {
+    // Only run this in production to avoid clearing dev data
+    if (import.meta.env.PROD) {
+      if ('indexedDB' in window) {
+        // Get all databases
+        indexedDB.databases().then(databases => {
+          // For each database, delete it if it's not actively needed
+          databases.forEach(db => {
             if (db.name && !db.name.includes('firebase') && !db.name.includes('auth')) {
               indexedDB.deleteDatabase(db.name);
             }
           });
-        }).catch(() => {/* Ignore errors */});
+        }).catch(() => {
+          // Silently fail if not supported
+        });
       }
-    };
+    }
   } catch (e) {
-    // Silent fail
+    // Silent fail for data cleanup
+  }
+};
+
+// Run cleanup after page is fully loaded
+if (document.readyState === 'complete') {
+  cleanupStoredData();
+} else {
+  window.addEventListener('load', cleanupStoredData);
+}
+
+// Disable Vite HMR websocket in production to avoid failed connection errors
+if (import.meta.env.PROD) {
+  // This will prevent Vite from trying to establish WebSocket connections in production
+  // @ts-ignore - Ignore type error since we're deliberately disabling a Vite internal feature
+  if (typeof import.meta.hot !== 'undefined') {
+    // @ts-ignore
+    import.meta.hot.decline();
   }
 }

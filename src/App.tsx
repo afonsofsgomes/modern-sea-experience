@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,9 +10,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 // Import components directly instead of lazy loading
 import SeaBus from "./pages/SeaBus";
-import { Helmet } from "react-helmet";
+import GoogleTagManager from "@/components/GoogleTagManager";
+import FacebookPixel from "@/components/FacebookPixel";
 
-// Lazy load non-critical pages
+// Lazy load non-critical pages without showing a loading screen
 const Booking = lazy(() => import("./pages/Booking"));
 const PrivateCruise = lazy(() => import("./pages/PrivateCruise"));
 const PortoSanto = lazy(() => import("./pages/PortoSanto"));
@@ -23,7 +24,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
 
 // Lazy load only the sitemap generator
-const SitemapGenerator = lazy(() => import("./components/SEO/SitemapGenerator"));
+const SitemapGenerator = lazy(() => import("@/components/SEO/SitemapGenerator"));
 
 // Create QueryClient with optimized settings
 const queryClient = new QueryClient({
@@ -37,7 +38,6 @@ const queryClient = new QueryClient({
   },
 });
 
-// Inline analytics code to avoid dynamic imports
 const GTM_ID = "GTM-MBXFXGKX";
 const FB_PIXEL_ID = "2645591515649546";
 
@@ -45,67 +45,14 @@ const FB_PIXEL_ID = "2645591515649546";
 const DESERTAS_ENABLED = false;
 
 const App = () => {
-  // Add analytics to the page without dynamic imports
-  useEffect(() => {
-    // Only run in production to avoid filling analytics in development
-    if (process.env.NODE_ENV === 'production') {
-      // Register route change listener for analytics
-      const handleRouteChange = () => {
-        if (window.fbq) {
-          window.fbq('track', 'PageView');
-        }
-        
-        if (window.dataLayer) {
-          window.dataLayer.push({
-            event: 'pageview',
-            page: window.location.pathname
-          });
-        }
-      };
-      
-      // Listen for history changes
-      window.addEventListener('popstate', handleRouteChange);
-      
-      return () => {
-        window.removeEventListener('popstate', handleRouteChange);
-      };
-    }
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="light">
         <TooltipProvider>
           <div className="overflow-x-hidden w-full">
-            {/* Inline analytics scripts using Helmet */}
-            <Helmet>
-              {/* Google Tag Manager */}
-              <script type="text/javascript">{`
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','${GTM_ID}');
-              `}</script>
-              
-              {/* Facebook Pixel */}
-              <script type="text/javascript">{`
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${FB_PIXEL_ID}');
-                fbq('track', 'PageView');
-              `}</script>
-              <noscript>{`
-                <img height="1" width="1" style="display:none"
-                src="https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1" alt="Facebook Pixel" />
-              `}</noscript>
-            </Helmet>
+            {/* Load analytics directly instead of using Suspense */}
+            <GoogleTagManager id={GTM_ID} />
+            <FacebookPixel pixelId={FB_PIXEL_ID} />
             
             <Toaster />
             <Sonner />

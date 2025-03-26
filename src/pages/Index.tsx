@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -15,14 +16,16 @@ const HERO_IMAGE_URL = "https://extranet.seayou.pt/photos/bc.jpg";
 const DEFAULT_OG_IMAGE = "https://extranet.seayou.pt/photos/9374361538.png";
 
 // Create image preloader
-if (typeof window !== 'undefined') {
-  const preloadImages = [HERO_IMAGE_URL, DEFAULT_OG_IMAGE];
-  preloadImages.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.fetchPriority = 'high';
-  });
-}
+(() => {
+  if (typeof window !== 'undefined') {
+    const preloadImages = [HERO_IMAGE_URL, DEFAULT_OG_IMAGE];
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.fetchPriority = 'high';
+    });
+  }
+})();
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,6 +35,7 @@ const Index = () => {
     window.scrollTo(0, 0);
     
     // Implement text updates only after initial render for better FCP
+    let updateTimeout: number | undefined;
     const updateTextElements = () => {
       const elements = document.querySelectorAll('.text-to-update');
       elements.forEach(el => {
@@ -50,7 +54,7 @@ const Index = () => {
         }, { timeout: 2000 });
       } else {
         // Fallback for browsers without requestIdleCallback
-        setTimeout(() => {
+        updateTimeout = window.setTimeout(() => {
           updateTextElements();
           setIsLoaded(true);
         }, 1000);
@@ -58,11 +62,12 @@ const Index = () => {
     };
     
     // Use smaller timeout to ensure tasks run
-    const initialTimeout = setTimeout(runIdleTask, 100);
+    const initialTimeout = window.setTimeout(runIdleTask, 100);
     
     // Cleanup function
     return () => {
-      clearTimeout(initialTimeout);
+      if (updateTimeout) window.clearTimeout(updateTimeout);
+      window.clearTimeout(initialTimeout);
     };
   }, []);
 
@@ -94,7 +99,6 @@ const Index = () => {
         {/* Add preload directive for critical resources */}
         <link rel="preload" href={HERO_IMAGE_URL} as="image" fetchPriority="high" />
       </PageHead>
-      
       <LocalBusinessSchema />
       <StructuredData data={breadcrumbSchema} />
       

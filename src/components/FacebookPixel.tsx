@@ -36,4 +36,10 @@ const FacebookPixel: React.FC<FacebookPixelProps> = ({ pixelId }) => {
 
 export default FacebookPixel;
 
-// Note: We've removed the duplicate global declarations as they're now in vite-env.d.ts
+// Add TypeScript definitions for the fbq function
+declare global {
+  interface Window {
+    fbq: any;
+    _fbq: any;
+  }
+}

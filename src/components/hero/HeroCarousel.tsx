@@ -25,17 +25,18 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
   const isVisibleRef = useRef(true);
   const timeoutRef = useRef<number | null>(null);
   
-  // Use intersection observer to optimize performance by only auto-scrolling when visible
+  // Optimize auto-scroll functionality with IntersectionObserver
   useEffect(() => {
+    // If auto-scroll is paused, don't set up the interval
     if (autoScrollPaused) return;
     
-    // Create intersection observer
+    // Create intersection observer to detect when carousel is visible
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
         isVisibleRef.current = entry.isIntersecting;
       },
-      { threshold: 0.1, rootMargin: '100px' }
+      { threshold: 0.1 }
     );
     
     // Observe the carousel container
@@ -44,10 +45,10 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
       observer.observe(carouselElement);
     }
     
-    // Use requestAnimationFrame for smoother performance
-    let rafId = 0;
+    // Use requestAnimationFrame to throttle checking visibility
+    let scrollTimerId: number;
     let lastScrollTime = 0;
-    const SCROLL_INTERVAL = 6000;
+    const SCROLL_INTERVAL = 6000; // 6 seconds
     
     const scrollLoop = (timestamp: number) => {
       if (!lastScrollTime) lastScrollTime = timestamp;
@@ -56,42 +57,38 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
       
       if (elapsed > SCROLL_INTERVAL) {
         lastScrollTime = timestamp;
+        // Only scroll when visible and user hasn't interacted
         if (isVisibleRef.current && !userInteracted && apiRef.current) {
           apiRef.current.scrollNext();
         }
       }
       
-      rafId = requestAnimationFrame(scrollLoop);
+      scrollTimerId = requestAnimationFrame(scrollLoop);
     };
     
-    // Start animation loop with lower priority
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => {
-        rafId = requestAnimationFrame(scrollLoop);
-      });
-    } else {
-      rafId = requestAnimationFrame(scrollLoop);
-    }
+    // Start the animation loop
+    scrollTimerId = requestAnimationFrame(scrollLoop);
     
-    // Clean up
+    // Cleanup
     return () => {
-      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(scrollTimerId);
       observer.disconnect();
     };
   }, [autoScrollPaused, userInteracted]);
   
-  // Optimize interaction handler
+  // Optimize user interaction handler with useCallback
   const handleUserInteraction = useCallback(() => {
-    if (userInteracted) return;
+    if (userInteracted) return; // Prevent unnecessary state updates
     
     setUserInteracted(true);
     setAutoScrollPaused(true);
     
+    // Clear any existing timeout
     if (timeoutRef.current !== null) {
-      window.clearTimeout(timeoutRef.current);
+      clearTimeout(timeoutRef.current);
     }
     
-    // Resume auto-scrolling after inactivity
+    // Resume auto-scrolling after 15 seconds of inactivity
     timeoutRef.current = window.setTimeout(() => {
       setAutoScrollPaused(false);
       setUserInteracted(false);
@@ -99,16 +96,16 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
     }, 15000);
   }, [userInteracted]);
   
-  // Clean up on unmount
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current !== null) {
-        window.clearTimeout(timeoutRef.current);
+        clearTimeout(timeoutRef.current);
       }
     };
   }, []);
 
-  // Simplified animation for better performance
+  // Simplified animation with better performance
   const buttonAnimation = {
     animate: { 
       opacity: [0.7, 1, 0.7],
@@ -153,6 +150,7 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
           ))}
         </CarouselContent>
         
+        {/* Simplified navigation buttons with fixed type */}
         <motion.div
           variants={buttonAnimation}
           animate="animate"
@@ -170,6 +168,7 @@ export const HeroCarousel = memo(({ destinations, fallbackImage }: HeroCarouselP
         </motion.div>
       </Carousel>
       
+      {/* Carousel indicators for mobile */}
       {isMobile && (
         <div className="flex justify-center mt-4 gap-1">
           {destinations.map((_, index) => (

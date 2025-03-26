@@ -78,6 +78,11 @@ const TallyScript: React.FC<TallyScriptProps> = ({ formId = 'wLYLZ2' }) => {
   return null;
 };
 
-// Note: We've removed the duplicate global declaration as it's now in vite-env.d.ts
+// Add Tally to the window object for TypeScript
+declare global {
+  interface Window {
+    Tally: any;
+  }
+}
 
 export default TallyScript;
