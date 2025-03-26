@@ -93,7 +93,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
           className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           loading="lazy"
           onLoad={() => setImageLoaded(true)}
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
           <Button
