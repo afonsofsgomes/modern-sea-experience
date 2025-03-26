@@ -39,7 +39,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [
-    react(),
+    react({
+      // Optimize React refresh to reduce overhead
+      devTarget: 'es2020'
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
@@ -61,20 +64,32 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ['react', 'react-dom'],
-          framer: ['framer-motion'],
+          vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-toast', '@radix-ui/react-slot'],
-          router: ['react-router-dom'],
+          animations: ['framer-motion'],
+          maps: ['mapbox-gl'],
+          utils: ['date-fns', 'zod'],
         },
+        // Optimize chunk size
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
+      // Optimize external dependencies
+      external: [],
     },
     cssCodeSplit: true,
-    assetsInlineLimit: 4096, // 4KB - inline small assets
+    assetsInlineLimit: 8192, // 8KB - inline small assets
     sourcemap: false,
     chunkSizeWarningLimit: 1000, // KB
+    // Target modern browsers for better performance
+    target: 'es2020',
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+    // Include commonly used deps for better pre-bundling
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'react-helmet'],
+    // Exclude large dependencies that aren't used immediately
+    exclude: ['recharts', 'mapbox-gl'],
     // Updated esbuild options to ensure compatibility with version 0.25.0+
     esbuildOptions: {
       target: 'es2020',

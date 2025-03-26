@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 interface NavbarLogoProps {
@@ -7,8 +7,7 @@ interface NavbarLogoProps {
 }
 
 export const NavbarLogo: React.FC<NavbarLogoProps> = ({ scrolled = false }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  
+  // Preload both logos immediately to avoid flashing during scroll
   const whiteLogoUrl = "https://extranet.seayou.pt/logos/logowhite.png";
   const blackLogoUrl = "https://extranet.seayou.pt/logos/logoblack.png";
   
@@ -19,15 +18,19 @@ export const NavbarLogo: React.FC<NavbarLogoProps> = ({ scrolled = false }) => {
         className="hover:opacity-80 transition-opacity"
       >
         <picture>
+          {/* Use source tags to provide webp if supported */}
+          <source 
+            srcSet={scrolled ? blackLogoUrl.replace('.png', '.webp') : whiteLogoUrl.replace('.png', '.webp')} 
+            type="image/webp" 
+          />
           <img 
             src={scrolled ? blackLogoUrl : whiteLogoUrl} 
             alt="SeaYou Logo" 
-            className={`w-auto transition-all duration-300 ${scrolled ? "h-20" : "h-16"} ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-auto transition-all duration-300 ${scrolled ? "h-20" : "h-16"}`}
             width="150"
             height={scrolled ? "80" : "64"}
             fetchPriority="high"
             decoding="async"
-            onLoad={() => setImageLoaded(true)}
           />
         </picture>
       </Link>

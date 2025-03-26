@@ -41,6 +41,18 @@ export const PageHead: React.FC<PageHeadProps> = ({
       {/* Canonical URL - always set to seayou.pt domain */}
       <link rel="canonical" href={canonical} />
       
+      {/* Preload critical assets */}
+      <link rel="preload" href="https://extranet.seayou.pt/logos/logowhite.png" as="image" fetchpriority="high" />
+      <link rel="preload" href="https://extranet.seayou.pt/photos/bc.jpg" as="image" fetchpriority="high" />
+      
+      {/* DNS Prefetch and Preconnect for external domains */}
+      <link rel="preconnect" href="https://extranet.seayou.pt" crossOrigin="" />
+      <link rel="dns-prefetch" href="https://extranet.seayou.pt" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="" />
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      
       {/* Open Graph Tags - Enhanced for Facebook compatibility */}
       <meta property="og:site_name" content={siteName} />
       <meta property="og:title" content={title} />

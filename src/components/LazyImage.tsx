@@ -30,6 +30,13 @@ export const LazyImage = ({
       : null;
 
   useEffect(() => {
+    // Check if browser supports IntersectionObserver
+    if (!('IntersectionObserver' in window)) {
+      // Fallback for older browsers
+      setIsInView(true);
+      return;
+    }
+    
     // Using Intersection Observer API for better performance
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -60,6 +67,10 @@ export const LazyImage = ({
   // Calculate numeric dimensions
   const numericWidth = typeof width === 'string' ? parseInt(width, 10) || 400 : width;
   const numericHeight = typeof height === 'string' ? parseInt(height, 10) || 300 : height;
+  
+  // Check for connection speed to adjust loading strategy
+  const connectionType = (navigator as any).connection?.effectiveType || '4g';
+  const isFastConnection = !['slow-2g', '2g'].includes(connectionType);
 
   return (
     <div 
@@ -83,7 +94,7 @@ export const LazyImage = ({
       )}
       
       {/* Main image, only loaded when in viewport */}
-      {isInView && (
+      {(isInView || isFastConnection) && (
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
@@ -96,6 +107,7 @@ export const LazyImage = ({
             className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={handleLoad}
             decoding="async"
+            fetchPriority={isInView ? "auto" : "low"}
             {...props}
           />
         </picture>
