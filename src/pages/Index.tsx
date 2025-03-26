@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -65,7 +66,7 @@ const Index = () => {
     
     // Cleanup function
     return () => {
-      if (updateTimeout) clearTimeout(updateTimeout);
+      if (updateTimeout) window.clearTimeout(updateTimeout);
     };
   }, []);
 

@@ -60,7 +60,7 @@ export const TallyScript = () => {
     // Cleanup on component unmount
     return () => {
       if (loadTimeoutRef.current !== null) {
-        clearTimeout(loadTimeoutRef.current);
+        window.clearTimeout(loadTimeoutRef.current);
       }
     };
   }, []);
