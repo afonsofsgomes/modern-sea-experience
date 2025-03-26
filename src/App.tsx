@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { LoadingFallback } from "@/components/LoadingFallback";
 
 // Lazy load non-critical pages
 const Booking = lazy(() => import("./pages/Booking"));
@@ -42,13 +43,6 @@ const FB_PIXEL_ID = "2645591515649546";
 
 // Flag to check if the Desertas page is accessible
 const DESERTAS_ENABLED = false;
-
-// Loading fallback that doesn't cause layout shift
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
-    <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-);
 
 const App = () => {
   return (
