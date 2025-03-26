@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -34,7 +35,7 @@ const Index = () => {
     window.scrollTo(0, 0);
     
     // Implement text updates only after initial render for better FCP
-    let updateTimeout: number;
+    let updateTimeout: number | undefined;
     const updateTextElements = () => {
       const elements = document.querySelectorAll('.text-to-update');
       elements.forEach(el => {
