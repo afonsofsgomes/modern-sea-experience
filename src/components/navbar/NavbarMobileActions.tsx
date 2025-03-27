@@ -41,7 +41,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
         <Button 
           variant="secondary" 
           size="sm" 
-          className="px-5 py-1.5 text-sm font-medium h-auto"
+          className="px-4 py-1 text-sm font-medium h-auto"
         >
           Book
         </Button>

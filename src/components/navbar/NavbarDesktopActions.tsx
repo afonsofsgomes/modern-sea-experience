@@ -34,8 +34,8 @@ export const NavbarDesktopActions: React.FC<NavbarDesktopActionsProps> = ({ scro
       <Link to={isProductPage ? "#booking" : "/booking"} onClick={handleBookClick}>
         <Button 
           variant="secondary" 
-          size="md" 
-          className="text-base px-6 py-2 md:py-1.5 lg:py-2.5 h-auto"
+          size="sm" 
+          className="text-sm px-4 md:px-5 py-1 md:py-1.5 lg:py-2 h-auto lg:text-base"
         >
           Book Now
         </Button>
