@@ -12,11 +12,11 @@ const buttonVariants = {
   outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
 };
 
-// Define button sizes with larger dimensions
+// Define button sizes with more responsive dimensions
 const buttonSizes = {
-  sm: "text-xs px-3 py-2 rounded-md",
-  md: "text-sm px-5 py-3 rounded-md",
-  lg: "text-base px-7 py-3.5 rounded-md",
+  sm: "text-xs px-3 py-1.5 rounded-md",
+  md: "text-sm px-5 py-2 rounded-md",
+  lg: "text-base px-7 py-3 rounded-md",
 };
 
 // Function version of buttonVariants for compatibility with shadcn components
