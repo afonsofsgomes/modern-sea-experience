@@ -38,11 +38,7 @@ export const NavbarMobileActions: React.FC<NavbarMobileActionsProps> = ({
   return (
     <div className="md:hidden flex items-center space-x-2">
       <Link to={isProductPage ? "#booking" : "/booking"} onClick={handleBookClick}>
-        <Button 
-          variant="secondary" 
-          size="sm" 
-          className="px-4 py-1 text-sm font-medium h-auto"
-        >
+        <Button variant="secondary" size="sm" className="px-5 py-2 text-sm font-medium">
           Book
         </Button>
       </Link>
