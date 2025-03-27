@@ -27,6 +27,12 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: ['seayou.pt', 'extranet.seayou.pt'],
     // Prevent CORS issues with development server
     cors: true,
+    // Add security headers to mitigate security vulnerabilities
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+    },
   },
   plugins: [
     react(),
@@ -85,5 +91,10 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     strictPort: true,
     cors: true,
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+    },
   },
 }));
