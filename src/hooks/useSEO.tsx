@@ -69,6 +69,27 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
       }
     }
 
+    // Ensure PWA meta tags are properly set
+    const ensurePWAMeta = (name: string, content: string) => {
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
+      
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
+        document.head.appendChild(meta);
+      }
+      
+      meta.setAttribute('content', content);
+    };
+    
+    // Set PWA meta tags
+    ensurePWAMeta('theme-color', '#253D7F');
+    ensurePWAMeta('apple-mobile-web-app-capable', 'yes');
+    ensurePWAMeta('mobile-web-app-capable', 'yes');
+    ensurePWAMeta('apple-mobile-web-app-status-bar-style', 'black-translucent');
+    ensurePWAMeta('apple-mobile-web-app-title', title || 'SeaYou Madeira');
+    ensurePWAMeta('application-name', title || 'SeaYou Madeira');
+
     // Ensure favicons are properly set
     const ensureFavicon = (rel: string, href: string, type?: string, sizes?: string) => {
       let link = document.querySelector(`link[rel="${rel}"]${sizes ? `[sizes="${sizes}"]` : ''}`) as HTMLLinkElement | null;
@@ -92,6 +113,23 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
     ensureFavicon('apple-touch-icon', 'https://extranet.seayou.pt/logos/apple-touch-icon.png', undefined, '180x180');
     ensureFavicon('icon', 'https://extranet.seayou.pt/logos/android-chrome-192x192.png', 'image/png', '192x192');
     ensureFavicon('icon', 'https://extranet.seayou.pt/logos/android-chrome-512x512.png', 'image/png', '512x512');
+    
+    // Ensure manifest link
+    const ensureManifest = () => {
+      let link = document.querySelector('link[rel="manifest"]') as HTMLLinkElement | null;
+      
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'manifest';
+        document.head.appendChild(link);
+      }
+      
+      if (link.href !== '/manifest.json') {
+        link.href = '/manifest.json';
+      }
+    };
+    
+    ensureManifest();
 
     // Add JSON-LD structured data if provided
     if (jsonLd) {

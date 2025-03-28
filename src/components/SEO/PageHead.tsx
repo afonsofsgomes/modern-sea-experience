@@ -61,12 +61,30 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
+      {/* PWA Meta Tags */}
+      <meta name="theme-color" content="#253D7F" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="apple-mobile-web-app-title" content={title} />
+      <meta name="application-name" content={title} />
+      <link rel="manifest" href="/manifest.json" />
+
       {/* Favicon and App Icons */}
       <link rel="icon" href="https://extranet.seayou.pt/logos/favicon.ico" type="image/x-icon" />
       <link rel="shortcut icon" href="https://extranet.seayou.pt/logos/favicon.ico" type="image/x-icon" />
       <link rel="apple-touch-icon" sizes="180x180" href="https://extranet.seayou.pt/logos/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="192x192" href="https://extranet.seayou.pt/logos/android-chrome-192x192.png" />
       <link rel="icon" type="image/png" sizes="512x512" href="https://extranet.seayou.pt/logos/android-chrome-512x512.png" />
+      
+      {/* Apple PWA Splash Screens */}
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-1242x2208.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2)" />
       
       {/* Allow child elements - useful for page-specific structured data */}
       {children}

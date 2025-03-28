@@ -16,6 +16,24 @@ const reportWebVitals = () => {
   }
 };
 
+// Register service worker for PWA functionality
+const registerServiceWorker = () => {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/serviceWorker.js')
+        .then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        })
+        .catch(error => {
+          console.error('ServiceWorker registration failed: ', error);
+        });
+    });
+  }
+};
+
+// Initialize PWA
+registerServiceWorker();
+
 // Get the root element
 const container = document.getElementById('root');
 
