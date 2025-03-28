@@ -16,26 +16,6 @@ const reportWebVitals = () => {
   }
 };
 
-// Handle service worker updates
-const handleServiceWorkerUpdates = () => {
-  if ('serviceWorker' in navigator) {
-    // Send a message to the service worker to skip waiting and activate new version
-    const refreshPage = () => {
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
-      }
-    };
-
-    // When a new service worker is found, refresh the page
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      window.location.reload();
-    });
-
-    // Refresh the page to activate new service worker if one is waiting
-    refreshPage();
-  }
-};
-
 // Register service worker for PWA functionality
 const registerServiceWorker = () => {
   if ('serviceWorker' in navigator) {
@@ -48,17 +28,32 @@ const registerServiceWorker = () => {
           registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
             if (newWorker) {
+              console.log('New service worker is being installed');
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  console.log('New content is available; please refresh.');
+                  console.log('New content is available; reloading to update.');
+                  // Force a reload to ensure new content is displayed
+                  window.location.reload();
                 }
               });
             }
           });
+          
+          // Check for updates every 30 minutes
+          setInterval(() => {
+            console.log('Checking for service worker updates...');
+            registration.update();
+          }, 30 * 60 * 1000);
         })
         .catch(error => {
           console.error('ServiceWorker registration failed: ', error);
         });
+        
+      // When a new service worker is found and activated, refresh the page
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('New service worker controller, reloading page');
+        window.location.reload();
+      });
     });
   }
 };
@@ -86,7 +81,6 @@ const removeLoader = () => {
 
 // Initialize PWA
 registerServiceWorker();
-handleServiceWorkerUpdates();
 
 // Get the root element
 const container = document.getElementById('root');
