@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, Ship } from "lucide-react";
+import { Mail, Phone, Ship, ExternalLink } from "lucide-react";
 
 export const FooterContact: React.FC = () => {
   return (
@@ -31,6 +31,16 @@ export const FooterContact: React.FC = () => {
           >
             <Ship className="h-4 w-4 mr-2" /> Schedule Information
           </Link>
+        </li>
+        <li>
+          <a
+            href="https://onboarding.seayou.pt/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors flex items-center"
+          >
+            <ExternalLink className="h-4 w-4 mr-2" /> Become our Partner
+          </a>
         </li>
       </ul>
     </div>
