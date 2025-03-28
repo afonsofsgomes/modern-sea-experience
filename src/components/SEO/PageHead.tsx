@@ -74,8 +74,16 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <link rel="icon" href="https://extranet.seayou.pt/logos/favicon.ico" type="image/x-icon" />
       <link rel="shortcut icon" href="https://extranet.seayou.pt/logos/favicon.ico" type="image/x-icon" />
       <link rel="apple-touch-icon" sizes="180x180" href="https://extranet.seayou.pt/logos/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="192x192" href="https://extranet.seayou.pt/logos/android-chrome-192x192.png" />
-      <link rel="icon" type="image/png" sizes="512x512" href="https://extranet.seayou.pt/logos/android-chrome-512x512.png" />
+      <link rel="icon" type="image/png" sizes="48x48" href="https://extranet.seayou.pt/logos/icons/icon-48x48.png" />
+      <link rel="icon" type="image/png" sizes="72x72" href="https://extranet.seayou.pt/logos/icons/icon-72x72.png" />
+      <link rel="icon" type="image/png" sizes="96x96" href="https://extranet.seayou.pt/logos/icons/icon-96x96.png" />
+      <link rel="icon" type="image/png" sizes="128x128" href="https://extranet.seayou.pt/logos/icons/icon-128x128.png" />
+      <link rel="icon" type="image/png" sizes="144x144" href="https://extranet.seayou.pt/logos/icons/icon-144x144.png" />
+      <link rel="icon" type="image/png" sizes="152x152" href="https://extranet.seayou.pt/logos/icons/icon-152x152.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="https://extranet.seayou.pt/logos/icons/icon-192x192.png" />
+      <link rel="icon" type="image/png" sizes="256x256" href="https://extranet.seayou.pt/logos/icons/icon-256x256.png" />
+      <link rel="icon" type="image/png" sizes="384x384" href="https://extranet.seayou.pt/logos/icons/icon-384x384.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="https://extranet.seayou.pt/logos/icons/icon-512x512.png" />
       
       {/* Apple PWA Splash Screens */}
       <link rel="apple-touch-startup-image" href="https://extranet.seayou.pt/logos/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />

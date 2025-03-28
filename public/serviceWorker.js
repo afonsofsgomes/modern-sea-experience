@@ -10,8 +10,16 @@ const urlsToCache = [
   'https://extranet.seayou.pt/logos/logowhite.png',
   'https://extranet.seayou.pt/logos/favicon.ico',
   'https://extranet.seayou.pt/logos/apple-touch-icon.png',
-  'https://extranet.seayou.pt/logos/android-chrome-192x192.png',
-  'https://extranet.seayou.pt/logos/android-chrome-512x512.png',
+  'https://extranet.seayou.pt/logos/icons/icon-48x48.png',
+  'https://extranet.seayou.pt/logos/icons/icon-72x72.png',
+  'https://extranet.seayou.pt/logos/icons/icon-96x96.png',
+  'https://extranet.seayou.pt/logos/icons/icon-128x128.png',
+  'https://extranet.seayou.pt/logos/icons/icon-144x144.png',
+  'https://extranet.seayou.pt/logos/icons/icon-152x152.png',
+  'https://extranet.seayou.pt/logos/icons/icon-192x192.png',
+  'https://extranet.seayou.pt/logos/icons/icon-256x256.png',
+  'https://extranet.seayou.pt/logos/icons/icon-384x384.png',
+  'https://extranet.seayou.pt/logos/icons/icon-512x512.png',
   'https://extranet.seayou.pt/photos/bc.jpg',
   'https://extranet.seayou.pt/photos/9374361538.png'
 ];
