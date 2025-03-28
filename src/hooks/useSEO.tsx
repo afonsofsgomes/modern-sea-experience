@@ -69,6 +69,30 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
       }
     }
 
+    // Ensure favicons are properly set
+    const ensureFavicon = (rel: string, href: string, type?: string, sizes?: string) => {
+      let link = document.querySelector(`link[rel="${rel}"]${sizes ? `[sizes="${sizes}"]` : ''}`) as HTMLLinkElement | null;
+      
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = rel;
+        if (type) link.type = type;
+        if (sizes) link.sizes = sizes;
+        document.head.appendChild(link);
+      }
+      
+      if (link.href !== href) {
+        link.href = href;
+      }
+    };
+    
+    // Set all necessary favicon and app icons
+    ensureFavicon('icon', 'https://extranet.seayou.pt/logos/favicon.ico', 'image/x-icon');
+    ensureFavicon('shortcut icon', 'https://extranet.seayou.pt/logos/favicon.ico', 'image/x-icon');
+    ensureFavicon('apple-touch-icon', 'https://extranet.seayou.pt/logos/apple-touch-icon.png', undefined, '180x180');
+    ensureFavicon('icon', 'https://extranet.seayou.pt/logos/android-chrome-192x192.png', 'image/png', '192x192');
+    ensureFavicon('icon', 'https://extranet.seayou.pt/logos/android-chrome-512x512.png', 'image/png', '512x512');
+
     // Add JSON-LD structured data if provided
     if (jsonLd) {
       let script = document.querySelector('#dynamic-jsonld') as HTMLScriptElement | null;

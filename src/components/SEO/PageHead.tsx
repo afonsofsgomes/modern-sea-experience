@@ -60,6 +60,13 @@ export const PageHead: React.FC<PageHeadProps> = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+
+      {/* Favicon and App Icons */}
+      <link rel="icon" href="https://extranet.seayou.pt/logos/favicon.ico" type="image/x-icon" />
+      <link rel="shortcut icon" href="https://extranet.seayou.pt/logos/favicon.ico" type="image/x-icon" />
+      <link rel="apple-touch-icon" sizes="180x180" href="https://extranet.seayou.pt/logos/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="https://extranet.seayou.pt/logos/android-chrome-192x192.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="https://extranet.seayou.pt/logos/android-chrome-512x512.png" />
       
       {/* Allow child elements - useful for page-specific structured data */}
       {children}
