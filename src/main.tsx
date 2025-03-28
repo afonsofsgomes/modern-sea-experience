@@ -24,35 +24,47 @@ const registerServiceWorker = () => {
         .then(registration => {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
           
-          // Handle updates
+          // Monitor for updates
           registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
             if (newWorker) {
               console.log('New service worker is being installed');
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  console.log('New content is available; reloading to update.');
-                  // Force a reload to ensure new content is displayed
-                  window.location.reload();
+                  const shouldUpdate = window.confirm(
+                    'New version available! Click OK to update and refresh the page.'
+                  );
+                  
+                  if (shouldUpdate) {
+                    // Send message to SW to skip waiting
+                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                    window.location.reload();
+                  }
                 }
               });
             }
           });
           
-          // Check for updates every 30 minutes
+          // Check for updates periodically (every 30 minutes)
           setInterval(() => {
             console.log('Checking for service worker updates...');
-            registration.update();
+            registration.update().catch(err => {
+              console.error('Error updating service worker:', err);
+            });
           }, 30 * 60 * 1000);
         })
         .catch(error => {
           console.error('ServiceWorker registration failed: ', error);
         });
         
-      // When a new service worker is found and activated, refresh the page
+      // When a new service worker is activated, reload the page once
+      let refreshing = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('New service worker controller, reloading page');
-        window.location.reload();
+        if (!refreshing) {
+          refreshing = true;
+          console.log('New service worker controller, reloading page');
+          window.location.reload();
+        }
       });
     });
   }
@@ -90,14 +102,13 @@ if (!container) {
   throw new Error('Root element not found');
 }
 
-// Create a root using createRoot API - remove StrictMode for production
+// Create a root using createRoot API
 const root = ReactDOM.createRoot(container);
 
-// Render the app with explicit React import - not using StrictMode in production
-// to avoid double rendering which impacts performance 
+// Render the app
 root.render(<App />);
 
-// Remove loader immediately and after a short delay to ensure it's gone
+// Remove loader
 removeLoader();
 
 // Log web vitals

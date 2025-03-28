@@ -1,30 +1,14 @@
 
 // Service Worker for SeaYou Madeira PWA
-const CACHE_NAME = 'seayou-pwa-v4'; // Increased version to force cache refresh
+const CACHE_NAME = 'seayou-pwa-v5'; // Increased version to force cache refresh
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
   '/offline.html',
   '/src/main.tsx',
-  '/src/index.css',
-  'https://extranet.seayou.pt/logos/logowhite.png',
-  'https://extranet.seayou.pt/logos/favicon.ico',
-  'https://extranet.seayou.pt/logos/apple-touch-icon.png',
-  'https://extranet.seayou.pt/logos/icons/icon-48x48.png',
-  'https://extranet.seayou.pt/logos/icons/icon-72x72.png',
-  'https://extranet.seayou.pt/logos/icons/icon-96x96.png',
-  'https://extranet.seayou.pt/logos/icons/icon-128x128.png',
-  'https://extranet.seayou.pt/logos/icons/icon-144x144.png',
-  'https://extranet.seayou.pt/logos/icons/icon-152x152.png',
-  'https://extranet.seayou.pt/logos/icons/icon-192x192.png',
-  'https://extranet.seayou.pt/logos/icons/icon-256x256.png',
-  'https://extranet.seayou.pt/logos/icons/icon-384x384.png',
-  'https://extranet.seayou.pt/logos/icons/icon-512x512.png',
-  'https://extranet.seayou.pt/logos/android-chrome-192x192.png',
-  'https://extranet.seayou.pt/logos/android-chrome-512x512.png',
-  'https://extranet.seayou.pt/photos/bc.jpg',
-  'https://extranet.seayou.pt/photos/9374361538.png'
+  '/src/index.css'
+  // Removed external URLs from initial cache list to avoid CORS issues
 ];
 
 // Install service worker and cache assets
@@ -36,11 +20,14 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-      .catch(err => {
-        console.error('Failed to cache resources:', err);
+        console.log('Opening cache...');
+        return cache.addAll(urlsToCache)
+          .then(() => console.log('Initial caching complete'))
+          .catch(err => {
+            console.error('Failed to cache initial resources:', err);
+            // Continue installation even if some resources fail to cache
+            return Promise.resolve();
+          });
       })
   );
 });
@@ -49,24 +36,31 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   console.log('Service Worker activating');
   // Take control of all clients immediately
-  event.waitUntil(self.clients.claim());
-  
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames
-          .filter(cacheName => cacheName !== CACHE_NAME)
-          .map(cacheName => {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          })
-      );
-    })
+    Promise.all([
+      self.clients.claim(),
+      // Clean up old caches
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames
+            .filter(cacheName => cacheName !== CACHE_NAME)
+            .map(cacheName => {
+              console.log('Deleting old cache:', cacheName);
+              return caches.delete(cacheName);
+            })
+        );
+      })
+    ])
   );
 });
 
-// Fetch resources from network first, then cache
+// Fetch resources
 self.addEventListener('fetch', event => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  
   // Handle navigation requests (HTML documents) with a network-first strategy
   if (event.request.mode === 'navigate') {
     event.respondWith(
@@ -78,59 +72,88 @@ self.addEventListener('fetch', event => {
     );
     return;
   }
-  
-  // Skip cross-origin requests that aren't in our allowed domains
-  if (!event.request.url.startsWith(self.location.origin) && 
-      !event.request.url.startsWith('https://extranet.seayou.pt')) {
+
+  // Don't handle requests that aren't HTTP/HTTPS
+  if (!event.request.url.startsWith('http')) {
     return;
   }
   
-  // Network first strategy for all other requests
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        // Check if valid response
-        if (!response || response.status !== 200 || response.type !== 'basic') {
+  // Handle cross-origin requests differently
+  const isSameOrigin = event.request.url.startsWith(self.location.origin);
+  
+  if (isSameOrigin) {
+    // For same-origin requests, use a network-first strategy
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Cache successful responses
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+              })
+              .catch(err => console.error('Error caching response:', err));
+          }
           return response;
-        }
-        
-        // Clone the response to use it in multiple places
-        const responseToCache = response.clone();
-        
-        // Add response to cache for future use
-        caches.open(CACHE_NAME)
-          .then(cache => {
-            cache.put(event.request, responseToCache);
-          });
+        })
+        .catch(() => {
+          console.log('Same-origin fetch failed, checking cache for:', event.request.url);
+          return caches.match(event.request);
+        })
+    );
+  } else {
+    // For cross-origin requests, use a cache-first strategy to avoid CORS issues
+    event.respondWith(
+      caches.match(event.request)
+        .then(cachedResponse => {
+          if (cachedResponse) {
+            console.log('Using cached cross-origin response for:', event.request.url);
+            return cachedResponse;
+          }
           
-        return response;
-      })
-      .catch(err => {
-        console.log('Fetch failed, checking cache:', event.request.url, err);
-        
-        return caches.match(event.request)
-          .then(cachedResponse => {
-            if (cachedResponse) {
-              console.log('Using cached response for:', event.request.url);
-              return cachedResponse;
-            }
-            
-            // If the request is for an image, return a default image
-            if (event.request.destination === 'image') {
-              console.log('Image not in cache, using fallback');
-              return caches.match('https://extranet.seayou.pt/logos/logowhite.png');
-            }
-            
-            // Return the offline page for HTML requests
-            if (event.request.destination === 'document') {
-              console.log('Document not in cache, using offline page');
-              return caches.match('/offline.html');
-            }
-            
-            console.log('No cache match and no fallback available for:', event.request.url);
-          });
-      })
-  );
+          // If not in cache, try fetching but don't cache the result (to avoid CORS issues)
+          return fetch(event.request, { mode: 'no-cors' })
+            .then(response => {
+              // Don't cache opaque responses as they can't be properly reused
+              if (response.type === 'opaque') {
+                console.log('Received opaque response for:', event.request.url);
+                return response;
+              }
+              
+              // For non-opaque responses, we can cache them
+              const responseToCache = response.clone();
+              caches.open(CACHE_NAME)
+                .then(cache => {
+                  console.log('Caching cross-origin response for:', event.request.url);
+                  cache.put(event.request, responseToCache);
+                })
+                .catch(err => console.error('Error caching cross-origin response:', err));
+              
+              return response;
+            })
+            .catch(error => {
+              console.error('Cross-origin fetch failed:', error);
+              
+              // Return a fallback for images
+              if (event.request.destination === 'image') {
+                return new Response(
+                  '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f0f0f0"/><text x="100" y="100" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#333">Image not available</text></svg>',
+                  { 
+                    headers: { 'Content-Type': 'image/svg+xml' } 
+                  }
+                );
+              }
+              
+              // Return empty response for other resources
+              return new Response('Resource not available', { 
+                status: 503,
+                headers: { 'Content-Type': 'text/plain' }
+              });
+            });
+        })
+    );
+  }
 });
 
 // Handle push notifications
