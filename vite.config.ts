@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -9,12 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080, // Using port 8080 as required
-    hmr: {
-      // HMR configurations to fix WebSocket connection issues
-      clientPort: 8080, // Match client port
-      // For production environment, disable HMR (optional)
-      ...(mode === 'production' && { enabled: false }),
-    },
+    hmr: false, // Completely disable HMR
     // Security settings to address GitHub alerts
     fs: {
       // Restricts file serving to only the allowed directories

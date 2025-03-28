@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
@@ -109,12 +108,11 @@ removeLoader();
 // Log web vitals
 setTimeout(reportWebVitals, 3000);
 
-// Disable Vite HMR websocket in production to avoid failed connection errors
-if (import.meta.env.PROD) {
-  // This will prevent Vite from trying to establish WebSocket connections in production
-  // @ts-ignore - Ignore type error since we're deliberately disabling a Vite internal feature
-  if (typeof import.meta.hot !== 'undefined') {
-    // @ts-ignore
-    import.meta.hot.decline();
-  }
+// Disable Vite HMR completely
+if (import.meta.hot) {
+  import.meta.hot.decline();
+  // Prevent any HMR-related operations
+  import.meta.hot.dispose(() => {});
+  // Invalidate the module to prevent updates
+  import.meta.hot.invalidate();
 }
