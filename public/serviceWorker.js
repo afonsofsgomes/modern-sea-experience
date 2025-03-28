@@ -1,10 +1,11 @@
 
 // Service Worker for SeaYou Madeira PWA
-const CACHE_NAME = 'seayou-pwa-v1';
+const CACHE_NAME = 'seayou-pwa-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/offline.html',
   '/src/main.tsx',
   '/src/index.css',
   'https://extranet.seayou.pt/logos/logowhite.png',
@@ -26,6 +27,9 @@ const urlsToCache = [
 
 // Install service worker and cache assets
 self.addEventListener('install', event => {
+  // Force the waiting service worker to become the active service worker
+  self.skipWaiting();
+  
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -40,6 +44,9 @@ self.addEventListener('install', event => {
 
 // Activate and clean up old caches
 self.addEventListener('activate', event => {
+  // Take control of all clients immediately
+  event.waitUntil(clients.claim());
+  
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -53,7 +60,18 @@ self.addEventListener('activate', event => {
 
 // Fetch resources from cache first, then network
 self.addEventListener('fetch', event => {
-  // Skip cross-origin requests
+  // Handle navigation requests (HTML documents) with a network-first strategy
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.match('/offline.html');
+        })
+    );
+    return;
+  }
+  
+  // Skip cross-origin requests that aren't in our allowed domains
   if (!event.request.url.startsWith(self.location.origin) && 
       !event.request.url.startsWith('https://extranet.seayou.pt')) {
     return;
@@ -90,8 +108,16 @@ self.addEventListener('fetch', event => {
           })
           .catch(err => {
             console.error('Fetch failed:', err);
-            // Optional: return a custom offline page
-            // return caches.match('/offline.html');
+            
+            // If the request is for an image, return a default image
+            if (event.request.destination === 'image') {
+              return caches.match('https://extranet.seayou.pt/logos/logowhite.png');
+            }
+            
+            // Return the offline page for HTML requests
+            if (event.request.destination === 'document') {
+              return caches.match('/offline.html');
+            }
           });
       })
   );
@@ -118,4 +144,11 @@ self.addEventListener('notificationclick', event => {
   event.waitUntil(
     clients.openWindow('https://seayou.pt')
   );
+});
+
+// Listen for messages from the client
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });

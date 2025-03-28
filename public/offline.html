@@ -60,12 +60,24 @@
     <h1>You're Offline</h1>
     <p>Looks like you've lost your internet connection. Please check your network and try again.</p>
     <p>The SeaYou Madeira team is waiting to help you book your next maritime adventure!</p>
-    <a href="/" class="btn">Try Again</a>
+    <a href="/" class="btn" id="retry-button">Try Again</a>
   </div>
   <script>
     // Check if we're back online and redirect to home
     window.addEventListener('online', () => {
       window.location.href = '/';
+    });
+    
+    // Add event listener to the retry button
+    document.getElementById('retry-button').addEventListener('click', (e) => {
+      if (navigator.onLine) {
+        // If we're online, let the default behavior happen (navigate to /)
+        return;
+      } else {
+        // If we're still offline, prevent the default behavior and show an alert
+        e.preventDefault();
+        alert("You're still offline. Please check your internet connection and try again.");
+      }
     });
   </script>
 </body>
