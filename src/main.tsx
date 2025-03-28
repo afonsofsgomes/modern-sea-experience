@@ -16,55 +16,6 @@ const reportWebVitals = () => {
   }
 };
 
-// Register service worker for PWA functionality
-const registerServiceWorker = () => {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/serviceWorker.js')
-        .then(registration => {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-          
-          // Check for updates (once after 10 seconds)
-          setTimeout(() => {
-            registration.update().catch(err => {
-              console.error('Error updating service worker:', err);
-            });
-          }, 10000);
-        })
-        .catch(error => {
-          console.error('ServiceWorker registration failed: ', error);
-        });
-        
-      // Only reload the page once when a new service worker takes control
-      let refreshing = false;
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (!refreshing) {
-          refreshing = true;
-          console.log('New service worker controller, reloading page');
-          window.location.reload();
-        }
-      });
-    });
-  }
-};
-
-// Remove the initial loader
-const removeLoader = () => {
-  const loader = document.querySelector('.initial-loader');
-  if (loader && loader instanceof HTMLElement) {
-    loader.style.opacity = '0';
-    loader.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => {
-      if (loader.parentNode) {
-        loader.parentNode.removeChild(loader);
-      }
-    }, 300);
-  }
-};
-
-// Initialize PWA
-registerServiceWorker();
-
 // Get the root element
 const container = document.getElementById('root');
 
@@ -73,28 +24,38 @@ if (!container) {
   throw new Error('Root element not found');
 }
 
-// Create a root using createRoot API
+// Remove the initial loader immediately after React hydration
+const removeLoader = () => {
+  const loader = document.querySelector('.initial-loader');
+  if (loader && loader instanceof HTMLElement) {
+    // Type assertion to HTMLElement to safely access style property
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
+      loader.remove();
+    }, 300);
+  }
+};
+
+// Create a root using createRoot API - remove StrictMode for production
 const root = ReactDOM.createRoot(container);
 
-// Render the app
+// Render the app with explicit React import - not using StrictMode in production
+// to avoid double rendering which impacts performance 
 root.render(<App />);
 
-// Remove loader
-removeLoader();
+// Remove loader after React has hydrated the app
+requestAnimationFrame(removeLoader);
 
 // Log web vitals
 setTimeout(reportWebVitals, 3000);
 
-// Disable Vite HMR completely
-if (import.meta.hot) {
-  // Use only the methods that are available in the TypeScript definitions
-  import.meta.hot.dispose(() => {});
-  // Mark the module as "accepting no updates"
-  import.meta.hot.accept(() => {
-    console.log('HMR update rejected');
-  });
-  // Use any other available method to prevent updates
-  if ('invalidate' in import.meta.hot) {
-    (import.meta.hot as any).invalidate();
+// Disable Vite HMR websocket in production to avoid failed connection errors
+if (import.meta.env.PROD) {
+  // This will prevent Vite from trying to establish WebSocket connections in production
+  // @ts-ignore - Ignore type error since we're deliberately disabling a Vite internal feature
+  if (typeof import.meta.hot !== 'undefined') {
+    // @ts-ignore
+    import.meta.hot.decline();
   }
 }
