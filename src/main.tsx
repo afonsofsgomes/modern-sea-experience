@@ -24,40 +24,18 @@ const registerServiceWorker = () => {
         .then(registration => {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
           
-          // Monitor for updates
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (newWorker) {
-              console.log('New service worker is being installed');
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  const shouldUpdate = window.confirm(
-                    'New version available! Click OK to update and refresh the page.'
-                  );
-                  
-                  if (shouldUpdate) {
-                    // Send message to SW to skip waiting
-                    newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    window.location.reload();
-                  }
-                }
-              });
-            }
-          });
-          
-          // Check for updates periodically (every 30 minutes)
-          setInterval(() => {
-            console.log('Checking for service worker updates...');
+          // Check for updates (once after 10 seconds)
+          setTimeout(() => {
             registration.update().catch(err => {
               console.error('Error updating service worker:', err);
             });
-          }, 30 * 60 * 1000);
+          }, 10000);
         })
         .catch(error => {
           console.error('ServiceWorker registration failed: ', error);
         });
         
-      // When a new service worker is activated, reload the page once
+      // Only reload the page once when a new service worker takes control
       let refreshing = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!refreshing) {
@@ -72,23 +50,16 @@ const registerServiceWorker = () => {
 
 // Remove the initial loader
 const removeLoader = () => {
-  const removeLoaderElement = () => {
-    const loader = document.querySelector('.initial-loader');
-    if (loader && loader instanceof HTMLElement) {
-      // Type assertion to HTMLElement to safely access style property
-      loader.style.opacity = '0';
-      loader.style.transition = 'opacity 0.3s ease';
-      setTimeout(() => {
-        if (loader.parentNode) {
-          loader.parentNode.removeChild(loader);
-        }
-      }, 300);
-    }
-  };
-
-  // Try immediately and also after a short delay to ensure it's removed
-  removeLoaderElement();
-  setTimeout(removeLoaderElement, 1000);
+  const loader = document.querySelector('.initial-loader');
+  if (loader && loader instanceof HTMLElement) {
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
+      if (loader.parentNode) {
+        loader.parentNode.removeChild(loader);
+      }
+    }, 300);
+  }
 };
 
 // Initialize PWA
