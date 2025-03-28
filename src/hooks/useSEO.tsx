@@ -76,8 +76,8 @@ export const useSEO = ({ title, description, keywords, jsonLd, ogImage = DEFAULT
       if (!link) {
         link = document.createElement('link');
         link.rel = rel;
-        if (type) link.type = type;
-        if (sizes) link.sizes = sizes;
+        if (type) link.setAttribute('type', type);
+        if (sizes) link.setAttribute('sizes', sizes);
         document.head.appendChild(link);
       }
       
