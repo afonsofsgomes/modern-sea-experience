@@ -1,6 +1,6 @@
 
 // Service Worker for SeaYou Madeira PWA
-const CACHE_NAME = 'seayou-pwa-v2';
+const CACHE_NAME = 'seayou-pwa-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -21,8 +21,17 @@ const urlsToCache = [
   'https://extranet.seayou.pt/logos/icons/icon-256x256.png',
   'https://extranet.seayou.pt/logos/icons/icon-384x384.png',
   'https://extranet.seayou.pt/logos/icons/icon-512x512.png',
+  'https://extranet.seayou.pt/logos/maskable/maskable-icon-48x48.png',
+  'https://extranet.seayou.pt/logos/maskable/maskable-icon-72x72.png',
+  'https://extranet.seayou.pt/logos/maskable/maskable-icon-96x96.png',
+  'https://extranet.seayou.pt/logos/maskable/maskable-icon-128x128.png',
+  'https://extranet.seayou.pt/logos/maskable/maskable-icon-192x192.png',
+  'https://extranet.seayou.pt/logos/maskable/maskable-icon-512x512.png',
   'https://extranet.seayou.pt/photos/bc.jpg',
-  'https://extranet.seayou.pt/photos/9374361538.png'
+  'https://extranet.seayou.pt/photos/9374361538.png',
+  'https://extranet.seayou.pt/photos/screenshot-narrow-1.jpg',
+  'https://extranet.seayou.pt/photos/screenshot-wide-1.jpg',
+  'https://extranet.seayou.pt/photos/screenshot-narrow-2.jpg'
 ];
 
 // Install service worker and cache assets
