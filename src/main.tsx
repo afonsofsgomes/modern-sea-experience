@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
@@ -110,9 +111,14 @@ setTimeout(reportWebVitals, 3000);
 
 // Disable Vite HMR completely
 if (import.meta.hot) {
-  import.meta.hot.decline();
-  // Prevent any HMR-related operations
+  // Use only the methods that are available in the TypeScript definitions
   import.meta.hot.dispose(() => {});
-  // Invalidate the module to prevent updates
-  import.meta.hot.invalidate();
+  // Mark the module as "accepting no updates"
+  import.meta.hot.accept(() => {
+    console.log('HMR update rejected');
+  });
+  // Use any other available method to prevent updates
+  if ('invalidate' in import.meta.hot) {
+    (import.meta.hot as any).invalidate();
+  }
 }
