@@ -7,8 +7,12 @@ export const AlertEmbed = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [iframeHeight, setIframeHeight] = useState(0);
+  const [timestamp, setTimestamp] = useState(Date.now());
 
   useEffect(() => {
+    // Set a new timestamp every time the component mounts
+    setTimestamp(Date.now());
+    
     // Function to handle iframe load
     const handleIframeLoad = () => {
       console.log("Iframe loaded");
@@ -52,12 +56,18 @@ export const AlertEmbed = () => {
 
     window.addEventListener("message", handleMessage);
     
+    // Refresh the iframe every 5 minutes to ensure content is up-to-date
+    const refreshInterval = setInterval(() => {
+      setTimestamp(Date.now());
+    }, 5 * 60 * 1000); // 5 minutes
+    
     return () => {
       if (iframe) {
         iframe.removeEventListener('load', handleIframeLoad);
       }
       window.removeEventListener("message", handleMessage);
       clearTimeout(loadTimeout);
+      clearInterval(refreshInterval);
     };
   }, [isLoading]);
 
@@ -80,7 +90,7 @@ export const AlertEmbed = () => {
         >
           <iframe 
             ref={iframeRef}
-            src="https://alerts.seayou.pt/embed" 
+            src={`https://alerts.seayou.pt/embed?t=${timestamp}`} 
             style={{ 
               width: "100%", 
               height: "100%",
